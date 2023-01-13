@@ -1,5 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
+# from .project import Project
+# from .pledge import Pledge
+# from .reward import Reward
+
+
 
 db = SQLAlchemy()
 
@@ -8,13 +13,13 @@ class Reward(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(20), nullable=False)
-    price = db.Column(db.Decimal, nullable=False)
+    price = db.Column(db.Numeric, nullable=False)
     description = db.Column(db.String(255), nullable=False)
     projectId = db.Column(db.Integer, db.ForeignKey("projects.id"), nullable=False)
     estimatedDelivery = db.Column(db.String(255))
 
     project = db.relationship("Project", back_populates="rewards")
-    pledges = db.relationship("Pledge", back_populates="rewards")
+    pledges = db.relationship("Pledge", back_populates="reward")
 
 
 

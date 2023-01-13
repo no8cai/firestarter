@@ -1,7 +1,10 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from datetime import datetime
+# from datetime import datetime
+# from .pledge import Pledge
+# from .reward import Reward
+# from .user import User
 
 
 class Project(db.Model):
@@ -23,7 +26,7 @@ class Project(db.Model):
 
     user = db.relationship("User", back_populates="projects")
     rewards = db.relationship("Reward", back_populates="projects")
-    pledges = db.relationship("Pledge", back_populates="projects")
+    # pledges = db.relationship("Pledge", back_populates="projects")
 
     def to_dict(self):
       return {
