@@ -1,10 +1,6 @@
-from dotenv import load_dotenv
-load_dotenv()
+from app.models import db, Reward, environment, SCHEMA
 
-from app import app, db
-from app.models import Reward
-
-with app.app_context():
+def seed_rewards():
     
     reward1 = Reward(title="Reward 1 For Project 1", price="1.00", description="Includes a reward. Nice!", projectId=1)
     reward2 = Reward(title="Reward 2 For Project 2", price="2.00", description="Includes a different reward. Wow!", projectId=1)
@@ -13,4 +9,12 @@ with app.app_context():
     db.session.add(reward1)
     db.session.add(reward2)
     db.session.add(reward3)
+    db.session.commit()
+    
+def undo_rewards():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute("DELETE FROM rewards")
+        
     db.session.commit()
