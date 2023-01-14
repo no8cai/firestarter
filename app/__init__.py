@@ -10,6 +10,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.project_routes import project_routes
 from .api.rewards_routes import rewards_routes
+from .api.pledge_routes import pledge_routes
 
 from .seeds import seed_commands
 from .config import Config
@@ -34,6 +35,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(rewards_routes)
 app.register_blueprint(project_routes, url_prefix='/api/projects')
+app.register_blueprint(pledge_routes, url_prefix='/api/pledges')
 
 
 db.init_app(app)
