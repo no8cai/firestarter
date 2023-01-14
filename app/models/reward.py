@@ -1,12 +1,10 @@
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 # from .project import Project
 # from .pledge import Pledge
 # from .reward import Reward
 
-
-
-db = SQLAlchemy()
 
 class Reward(db.Model):
     __tablename__ = 'rewards'
