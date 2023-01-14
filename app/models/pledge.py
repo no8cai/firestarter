@@ -1,9 +1,4 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from werkzeug.security import generate_password_hash, check_password_hash
-# from flask_login import UserMixin
-# from .project import Project
-# from .reward import Reward
-# from .user import User
 
 
 class Pledge(db.Model):
@@ -14,13 +9,13 @@ class Pledge(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     rewardId = db.Column(db.Integer, db.ForeignKey("rewards.id"))
-    # rewardId = db.Column(db.Integer)
     projectId = db.Column(db.Integer, db.ForeignKey("projects.id"))
     backerId = db.Column(db.Integer, db.ForeignKey("users.id"))
 
     user = db.relationship("User", back_populates="pledges")
     projects = db.relationship("Project", back_populates="pledges")
     reward = db.relationship("Reward", back_populates="pledges")
+    
 
     def to_dict(self):
         return {

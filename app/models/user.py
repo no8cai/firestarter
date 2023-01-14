@@ -1,9 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-# from .project import Project
-# from .pledge import Pledge
-# from .reward import Reward
 
 
 
@@ -18,7 +15,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     
-    projects = db.relationship("Project", back_populates='user')
+    projects = db.relationship("Project", back_populates='user', cascade="all, delete")
     pledges = db.relationship("Pledge", back_populates='user')
 
 
