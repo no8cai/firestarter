@@ -90,7 +90,9 @@ def react_root(path):
 def not_found(e):
     return app.send_static_file('index.html')
 
-@app.route('/test')
+@app.route('/')
 def test_route():
-    
-    return Project.query.all()
+    projects = Project.query.all()
+    print("THIS IS THE TEST ROUTE", projects)
+    return [project.to_dict() for project in Project.query.all()]
+    # return "Welcome"
