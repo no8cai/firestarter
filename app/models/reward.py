@@ -12,7 +12,7 @@ class Reward(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(20), nullable=False)
-    price = db.Column(db.Numeric, nullable=False)
+    price = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(255), nullable=False)
     projectId = db.Column(db.Integer, db.ForeignKey("projects.id"), nullable=False)
     estimatedDelivery = db.Column(db.String(255))
