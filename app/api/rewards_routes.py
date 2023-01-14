@@ -1,5 +1,4 @@
-from flask import Blueprint, request, jsonify
-from flask.json import JSONEncoder
+from flask import Blueprint, request
 
 from app.api.auth_routes import authenticate
 from ..models import Reward, db, User, Project
@@ -28,7 +27,7 @@ def create_reward(id):
             "message": "Project couldn't be found",
             "statusCode": 404
         }, 404
-    
+        
     # Current user is project creator authentication
     if authenticate()['id'] == project.creatorId:
         if form.validate_on_submit():
