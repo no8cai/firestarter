@@ -14,8 +14,6 @@ rewards_routes = Blueprint('rewards', __name__, url_prefix="/api")
 def all_rewards(id):
     rewards = Reward.query.filter(Reward.projectId == id).all()
     rwds = [reward.to_dict_reward() for reward in rewards]
-    # print('GET ALL REWARDS BY PROJECTID', rwds)
-    # return str([reward.to_dict_reward() for reward in rewards])
     rewards_routes.json_encoder = JSONEncoder
     return jsonify(rwds)
 
@@ -23,17 +21,22 @@ def all_rewards(id):
 @rewards_routes.route('/projects/<int:id>/rewards', methods=["POST"])
 def create_reward(id):
     form = RewardForm()
+    # Authorization
     form['csrf_token'].data = request.cookies['csrf_token']
+    project = Project.query.get(id)
     
-    # bp.json_encoder = JSONEncoder
-    # project = Project.query.get(id).to_dict()
-    # print("PROOOOOOOOJECT", project)
-    # return print('AAAAAAAAAAAAAAAAAUTH????????', authenticate()['id'])
+    if not project:
+        return {
+            "message": "Project couldn't be found",
+            "statusCode": 404
+        }, 404
     
-    if authenticate()['id'] == id:
+    # Current user is project creator authentication
+    if authenticate()['id'] == project.creatorId:
         if form.validate_on_submit():
             new_reward = Reward()
             form.populate_obj(new_reward)
+            # assign projectId
             new_reward.projectId = id
             
             db.session.add(new_reward)
@@ -47,6 +50,7 @@ def create_reward(id):
                 "errors": form.errors
             }, 400
     
+    #current user is not project creator
     else:
         return {
             "message": "Forbidden",
@@ -65,10 +69,10 @@ def update_reward(id):
             "statusCode": 404
         }, 404
     
-    project = Project.query.get(reward.projectId)
     form['csrf_token'].data = request.cookies['csrf_token']
+    project = Project.query.get(reward.projectId)
 
-    if authenticate()['id'] == project.id:
+    if authenticate()['id'] == project.creatorId:
         if form.validate_on_submit():
             form.populate_obj(reward)
             db.session.add(reward)
