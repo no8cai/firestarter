@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-
+from .user import User
+from .reward import Reward
 
 class Project(db.Model):
     __tablename__ = 'projects'
@@ -29,6 +30,7 @@ class Project(db.Model):
     def to_dict(self):
       return {
         'id': self.id,
+        'creatorId':self.creatorId,
         'title': self.title,
         'category': self.category,
         'city': self.city,
@@ -41,4 +43,24 @@ class Project(db.Model):
         'endDate': self.endDate,
         'description': self.description,
         'risks': self.risks
+      }
+
+    def to_dict_full(self):
+      return {
+        'id': self.id,
+        'creatorId':self.creatorId,
+        'title': self.title,
+        'category': self.category,
+        'city': self.city,
+        'state': self.state,
+        'country': self.country,
+        'imageUrl': self.imageUrl,
+        'videoUrl': self.videoUrl,
+        'fundingGoal': str(self.fundingGoal),
+        'startDate': self.startDate,
+        'endDate': self.endDate,
+        'description': self.description,
+        'risks': self.risks,
+        'creator':User.query.get(self.creatorId).to_dict(),
+        "rewards":[reward.to_dict_reward() for reward in Reward.query.all() if int(reward.projectId)==int(self.id)]
       }
