@@ -2,13 +2,16 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .reward import Reward
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from datetime import datetime
+# from datetime import datetime
+# from .pledge import Pledge
+# from .reward import Reward
+# from .user import User
 
 
 class Project(db.Model):
     __tablename__ = 'projects'
     id = db.Column(db.Integer, primary_key=True)
-    creatorId = db.Column(db.Integer,nullable=False)
+    creatorId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     title = db.Column(db.String(50), nullable=False)
     category = db.Column(db.String(50), nullable=False)
     city = db.Column(db.String(50), nullable=False)
@@ -21,8 +24,10 @@ class Project(db.Model):
     endDate = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(2000), nullable=False)
     risks = db.Column(db.String(1000), nullable=False)
-    createdAt = db.Column(db.DateTime, default=datetime.now)
-    updatedAt = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+
+    user = db.relationship("User", back_populates="projects")
+    rewards = db.relationship("Reward", back_populates="projects")
+    # pledges = db.relationship("Pledge", back_populates="projects")
 
     rewards = db.relationship("Reward", back_populates="project")
 
@@ -41,6 +46,4 @@ class Project(db.Model):
         'endDate': self.endDate,
         'description': self.description,
         'risks': self.risks,
-        'createdAt': str(self.createdAt),
-        'updatedAt': str(self.updatedAt)
       }

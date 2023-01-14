@@ -1,7 +1,8 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .projects import seed_projects, undo_projects
-
+from .pledges import seed_pledges,undo_pledges
+from .rewards import seed_rewards,undo_rewards
 
 from app.models.db import db, environment, SCHEMA
 
@@ -21,14 +22,20 @@ def seed():
         undo_users()
     undo_users()
     undo_projects()
+    undo_pledges()
+    undo_rewards()
     seed_users()
     seed_projects()
+    seed_pledges()
+    seed_rewards()
     # Add other seed functions here
 
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
+    undo_rewards()
+    undo_pledges()
     undo_projects()
     undo_users()
     # Add other undo functions here
