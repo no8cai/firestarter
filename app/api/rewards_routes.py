@@ -7,20 +7,20 @@ from ..forms.reward_form import RewardForm
 
 from flask_login import current_user, login_user, logout_user, login_required
 
-bp = Blueprint('rewards', __name__, url_prefix="/api")
+rewards_routes = Blueprint('rewards', __name__, url_prefix="/api")
 
 # ALL REWARDS BASED ON PROJECT ID
-@bp.route('/projects/<int:id>/rewards')
+@rewards_routes.route('/projects/<int:id>/rewards')
 def all_rewards(id):
     rewards = Reward.query.filter(Reward.projectId == id).all()
     rwds = [reward.to_dict_reward() for reward in rewards]
-    print('GET ALL REWARDS BY PROJECTID', rwds)
+    # print('GET ALL REWARDS BY PROJECTID', rwds)
     # return str([reward.to_dict_reward() for reward in rewards])
-    bp.json_encoder = JSONEncoder
+    rewards_routes.json_encoder = JSONEncoder
     return jsonify(rwds)
 
 # CREATE REWARD
-@bp.route('/projects/<int:id>/rewards', methods=["POST"])
+@rewards_routes.route('/projects/<int:id>/rewards', methods=["POST"])
 def create_reward(id):
     form = RewardForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -54,7 +54,7 @@ def create_reward(id):
         }, 403
         
 # UPDATE A REWARD
-@bp.route('/rewards/<int:id>', methods=["PUT"])
+@rewards_routes.route('/rewards/<int:id>', methods=["PUT"])
 def update_reward(id):
     form = RewardForm()
     reward = Reward.query.get(id)
@@ -89,7 +89,7 @@ def update_reward(id):
         }, 403
         
 # DELETE A REWARD
-@bp.route('/rewards/<int:id>', methods=["DELETE"])
+@rewards_routes.route('/rewards/<int:id>', methods=["DELETE"])
 def delete_reward(id):
     reward = Reward.query.get(id)
     
