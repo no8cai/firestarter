@@ -4,9 +4,12 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
-from .models import db, User, Project, Reward
+from .models import db, User, Project,Pledge,Reward
+
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
+from .api.project_routes import project_routes
+
 from .seeds import seed_commands
 from .config import Config
 from .routes import rewards
@@ -30,6 +33,9 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(rewards.bp)
+app.register_blueprint(project_routes, url_prefix='/api/projects')
+
+
 db.init_app(app)
 Migrate(app, db)
 
@@ -92,9 +98,7 @@ def react_root(path):
 def not_found(e):
     return app.send_static_file('index.html')
 
-# @app.route('/')
-# def test_route():
-#     projects = Project.query.all()
-#     print("THIS IS THE TEST ROUTE", projects)
-#     return [project.to_dict() for project in Project.query.all()]
+@app.route('/test')
+def test_route():
+    return Project.query.get(1).to_dict()
     # return "Welcome"

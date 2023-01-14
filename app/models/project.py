@@ -1,14 +1,12 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
-# from datetime import datetime
-# from .pledge import Pledge
-# from .reward import Reward
-# from .user import User
 
 
 class Project(db.Model):
     __tablename__ = 'projects'
+    
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
     id = db.Column(db.Integer, primary_key=True)
     creatorId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     title = db.Column(db.String(50), nullable=False)
@@ -17,8 +15,8 @@ class Project(db.Model):
     state = db.Column(db.String(50), nullable=False)
     country = db.Column(db.String(50), nullable=False)
     imageUrl = db.Column(db.String(255), nullable=False)
-    videoUrl = db.Column(db.String(50))
-    fundingGoal = db.Column(db.Numeric,nullable=False)
+    videoUrl = db.Column(db.String(255))
+    fundingGoal = db.Column(db.DECIMAL(50,2),nullable=False)
     startDate = db.Column(db.String(50), nullable=False)
     endDate = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(2000), nullable=False)
@@ -38,9 +36,9 @@ class Project(db.Model):
         'country': self.country,
         'imageUrl': self.imageUrl,
         'videoUrl': self.videoUrl,
-        'fundingGoal': self.fundingGoal,
+        'fundingGoal': str(self.fundingGoal),
         'startDate': self.startDate,
         'endDate': self.endDate,
         'description': self.description,
-        'risks': self.risks,
+        'risks': self.risks
       }
