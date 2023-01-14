@@ -30,9 +30,11 @@ def create_reward(id):
             "message": "Project couldn't be found",
             "statusCode": 404
         }, 404
+        
+    print("AAAAAAAAAAAAAAAAAAAAAAAAAA", authenticate())
     
     # Current user is project creator authentication
-    if authenticate()['id'] == project.creatorId:
+    if not authenticate()['errors'] and authenticate()['id'] == project.creatorId:
         if form.validate_on_submit():
             new_reward = Reward()
             form.populate_obj(new_reward)
@@ -72,7 +74,7 @@ def update_reward(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     project = Project.query.get(reward.projectId)
 
-    if authenticate()['id'] == project.creatorId:
+    if not authenticate()['errors'] and authenticate()['id'] == project.creatorId:
         if form.validate_on_submit():
             form.populate_obj(reward)
             db.session.add(reward)
@@ -105,7 +107,7 @@ def delete_reward(id):
         
     project = Project.query.get(reward.projectId)
 
-    if authenticate()['id'] == project.id:
+    if not authenticate()['errors'] and authenticate()['id'] == project.id:
         db.session.delete(reward)
         db.session.commit()
         return {
