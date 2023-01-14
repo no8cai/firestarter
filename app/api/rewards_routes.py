@@ -30,8 +30,6 @@ def create_reward(id):
             "message": "Project couldn't be found",
             "statusCode": 404
         }, 404
-        
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAA", authenticate())
     
     # Current user is project creator authentication
     if not authenticate()['errors'] and authenticate()['id'] == project.creatorId:
