@@ -100,17 +100,23 @@ def single_pledge3(id):
     # onePledge = Pledge.query.get(id).to_dict()
     # return onePledge
     #version 2
-    testing = db.session.query(Pledge).filter(Pledge.id==id).all()
-    if not testing:
-        return {'errors': "Needs pledgeId"}, 400
-    else:
-        results = db.session.query(Pledge, Project, Reward).select_from(Pledge).join(Reward).join(Project).filter(Pledge.id==id).all()
-        listOfDict = []
-        for pledge, project, reward in results:
-            return {"id": pledge.id, 'backerId': pledge.backerId, 'projectId': pledge.projectId,'rewardId':pledge.rewardId,
-                "Reward":{"id": reward.id, 'title': reward.title},
-                'Project':{"id": project.id, 'creatorId': project.creatorId, "title": project.title}
-                }
+    # testing = db.session.query(Pledge).filter(Pledge.id==id).all()
+    # if not testing:
+    #     return {'errors': "Needs pledgeId"}, 400
+    # else:
+    #     results = db.session.query(Pledge, Project, Reward).select_from(Pledge).join(Reward).join(Project).filter(Pledge.id==id).all()
+    #     listOfDict = []
+    #     for pledge, project, reward in results:
+    #         return {"id": pledge.id, 'backerId': pledge.backerId, 'projectId': pledge.projectId,'rewardId':pledge.rewardId,
+    #             "Reward":{"id": reward.id, 'title': reward.title},
+    #             'Project':{"id": project.id, 'creatorId': project.creatorId, "title": project.title}
+    #             }
+    # version 3
+    # return {pledge.to_dict_full() for pledge in Pledge.query.all() if int(pledge.id) == int(id)}
+    # version 4
+    onePledge = Pledge.query.get(id).to_dict_full()
+    return onePledge
+
 
 
 
