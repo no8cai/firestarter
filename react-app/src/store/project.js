@@ -122,7 +122,7 @@ const projectsReducer = (state = initialState, action) => {
             editedProject[action.project.id] = action.project
             return editedProject
 
-        case DELETE:
+        case DELETE_PROJECT:
             const deleteState = {...state}
             delete deleteState[action.projectId]
             return deleteState
