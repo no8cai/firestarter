@@ -1,4 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from .reward import Reward
+from .project import Project
 
 
 class Pledge(db.Model):
@@ -15,7 +17,7 @@ class Pledge(db.Model):
     user = db.relationship("User", back_populates="pledges")
     projects = db.relationship("Project", back_populates="pledges")
     reward = db.relationship("Reward", back_populates="pledges")
-    
+
 
     def to_dict(self):
         return {
@@ -23,4 +25,16 @@ class Pledge(db.Model):
             'rewardId': self.rewardId,
             'projectId': self.projectId,
             'backerId': self.backerId
+        }
+
+    def to_dict_full(self):
+        return {
+            'id': self.id,
+            'rewardId': self.rewardId,
+            'projectId': self.projectId,
+            'backerId': self.backerId,
+            # add reward back in after syncing with Kirin
+           # "Reward": Reward.query.get(self.rewardId).to_dict(),
+            "Project": Project.query.get(self.projectId).to_dict()
+
         }
