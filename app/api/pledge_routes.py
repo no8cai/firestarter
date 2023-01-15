@@ -1,6 +1,8 @@
 from flask import Blueprint, redirect, request
 from ..models import db, Project, Pledge, Reward
 from app.forms.pledge_form import PledgeForm
+from app.api.auth_routes import authenticate
+from flask_login import current_user, login_user, logout_user, login_required
 # from sqlalchemy.orm import sessionmaker, relationship
 
 import json
@@ -122,13 +124,18 @@ def single_pledge3(id):
 
 # PL5: Create pledge - DONE, error messages done
 @pledge_routes.route('', methods=['POST'])
+@login_required
 def add_pledge():
     #data=json.loads(request.data) #not needed?
     form= PledgeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    currentId=current_user.get_id()
+    print('333333333',currentId)
+    # check if the current user is the pledge owner
+
 
     if form.validate_on_submit():
-        new_pledge = Pledge()
+        new_pledge = Pledge(backerId=currentId)
         form.populate_obj(new_pledge)
         # if not form.data['projectId']: #this should be removed once we fix the db and take out the connection to the project
         #     return {'errors': "Needs projectId"}, 400
@@ -137,7 +144,8 @@ def add_pledge():
         # if not form.data['backerId']:
         #     return {'errors': "Needs backerId"}, 400
         new_pledge.rewardId = form.data['rewardId']
-        new_pledge.backerId = form.data['backerId']
+        new_pledge.backerId = currentId
+
         new_pledge.backerId = form.data['projectId'] #need to get rid of this
         db.session.add(new_pledge)
         db.session.commit()
@@ -153,6 +161,7 @@ def add_pledge():
 # I think both ways work below, wit hte .update, and with the doing it line by line with form.data['rewardId']
 # On the front end do a get pledges, then fill in the data that is the same
 @pledge_routes.route('<int:id>', methods=['PUT'])
+@login_required
 def edit_pledge(id):
     current_pledge = Pledge.query.get(id)
     if not current_pledge:
@@ -160,6 +169,10 @@ def edit_pledge(id):
     form = PledgeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     print('this is data ----------', list(form.data))
+    currentId=current_user.get_id()
+    # check if the current user is the pledge owner
+    if int(current_pledge.backerId) != int(currentId):
+        return {"errors":['Unauthorized']}
     if form.validate_on_submit():
         edit_pledge=Pledge(id=id)
         form.populate_obj(edit_pledge)
@@ -182,8 +195,12 @@ def edit_pledge(id):
 
 # PL7 Delete pledge by pledge id - DONE, error messages done
 @pledge_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
 def delete_pledge(id):
     onePledge = Pledge.query.get(id)
+    currentId=current_user.get_id()
+    if int(onePledge.backerId) != int(currentId):
+        return {"errors":['Unauthorized']}, 401
     if not onePledge:
         return {"errors": "Pledge not found"}, 404
 
