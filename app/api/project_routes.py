@@ -10,7 +10,7 @@ project_routes = Blueprint('projects', __name__)
 # Get all project data
 @project_routes.route('')
 def all_projects():
-    return {"projects":[project.to_dict_full() for project in Project.query.join(User).all()]}
+    return {"projects":[project.to_dict_full() for project in Project.query.all()]}
 
 # Get all project data by the current user
 @project_routes.route('/current')
