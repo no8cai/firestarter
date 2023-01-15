@@ -25,7 +25,7 @@ def single_project(id):
     oneProject = Project.query.get(id)
     if oneProject:
       return oneProject.to_dict_full()
-    return {"error":["Project couldn't be found"]},404
+    return {"errors":["Project couldn't be found"]},404
 
 # Create a project
 @project_routes.route('', methods=['POST'])
@@ -56,11 +56,11 @@ def edit_project(id):
     # check if the project is in the database
     oneProject = Project.query.get(id)
     if not oneProject:
-        return {"error":["Project couldn't be found"]},404
+        return {"errors":["Project couldn't be found"]},404
     # check if the current user is the project owner
     currentId=current_user.get_id()
     if int(oneProject.creatorId) != int(currentId):
-        return {"error":['Unauthorized']}
+        return {"errors":['Unauthorized']}
     
     if form.validate_on_submit():
         edit_project=Project(id=id)
@@ -79,7 +79,7 @@ def edit_project(id):
 def delete_project(id):
     oneProject = Project.query.get(id)
     if not oneProject:
-        return {"error":["Project couldn't be found"]},404
+        return {"errors":["Project couldn't be found"]},404
     db.session.delete(oneProject)
     db.session.commit()
     return "delete succeful"
