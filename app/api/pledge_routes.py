@@ -85,7 +85,7 @@ def all_pledges_by_project_id(id):
     #             }
     #             )
     #     return {'Pledges':listOfDict}
-    #version 3 #doesnt work
+    #version 3 #doesn't work
     # onePledge = Pledge.query.get(id)
     # if onePledge:
     #     return onePledge.to_dict_full()
@@ -124,12 +124,12 @@ def add_pledge():
     if form.validate_on_submit():
         new_pledge = Pledge()
         form.populate_obj(new_pledge)
-        if not form.data['projectId']: #this should be removed once we fix the db and take out the connection to the project
-            return {'errors': "Needs projectId"}, 400
-        if not form.data['rewardId']:
-            return {'errors': "Needs rewardId"}, 400
-        if not form.data['backerId']:
-            return {'errors': "Needs backerId"}, 400
+        # if not form.data['projectId']: #this should be removed once we fix the db and take out the connection to the project
+        #     return {'errors': "Needs projectId"}, 400
+        # if not form.data['rewardId']:
+        #     return {'errors': "Needs rewardId"}, 400
+        # if not form.data['backerId']:
+        #     return {'errors': "Needs backerId"}, 400
         new_pledge.rewardId = form.data['rewardId']
         new_pledge.backerId = form.data['backerId']
         new_pledge.backerId = form.data['projectId'] #need to get rid of this
@@ -145,6 +145,7 @@ def add_pledge():
 # should we make it so you don't have to give a new value for each field?
 # take out project id?
 # I think both ways work below, wit hte .update, and with the doing it line by line with form.data['rewardId']
+# On the front end do a get pledges, then fill in the data that is the same
 @pledge_routes.route('<int:id>', methods=['PUT'])
 def edit_pledge(id):
     current_pledge = Pledge.query.get(id)
