@@ -30,6 +30,7 @@ class Project(db.Model):
     def to_dict(self):
       return {
         'id': self.id,
+        'creatorId':self.creatorId,
         'title': self.title,
         'category': self.category,
         'city': self.city,
@@ -60,6 +61,6 @@ class Project(db.Model):
         'endDate': self.endDate,
         'description': self.description,
         'risks': self.risks,
-        'Creator':User.query.get(self.creatorId).to_dict(),
-        "Rewards":[reward.to_dict_reward() for reward in Reward.query.all() if int(reward.projectId)==int(self.id)]
+        'creator':User.query.get(self.creatorId).to_dict(),
+        "rewards":[reward.to_dict_reward() for reward in Reward.query.all() if int(reward.projectId)==int(self.id)]
       }
