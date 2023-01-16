@@ -1,5 +1,4 @@
-from flask import Blueprint, request, jsonify
-from flask.json import JSONEncoder
+from flask import Blueprint, request
 
 from app.api.auth_routes import authenticate
 from ..models import Reward, db, User, Project
@@ -12,13 +11,11 @@ rewards_routes = Blueprint('rewards', __name__, url_prefix="/api")
 # ALL REWARDS BASED ON PROJECT ID
 @rewards_routes.route('/projects/<int:id>/rewards')
 def all_rewards(id):
-    rewards = Reward.query.filter(Reward.projectId == id).all()
-    rwds = [reward.to_dict_reward() for reward in rewards]
-    rewards_routes.json_encoder = JSONEncoder
-    return jsonify(rwds)
+    return {"Rewards":[reward.to_dict_reward() for reward in Reward.query.filter(Reward.projectId == id).all()]}
 
 # CREATE REWARD
 @rewards_routes.route('/projects/<int:id>/rewards', methods=["POST"])
+@login_required
 def create_reward(id):
     form = RewardForm()
     # Authorization
@@ -30,7 +27,7 @@ def create_reward(id):
             "message": "Project couldn't be found",
             "statusCode": 404
         }, 404
-    
+        
     # Current user is project creator authentication
     if authenticate()['id'] == project.creatorId:
         if form.validate_on_submit():
@@ -59,6 +56,7 @@ def create_reward(id):
         
 # UPDATE A REWARD
 @rewards_routes.route('/rewards/<int:id>', methods=["PUT"])
+@login_required
 def update_reward(id):
     form = RewardForm()
     reward = Reward.query.get(id)
@@ -94,6 +92,7 @@ def update_reward(id):
         
 # DELETE A REWARD
 @rewards_routes.route('/rewards/<int:id>', methods=["DELETE"])
+@login_required
 def delete_reward(id):
     reward = Reward.query.get(id)
     
