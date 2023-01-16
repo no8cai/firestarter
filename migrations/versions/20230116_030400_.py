@@ -34,8 +34,8 @@ def upgrade():
     sa.Column('fundingGoal', sa.DECIMAL(precision=50, scale=2), nullable=False),
     sa.Column('startDate', sa.String(length=50), nullable=False),
     sa.Column('endDate', sa.String(length=50), nullable=False),
-    sa.Column('description', sa.String(length=2000), nullable=False),
-    sa.Column('risks', sa.String(length=1000), nullable=False),
+    sa.Column('description', sa.String(length=4000), nullable=False),
+    sa.Column('risks', sa.String(length=4000), nullable=False),
     sa.ForeignKeyConstraint(['creatorId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -45,7 +45,7 @@ def upgrade():
 
     op.create_table('rewards',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.String(length=20), nullable=False),
+    sa.Column('title', sa.String(length=255), nullable=False),
     sa.Column('price', sa.DECIMAL(precision=50, scale=2), nullable=False),
     sa.Column('description', sa.String(length=255), nullable=False),
     sa.Column('projectId', sa.Integer(), nullable=False),
