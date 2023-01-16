@@ -12,6 +12,7 @@ import { authenticate } from './store/session';
 import Landing from './components/HomePage';
 import Footer from "./components/Footer"
 import Navigation from './components/Navigation';
+import * as sessionActions from "./store/session";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -31,17 +32,18 @@ function App() {
   return (
     <BrowserRouter>
       {/* <NavBar /> */}
-      <Navigation />
+      <Navigation isLoaded={loaded} />
+      {loaded && (
       <Switch>
         <Route path='/' exact={true}>
           <Landing />
         </Route>
-        <Route path='/login' exact={true}>
+        {/* <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
-        </Route>
+        </Route> */}
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
@@ -55,6 +57,7 @@ function App() {
           <SingleProject/>
         </Route>
       </Switch>
+      )}
       <Footer />
     </BrowserRouter>
   );
