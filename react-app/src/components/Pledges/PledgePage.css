@@ -1,0 +1,18 @@
+.pledge-project-title {
+    border: .1em solid rgb(232,232,232);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pledge-ul-nav {
+    display: flex;
+    /* align-items: flex-start; */
+    padding-left: 13%;
+}
+
+.reward-selection-text {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10%;
+}

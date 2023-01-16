@@ -8,6 +8,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import SingleProject from './components/SingleProject/Index'
+import PledgeDetails from './components/Pledges/PledgePage';
 import { authenticate } from './store/session';
 import Landing from './components/HomePage';
 import Footer from "./components/Footer"
@@ -54,6 +55,9 @@ function App() {
         </Route> */}
         <Route path='/project/:id' exact={true}>
           <SingleProject/>
+        </Route>
+        <Route path='/project/:id/pledges' exact={true}>
+          <PledgeDetails />
         </Route>
       </Switch>
       <Footer />
