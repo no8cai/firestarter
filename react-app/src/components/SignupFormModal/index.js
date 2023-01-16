@@ -1,38 +1,47 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import {  useSelector, useDispatch } from "react-redux";
+import { useHistory, Redirect } from "react-router-dom";
 import { useModal } from "../../context/Modal";
-import * as sessionActions from "../../store/session";
+import { signUp } from "../../store/session";
 import './SignupForm.css';
 
 function SignupFormModal() {
-  const dispatch = useDispatch();
-  const history = useHistory()
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const user = useSelector(state => state.session.user);
+  const dispatch = useDispatch();
+  
+  const history = useHistory()
   const { closeModal } = useModal();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
 
     e.preventDefault();
-    if (password === confirmPassword) {
-      setErrors([]);
-
+    if (password === repeatPassword) {
+      const data = await dispatch(signUp(username, email, password)).then(closeModal).then(history.push('/'));
+      if (data) {
+        setErrors(data)
+        // closeModal()
+      }
+      // setErrors([]);
       // return console.log("test signup", {email, name, password})
-
-      return dispatch(sessionActions.signUp({ email, name, password }))
-        .then(closeModal)
-        .then(history.push('/'))
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        });
+      // return dispatch(signUp({ email, username, password }))
+      //   .then(closeModal)
+      //   .then(history.push('/'))
+      //   .catch(async (res) => {
+      //     const data = await res.json();
+      //     if (data && data.errors) setErrors(data.errors);
+      //   });
     }
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
+
+  // if (user) {
+  //   return <Redirect to='/' />;
+  // }
 
   return (
     <div className='signup-holder'>
@@ -70,9 +79,9 @@ function SignupFormModal() {
             type="text"
             placeholder="Name"
             className='input-line'
-            value={name}
+            value={username}
             title='Name'
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
         </label>
@@ -94,9 +103,9 @@ function SignupFormModal() {
           className='input-line2'
             type="password"
             placeholder='Confirm Password'
-            value={confirmPassword}
+            value={repeatPassword}
             title='Confirm Password'
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            onChange={(e) => setRepeatPassword(e.target.value)}
             required
           />
         </label>

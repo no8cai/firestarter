@@ -1,49 +1,57 @@
 import React, { useState } from "react";
-import * as sessionActions from "../../store/session";
-import { useDispatch } from "react-redux";
+// import * as sessionActions from "../../store/session";
+import { login } from '../../store/session'
+import {  useSelector, useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
+
 
 function LoginFormModal() {
-  const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
-  const { closeModal } = useModal();
+    const [errors, setErrors] = useState([]);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const user = useSelector(state => state.session.user);
+    const dispatch = useDispatch();
+    
+    const { closeModal } = useModal();
+    
+    const history = useHistory()
 
-  const history = useHistory()
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors([]);
-
-    // return console.log("test", {email, password})
-
-    return dispatch(sessionActions.login({ email, password }))
-      .then(closeModal)
-      .then(history.push('/'))
-      .catch(
-        async (res) => {
-          const data = await res.json();
-          console.log(data.errors)
-          if (data && data.errors) setErrors(data.errors);
-        }
-      );
+    // setErrors([]);
+    const data = await dispatch(login(email, password)).then(closeModal).then(history.push('/'));
+    if (data) {
+        setErrors(data)
+    }
+    //   .then(history.push('/'))
+    //   .catch(
+    //     async (res) => {
+    //       const data = await res.json();
+    //       console.log(data.errors)
+    //       if (data && data.errors) setErrors(data.errors);
+    //     }
+    //   );
   };
 
-  const demoLogin = (e) => {
+  const demoLogin = async (e) => {
     e.preventDefault();
-    const demo = {
-        email: 'demo@aa.io',
-        password: 'password'
+    const demoEmail = 'demo@aa.io'
+    const demoPassword = 'password'
+    const data = await dispatch(login(demoEmail, demoPassword)).then(closeModal).then(history.push('/'));
+    if (data) {
+        setErrors(data)
     }
-    // return console.log("demotest", demo)
 
-    return dispatch(sessionActions.login(demo)).then(closeModal)
-    .then(closeModal)
-    .then(history.push('/'))
+    // return dispatch(login(demo)).then(closeModal)
+    // .then(closeModal)
+    // .then(history.push('/'))
   }
+
+//   if (user) {
+//     return <Redirect to='/' />;
+//   }
 
   return (
     <div className='login-holder'>
