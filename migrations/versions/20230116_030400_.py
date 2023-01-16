@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 280c0ae7b350
+Revision ID: a09237bd3e45
 Revises: ffdc0a98111c
-Create Date: 2023-01-16 02:07:57.709207
+Create Date: 2023-01-16 03:04:00.667210
 
 """
 from alembic import op
@@ -12,9 +12,8 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
-
 # revision identifiers, used by Alembic.
-revision = '280c0ae7b350'
+revision = 'a09237bd3e45'
 down_revision = 'ffdc0a98111c'
 branch_labels = None
 depends_on = None
@@ -40,7 +39,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['creatorId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    
+
     if environment == "production":
         op.execute(f"ALTER TABLE projects SET SCHEMA {SCHEMA};")
 
@@ -54,7 +53,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['projectId'], ['projects.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    
+
     if environment == "production":
         op.execute(f"ALTER TABLE rewards SET SCHEMA {SCHEMA};")
 

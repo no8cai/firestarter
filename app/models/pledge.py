@@ -15,7 +15,7 @@ class Pledge(db.Model):
     backerId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
 
     user = db.relationship("User", back_populates="pledges")
-    projects = db.relationship("Project", back_populates="pledges")
+    project = db.relationship("Project", back_populates="pledges")
     reward = db.relationship("Reward", back_populates="pledges")
 
 
