@@ -14,7 +14,8 @@ const getAll = ({projects}) => ({
 const getOne = (project) => ({
     type: READ_SINGLE_PROJECT,
     project
-})
+}
+)
 
 const create = (project) => ({
     type: CREATE_PROJECT,
