@@ -1,3 +1,4 @@
+import React from 'react';
 import './HomePage.css'
 
 
@@ -21,7 +22,7 @@ function Landing() {
             <h1 className="headline">Bring a creative project to life.</h1>
             <p className="subtext">ON CLONERSTARTER:</p>
         </div>
-    
+
         <div className="numbers-holder">
             <div className="numbers-box">
                 <span className="nums-text">123,456</span>
@@ -100,7 +101,7 @@ function Landing() {
         Etc....
     </div> */}
 
-    
+
     </div>
     )
 }
