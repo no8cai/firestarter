@@ -9,19 +9,10 @@ function Landing() {
     
     useEffect(() => {
         dispatch(getAllProjects())
-        dispatch(getOneProject())
     }, [dispatch])
 
-    let randId = Math.floor(Math.random() * 3)
-    console.log(randId)
-
-    const state = useSelector(state => state)
-    // let randomProject = useSelector(state => { return state.projects[randId]})
     const projects = useSelector(state => state.projects)
     console.log('allprojects', Object.values(projects))
-    // console.log('one project', Object.values(randomProject))
-    console.log('state', state)
-
 
     if (!projects) return null
 
