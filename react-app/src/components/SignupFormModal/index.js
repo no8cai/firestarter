@@ -20,6 +20,9 @@ function SignupFormModal() {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
+
+      // return console.log("test signup", {email, name, password})
+
       return dispatch(sessionActions.signUp({ email, name, password }))
         .then(closeModal)
         .then(history.push('/'))

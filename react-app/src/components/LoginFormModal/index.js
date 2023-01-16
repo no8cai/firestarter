@@ -17,6 +17,9 @@ function LoginFormModal() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
+
+    // return console.log("test", {email, password})
+
     return dispatch(sessionActions.login({ email, password }))
       .then(closeModal)
       .then(history.push('/'))
@@ -35,6 +38,8 @@ function LoginFormModal() {
         email: 'demo@aa.io',
         password: 'password'
     }
+    // return console.log("demotest", demo)
+
     return dispatch(sessionActions.login(demo)).then(closeModal)
     .then(closeModal)
     .then(history.push('/'))
