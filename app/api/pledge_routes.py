@@ -23,7 +23,7 @@ def all_backers_pledges_test():
 
 
 # PL3: Get all pledges by project id - DONE, error message done
-@pledge_routes.route('/project/<int:id>/pledges')
+@pledge_routes.route('/projects/<int:id>/pledges')
 def all_pledges_by_project_id(id):
     return {"Pledges":[pledge.to_dict_full() for pledge in Pledge.query.all() if int(pledge.projectId) == int(id)]}
 
