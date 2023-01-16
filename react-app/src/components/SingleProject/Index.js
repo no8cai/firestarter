@@ -1,7 +1,7 @@
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
 import './SingleProject.css'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getOneProject } from '../../store/project'
 import { getAllPledgesByProjectId} from '../../store/pledge' //not working in the reducer yet
 import { getAllPledges } from '../../store/pledge';
@@ -20,7 +20,7 @@ const SingleProject = () => {
     //   history.push('/page-not-found')
     // }
     //const returnProjectsPledges = await dispatch(getAllPledgesByProjectId(id))
-    const returnAllPledges = await dispatch(getAllPledges()) //just for testing purposes
+    // const returnAllPledges = await dispatch(getAllPledges()) //just for testing purposes
   }
 
   useEffect(() => {

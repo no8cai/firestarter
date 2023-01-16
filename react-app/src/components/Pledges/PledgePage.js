@@ -10,6 +10,7 @@ const PledgeDetails = () => {
     }, [dispatch])
 
     let pledges = useSelector(state => state.pledges)
+    console.log('00000000pledges0000000', pledges)
     let pledgesArr = Object.values(pledges)
     console.log('--------all the pledges---------', pledgesArr)
     if(!pledgesArr) return null
