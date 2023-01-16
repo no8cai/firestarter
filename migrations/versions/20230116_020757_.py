@@ -40,6 +40,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['creatorId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    
+    if environment == "production":
+        op.execute(f"ALTER TABLE projects SET SCHEMA {SCHEMA};")
+
     op.create_table('rewards',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=20), nullable=False),
@@ -50,6 +54,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['projectId'], ['projects.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    
+    if environment == "production":
+        op.execute(f"ALTER TABLE rewards SET SCHEMA {SCHEMA};")
+
     op.create_table('pledges',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('rewardId', sa.Integer(), nullable=True),
@@ -62,8 +70,6 @@ def upgrade():
     )
 
     if environment == "production":
-        op.execute(f"ALTER TABLE projects SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE rewards SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE pledges SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 

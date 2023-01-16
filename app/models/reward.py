@@ -11,7 +11,7 @@ class Reward(db.Model):
     title = db.Column(db.String(20), nullable=False)
     price = db.Column(db.DECIMAL(50,2), nullable=False)
     description = db.Column(db.String(255), nullable=False)
-    projectId = db.Column(db.Integer, db.ForeignKey("projects.id"), nullable=False)
+    projectId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("projects.id")), nullable=False)
     estimatedDelivery = db.Column(db.String(255))
 
     project = db.relationship("Project", back_populates="rewards")
