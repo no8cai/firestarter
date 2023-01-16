@@ -8,7 +8,7 @@ const DELETE_PLEDGE = 'pledges/DELETE_PLEDGE' //PL6
 const UPDATE_PLEDGE = 'pledges/UPDATE_PLEDGE' //PL7
 
 //action creators
-const getAll = ({pledges}) => ({
+const getAll = (pledges) => ({
     type: READ_PLEDGES,
     pledges
 })
@@ -18,12 +18,12 @@ const getOne = (pledge) => ({
     pledge
 })
 
-const getByCurrent = ({pledges}) => ({
+const getByCurrent = (pledges) => ({
     type: READ_PLEDGES_CURRENT_USER,
     pledges
 })
 
-const getByProject = ({pledges}) => ({
+const getByProject = (pledges) => ({
     type: READ_PLEDGES_BY_PROJECT_ID,
     pledges
 })
