@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import * as sessionActions from "../../store/session";
 import { login } from '../../store/session'
 import {  useSelector, useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -20,19 +19,10 @@ function LoginFormModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setErrors([]);
     const data = await dispatch(login(email, password)).then(closeModal).then(history.push('/'));
     if (data) {
         setErrors(data)
     }
-    //   .then(history.push('/'))
-    //   .catch(
-    //     async (res) => {
-    //       const data = await res.json();
-    //       console.log(data.errors)
-    //       if (data && data.errors) setErrors(data.errors);
-    //     }
-    //   );
   };
 
   const demoLogin = async (e) => {
@@ -43,15 +33,8 @@ function LoginFormModal() {
     if (data) {
         setErrors(data)
     }
-
-    // return dispatch(login(demo)).then(closeModal)
-    // .then(closeModal)
-    // .then(history.push('/'))
   }
 
-//   if (user) {
-//     return <Redirect to='/' />;
-//   }
 
   return (
     <div className='login-holder'>

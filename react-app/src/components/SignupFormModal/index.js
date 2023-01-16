@@ -24,24 +24,10 @@ function SignupFormModal() {
       const data = await dispatch(signUp(username, email, password)).then(closeModal).then(history.push('/'));
       if (data) {
         setErrors(data)
-        // closeModal()
       }
-      // setErrors([]);
-      // return console.log("test signup", {email, name, password})
-      // return dispatch(signUp({ email, username, password }))
-      //   .then(closeModal)
-      //   .then(history.push('/'))
-      //   .catch(async (res) => {
-      //     const data = await res.json();
-      //     if (data && data.errors) setErrors(data.errors);
-      //   });
     }
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
-
-  // if (user) {
-  //   return <Redirect to='/' />;
-  // }
 
   return (
     <div className='signup-holder'>
