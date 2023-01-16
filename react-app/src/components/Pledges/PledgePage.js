@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { getAllPledges, deletePledge, updatePledge } from '../store/pledge';
+import { getAllPledges, deletePledge, updatePledge } from '../../store/pledge';
 
 
 const PledgeDetails = () => {
