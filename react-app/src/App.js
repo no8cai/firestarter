@@ -9,6 +9,9 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import SingleProject from './components/SingleProject/Index'
 import { authenticate } from './store/session';
+import Landing from './components/HomePage';
+import Footer from "./components/Footer"
+import Navigation from './components/Navigation';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -27,8 +30,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      {/* <NavBar /> */}
+      <Navigation />
       <Switch>
+        <Route path='/'>
+          <Landing />
+          <Footer />
+        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
@@ -41,9 +49,9 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <Route path='/' exact={true} >
+        {/* <Route path='/' exact={true} >
           <h1>My Home Page</h1>
-        </Route>
+        </Route> */}
         <Route path='/project/:id' exact={true}>
           <SingleProject/>
         </Route>
