@@ -9,7 +9,6 @@ from .auth_routes import validation_errors_to_error_messages
 pledge_routes = Blueprint('pledges', __name__,url_prefix="/api")
 
 # PL1: Get all pledge data - DONE (no error needed)
-# but since we will probably never use this route that might be okay
 @pledge_routes.route('/pledges')
 def all_pledges():
     return {"Pledges":[pledge.to_dict_full() for pledge in Pledge.query.all()]}
@@ -66,10 +65,6 @@ def add_pledge(id):
 
 
 # PL6: Edit pledge by pledge id - DONE, error messages done,
-# should we make it so you don't have to give a new value for each field?
-# take out project id?
-# I think both ways work below, wit hte .update, and with the doing it line by line with form.data['rewardId']
-# On the front end do a get pledges, then fill in the data that is the same
 @pledge_routes.route('/pledges/<int:id>', methods=['PUT'])
 @login_required
 def edit_pledge(id):
@@ -86,7 +81,6 @@ def edit_pledge(id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     currentId=current_user.get_id()
-    # check if the current user is the pledge owner
     if int(current_pledge.backerId) != int(currentId):
         return {
           'message':'Forbidden Error',

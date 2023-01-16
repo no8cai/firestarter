@@ -196,6 +196,13 @@ user's information.
     }
     ```
 
+### U6: Log out
+
+
+Logs out a current user with valid credentials and returns the current user's
+information.
+
+
 ## PROJECTS
 
 ### PR1-Get all projects - DONE
