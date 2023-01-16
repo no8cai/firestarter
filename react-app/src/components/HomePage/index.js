@@ -1,8 +1,22 @@
 import React from 'react';
 import './HomePage.css'
+import { useDispatch, useSelector} from 'react-redux';
+import { fetchAllProjects, fetchOneProject } from '../../store/project';
+import { useEffect, useState } from 'react'
 
 
 function Landing() {
+    const dispatch = useDispatch()
+    
+    useEffect(() => {
+        dispatch(fetchAllProjects())
+    }, [dispatch])
+
+    const projects = useSelector(state => state.projects)
+    console.log('allprojects', Object.values(projects))
+
+    if (!projects) return null
+
 
     return (
         <div className="main-container">
@@ -20,7 +34,7 @@ function Landing() {
     <div className="content-container">
         <div className="headline-holder">
             <h1 className="headline">Bring a creative project to life.</h1>
-            <p className="subtext">ON CLONERSTARTER:</p>
+            <p className="subtext">ON FIRESTARTER:</p>
         </div>
 
         <div className="numbers-holder">

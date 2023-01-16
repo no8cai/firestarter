@@ -10,14 +10,14 @@ project_routes = Blueprint('projects', __name__)
 # Get all project data
 @project_routes.route('')
 def all_projects():
-    return {"projects":[project.to_dict_full() for project in Project.query.all()]}
+    return {"Projects":[project.to_dict_full() for project in Project.query.all()]}
 
 # Get all project data by the current user
 @project_routes.route('/current')
 @login_required
 def all_current_projects():
     currentId=current_user.get_id()
-    return {"projects":[project.to_dict_full() for project in Project.query.all() if int(project.creatorId) == int(currentId)]}
+    return {"Projects":[project.to_dict_full() for project in Project.query.all() if int(project.creatorId) == int(currentId)]}
 
 # Get project data by Id
 @project_routes.route('/<int:id>')

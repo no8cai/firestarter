@@ -10,6 +10,9 @@ from .auth_routes import validation_errors_to_error_messages
 
 rewards_routes = Blueprint('rewards', __name__, url_prefix="/api")
 
+
+
+
 # ALL REWARDS BASED ON PROJECT ID
 @rewards_routes.route('/projects/<int:id>/rewards')
 def all_rewards(id):
