@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 42edbd815b61
+Revision ID: b38e5e39b3b3
 Revises: 
-Create Date: 2023-01-13 23:28:08.177138
+Create Date: 2023-01-16 01:40:53.140953
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '42edbd815b61'
+revision = 'b38e5e39b3b3'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,10 +30,6 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")  
-      
     op.create_table('projects',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('creatorId', sa.Integer(), nullable=False),
@@ -72,8 +68,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['rewardId'], ['rewards.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
-
     # ### end Alembic commands ###
 
 
