@@ -1,8 +1,10 @@
-import React from "react";
-import { NavLink } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from "react";
+import { NavLink, Link, Route, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import './Navigation.css'
 import LogoutButton from "../auth/LogoutButton";
-
+import OpenModalButton from '../OpenModalButton';
+import ProfileButton from './ProfileButton';
 
 function Navigation() {
     return (
@@ -21,9 +23,24 @@ function Navigation() {
    
            <div className="right-nav">
                <span>Search</span>
-               <span><NavLink to='/login' exact={true} activeClassName='active'>
-            Login
-          </NavLink></span>
+               <span> <ProfileButton /></span>
+               {/* <span> <ProfileButton user={sessionUser} /></span> */}
+
+
+               {/* <span><NavLink to='/login' exact={true} activeClassName='active'>
+                Login
+                </NavLink>
+                </span> */}
+
+
+                {/* <span>
+
+            {isLoaded && (
+                <li>
+                    <ProfileButton user={sessionUser} />
+                </li>
+             )}
+                </span> */}
            </div>
        </div>
     </nav>

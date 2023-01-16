@@ -1,0 +1,122 @@
+.login-form {
+    border: 1px solid;
+    position: absolute;
+    /* display: flex;
+    justify-content: center;
+    flex-direction: column; */
+    
+}
+/* form {
+    width: 100%;
+    height: 100%;
+} */
+
+.signup-holder {
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    /* justify-content: center; */
+    align-items: center;
+    width: 35rem;
+    height: 40rem;
+    /* padding: 2rem; */
+}
+
+.signup-line {
+    margin: 1rem;
+    /* margin-bottom: 1rem; */
+    font-size: 1rem;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    /* border-bottom: lightgray solid 1px; */
+}
+
+.signup-line-holder {
+    width: 100%;
+    border-bottom: lightgray solid 1px;
+}
+
+.form-holder {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 0px;
+    /* margin-bottom: 1rem; */
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    /* padding: 2rem; */
+}
+
+.signup-form-css {
+    width: 90%;
+    
+}
+
+button {
+    width: 100%;
+}
+
+.input-holder {
+    border: gray solid 1px;
+    border-radius: 3% / 5%;
+    margin-bottom: 2rem;
+    width: 100%;
+ 
+}
+
+.input-line { 
+    width: 94%;
+    /* border-bottom: 0px; */
+    padding: 1rem;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    background: transparent;
+    border-bottom: 1px solid gray;
+    height: 0.5rem;
+}
+.input-line2 { 
+    width: 94%;
+    border-bottom: 0px;
+    padding: 1rem;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    background: transparent;
+    /* border-bottom: 1px solid gray; */
+    height: 0.5rem;
+}
+
+.welcome {
+    display: flex;
+    width: 90%;
+    font-size: 1.3rem;
+    /* padding: 1rem; */
+    margin-top: 1rem;
+}
+
+.welcome-h3 {
+    margin-left: 1rem;
+}
+
+
+.login-break {
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    text-align: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.errorlist> li {
+    padding-top: 0px;
+    padding-bottom: 0.7rem;
+}
