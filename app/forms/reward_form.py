@@ -1,9 +1,19 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DecimalField, IntegerField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired,ValidationError
+from datetime import datetime
+
+
+def valid_delivery(form, field):
+    delivery = datetime.strptime(field.data,"%B %Y")
+    current=datetime.now()
+    if delivery<current:
+        raise ValidationError('Delivery estimation can not be in the past.')
 
 class RewardForm(FlaskForm):
     title = StringField("Reward Title", validators=[DataRequired(message="Reward title cannot be blank.")])
     price = DecimalField("Price", validators=[DataRequired(message="Price for this reward must be set.")])
     description = StringField("Description", validators=[DataRequired(message="Reward description cannot be blank.")])
-    estimatedDelivery = StringField("Estimated Delivery", validators=[DataRequired(message="Reward estimated delivery cannot be blank.")])
+    estimatedDelivery = StringField("Estimated Delivery", validators=[DataRequired(message="Reward estimated delivery cannot be blank."),valid_delivery])
+
+

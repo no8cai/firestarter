@@ -9,7 +9,7 @@ class Project(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    creatorId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    creatorId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     title = db.Column(db.String(50), nullable=False)
     category = db.Column(db.String(50), nullable=False)
     city = db.Column(db.String(50), nullable=False)
@@ -20,12 +20,12 @@ class Project(db.Model):
     fundingGoal = db.Column(db.DECIMAL(50,2),nullable=False)
     startDate = db.Column(db.String(50), nullable=False)
     endDate = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.String(2000), nullable=False)
-    risks = db.Column(db.String(1000), nullable=False)
+    description = db.Column(db.String(4000), nullable=False)
+    risks = db.Column(db.String(4000), nullable=False)
 
     user = db.relationship("User", back_populates="projects")
     rewards = db.relationship("Reward", back_populates="project")
-    pledges = db.relationship("Pledge", back_populates="projects")
+    pledges = db.relationship("Pledge", back_populates="project")
 
     def to_dict(self):
       return {
