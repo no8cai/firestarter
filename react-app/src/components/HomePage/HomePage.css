@@ -1,0 +1,141 @@
+.main-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    justify-content: center;
+    align-items: center;
+    padding-left: 5%;
+    margin-right: 0px;
+    padding-bottom: 5em;
+    margin-top: 5rem;
+    padding: 0px;
+}
+
+.categories-bar {
+    border-bottom: 1px lightgray solid;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 1rem;
+}
+
+.categories-bar> span {
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.home-section-title {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: gray;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 77rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0px;
+}
+
+.line-break {
+    width: 100%;
+    padding-top: 3rem;
+    border-bottom: 1px solid lightgray;
+}
+
+.content-container-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.headline-holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.numbers-holder {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    /* border: solid lightgray 1px; */
+    width: 100%;
+    justify-content: space-around;
+    box-shadow: 0.5px 2px 10px lightgray;
+    padding: 0px;
+}
+
+.numbers-box {
+    border: 0.1rem lightgray solid;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 20rem;
+    width: 100%;
+    height: 100%;
+}
+
+.nums-text {
+    font-size: 2rem;
+    color: rgb(0, 100, 62)
+}
+
+.subtext {
+    font-size: 0.9rem;
+}
+
+.content-container-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.feature-project-holder {
+    width: 55%;
+    padding-right: 4rem;
+}
+
+.rec-holder {
+    width: 45%;
+    padding-left: 4rem;
+    border-left: 1px lightgray solid;
+}
+
+.feature-image {
+    width: 100%;
+    height: 25rem;
+    border: red solid 1px;
+}
+
+.rec-projects {
+    display: flex;
+    flex-direction: row;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid lightgray;
+}
+
+.rec-project-thumbnail {
+    height: 5rem;
+    width: 10rem;
+    padding-right: 2rem;
+    border: red solid 1px;
+}
+
+.rec-project-details {
+    display: flex;
+    flex-direction: column;
+}
