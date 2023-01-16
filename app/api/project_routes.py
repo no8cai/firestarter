@@ -60,7 +60,7 @@ def edit_project(id):
     # check if the current user is the project owner
     currentId=current_user.get_id()
     if int(oneProject.creatorId) != int(currentId):
-        return {"errors":['Unauthorized']}
+        return {"errors":['Unauthorized']},401
     
     if form.validate_on_submit():
         edit_project=Project(id=id)
@@ -80,6 +80,11 @@ def delete_project(id):
     oneProject = Project.query.get(id)
     if not oneProject:
         return {"errors":["Project couldn't be found"]},404
+
+    currentId=current_user.get_id()
+    if int(oneProject.creatorId) != int(currentId):
+        return {"errors":['Unauthorized']},401
+    
     db.session.delete(oneProject)
     db.session.commit()
     return "delete succeful"
