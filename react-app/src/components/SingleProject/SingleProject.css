@@ -1,0 +1,80 @@
+
+.add-border {
+    border: .1em solid black;
+}
+
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+ button {
+    background-color: white;
+    /* border: none; */
+}
+
+.nav > div {
+    width: 15em;
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+
+.media-img img{
+    height: 20em;
+    width: 35em;
+    border-radius: 1em;
+    border-color: white;
+    border-width: 1em;
+    border-style: solid;
+    object-fit: cover;
+
+}
+
+.main-content {
+    display: flex;
+    justify-content: center;
+
+}
+
+.right-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.basic-budget {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.right-side-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.about-kickstarter {
+    display: flex;
+}
+
+.bottom-bar {
+    display: flex;
+
+}
+
+.bottom-section {
+    display: flex;
+}
