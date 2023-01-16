@@ -196,6 +196,13 @@ user's information.
     }
     ```
 
+### U6: Log out
+
+
+Logs out a current user with valid credentials and returns the current user's
+information.
+
+
 ## PROJECTS
 
 ### PR1-Get all projects - DONE
@@ -903,16 +910,18 @@ Returns all the pledges.
       "pledges": [
         {
            "id": 1,
-           "creatorId": 1,
            "backerId": 1,
-           "pledgeId": 1,
+           "projectId": 1,
+           "rewardId":1,
            "Reward":  {
            "id": 1,
            "price": 20,
            "title": "Book for kids"
            },
            "Project": {
-           "id": 1
+           "id": 1,
+           "creatorId": 1,
+           "title": "Books about female leaders"
            }
         }
       ]
@@ -967,7 +976,7 @@ Returns all the pledges owned (created) by the current user.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: /api/projects/:projectId/pledges
+  * URL: /api/pledges/project/:projectId
   * Body: none
 
 * Successful Response
@@ -992,7 +1001,7 @@ Returns all the pledges owned (created) by the current user.
         }
       ]
     }
-### PL4: Get details of a pledge from an id (never used?)
+### PL4: Get details of a pledge from an id (will need for edit page)
 
 Returns the details of a Pledge specified by its id.
 
@@ -1045,7 +1054,10 @@ Creates and returns a new Pledge for a reward based on the specified Id..
   * Body:
 
     ```json
-          { "rewardId": 1 }
+          {
+            "rewardId": 1,
+            "backerId":1
+           }
     ```
 
 * Successful Response

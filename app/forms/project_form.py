@@ -1,21 +1,41 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
-from wtforms.validators import DataRequired, Email, ValidationError
+from wtforms import StringField,DecimalField
+from wtforms.validators import DataRequired, Email, ValidationError,Length
 from app.models import Project
+from datetime import datetime
 
-# class ProjectForm(FlaskForm):
-#     title = StringField('title', validators=[DataRequired()])
-#     category = StringField('category', validators=[DataRequired()])
-#     city = StringField('city', validators=[DataRequired()])
-#     state = StringField('state', validators=[DataRequired()])
-#     country = StringField('country', validators=[DataRequired()])
-#     imageUrl = StringField('imageUrl', validators=[DataRequired()])
-#     videoUrl = StringField('videoUrl', validators=[DataRequired()])
-#     fundingGoal = StringField('fundingGoal', validators=[DataRequired()])
-#     startDate = StringField('startDate', validators=[DataRequired()])
-#     endDate = StringField('endDate', validators=[DataRequired()])
-#     description = StringField('description', validators=[DataRequired()])
-#     risks = StringField('risks', validators=[DataRequired()])
+# reuseable validation
+def valid_startDate(form, field):
+    startdate = datetime.strptime(field.data,"%m-%d-%Y")
+    current=datetime.now()
+    if startdate<current:
+        raise ValidationError('Start date can not be in the past.')
 
 class ProjectForm(FlaskForm):
-    title = StringField('title')
+    title = StringField('title', validators=[DataRequired()])
+    category = StringField('category', validators=[DataRequired()])
+    city = StringField('city', validators=[DataRequired()])
+    state = StringField('state', validators=[DataRequired()])
+    country = StringField('country', validators=[DataRequired()])
+    imageUrl = StringField('imageUrl', validators=[DataRequired()])
+    videoUrl = StringField('videoUrl')
+    fundingGoal = DecimalField('fundingGoal', validators=[DataRequired()])
+    startDate = StringField('startDate', validators=[DataRequired(),valid_startDate])
+    endDate = StringField('endDate', validators=[DataRequired()])
+    description = StringField('description', validators=[DataRequired()])
+    risks = StringField('risks', validators=[DataRequired()])
+    
+    #globle one time validation
+    def validate(self, **kwargs):
+        # Standard validators
+        rv = FlaskForm.validate(self)
+        # Ensure all standard validators are met
+        if rv:
+            # Ensure end date >= start date
+            endingdate = datetime.strptime(self.endDate.data,"%m-%d-%Y")
+            startingdate = datetime.strptime(self.startDate.data,"%m-%d-%Y")
+            if startingdate >= endingdate:
+                self.endDate.errors.append('End date must be after the starting date.')
+                return False
+            return True
+        return False
