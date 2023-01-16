@@ -45,7 +45,7 @@ function Navigation({ isLoaded }) {
    
            <div className="mid-nav">
            <NavLink to='/' exact={true} activeClassName='active'>
-            Firestarter
+            FIRESTARTER
           </NavLink>
            </div>
    

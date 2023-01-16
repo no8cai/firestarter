@@ -53,26 +53,12 @@ function ProfileButton({ user }) {
         <div className={ulClassName} ref={ulRef}>
           {user ? (
             <div className='modal-dropdown'>
-              <li>{user.username}</li>
-              {/* <li>{user.firstName} {user.lastName}</li> */}
-              <li id='useremailline'>{user.email}</li>
-                <div className='manage'>
-              <li>
-  
-                
-                <hr></hr>
-                {/* <Link id='toplink' className='link' to='/manage-listings'>Manage Listings</Link> */}
-                {/* </Route> */}
-                </li>
-                <li>
-                  {/* <Link className='link' to='/manage-reviews'>Manage Reviews</Link> */}
-                </li>
-                <hr></hr>
-                </div>
-  
-              <li className='logoutbutton'>
-                <button onClick={logout}>Log Out</button>
-              </li>
+              <div className='dropdown-container'>
+                <p>{user.username}</p>
+                <p id="useremailline">{user.email}</p>
+                <p className="logoutbutton"><button onClick={logout}>Logout</button></p>
+              </div>
+              
             </div>
           ) : (
             <div className='signup-button'>
