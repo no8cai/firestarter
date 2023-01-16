@@ -2,7 +2,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
 import './SingleProject.css'
 import { useEffect, useState } from 'react'
-import { getOneProject } from '../../store/project'
+import { fetchOneProject } from '../../store/project'
+import { fetchProjectRewards } from '../../store/reward'
 import { getAllPledgesByProjectId} from '../../store/pledge' //not working in the reducer yet
 import { getAllPledges } from '../../store/pledge';
 
@@ -14,12 +15,12 @@ const SingleProject = () => {
 
 
   const findProjectTest = async () => {
-    const returnProject = await dispatch(getOneProject(id))
+    const returnProject = await dispatch(fetchOneProject(id))
     //console.log("the returnProject is undefined", returnProject, 'the id is', id)
     // if(!returnProject) { //having that in there broke it
     //   history.push('/page-not-found')
     // }
-    //const returnProjectsPledges = await dispatch(getAllPledgesByProjectId(id))
+    const returnProjectsPledges = await dispatch(fetchProjectRewards(id))
     // const returnAllPledges = await dispatch(getAllPledges()) //just for testing purposes
   }
 

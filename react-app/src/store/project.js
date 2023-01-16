@@ -6,9 +6,9 @@ const DELETE_PROJECT = 'projects/DELETE_PROJECT'
 const UPDATE_PROJECT = 'projects/UPDATE_PROJECT'
 
 //action creators
-const getAll = ({projects}) => ({
+const getAll = ({Projects}) => ({
     type: READ_PROJECTS,
-    projects
+    Projects
 })
 
 const getOne = (project) => ({
@@ -22,64 +22,70 @@ const create = (project) => ({
     project
 })
 
-const remove = (projectId) => ({
-    type: DELETE_PROJECT,
-    projectId
-})
-
 const edit = (project) => ({
     type: UPDATE_PROJECT,
     project
 })
 
+const remove = (projectId) => ({
+    type: DELETE_PROJECT,
+    projectId
+})
+
+
+
 //thunks
-export const getAllProjects = () => async dispatch => {
+export const fetchAllProjects = () => async dispatch => {
     const response = await fetch(`/api/projects`);
     if(response.ok){
         const projectsList = await response.json()
         dispatch(getAll(projectsList))
     }
+    if(response.status>=400) throw response
 }
 
-export const getOneProject = (projectId) => async dispatch => {
+export const fetchOneProject = (projectId) => async dispatch => {
     const response = await fetch(`/api/projects/${projectId}`)
     if(response.ok){
         const singleProject = await response.json()
         dispatch(getOne(singleProject))
     }
+    if(response.status>=400) throw response
 }
 
-export const createProject = (payload) => async dispatch => {
+export const fetchCreateProject = (project) => async dispatch => {
     const response = await fetch(`/api/projects`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(project)
     })
     if(response.ok){
-        const project = await response.json()
-        dispatch(create(project))
-        return project
+        const newproject = await response.json()
+        dispatch(create(newproject))
+        return newproject
     }
+    if(response.status>=400) throw response
 }
 
-export const updateProject = (payload) => async dispatch => {
-    const response = await fetch(`/api/projects/${payload.id}`, {
+export const fetchUpdateProject = (project) => async dispatch => {
+    const response = await fetch(`/api/projects/${project.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(project)
     })
     if(response.ok){
-        const project = await response.json()
-        dispatch(edit(project))
-        return project
+        const editproject = await response.json()
+        dispatch(edit(editproject))
+        return editproject
     }
+    if(response.status>=400) throw response
 }
 
-export const deleteProject = projectId => async dispatch => {
+export const fetchDeleteProject = projectId => async dispatch => {
     const response = await fetch(`/api/projects/${projectId}`, {
         method: 'DELETE',
         headers: {
@@ -90,43 +96,42 @@ export const deleteProject = projectId => async dispatch => {
         dispatch(remove(projectId))
         return response
     }
+    if(response.status>=400) throw response
 }
 
 //reducer
 const initialState = {}
 
 const projectsReducer = (state = initialState, action) => {
-    let allProjects = {}
+    let newState;
     switch(action.type){
         case READ_PROJECTS:
-            action.projects.Projects.forEach(project => {
-                allProjects[project.id] = project
+            newState={...state}
+            action.Projects.forEach(project => {
+            newState[project.id] = project
             })
-            return {
-                ...allProjects
-            }
+            return newState
+
         case READ_SINGLE_PROJECT:
-            const oneState = {...state}
-            oneState[action.project.id] = action.project
-            return oneState
+            newState = {...state}
+            newState[action.project.id] = action.project
+            return newState
 
         case CREATE_PROJECT:
-            if(!state[action.project.id]){
-                return {
-                    ...state,
-                    [action.project.id]: action.project
-                }
-            }
+            newState = {...state}
+            newState[action.project.id] = action.project
+            return newState
 
         case UPDATE_PROJECT:
-            let editedProject = {...state}
-            editedProject[action.project.id] = action.project
-            return editedProject
+            newState = {...state}
+            newState[action.project.id] = action.project
+            return newState
 
         case DELETE_PROJECT:
-            const deleteState = {...state}
-            delete deleteState[action.projectId]
-            return deleteState
+            newState = {...state}
+            delete newState[action.projectId]
+            return newState
+            
         default:
             return state
 
