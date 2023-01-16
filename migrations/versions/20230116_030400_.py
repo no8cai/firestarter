@@ -47,7 +47,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=255), nullable=False),
     sa.Column('price', sa.DECIMAL(precision=50, scale=2), nullable=False),
-    sa.Column('description', sa.String(length=255), nullable=False),
+    sa.Column('description', sa.String(length=2000), nullable=False),
     sa.Column('projectId', sa.Integer(), nullable=False),
     sa.Column('estimatedDelivery', sa.String(length=255), nullable=True),
     sa.ForeignKeyConstraint(['projectId'], ['projects.id'], ),

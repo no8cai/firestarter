@@ -42,26 +42,32 @@ def single_pledge3(id):
 
 
 # PL5: Create pledge - DONE, error messages done
-@pledge_routes.route('/rewards/<int:id>/pledges', methods=['POST'])
+@pledge_routes.route('/pledges', methods=['POST'])
 @login_required
-def add_pledge(id):
-
-    reward=Reward.query.get(id)
-    if not reward:
-        return {
-            'message':'HTTP Error',
-            "errors": "Reward couldn't be found",
-            'statusCode': 404
-            }, 404
+def add_pledge():
+    form = PledgeForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        reward=Reward.query.get(form.data["rewardId"])
+        if not reward:
+            return {
+              'message':'HTTP Error',
+              "errors": "Reward couldn't be found",
+              'statusCode': 404
+            }, 404   
+        project_Id=reward.projectId
+        currentId=current_user.get_id()
+        new_pledge = Pledge(backerId=currentId,projectId=project_Id)
+        form.populate_obj(new_pledge)
+        db.session.add(new_pledge)
+        db.session.commit()
+        return new_pledge.to_dict(),201       
     
-    project_Id=reward.projectId
-    currentId=current_user.get_id()
-
-    new_pledge = Pledge(backerId=currentId,rewardId=id,projectId=project_Id)
-
-    db.session.add(new_pledge)
-    db.session.commit()
-    return new_pledge.to_dict(), 201
+    return {
+        'message':'Validation Error',
+        "errors":validation_errors_to_error_messages(form.errors),
+        'statusCode': 400
+        },400
 
 
 # PL6: Edit pledge by pledge id - DONE, error messages done,
