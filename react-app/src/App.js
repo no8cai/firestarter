@@ -33,7 +33,6 @@ function App() {
     <BrowserRouter>
       {/* <NavBar /> */}
       <Navigation />
-        <Footer />
       <Switch>
         <Route path='/' exact={true}>
           <Landing />
@@ -57,6 +56,7 @@ function App() {
           <SingleProject/>
         </Route>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }
