@@ -54,15 +54,15 @@ def add_pledge():
               'message':'HTTP Error',
               "errors": "Reward couldn't be found",
               'statusCode': 404
-            }, 404   
+            }, 404
         project_Id=reward.projectId
         currentId=current_user.get_id()
         new_pledge = Pledge(backerId=currentId,projectId=project_Id)
         form.populate_obj(new_pledge)
         db.session.add(new_pledge)
         db.session.commit()
-        return new_pledge.to_dict(),201       
-    
+        return new_pledge.to_dict(),201
+
     return {
         'message':'Validation Error',
         "errors":validation_errors_to_error_messages(form.errors),
@@ -82,7 +82,7 @@ def edit_pledge(id):
             "errors": "Pledge couldn't be found",
             'statusCode': 404
             }, 404
-    
+
     form = PledgeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -93,7 +93,7 @@ def edit_pledge(id):
           'errors': ['The pledge is not belongs to the current user'],
           'statusCode': 403
           },403
-    
+
     if form.validate_on_submit():
         reward=Reward.query.get(form.data["rewardId"])
         if not reward:
