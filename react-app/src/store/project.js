@@ -15,7 +15,6 @@ const getOne = (project) => ({
     type: READ_SINGLE_PROJECT,
     project
 }
-//console.log('does getOne work, it does', project)
 )
 
 const create = (project) => ({
@@ -44,7 +43,6 @@ export const getAllProjects = () => async dispatch => {
 
 export const getOneProject = (projectId) => async dispatch => {
     const response = await fetch(`/api/projects/${projectId}`)
-    console.log('what is the response of one project, this works', response)
     if(response.ok){
         const singleProject = await response.json()
         dispatch(getOne(singleProject))
@@ -110,7 +108,6 @@ const projectsReducer = (state = initialState, action) => {
         case READ_SINGLE_PROJECT:
             const oneState = {...state}
             oneState[action.project.id] = action.project
-            console.log('does the reducer work', oneState)
             return oneState
 
         case CREATE_PROJECT:
