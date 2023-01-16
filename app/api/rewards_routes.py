@@ -6,6 +6,8 @@ from ..forms.reward_form import RewardForm
 
 from flask_login import current_user, login_user, logout_user, login_required
 
+from .auth_routes import validation_errors_to_error_messages
+
 rewards_routes = Blueprint('rewards', __name__, url_prefix="/api")
 
 # ALL REWARDS BASED ON PROJECT ID
@@ -24,9 +26,10 @@ def create_reward(id):
     
     if not project:
         return {
-            "message": "Project couldn't be found",
-            "statusCode": 404
-        }, 404
+           'message':'HTTP Error',
+           "errors":["Project couldn't be found"],
+           'statusCode': 404
+           },404
         
     # Current user is project creator authentication
     if authenticate()['id'] == project.creatorId:
@@ -42,15 +45,16 @@ def create_reward(id):
         
         if form.errors:
             return {
-                "message": "Validation error",
+                "message": "Validation Error",
+                "errors":validation_errors_to_error_messages(form.errors),
                 "statusCode": 400,
-                "errors": form.errors
             }, 400
     
     #current user is not project creator
     else:
         return {
-            "message": "Forbidden",
+            "message": "Forbidden Error",
+            'errors': ['The project is not belongs to the current user'],
             "statusCode": 403
         }, 403
         
@@ -63,9 +67,10 @@ def update_reward(id):
     
     if not reward:
         return {
-            "message": "Reward couldn't be found",
-            "statusCode": 404
-        }, 404
+            'message':'HTTP Error',
+            "errors":["Reward couldn't be found"],
+            'statusCode': 404
+            },404
     
     form['csrf_token'].data = request.cookies['csrf_token']
     project = Project.query.get(reward.projectId)
@@ -80,13 +85,14 @@ def update_reward(id):
         if form.errors:
             return {
                 "message": "Validation error",
-                "statusCode": 400,
-                "errors": form.errors
+                "errors":validation_errors_to_error_messages(form.errors),
+                "statusCode": 400
             }, 400
             
     else:
         return {
-            "message": "Forbidden",
+            "message": "Forbidden Error",
+            'errors': ['The project is not belongs to the current user'],
             "statusCode": 403
         }, 403
         
@@ -98,9 +104,10 @@ def delete_reward(id):
     
     if not reward:
         return {
-            "message": "Reward couldn't be found",
-            "statusCode": 404
-        }, 404
+            'message':'HTTP Error',
+            "errors":["Reward couldn't be found"],
+            'statusCode': 404
+            },404
         
     project = Project.query.get(reward.projectId)
 
@@ -109,12 +116,12 @@ def delete_reward(id):
         db.session.commit()
         return {
             "message": "Successfully deleted",
-            "statusCode": 200,
-            "id": id
+            "statusCode": 200
         }, 200
         
     else:
         return {
-            "message": "Forbidden",
+            "message": "Forbidden Error",
+            'errors': ['The project is not belongs to the current user'],
             "statusCode": 403
         }, 403

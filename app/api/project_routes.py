@@ -25,7 +25,11 @@ def single_project(id):
     oneProject = Project.query.get(id)
     if oneProject:
       return oneProject.to_dict_full()
-    return {"errors":["Project couldn't be found"]},404
+    return {
+        'message':'HTTP Error',
+        "errors":["Project couldn't be found"],
+        'statusCode': 404
+        },404
 
 # Create a project
 @project_routes.route('', methods=['POST'])
@@ -45,7 +49,11 @@ def add_project():
         db.session.commit()
         return new_project.to_dict(),201
     
-    return {"errors":validation_errors_to_error_messages(form.errors)},400
+    return {
+        'message':'Validation Error',
+        "errors":validation_errors_to_error_messages(form.errors),
+        'statusCode': 400
+        },400
 
 # Edit a project
 @project_routes.route('/<int:id>', methods=['PUT'])
@@ -56,21 +64,31 @@ def edit_project(id):
     # check if the project is in the database
     oneProject = Project.query.get(id)
     if not oneProject:
-        return {"errors":["Project couldn't be found"]},404
+        return {
+            'message':'HTTP Error',
+            'errors':["Project couldn't be found"],
+            'statusCode': 404
+            },404
     # check if the current user is the project owner
     currentId=current_user.get_id()
     if int(oneProject.creatorId) != int(currentId):
-        return {"errors":['Unauthorized']},401
+        return {
+          'message':'Forbidden Error',
+          'errors': ['The project is not belongs to the current user'],
+          'statusCode': 403
+          },403
     
     if form.validate_on_submit():
-        edit_project=Project(id=id)
-        form.populate_obj(edit_project)
-
-        Project.query.filter(Project.id==id).update(edit_project.to_dict())
+        form.populate_obj(oneProject)
+        db.session.add(oneProject)
         db.session.commit()
-        return Project.query.get(id).to_dict()
+        return oneProject.to_dict()
 
-    return {"errors":validation_errors_to_error_messages(form.errors)},400
+    return {
+        'message':'Validation Error',
+        "errors":validation_errors_to_error_messages(form.errors),
+        'statusCode': 400
+        },400
 
 
 # Delete a project
@@ -79,12 +97,23 @@ def edit_project(id):
 def delete_project(id):
     oneProject = Project.query.get(id)
     if not oneProject:
-        return {"errors":["Project couldn't be found"]},404
+        return {
+            'message':'HTTP Error',
+            "errors":["Project couldn't be found"],
+            'statusCode': 404
+            },404
 
     currentId=current_user.get_id()
     if int(oneProject.creatorId) != int(currentId):
-        return {"errors":['Unauthorized']},401
+        return {
+          'message':'Forbidden Error',
+          'errors': ['The project is not belongs to the current user'],
+          'statusCode': 403
+          },403
     
     db.session.delete(oneProject)
     db.session.commit()
-    return "delete succeful"
+    return {
+        "message": "Successfully deleted",
+        'statusCode': 200
+        },200
