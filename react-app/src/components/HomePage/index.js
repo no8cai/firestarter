@@ -1,6 +1,6 @@
 import './HomePage.css'
 import { useDispatch, useSelector} from 'react-redux';
-import { getAllProjects, getOneProject } from '../../store/project';
+import { fetchAllProjects, fetchOneProject } from '../../store/project';
 import { useEffect, useState } from 'react'
 
 
@@ -8,7 +8,7 @@ function Landing() {
     const dispatch = useDispatch()
     
     useEffect(() => {
-        dispatch(getAllProjects())
+        dispatch(fetchAllProjects())
     }, [dispatch])
 
     const projects = useSelector(state => state.projects)
