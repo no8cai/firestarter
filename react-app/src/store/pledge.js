@@ -8,7 +8,7 @@ const DELETE_PLEDGE = 'pledges/DELETE_PLEDGE' //PL6
 const UPDATE_PLEDGE = 'pledges/UPDATE_PLEDGE' //PL7
 
 //action creators
-const getAll = (pledges) => ({ //different then ({projects})
+const getAll = ({pledges}) => ({
     type: READ_PLEDGES,
     pledges
 })
@@ -18,7 +18,12 @@ const getOne = (pledge) => ({
     pledge
 })
 
-const getByProject = (pledges) => ({
+const getByCurrent = ({pledges}) => ({
+    type: READ_PLEDGES_CURRENT_USER,
+    pledges
+})
+
+const getByProject = ({pledges}) => ({
     type: READ_PLEDGES_BY_PROJECT_ID,
     pledges
 })
@@ -57,7 +62,7 @@ export const getOnePledge = (backerId) => async dispatch => {
 }
 
 export const getAllPledgesByProjectId = (projectId) => async dispatch => {
-    const response = await fetch(`/api/pledges/project/${projectId}`)
+    const response = await fetch(`/api/projects/${projectId}/pledges`)
     if(response.ok){
         const pledgesList = await response.json()
         dispatch(getByProject(pledgesList))
