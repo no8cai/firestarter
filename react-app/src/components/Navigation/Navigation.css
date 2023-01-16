@@ -27,3 +27,139 @@
     padding-left: 1rem;
     padding-right: 1rem;
 }
+
+.right-nav {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-button {
+    border: solid darkgreen 2px !important; 
+    background: white !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    padding-left: 12px;
+    border-radius: 50%;
+    text-align: start;
+    font-size: 2em;
+    color: gray !important;
+    font-stretch: 100%;
+    /* position: relative;
+    vertical-align: middle; */
+    justify-content: center;
+    flex-direction: row;
+    height: 2rem;
+    width: 2rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-button:hover {
+  box-shadow: 1px 5px 5px lightgray;
+}
+
+.profile-button-div {
+    padding-right: 4rem;
+    position: relative;
+}
+
+.fas.fa-user-circle {
+    padding-left: 15px;
+    margin: 0;
+    padding-top: 0.1rem;
+}
+
+.profile-dropdown {
+    border: white 1px solid;
+    /* justify-content: left; */
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 13rem;
+    border-radius: 5%;
+    box-shadow: 0px 0px 10px 1px lightgray;
+    position: relative;
+    /* border: red 1px solid; */
+    position: absolute;
+    margin-top: 0.5rem;
+    z-index: 99;
+    float: right;
+    background: white;
+    right: 4rem;
+    left: auto;
+
+}
+
+/* li {
+    padding-top: 1em;
+} */
+
+.modal-dropdown {
+    /* border: red 1px solid; */
+    position: relative;
+}
+
+.link {
+    justify-content: flex-start;
+    padding-left: 0px;
+    margin-bottom: 1rem;
+}
+
+.link:hover {
+    background: rgb(238, 238, 238);
+}
+
+/* .manage {
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
+} */
+
+.login-button> li {
+    font-weight: bold;
+    margin-top: 1em;
+}
+
+.login-button> li:hover {
+    cursor: pointer;
+    background: rgb(238, 238, 238);
+}
+
+.signup-button> li {
+    cursor: pointer;
+    margin-top: 1em;
+}
+
+.signup-button> li:hover {
+    cursor: pointer !important;
+    background: rgb(238, 238, 238);
+}
+
+.logoutbutton> button {
+    /* justify-content: flex-start; */
+    /* padding-left: 0px; */
+    background: none;
+    color: black;
+    padding: 0px;
+    width: 30%;
+    font-weight: normal;
+    font-size: 1rem;
+    height: 1rem;
+    /* margin-bottom: 0.5rem; */
+}
+
+.logoutbutton:hover {
+    background: rgb(238, 238, 238);
+}
+
+.modal-dropdown> li {
+    margin-top: 1rem;
+}
+ 
+#toplink {
+    margin-top: 1rem;
+}
+
+#useremailline {
+    margin-bottom: 1rem;
+}
