@@ -20,7 +20,7 @@ const SingleProject = () => {
     //   history.push('/page-not-found')
     // }
     //const returnProjectsPledges = await dispatch(getAllPledgesByProjectId(id))
-    const returnAllPledges = await dispatch(getAllPledges()) //just for testing purposes
+    // const returnAllPledges = await dispatch(getAllPledges()) //just for testing purposes
   }
 
   useEffect(() => {
