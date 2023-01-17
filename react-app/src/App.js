@@ -54,7 +54,7 @@ function App() {
         {/* <Route path='/' exact={true} >
           <h1>My Home Page</h1>
         </Route> */}
-        <Route path='/project/:id' exact={true}>
+        <Route path='/projects/:id' exact={true}>
           <SingleProject/>
         </Route>
         <Route path='/testing' exact={true}>

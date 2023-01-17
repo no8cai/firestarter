@@ -33,8 +33,7 @@ class Pledge(db.Model):
             'rewardId': self.rewardId,
             'projectId': self.projectId,
             'backerId': self.backerId,
-            # add reward back in after syncing with Kirin
-           # "Reward": Reward.query.get(self.rewardId).to_dict(),
+             "Reward": Reward.query.get(self.rewardId).to_dict_reward(),
             "Project": Project.query.get(self.projectId).to_dict()
 
         }
