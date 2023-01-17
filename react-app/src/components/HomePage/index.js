@@ -1,5 +1,6 @@
 import './HomePage.css'
 import { useDispatch, useSelector} from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchAllProjects, fetchOneProject } from '../../store/project';
 import { useEffect, useState } from 'react'
 import { getAllPledges, getAllPledgesByProjectId } from '../../store/pledge';
@@ -26,9 +27,10 @@ function Landing() {
     
     const projectsObj = useSelector(state => state.projects)
     const projects = Object.values(projectsObj)
+    // console.log(projects)
     let randId = Math.floor(Math.random() * (projects.length) + 1)
     const randProject = useSelector(state => state.projects[randId])
-
+    let pledgeTotal = 0
 
     if (!projectsObj || !randProject || !pledgesObj) return null
 
@@ -72,25 +74,32 @@ function Landing() {
         <div className="content-container-row">
             <div className="feature-project-holder">
                 <span className="home-section-title">FEATURE PROJECT</span>
-                <div className="feature-image"><img className='img' src={randProject.imageUrl}></img></div>
+                <Link className="feature-link" to={`/project/${randProject.id}`}>
+                    <div className="feature-image"><img className='img' src={randProject.imageUrl}></img></div>
                 <div className="feature-title">{randProject.title}</div>
                 <div className="feature description">{randProject.description}</div>
                 <div className="feature-creator">by {randProject.creator.username}</div>
+                </Link>
+                
             </div>
             <div className="rec-holder">
                 <span className="home-section-title">RECOMMENDED FOR YOU</span>
                 {/* for project in projects loop */}
                     {projects.length && (projects.slice(0).reverse().map(project => {
+                        console.log(pledges[project.id - 1])
+                        if (pledges.length) pledgeTotal += pledges[project.id - 1].Reward.price
                         return (
                 <div className="rec-projects">
+                    <Link to={`/project/${project.id}`}>
 
                     <div className="rec-project-thumbnail"><img className='img' src={project.imageUrl}></img></div>
                     <div className="rec-project-details">
                         <span className="rec-project-title">{project.title}</span>
-                        <span className="rec-project-funded">100% funded</span>
+                        <span className="rec-project-funded">{pledges.length ? pledgeTotal/project.fundingGoal : 0}% funded</span>
                         <span className="rec-project-creator">By {project.creator.username}</span>
                         <div className="rec-project-bookmark-likes">Bookmark, like, dislike buttons</div>
                     </div>
+                        </Link>
                 </div>
                         )
                     }))}

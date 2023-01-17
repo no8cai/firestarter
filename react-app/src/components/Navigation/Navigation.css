@@ -71,14 +71,14 @@
 }
 
 .profile-dropdown {
-    border: white 1px solid;
+    border: gray 1px solid;
     /* justify-content: left; */
     padding-bottom: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    width: 13rem;
-    border-radius: 5%;
-    box-shadow: 0px 0px 10px 1px lightgray;
+    width: 30rem;
+    /* border-radius: 5%; */
+    /* box-shadow: 0px 0px 10px 1px lightgray; */
     position: relative;
     /* border: red 1px solid; */
     position: absolute;
@@ -162,4 +162,31 @@
 
 #useremailline {
     margin-bottom: 1rem;
+}
+
+.dropdown-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-box-user-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: lightgray solid 1px;
+}
+
+.nav-backed-item {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 1rem;
+}
+
+.nav-thumbnail {
+    height: 2rem;
+    width: 4rem;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
