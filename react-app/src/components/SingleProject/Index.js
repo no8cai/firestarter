@@ -51,7 +51,7 @@ const SingleProject = () => {
 
   if (oneProject && allPledges3) {
     let currentProgress = ((totalPledges * 100)/(oneProject.fundingGoal)).toFixed(2)
-    console.log('what is current progress', currentProgress)
+    //console.log('what is current progress', currentProgress)
     return (
         <div className='sp-extra-outer-div'>
         <div className='sp-whole-page'>
@@ -78,7 +78,7 @@ const SingleProject = () => {
             </div>
             <div className="sp-add-border sp-basic-budget">
                 <h2 className='sp-green'>${totalPledges}</h2>
-                <h8>pledged of ${oneProject.fundingGoal} goal</h8>
+                <h8>pledged of ${Math.floor(oneProject.fundingGoal)} goal</h8>
                 <h2>{allPledges3.length} </h2>
                 <h8>backers </h8>
                 <h2>{diffDays} </h2>
