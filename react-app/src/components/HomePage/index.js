@@ -2,7 +2,7 @@ import './HomePage.css'
 import { useDispatch, useSelector} from 'react-redux';
 import { fetchAllProjects, fetchOneProject } from '../../store/project';
 import { useEffect, useState } from 'react'
-import { getAllPledges } from '../../store/pledge';
+import { getAllPledges, getAllPledgesByProjectId } from '../../store/pledge';
 import { fetchProjectRewards } from '../../store/reward';
 
 
@@ -17,13 +17,10 @@ function Landing() {
 
     const pledgesObj = useSelector(state => state.pledges)
     const pledges = Object.values(pledgesObj)
-    console.log(pledges)
-    // console.log("??????????????", rewards)
     let totalPledges = 0
     if (pledgesObj){
-        pledges.map(pledge => {
+        pledges.forEach(pledge => {
             totalPledges += parseFloat(pledge.Reward.price)
-            // console.log("THIS IS A PLEDGE", pledge.Reward.price)
         })
     }
     
@@ -33,7 +30,7 @@ function Landing() {
     const randProject = useSelector(state => state.projects[randId])
 
 
-    if (!projectsObj || !randProject || ! pledgesObj ) return null
+    if (!projectsObj || !randProject || !pledgesObj) return null
 
 
     return (
@@ -58,14 +55,14 @@ function Landing() {
         <div className="numbers-holder">
             <div className="numbers-box">
                 <span className="nums-text">{projects.length}</span>
-                <span className="subtext">projects funded</span>
+                <span className="subtext">projects</span>
             </div>
             <div className="numbers-box">
                 <span className="nums-text">${totalPledges}.00</span>
                 <span className="subtext">towards creative work</span>
             </div>
             <div className="numbers-box">
-                <span className="nums-text">${totalPledges}.00</span>
+                <span className="nums-text">{pledges.length}</span>
                 <span className="subtext">pledges</span>
             </div>
         </div>
