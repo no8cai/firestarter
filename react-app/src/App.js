@@ -14,6 +14,7 @@ import Footer from "./components/Footer"
 import Navigation from './components/Navigation';
 import * as sessionActions from "./store/session";
 import CreatProject from './components/Projects/CreateProject';
+import Testing from './components/Testing';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -57,8 +58,11 @@ function App() {
         {/* <Route path='/' exact={true} >
           <h1>My Home Page</h1>
         </Route> */}
-        <Route path='/project/:id' exact={true}>
+        <Route path='/projects/:id' exact={true}>
           <SingleProject/>
+        </Route>
+        <Route path='/testing' exact={true}>
+          <Testing/>
         </Route>
       </Switch>
       )}
