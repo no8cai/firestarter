@@ -34,7 +34,7 @@ function Landing() {
     // console.log(projects)
     let randId = Math.floor(Math.random() * (projects.length) + 1)
     const randProject = useSelector(state => state.projects[randId])
-    let pledgeTotal = 0
+    // let pledgeTotal
 
     if (!projectsObj || !randProject || !pledgesObj || pledges.length == 0) return null
 
@@ -90,9 +90,14 @@ function Landing() {
                 <span className="home-section-title">RECOMMENDED FOR YOU</span>
                 {/* for project in projects loop */}
                     {projects.length && (projects.slice(0).reverse().map(project => {
-                        // console.log(pledges[project.id - 1])
-                        if (pledges.length) pledgeTotal += pledges[project.id - 1].Reward.price
-                        console.log(pledges)
+                        // console.log(pledges)
+                        let pledgeTotal = 0
+                        pledges.forEach(pledge => {
+                            if (project.id == pledge.Project.id){
+                                console.log(pledge.Reward.price)
+                                pledgeTotal += pledge.Reward.price
+                            }
+                        })
                         return (
                 <div key={project.id} className="rec-projects">
                     <Link to={`/projects/${project.id}`}>
@@ -100,7 +105,7 @@ function Landing() {
                     <div className="rec-project-thumbnail"><img className='img' src={project.imageUrl}></img></div>
                     <div className="rec-project-details">
                         <span className="rec-project-title">{project.title}</span>
-                        <span className="rec-project-funded">{pledges.length ? (pledgeTotal * 100)/project.fundingGoal : 0}% funded</span>
+                        <span className="rec-project-funded">{pledges.length ? ((parseFloat(pledgeTotal) * 1000)/parseFloat(project.fundingGoal)) : 0}% funded</span>
                         <span className="rec-project-creator">By {project.creator.username}</span>
                         <div className="rec-project-bookmark-likes">Bookmark, like, dislike buttons</div>
                     </div>
