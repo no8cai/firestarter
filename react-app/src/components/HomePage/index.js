@@ -86,10 +86,10 @@ function Landing() {
                 <span className="home-section-title">RECOMMENDED FOR YOU</span>
                 {/* for project in projects loop */}
                     {projects.length && (projects.slice(0).reverse().map(project => {
-                        console.log(pledges[project.id - 1])
+                        // console.log(pledges[project.id - 1])
                         if (pledges.length) pledgeTotal += pledges[project.id - 1].Reward.price
                         return (
-                <div className="rec-projects">
+                <div key={project.id} className="rec-projects">
                     <Link to={`/project/${project.id}`}>
 
                     <div className="rec-project-thumbnail"><img className='img' src={project.imageUrl}></img></div>

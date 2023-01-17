@@ -21,7 +21,11 @@ function UserDataModal({user}) {
 
     const userPledgesObj = useSelector(state => state.pledges)
     const userPledges = Object.values(userPledgesObj)
-    console.log(userPledges)
+    let pledges
+    if(userPledgesObj && user){
+        pledges = userPledges.filter(pledge => pledge.backerId == user.id)
+        }
+    
   
     const openMenu = () => {
       if (showMenu) return;
@@ -63,9 +67,9 @@ function UserDataModal({user}) {
                 </div>
                 <div className="nav-backed-container">
                   <p>Backed Projects</p>
-                  {user && (userPledges.map(pledge => {
+                  {user && (pledges.map(pledge => {
                     return (
-                        <div className="nav-backed-item">
+                        <div key={pledge.id} className="nav-backed-item">
                             <Link to={`/projects/${pledge.Project.id}`}>
 
                             <div className="nav-thumbnail">{<img className="backed-thumbnail" src={pledge.Project.imageUrl}></img>}</div>
