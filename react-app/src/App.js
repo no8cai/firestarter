@@ -13,6 +13,7 @@ import Landing from './components/HomePage';
 import Footer from "./components/Footer"
 import Navigation from './components/Navigation';
 import * as sessionActions from "./store/session";
+import CreatProject from './components/Projects/CreateProject';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -37,6 +38,9 @@ function App() {
       <Switch>
         <Route path='/' exact={true}>
           <Landing />
+        </Route>
+        <Route exact path='/createproject'>
+          <CreatProject />
         </Route>
         {/* <Route path='/login' exact={true}>
           <LoginForm />
