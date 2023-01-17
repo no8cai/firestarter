@@ -1,9 +1,11 @@
 import './HomePage.css'
 import { useDispatch, useSelector} from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchAllProjects, fetchOneProject } from '../../store/project';
 import { useEffect, useState } from 'react'
-import { getAllPledges } from '../../store/pledge';
-import { fetchProjectRewards } from '../../store/reward';
+import { getAllPledges, getAllPledgesByProjectId, getPledgesByCurrentUser } from '../../store/pledge';
+// import { fetchProjectRewards } from '../../store/reward';
+// import SearchResultPage from '../Search';
 
 
 function Landing() {
@@ -13,42 +15,41 @@ function Landing() {
         dispatch(fetchAllProjects())
         dispatch(fetchOneProject())
         dispatch(getAllPledges())
-        dispatch(fetchProjectRewards(1))
+        // dispatch(getPledgesByCurrentUser())
     }, [dispatch])
 
-    const pledgesObj = useSelector(state => state.pledges)
-    // const pledges = Object.values(pledgesObj)
-    const rewardsObj = useSelector(state => state.rewards[1])
-    // const rewards = Object.values(rewardsObj)
+    const pledgesObj = useSelector(state => state.pledges.allPledges)
+    const pledges = Object.values(pledgesObj)
     // console.log(pledges)
-    // console.log("??????????????", rewards)
-
-    // if (pledgesObj){
-    //     pledges.map(pledge => {
-    //         console.log("??????????????", pledge)
-    //     })
-    // }
+    let totalPledges = 0
+    if (pledgesObj){
+        pledges.forEach(pledge => {
+            // console.log("PLEDGE", pledge)
+            totalPledges += parseFloat(pledge.Reward.price)
+        })
+    }
     
     const projectsObj = useSelector(state => state.projects)
     const projects = Object.values(projectsObj)
+    // console.log(projects)
     let randId = Math.floor(Math.random() * (projects.length) + 1)
     const randProject = useSelector(state => state.projects[randId])
+    let pledgeTotal = 0
 
-
-    if (!projectsObj || !randProject || ! pledgesObj || !rewardsObj) return null
+    if (!projectsObj || !randProject || !pledgesObj || pledges.length == 0) return null
 
 
     return (
         <div className="main-container">
     <div className="categories-bar">
-        <span>Arts</span>
-        <span>Comics & Illustration</span>
-        <span>Design & Tech</span>
-        <span>Film</span>
-        <span>Food & Craft</span>
-        <span>Games</span>
-        <span>Music</span>
-        <span>Publishing</span>
+        <span><Link to="/discover/arts" cat='art'>Arts</Link></span>
+        <span><Link to="/discover/comicsillustration" cat='comicsillustration'>Comics & Illustration</Link></span>
+        <span><Link to="/discover/designtech">Design & Tech</Link></span>
+        <span><Link to="/discover/film">Film</Link></span>
+        <span><Link to="/discover/foodcraft">Food & Craft</Link></span>
+        <span><Link to="/discover/games">Games</Link></span>
+        <span><Link to="/discover/music">Music</Link></span>
+        <span><Link to="/discover/publishing">Publishing</Link></span>
     </div>
 
     <div className="content-container">
@@ -59,15 +60,15 @@ function Landing() {
     
         <div className="numbers-holder">
             <div className="numbers-box">
-                <span className="nums-text">123,456</span>
-                <span className="subtext">projects funded</span>
+                <span className="nums-text">{projects.length}</span>
+                <span className="subtext">projects</span>
             </div>
             <div className="numbers-box">
-                <span className="nums-text">$123,456</span>
+                <span className="nums-text">${totalPledges}.00</span>
                 <span className="subtext">towards creative work</span>
             </div>
             <div className="numbers-box">
-                <span className="nums-text">$123,456</span>
+                <span className="nums-text">{pledges.length}</span>
                 <span className="subtext">pledges</span>
             </div>
         </div>
@@ -77,25 +78,33 @@ function Landing() {
         <div className="content-container-row">
             <div className="feature-project-holder">
                 <span className="home-section-title">FEATURE PROJECT</span>
-                <div className="feature-image"><img className='img' src={randProject.imageUrl}></img></div>
+                <Link className="feature-link" to={`/projects/${randProject.id}`}>
+                    <div className="feature-image"><img className='img' src={randProject.imageUrl}></img></div>
                 <div className="feature-title">{randProject.title}</div>
                 <div className="feature description">{randProject.description}</div>
                 <div className="feature-creator">by {randProject.creator.username}</div>
+                </Link>
+                
             </div>
             <div className="rec-holder">
                 <span className="home-section-title">RECOMMENDED FOR YOU</span>
                 {/* for project in projects loop */}
                     {projects.length && (projects.slice(0).reverse().map(project => {
+                        // console.log(pledges[project.id - 1])
+                        if (pledges.length) pledgeTotal += pledges[project.id - 1].Reward.price
+                        console.log(pledges)
                         return (
-                <div className="rec-projects">
+                <div key={project.id} className="rec-projects">
+                    <Link to={`/projects/${project.id}`}>
 
                     <div className="rec-project-thumbnail"><img className='img' src={project.imageUrl}></img></div>
                     <div className="rec-project-details">
                         <span className="rec-project-title">{project.title}</span>
-                        <span className="rec-project-funded">100% funded</span>
+                        <span className="rec-project-funded">{pledges.length ? (pledgeTotal * 100)/project.fundingGoal : 0}% funded</span>
                         <span className="rec-project-creator">By {project.creator.username}</span>
                         <div className="rec-project-bookmark-likes">Bookmark, like, dislike buttons</div>
                     </div>
+                        </Link>
                 </div>
                         )
                     }))}

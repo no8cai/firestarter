@@ -16,6 +16,7 @@ import * as sessionActions from "./store/session";
 import CreatProject from './components/Projects/CreateProject';
 import EditProject from './components/Projects/EditProject';
 import Testing from './components/Testing';
+import SearchResultPage from './components/Search';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -67,6 +68,9 @@ function App() {
         </Route>
         <Route path='/testing' exact={true}>
           <Testing/>
+        </Route>
+        <Route path='/discover/:category' exact={true}>
+          <SearchResultPage />
         </Route>
       </Switch>
       )}
