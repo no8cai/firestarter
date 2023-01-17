@@ -17,6 +17,7 @@ import CreatProject from './components/Projects/CreateProject';
 import EditProject from './components/Projects/EditProject';
 import Testing from './components/Testing';
 import SearchResultPage from './components/Search';
+import Profilepage from './components/Projects';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -42,11 +43,8 @@ function App() {
         <Route path='/' exact={true}>
           <Landing />
         </Route>
-        <Route exact path='/createproject'>
-          <CreatProject />
-        </Route>
-        <Route path='/editproject/:projectId'>
-          <EditProject />
+        <Route path={['/profile','/createproject','/editproject/:projectId','/editreward']} >
+          <Profilepage />
         </Route>
         {/* <Route path='/login' exact={true}>
           <LoginForm />

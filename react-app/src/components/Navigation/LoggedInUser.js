@@ -58,6 +58,9 @@ function UserDataModal({user}) {
 
                 <div className="nav-user-info">
                   <p>User Info</p>
+                  <Link to={'/profile'}>
+                  <p>Profile</p>
+                  </Link>
                   <p>{user.username}</p>
                 <p id="useremailline">{user.email}</p>
                 </div>
