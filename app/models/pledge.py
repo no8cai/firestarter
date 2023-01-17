@@ -10,14 +10,16 @@ class Pledge(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    rewardId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("rewards.id")))
-    projectId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("projects.id")))
-    backerId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
+    rewardId = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod("rewards.id")))
+    projectId = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod("projects.id")))
+    backerId = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod("users.id")))
 
     user = db.relationship("User", back_populates="pledges")
     project = db.relationship("Project", back_populates="pledges")
     reward = db.relationship("Reward", back_populates="pledges")
-
 
     def to_dict(self):
         return {
@@ -34,7 +36,7 @@ class Pledge(db.Model):
             'projectId': self.projectId,
             'backerId': self.backerId,
             # add reward back in after syncing with Kirin
-           # "Reward": Reward.query.get(self.rewardId).to_dict(),
+            "Reward": Reward.query.get(self.rewardId).to_dict_reward(),
             "Project": Project.query.get(self.projectId).to_dict()
 
         }

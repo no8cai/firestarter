@@ -13,21 +13,19 @@ function Landing() {
         dispatch(fetchAllProjects())
         dispatch(fetchOneProject())
         dispatch(getAllPledges())
-        dispatch(fetchProjectRewards(1))
     }, [dispatch])
 
     const pledgesObj = useSelector(state => state.pledges)
-    // const pledges = Object.values(pledgesObj)
-    const rewardsObj = useSelector(state => state.rewards[1])
-    // const rewards = Object.values(rewardsObj)
-    // console.log(pledges)
+    const pledges = Object.values(pledgesObj)
+    console.log(pledges)
     // console.log("??????????????", rewards)
-
-    // if (pledgesObj){
-    //     pledges.map(pledge => {
-    //         console.log("??????????????", pledge)
-    //     })
-    // }
+    let totalPledges = 0
+    if (pledgesObj){
+        pledges.map(pledge => {
+            totalPledges += parseFloat(pledge.Reward.price)
+            // console.log("THIS IS A PLEDGE", pledge.Reward.price)
+        })
+    }
     
     const projectsObj = useSelector(state => state.projects)
     const projects = Object.values(projectsObj)
@@ -35,7 +33,7 @@ function Landing() {
     const randProject = useSelector(state => state.projects[randId])
 
 
-    if (!projectsObj || !randProject || ! pledgesObj || !rewardsObj) return null
+    if (!projectsObj || !randProject || ! pledgesObj ) return null
 
 
     return (
@@ -59,15 +57,15 @@ function Landing() {
     
         <div className="numbers-holder">
             <div className="numbers-box">
-                <span className="nums-text">123,456</span>
+                <span className="nums-text">{projects.length}</span>
                 <span className="subtext">projects funded</span>
             </div>
             <div className="numbers-box">
-                <span className="nums-text">$123,456</span>
+                <span className="nums-text">${totalPledges}.00</span>
                 <span className="subtext">towards creative work</span>
             </div>
             <div className="numbers-box">
-                <span className="nums-text">$123,456</span>
+                <span className="nums-text">${totalPledges}.00</span>
                 <span className="subtext">pledges</span>
             </div>
         </div>
