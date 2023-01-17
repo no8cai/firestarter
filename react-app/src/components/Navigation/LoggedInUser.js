@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import * as sessionActions from '../../store/session';
+import { logout } from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { Link, Route, useHistory } from 'react-router-dom'
 import OpenModalButton from '../OpenModalButton';
 import './Navigation.css'
-import { getByCurrentUser } from "../../store/pledge";
+import { getPledgesByCurrentUser } from "../../store/pledge";
 
 function UserDataModal({user}) {
     const history = useHistory()
@@ -16,19 +16,17 @@ function UserDataModal({user}) {
     const ulRef = useRef();
 
     useEffect(() => {
-      dispatch(getByCurrentUser())
+      dispatch(getPledgesByCurrentUser())
     }, [dispatch])
 
     const userPledgesObj = useSelector(state => state.pledges)
-    const ownerPledges = useSelector(state => state.pledges)
-    console.log('aaaaaaaaaaaaaaaa', ownerPledges)
-    const userPledges = Object.values(userPledgesObj)
-    let pledges
-    if(userPledgesObj && user){
-        pledges = userPledges.filter(pledge => pledge.backerId == user.id)
-        }
+    console.log('aaaaaaaaaaaaaaaa', userPledgesObj)
+    const pledges = Object.values(userPledgesObj.currentOwnersPledges)
+    // let pledges
+    // if(userPledgesObj && user){
+    //     pledges = userPledgesObj.filter(pledge => pledge.backerId == user.id)
+    //     }
     
-  
     const openMenu = () => {
       if (showMenu) return;
       setShowMenu(true);
@@ -52,11 +50,11 @@ function UserDataModal({user}) {
   
     const logout = (e) => {
       e.preventDefault();
-      dispatch(sessionActions.logout());
+      dispatch(logout());
       closeMenu();
       history.push('/')
     };
-    if (!userPledgesObj) return null
+    if (!userPledgesObj || !user) return null
 
     return (
         <div className='dropdown-container'>
