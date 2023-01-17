@@ -3,6 +3,8 @@ import './HomePage.css'
 import { useDispatch, useSelector} from 'react-redux';
 import { fetchAllProjects, fetchOneProject } from '../../store/project';
 import { useEffect, useState } from 'react'
+import { getAllPledges } from '../../store/pledge';
+import { fetchProjectRewards } from '../../store/reward';
 
 
 function Landing() {
@@ -10,12 +12,31 @@ function Landing() {
     
     useEffect(() => {
         dispatch(fetchAllProjects())
+        dispatch(fetchOneProject())
+        dispatch(getAllPledges())
+        dispatch(fetchProjectRewards(1))
     }, [dispatch])
 
-    const projects = useSelector(state => state.projects)
-    console.log('allprojects', Object.values(projects))
+    const pledgesObj = useSelector(state => state.pledges)
+    // const pledges = Object.values(pledgesObj)
+    const rewardsObj = useSelector(state => state.rewards[1])
+    // const rewards = Object.values(rewardsObj)
+    // console.log(pledges)
+    // console.log("??????????????", rewards)
 
-    if (!projects) return null
+    // if (pledgesObj){
+    //     pledges.map(pledge => {
+    //         console.log("??????????????", pledge)
+    //     })
+    // }
+    
+    const projectsObj = useSelector(state => state.projects)
+    const projects = Object.values(projectsObj)
+    let randId = Math.floor(Math.random() * (projects.length) + 1)
+    const randProject = useSelector(state => state.projects[randId])
+
+
+    if (!projectsObj || !randProject || ! pledgesObj || !rewardsObj) return null
 
 
     return (
@@ -55,26 +76,30 @@ function Landing() {
 
     <div className="content-container">
         <div className="content-container-row">
-            {/* have route to randomize project from db? */}
             <div className="feature-project-holder">
                 <span className="home-section-title">FEATURE PROJECT</span>
-                <div className="feature-image">image</div>
-                <div className="feature-title">This is a Project Title</div>
-                <div className="feature description">qwertyuiopasdfghjklzxcvbnm</div>
-                <div className="feature-creator">by A Stray Cat</div>
+                <div className="feature-image"><img className='img' src={randProject.imageUrl}></img></div>
+                <div className="feature-title">{randProject.title}</div>
+                <div className="feature description">{randProject.description}</div>
+                <div className="feature-creator">by {randProject.creator.username}</div>
             </div>
             <div className="rec-holder">
                 <span className="home-section-title">RECOMMENDED FOR YOU</span>
                 {/* for project in projects loop */}
+                    {projects.length && (projects.slice(0).reverse().map(project => {
+                        return (
                 <div className="rec-projects">
-                    <div className="rec-project-thumbnail">Rec proj thumbnail</div>
+
+                    <div className="rec-project-thumbnail"><img className='img' src={project.imageUrl}></img></div>
                     <div className="rec-project-details">
-                        <span className="rec-project-title">Rec Project Title</span>
+                        <span className="rec-project-title">{project.title}</span>
                         <span className="rec-project-funded">100% funded</span>
-                        <span className="rec-project-creator">By Name</span>
+                        <span className="rec-project-creator">By {project.creator.username}</span>
                         <div className="rec-project-bookmark-likes">Bookmark, like, dislike buttons</div>
                     </div>
                 </div>
+                        )
+                    }))}
             </div>
         </div>
     </div>
@@ -87,9 +112,32 @@ function Landing() {
 
     <div className="line-break"></div>
 
-    <div className="content-container">
-        Fresh Favorites section
+    <div className='content-container'>
+
+    <div className="content-container-row2">
+        <div className="home-section-title">DEVS</div>
+        <div className="devbox1"></div>
+     </div>   
+        <div className="devbox">
+            <div className='each-dev'>
+                    <div className="dev-img-holder"></div>
+                    <div>Dev 1</div>
+            </div>
+            <div className='each-dev'>
+                <div className="dev-img-holder"></div>
+                <div>Dev A</div>
+            </div>
+            <div className='each-dev'>
+                <div className="dev-img-holder"></div>
+                <div>Dev α</div>
+            </div>
+            <div className='each-dev'>
+                <div className="dev-img-holder"></div>
+                <div>Dev 👍</div>
+            </div>
+        </div>
     </div>
+    
 
     {/* <div className="line-break"></div>
 
