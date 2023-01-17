@@ -53,8 +53,8 @@ export const getAllPledges = () => async dispatch => {
     }
 }
 
-export const getOnePledge = (backerId) => async dispatch => {
-    const response = await fetch(`/api/pledges/${backerId}`)
+export const getOnePledge = (id) => async dispatch => {
+    const response = await fetch(`/api/pledges/${id}`)
     if(response.ok){
         const singlePledge = await response.json()
         dispatch(getOne(singlePledge))
@@ -66,6 +66,14 @@ export const getAllPledgesByProjectId = (projectId) => async dispatch => {
     if(response.ok){
         const pledgesList = await response.json()
         dispatch(getByProject(pledgesList))
+    }
+}
+
+export const getByCurrentUser = () => async dispatch => {
+    const response = await fetch(`/api/pledges/current`)
+    if (response.ok){
+        const pledgesList = await response.json()
+        dispatch(getByCurrentUser(pledgesList))
     }
 }
 
@@ -125,14 +133,21 @@ const pledgesReducer = (state = initialState, action) => {
             return {
                 ...allPledges
             }
-        // case READ_PLEDGES_BY_PROJECT_ID:
-        //     //this is not right
-        //     action.pledges.Pledges.forEach(pledge => {
-        //         allPledges[pledge.id] = pledge
-        //     })
-        //     return {
-        //         ...allPledges
-        //     }
+        case READ_PLEDGES_BY_PROJECT_ID: //just copied read pledges, need to fix
+            //this is not right
+            action.pledges.Pledges.forEach(pledge => {
+                allPledges[pledge.id] = pledge
+            })
+            return {
+                ...allPledges
+            }
+        case READ_PLEDGES_CURRENT_USER: //just copied read pledges, need to fix
+            action.pledges.Pledges.forEach(pledge => {
+                allPledges[pledge.id] = pledge
+                return {
+                    ...allPledges
+                }
+            })
         case READ_SINGLE_PLEDGE:
             const oneState = {...state}
             oneState[action.pledge.id] = action.pledge
