@@ -1,7 +1,7 @@
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
 import './SingleProject.css'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { fetchOneProject } from '../../store/project'
 import { fetchProjectRewards } from '../../store/reward'
 import { getAllPledgesByProjectId} from '../../store/pledge' //not working in the reducer yet
