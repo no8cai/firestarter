@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
-import { fetchCreateProject,fetchUpdateProject } from "../../../store/project";
+import { fetchCreateProject,fetchUpdateProject,fetchDeleteProject } from "../../../store/project";
 import './ProjectForm.css'
 
 const ProjectForm=({project,formType})=>{
@@ -99,6 +99,10 @@ const ProjectForm=({project,formType})=>{
             });
             }
     }
+
+    const deleteEvents= (id)=>{
+        dispatch(fetchDeleteProject(id))
+        }
 
     return (
         <div className="projectfrom-container">
@@ -241,9 +245,12 @@ const ProjectForm=({project,formType})=>{
               value={fundingGoal}/></div>
 
              <input type="submit" value={formType} className="projectbutton" disabled={!!validationErrors.length}/>
+
             </form>
 
-
+            {formType==="Edit Project" &&(
+                <button onClick={()=>deleteEvents(5)}>delete</button>
+                )}
             <div className='projectform-errorsec'>
             <div className='error-title'>
             {/* <i className="fa-solid fa-circle-exclamation ertlbu" /> */}

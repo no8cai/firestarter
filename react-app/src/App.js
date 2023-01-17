@@ -14,6 +14,7 @@ import Footer from "./components/Footer"
 import Navigation from './components/Navigation';
 import * as sessionActions from "./store/session";
 import CreatProject from './components/Projects/CreateProject';
+import EditProject from './components/Projects/EditProject';
 import Testing from './components/Testing';
 
 function App() {
@@ -42,6 +43,9 @@ function App() {
         </Route>
         <Route exact path='/createproject'>
           <CreatProject />
+        </Route>
+        <Route path='/editproject/:projectId'>
+          <EditProject />
         </Route>
         {/* <Route path='/login' exact={true}>
           <LoginForm />
