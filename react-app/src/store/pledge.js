@@ -38,7 +38,7 @@ const remove = (backerId) => ({
     backerId
 })
 
-const edit = (pledge) => ({
+const eXit = (pledge) => ({
     type: UPDATE_PLEDGE,
     pledge
 })
