@@ -31,7 +31,7 @@ function Landing() {
     
     const projectsObj = useSelector(state => state.projects)
     const projects = Object.values(projectsObj)
-    let randId = Math.floor(Math.random() * (projects.length - 1) + 1)
+    let randId = Math.floor(Math.random() * (projects.length) + 1)
     const randProject = useSelector(state => state.projects[randId])
 
 
