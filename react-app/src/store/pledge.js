@@ -39,7 +39,7 @@ const remove = (backerId) => ({
 })
 
 const eXit = (pledge) => ({
-    notcoolthing: veryuncool
+    notcoolthing: veryuncoolgit 
     type: UPDATE_PLEDGE,
     pledge
 })
