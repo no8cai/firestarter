@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
+import { createPledge } from '../../store/pledge';
 import { fetchOneProject } from '../../store/project'
 import { fetchProjectRewards } from '../../store/reward';
 import './PledgePage.css'
@@ -9,6 +10,7 @@ import './PledgePage.css'
 const PledgeDetails = () => {
     const dispatch = useDispatch()
     const { id } = useParams()
+    const history = useHistory()
 
     useEffect(() => {
         dispatch(fetchOneProject(id))
@@ -25,6 +27,12 @@ const PledgeDetails = () => {
     // console.log('rewardsArr-----', rewardsArr)
     if(!rewardsArr) return null
     if(!project) return null
+
+    const createPledgeBtn = (e) => {
+        e.preventDefault()
+        dispatch(createPledge())
+        history.push('/')
+    }
 
 
     return(
@@ -44,7 +52,7 @@ const PledgeDetails = () => {
 
 
             <div className='pledge-ul-nav'>
-                <p>Rewards > Payment</p>
+                <p>Rewards {'>'} Payment</p>
             </div>
 
             <div className='reward-selection-text'>
@@ -60,7 +68,7 @@ const PledgeDetails = () => {
             <div className='reward-container'>
                 {rewardsArr.map(reward => {
                     return (
-                        <div className='reward-card'>
+                    <div className='reward-card'>
 
                         <div className='reward-card-details'>
                             {/* <input type='radio' />Pledge $20 */}
@@ -74,8 +82,9 @@ const PledgeDetails = () => {
                             <h6 className='reward-estimated'>SHIPS TO</h6>
                             <h5 className='reward-estimated'>Anywhere in the world</h5>
                         </div>
+                        <button className='pledge-button' onClick={createPledgeBtn}>Pledge {reward.price}</button>
 
-                        </div>
+                    </div>
 
 )
 })}

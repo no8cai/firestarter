@@ -102,3 +102,12 @@ summary {
 details[open] {
     padding: .5em;
 }
+
+.pledge-button {
+    background-color: #028858;
+    color: white;
+    border: none;
+    margin: 5px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
