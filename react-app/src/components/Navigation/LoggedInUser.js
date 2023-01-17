@@ -20,6 +20,8 @@ function UserDataModal({user}) {
     }, [dispatch])
 
     const userPledgesObj = useSelector(state => state.pledges)
+    const ownerPledges = useSelector(state => state.pledges)
+    console.log('aaaaaaaaaaaaaaaa', ownerPledges)
     const userPledges = Object.values(userPledgesObj)
     let pledges
     if(userPledgesObj && user){

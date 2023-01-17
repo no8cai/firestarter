@@ -88,6 +88,7 @@ function Landing() {
                     {projects.length && (projects.slice(0).reverse().map(project => {
                         // console.log(pledges[project.id - 1])
                         if (pledges.length) pledgeTotal += pledges[project.id - 1].Reward.price
+                        console.log(pledges)
                         return (
                 <div key={project.id} className="rec-projects">
                     <Link to={`/project/${project.id}`}>
@@ -95,7 +96,7 @@ function Landing() {
                     <div className="rec-project-thumbnail"><img className='img' src={project.imageUrl}></img></div>
                     <div className="rec-project-details">
                         <span className="rec-project-title">{project.title}</span>
-                        <span className="rec-project-funded">{pledges.length ? pledgeTotal/project.fundingGoal : 0}% funded</span>
+                        <span className="rec-project-funded">{pledges.length ? (pledgeTotal * 100)/project.fundingGoal : 0}% funded</span>
                         <span className="rec-project-creator">By {project.creator.username}</span>
                         <div className="rec-project-bookmark-likes">Bookmark, like, dislike buttons</div>
                     </div>

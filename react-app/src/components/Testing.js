@@ -1,14 +1,14 @@
 import { useDispatch, useSelector} from 'react-redux';
 import { useEffect, useState } from 'react'
-import { getAllPledges, getOnePledge, getAllPledgesByProjectId, createPledge, updatePledge, deletePledge } from '../store/pledge';
+import { getAllPledges, getOnePledge, getAllPledgesByProjectId, createPledge, updatePledge, deletePledge, getByCurrentUser } from '../store/pledge';
 
 const Testing = () => {
     const dispatch = useDispatch()
     const findPledgesTest = async () => {
     //PL1 - DONE
-    // const return1 = await dispatch(getAllPledges())
+    const return1 = await dispatch(getAllPledges())
     //PL2 - current user -
-    //const return2 = await dispatch()
+    // const return2 = await dispatch(getByCurrentUser())
     // //PL3 - project id - done
     //const return3 = await dispatch(getAllPledgesByProjectId(2))
     //PL4 - DONE

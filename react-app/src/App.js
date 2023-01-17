@@ -33,8 +33,8 @@ function App() {
   return (
     <BrowserRouter>
       {/* <NavBar /> */}
-      <Navigation isLoaded={loaded} />
-      {loaded && (
+      {/* <Navigation isLoaded={loaded} />
+      {loaded && ( */}
       <Switch>
         <Route path='/' exact={true}>
           <Landing />
