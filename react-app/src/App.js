@@ -65,7 +65,7 @@ function App() {
         <Route path='/testing' exact={true}>
           <Testing/>
         </Route>
-        <Route path='/discover/:category' exact={true}>
+        <Route path='/discover/:searchItem1' >
           <SearchResultPage />
         </Route>
       </Switch>

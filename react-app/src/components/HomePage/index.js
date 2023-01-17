@@ -1,11 +1,10 @@
 import './HomePage.css'
 import { useDispatch, useSelector} from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import { fetchAllProjects, fetchOneProject } from '../../store/project';
 import { useEffect, useState } from 'react'
 import { getAllPledges, getAllPledgesByProjectId, getPledgesByCurrentUser } from '../../store/pledge';
-// import { fetchProjectRewards } from '../../store/reward';
-// import SearchResultPage from '../Search';
+import SearchResultPage from '../Search';
 
 
 function Landing() {
@@ -15,16 +14,14 @@ function Landing() {
         dispatch(fetchAllProjects())
         dispatch(fetchOneProject())
         dispatch(getAllPledges())
-        // dispatch(getPledgesByCurrentUser())
     }, [dispatch])
 
     const pledgesObj = useSelector(state => state.pledges.allPledges)
     const pledges = Object.values(pledgesObj)
-    // console.log(pledges)
+
     let totalPledges = 0
     if (pledgesObj){
         pledges.forEach(pledge => {
-            // console.log("PLEDGE", pledge)
             totalPledges += parseFloat(pledge.Reward.price)
         })
     }
@@ -34,7 +31,6 @@ function Landing() {
     // console.log(projects)
     let randId = Math.floor(Math.random() * (projects.length) + 1)
     const randProject = useSelector(state => state.projects[randId])
-    // let pledgeTotal
 
     if (!projectsObj || !randProject || !pledgesObj || pledges.length == 0) return null
 
@@ -42,9 +38,9 @@ function Landing() {
     return (
         <div className="main-container">
     <div className="categories-bar">
-        <span><Link to="/discover/arts" cat='art'>Arts</Link></span>
-        <span><Link to="/discover/comicsillustration" cat='comicsillustration'>Comics & Illustration</Link></span>
-        <span><Link to="/discover/designtech">Design & Tech</Link></span>
+        <span><Link to="/discover/art">Arts</Link></span>
+        <span><Link to="/discover/comicsillustration">Comics & Illustration</Link></span>
+        <span><Link to="/discover/tech">Design & Tech</Link></span>
         <span><Link to="/discover/film">Film</Link></span>
         <span><Link to="/discover/foodcraft">Food & Craft</Link></span>
         <span><Link to="/discover/games">Games</Link></span>
@@ -88,14 +84,13 @@ function Landing() {
             </div>
             <div className="rec-holder">
                 <span className="home-section-title">RECOMMENDED FOR YOU</span>
-                {/* for project in projects loop */}
                     {projects.length && (projects.slice(0).reverse().map(project => {
-                        // console.log(pledges)
                         let pledgeTotal = 0
+                        let counter = 0
                         pledges.forEach(pledge => {
                             if (project.id == pledge.Project.id){
-                                console.log(pledge.Reward.price)
                                 pledgeTotal += pledge.Reward.price
+                                counter++
                             }
                         })
                         return (
@@ -105,7 +100,7 @@ function Landing() {
                     <div className="rec-project-thumbnail"><img className='img' src={project.imageUrl}></img></div>
                     <div className="rec-project-details">
                         <span className="rec-project-title">{project.title}</span>
-                        <span className="rec-project-funded">{pledges.length ? ((parseFloat(pledgeTotal) * 1000)/parseFloat(project.fundingGoal)) : 0}% funded</span>
+                        <span className="rec-project-funded">{counter !== 0 ? parseFloat((pledgeTotal * 1000000)/project.fundingGoal).toFixed(2) : 0}% funded</span>
                         <span className="rec-project-creator">By {project.creator.username}</span>
                         <div className="rec-project-bookmark-likes">Bookmark, like, dislike buttons</div>
                     </div>
