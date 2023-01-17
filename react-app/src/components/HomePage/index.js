@@ -3,8 +3,9 @@ import { useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchAllProjects, fetchOneProject } from '../../store/project';
 import { useEffect, useState } from 'react'
-import { getAllPledges, getAllPledgesByProjectId } from '../../store/pledge';
-import { fetchProjectRewards } from '../../store/reward';
+import { getAllPledges, getAllPledgesByProjectId, getPledgesByCurrentUser } from '../../store/pledge';
+// import { fetchProjectRewards } from '../../store/reward';
+// import SearchResultPage from '../Search';
 
 
 function Landing() {
@@ -14,13 +15,16 @@ function Landing() {
         dispatch(fetchAllProjects())
         dispatch(fetchOneProject())
         dispatch(getAllPledges())
+        // dispatch(getPledgesByCurrentUser())
     }, [dispatch])
 
-    const pledgesObj = useSelector(state => state.pledges)
+    const pledgesObj = useSelector(state => state.pledges.allPledges)
     const pledges = Object.values(pledgesObj)
+    // console.log(pledges)
     let totalPledges = 0
     if (pledgesObj){
         pledges.forEach(pledge => {
+            // console.log("PLEDGE", pledge)
             totalPledges += parseFloat(pledge.Reward.price)
         })
     }
@@ -32,20 +36,20 @@ function Landing() {
     const randProject = useSelector(state => state.projects[randId])
     let pledgeTotal = 0
 
-    if (!projectsObj || !randProject || !pledgesObj) return null
+    if (!projectsObj || !randProject || !pledgesObj || pledges.length == 0) return null
 
 
     return (
         <div className="main-container">
     <div className="categories-bar">
-        <span>Arts</span>
-        <span>Comics & Illustration</span>
-        <span>Design & Tech</span>
-        <span>Film</span>
-        <span>Food & Craft</span>
-        <span>Games</span>
-        <span>Music</span>
-        <span>Publishing</span>
+        <span><Link to="/discover/arts" cat='art'>Arts</Link></span>
+        <span><Link to="/discover/comicsillustration" cat='comicsillustration'>Comics & Illustration</Link></span>
+        <span><Link to="/discover/designtech">Design & Tech</Link></span>
+        <span><Link to="/discover/film">Film</Link></span>
+        <span><Link to="/discover/foodcraft">Food & Craft</Link></span>
+        <span><Link to="/discover/games">Games</Link></span>
+        <span><Link to="/discover/music">Music</Link></span>
+        <span><Link to="/discover/publishing">Publishing</Link></span>
     </div>
 
     <div className="content-container">
@@ -74,7 +78,7 @@ function Landing() {
         <div className="content-container-row">
             <div className="feature-project-holder">
                 <span className="home-section-title">FEATURE PROJECT</span>
-                <Link className="feature-link" to={`/project/${randProject.id}`}>
+                <Link className="feature-link" to={`/projects/${randProject.id}`}>
                     <div className="feature-image"><img className='img' src={randProject.imageUrl}></img></div>
                 <div className="feature-title">{randProject.title}</div>
                 <div className="feature description">{randProject.description}</div>
@@ -91,7 +95,7 @@ function Landing() {
                         console.log(pledges)
                         return (
                 <div key={project.id} className="rec-projects">
-                    <Link to={`/project/${project.id}`}>
+                    <Link to={`/projects/${project.id}`}>
 
                     <div className="rec-project-thumbnail"><img className='img' src={project.imageUrl}></img></div>
                     <div className="rec-project-details">

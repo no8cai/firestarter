@@ -14,6 +14,7 @@ import Footer from "./components/Footer"
 import Navigation from './components/Navigation';
 import * as sessionActions from "./store/session";
 import Testing from './components/Testing';
+import SearchResultPage from './components/Search';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -59,6 +60,9 @@ function App() {
         </Route>
         <Route path='/testing' exact={true}>
           <Testing/>
+        </Route>
+        <Route path='/discover/:category' exact={true}>
+          <SearchResultPage />
         </Route>
       </Switch>
       )}

@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../store/session';
-import OpenModalMenuItem from './OpenModalMenuItem';
-import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
+// import { logout } from '../../store/session';
+// import OpenModalMenuItem from './OpenModalMenuItem';
+// import LoginFormModal from '../LoginFormModal';
+// import SignupFormModal from '../SignupFormModal';
 import { Link, Route, useHistory } from 'react-router-dom'
-import OpenModalButton from '../OpenModalButton';
+// import OpenModalButton from '../OpenModalButton';
 import './Navigation.css'
-import { getPledgesByCurrentUser } from "../../store/pledge";
+import { getAllPledges, getPledgesByCurrentUser } from "../../store/pledge";
 
 function UserDataModal({user}) {
     const history = useHistory()
@@ -16,21 +16,16 @@ function UserDataModal({user}) {
     const ulRef = useRef();
 
     useEffect(() => {
-      dispatch(getPledgesByCurrentUser())
+        dispatch(getPledgesByCurrentUser())
     }, [dispatch])
 
-    const userPledgesObj = useSelector(state => state.pledges)
-    console.log('aaaaaaaaaaaaaaaa', userPledgesObj)
-    const pledges = Object.values(userPledgesObj.currentOwnersPledges)
-    // let pledges
-    // if(userPledgesObj && user){
-    //     pledges = userPledgesObj.filter(pledge => pledge.backerId == user.id)
-    //     }
+    const userPledges = useSelector(state => state.pledges.userPledges)
+    const pledges = Object.values(userPledges)
     
-    const openMenu = () => {
-      if (showMenu) return;
-      setShowMenu(true);
-    };
+    // const openMenu = () => {
+    //   if (showMenu) return;
+    //   setShowMenu(true);
+    // };
   
     useEffect(() => {
       if (!showMenu) return;
@@ -54,7 +49,8 @@ function UserDataModal({user}) {
       closeMenu();
       history.push('/')
     };
-    if (!userPledgesObj || !user) return null
+    if (!userPledges || !user) return null
+    // if (!userPledgesObj || !user) return null
 
     return (
         <div className='dropdown-container'>

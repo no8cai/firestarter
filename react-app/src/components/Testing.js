@@ -6,7 +6,7 @@ const Testing = () => {
     const dispatch = useDispatch()
     const findPledgesTest = async () => {
     //PL1 - DONE
-    // const return1 = await dispatch(getAllPledges())
+    const return1 = await dispatch(getAllPledges())
     //PL2 - current user -
     const return2 = await dispatch(getPledgesByCurrentUser())
     // //PL3 - project id - done
