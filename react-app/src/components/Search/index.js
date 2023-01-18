@@ -112,7 +112,7 @@ function SearchResultPage() {
           <div>
             Explore {filteredResults.length} project{filteredResults.length > 1 ? "s" : ""}
           </div>
-        ) : null}
+        ) : <div>We can't find projects that match your search</div>}
       </div>
       <div className="all-projects">
         {results.length ? (filteredResults.map((project) => {
