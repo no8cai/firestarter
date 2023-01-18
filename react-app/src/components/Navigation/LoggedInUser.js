@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import * as sessionActions from '../../store/session';
-import OpenModalMenuItem from './OpenModalMenuItem';
-import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
+// import { logout } from '../../store/session';
+// import OpenModalMenuItem from './OpenModalMenuItem';
+// import LoginFormModal from '../LoginFormModal';
+// import SignupFormModal from '../SignupFormModal';
 import { Link, Route, useHistory } from 'react-router-dom'
-import OpenModalButton from '../OpenModalButton';
+// import OpenModalButton from '../OpenModalButton';
 import './Navigation.css'
-import { getByCurrentUser } from "../../store/pledge";
+import { getAllPledges, getPledgesByCurrentUser } from "../../store/pledge";
+import { fetchAllProjects } from "../../store/project";
 
 function UserDataModal({user}) {
     const history = useHistory()
@@ -16,17 +17,17 @@ function UserDataModal({user}) {
     const ulRef = useRef();
 
     useEffect(() => {
-      dispatch(getByCurrentUser())
+        dispatch(getPledgesByCurrentUser())
+        // dispatch(fetchAllProjects())
     }, [dispatch])
 
-    const userPledgesObj = useSelector(state => state.pledges)
-    const userPledges = Object.values(userPledgesObj)
-    console.log(userPledges)
-  
-    const openMenu = () => {
-      if (showMenu) return;
-      setShowMenu(true);
-    };
+    const userPledges = useSelector(state => state.pledges.userPledges)
+    const pledges = Object.values(userPledges)
+
+    const allProjects = useSelector(state => state.projects)
+    const projects = Object.values(allProjects)
+    let userProjects = projects.filter(project => project.creatorId === user.id)
+    
   
     useEffect(() => {
       if (!showMenu) return;
@@ -46,11 +47,12 @@ function UserDataModal({user}) {
   
     const logout = (e) => {
       e.preventDefault();
-      dispatch(sessionActions.logout());
+      dispatch(logout());
       closeMenu();
       history.push('/')
     };
-    if (!userPledgesObj) return null
+    if (!userPledges || !user || !allProjects) return null
+    // if (!userPledges || !user) return null
 
     return (
         <div className='dropdown-container'>
@@ -63,9 +65,9 @@ function UserDataModal({user}) {
                 </div>
                 <div className="nav-backed-container">
                   <p>Backed Projects</p>
-                  {user && (userPledges.map(pledge => {
+                  {user && (pledges.map(pledge => {
                     return (
-                        <div className="nav-backed-item">
+                        <div key={pledge.id} className="nav-backed-item">
                             <Link to={`/projects/${pledge.Project.id}`}>
 
                             <div className="nav-thumbnail">{<img className="backed-thumbnail" src={pledge.Project.imageUrl}></img>}</div>
@@ -77,6 +79,18 @@ function UserDataModal({user}) {
                 </div>
                 <div className="nav-created-container">
                   <p>Created Projects</p>
+                  {user && projects.length ? (userProjects.map(project => {
+                    return (
+                        <div key={project.id} className="nav-backed-item">
+                            <Link to={`/projects/${project.id}`}>
+
+                            <div className="nav-thumbnail">{<img className="backed-thumbnail" src={project.imageUrl}></img>}</div>
+                            <div className="nav-backed-title">{project.title}</div>
+                            </Link>
+                        </div>
+                    )
+                  })): (null)}
+                  <div>Create Project Button</div>
                 </div>
                 </div>
                 

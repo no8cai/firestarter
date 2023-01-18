@@ -4,8 +4,9 @@ import './SingleProject.css'
 import { useEffect, useState } from 'react'
 import { fetchOneProject } from '../../store/project'
 import { fetchProjectRewards } from '../../store/reward'
-import { getAllPledgesByProjectId} from '../../store/pledge' //not working in the reducer yet
+import { getAllPledgesByProjectId} from '../../store/pledge'
 import { getAllPledges } from '../../store/pledge';
+import {fetchDeleteReward} from '../../store/reward'
 
 
 const SingleProject = () => {
@@ -16,12 +17,7 @@ const SingleProject = () => {
 
   const findProjectTest = async () => {
     const returnProject = await dispatch(fetchOneProject(id))
-    //console.log("the returnProject is undefined", returnProject, 'the id is', id)
-    // if(!returnProject) { //having that in there broke it
-    //   history.push('/page-not-found')
-    // }
-    const returnProjectsPledges = await dispatch(fetchProjectRewards(id))
-    // const returnAllPledges = await dispatch(getAllPledges()) //just for testing purposes
+    const allPledgeByProject = await dispatch(getAllPledgesByProjectId(id))
   }
 
   useEffect(() => {
@@ -29,110 +25,102 @@ const SingleProject = () => {
  }, [dispatch])
 
    let oneProject = useSelector(state => {return state.projects[id]})
-  //console.log('is the useSelector working', oneProject)
+   if(oneProject) {
+    var date1 = new Date(oneProject.startDate);
+    var date2 = new Date(oneProject.endDate);
+    var diffTime = Math.abs(date2 - date1);
+    var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+   }
 
-    const currentUserId = useSelector(state=>{
-        if(state.session.user) {return state.session.user.id}
-        else {return ''}
-    })
-
-    //const oneProjectPledges = useSelector(state => {return state.pledges.projectId[id]})
-    //console.log('can we make pledges populate in the state?', oneProjectPledges)
-    const allPledges = useSelector(state => {return state.pledges} )
-    if (allPledges) {
-        console.log('XXXXXXXXXXXXXXXXXXX does all Pledges work', allPledges)
+    const allPledges = useSelector(state => state.pledges)
+    let allPledgesArray = []
+    let totalPledges = 0
+    if(allPledges.pledgesById) {
+        allPledgesArray = Object.values(allPledges.pledgesById)
+        allPledgesArray.forEach(pledge => {
+            totalPledges += parseFloat(pledge.Reward.price)})
     } else {
-        console.log('XXXXXXXXX i guess all pledges doesnt work')
+        return null
+    }
+    const tempDeleteRewardId = 6
+    const handleRemoveReward = (rewardId) => {
+        console.log('for delete do we have rewardId', rewardId)
+        dispatch(fetchDeleteReward(rewardId))
     }
 
-  if (oneProject) {
+  if (oneProject && allPledgesArray) { //
+    let currentProgress = ((totalPledges * 100)/(oneProject.fundingGoal)).toFixed(2)
     return (
-        <div>
-    <div className="nav add-border">
-        <div className="left-nav">
-            <button>Discover</button>
-             <button>Start a project</button>
-        </div>
-        <div className="center-nav">
-            <button>KICKSTARTER</button>
-        </div>
-
-        <div className="'right-nav">
-            <button>Search</button>
-            <div>logo</div>
-             <button>login</button>
-             <div>logo</div>
-        </div>
-
-
+        <div className='sp-extra-outer-div'>
+        <div className='sp-whole-page'>
+    <div className="sp-title sp-add-border">
+        <h1>{oneProject.title}</h1>
+        <button className='sp-delete-reward'onClick={()=> {handleRemoveReward(tempDeleteRewardId)}}>Temporary location of delete reward button </button>
     </div>
-    <div className="title add-border">
-        <h3>Title: {oneProject.title}</h3>
-        {/* <h4>Subtitle: A book to empower the girls we love</h4> */}
-    </div>
-    <div className="main-content add-border">
-        <div className="left-side-media add-border">
-            <div className="media-img">
-                <img src="https://ksr-ugc.imgix.net/assets/039/344/204/8bee49558eb7cf83017f35b941be7143_original.png?ixlib=rb-4.0.2&crop=faces&w=1024&h=576&fit=crop&v=1669689332&auto=format&frame=1&q=92&s=999555cf6d5ead17ea4d17cb90839449" alt="Project Image"/>
+    <div className="sp-main-content add-border">
+        <div className="sp-left-side-media add-border">
+            <div className="sp-media-img">
+                <img src={oneProject.imageUrl} alt="Project Image"/>
             </div>
-            <div>
-                category: {oneProject.category} <br/>
-                location: {oneProject.city}, {oneProject.state}, {oneProject.country}
+            <div className='sp-location'>
+            <i className ="fa-solid fa-fire"></i>&nbsp;Project We Love&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <i className="fa-regular fa-compass"></i> {oneProject.category}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <i className="fa-sharp fa-solid fa-location-dot"></i>   {oneProject.city}, {oneProject.state}, {oneProject.country}
             </div>
         </div>
 
-        <div className="right-side add-border">
-            <div className="add-border">
-                -------bar for funding of the project--------
+        <div className="sp-right-side sp-add-border">
+            <div className="sp-add-border sp-bar-back" role='progressbar'
+            >
+                <div className='sp-green-bar' style={{width: `${currentProgress}%`}}></div>
             </div>
-            <div className="add-border basic-budget">
-                <h4>$4189 pledged of ${oneProject.fundingGoal} goal</h4>
-                <h4>88 backers</h4>
-                <h4>8 days to go</h4>
+            <div className="sp-add-border sp-basic-budget">
+                <h2 className='sp-green'>${totalPledges}</h2>
+                <p>pledged of ${Math.floor(oneProject.fundingGoal)} goal</p>
+                <h2>{allPledgesArray.length} </h2>
+                <p>backers </p>
+                <h2>{diffDays} </h2>
+                <p>days to go</p>
             </div>
-            <div className="add-border right-side-buttons">
-                <button>Back this project</button>
-                <button>Remind me</button>
+            <div className="sp-add-border sp-right-side-buttons">
+                <button className='sp-green-button'>Back this project</button>
+                <br/>
+                <button className='sp-remind-me'><i className="fa-regular fa-bookmark"></i> Remind me</button>
                 <p>All or nothing. This project will only be funded
-                    if it reaches its goal by {oneProject.endDate}.</p>
+                    if it reaches its goal by {date2.toDateString()}.</p>
             </div>
-
         </div>
-
     </div>
-    <div className="add-border about-kickstarter">
-        <div> Kickstarter connects creators with backers to fund projects.</div>
-        <div> Rewards aren't guaranteed, but creators must regularly update backers.</div>
-        <div> You're only charged if the project meets its funding goal by the campaign deadline.</div>
+    <div className="sp-add-border sp-about-kickstarter">
+        <div><i className="fa-solid fa-people-arrows sp-center-icon"></i><p>Fire Starter connects creators with backers to fund projects.</p> </div>
+        <div><i className="fa-regular fa-comments sp-center-icon"></i><p>Rewards aren't guaranteed, but creators must regularly update backers.</p> </div>
+        <div><i className="fa-solid fa-bullhorn sp-center-icon"></i><p>You're only charged if the project meets its funding goal by the campaign deadline.</p> </div>
     </div>
-    <div className="add-border bottom-bar">
+    <div className='sp-add-border sp-outer-bottom-bar'>
+    <div className="sp-add-border sp-bottom-bar">
         <button>Campaign</button>
         <button>Updates</button>
         <button>Comments</button>
     </div>
-    <div className="add-border bottom-section">
-        <div className="bottom-left">
-            <h4>Story</h4>
-            <div>----</div>
+    </div>
+    <div className="sp-add-border sp-bottom-section">
+        <div className="sp-bottom-left">
+            <h4 className='sp-story'>Story</h4>
             <h4>Risks</h4>
         </div>
-        <div className="add-border bottom-center">
-            <div className="story">
+        <div className="sp-add-border sp-bottom-center">
+            <div className="sp-story">
                 <h4>Story</h4>
                 <p>{oneProject.description}</p>
-                {/* Sweet Fire is a children's book that inspires girls to live full and free. The goal of this Kickstarter campaign is to print 500 hardcover copies of the Sweet Fire  and to get them into the hands of children who need this message.  Additional items such as the accompanying song and custom stickers  are also part of the project's goals.
-        The author has financed the illustrations, promotion and initial book design.  Now the Kickstarter community can help take the project over the finished line to a finished, industry-quality publishing product! */}
-
             </div>
-            <div className="risks">
+            <div className="sp-risks">
                 <h4>Risks</h4>
                 <p>{oneProject.risks}</p>
-                {/* The central risk with this campaign is not meeting the funding goal. If the funding goal is not reached, unfortunately no one receives their rewards.
-        We are working with a reputable and reliable U.S. printer and the books are on track for completion at the end of this campaign. The one risk to all of publishing that we cannot control is the supply chain issues created by COVID. The risk associated with this would be a delay in shipping. This should be unlikely, however, since margin has been built into the schedule to hopefully allow for this. */}
             </div>
 
         </div>
-        <div className="add-border bottom-right">
+        <div className="sp-add-border sp-bottom-right">
+
             <div>About the creator: {oneProject.creator.username}</div>
             <div>Support</div>
             <div>Pledge without reward</div>
@@ -141,9 +129,24 @@ const SingleProject = () => {
     </div>
 
 </div>
+</div>
     )
   } else {
-    return "something didn't work"
+    return(
+        <div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+            "something didn't work"
+        </div>
+
+    )
 
   }
 
