@@ -19,7 +19,8 @@ import ManageCenter from './components/Profile';
 import ProjectEntry from './components/Projects';
 import CreateReward from './components/Rewards/CreateReward';
 import EditReward from './components/Rewards/EditReward';
-import PledgeDetails from './components/Pledges';
+// import PledgeDetails from './components/Pledges';
+import CreatePledge from './components/Pledges/CreatePledge';
 
 
 function App() {
@@ -46,7 +47,7 @@ function App() {
         <Route path='/' exact={true}>
           <Landing />
         </Route>
-        <Route path={['/profile','/createReward','/editReward/:rewardId']} >
+        <Route path={['/profile','/createReward','/editReward/:rewardId','/projects/:projectId/editpledge/:pledgeId']} >
           <ManageCenter />
         </Route>
           <Route path={['/createproject','/editproject/:projectId']} >
@@ -77,8 +78,8 @@ function App() {
         <Route path='/discover/:searchItem1' >
           <SearchResultPage />
         </Route>
-        <Route path='/projects/:id/pledges' exact={true}>
-          <PledgeDetails />
+        <Route path='/projects/:projectId/createpledges' exact={true}>
+          <CreatePledge />
         </Route>
         <Route>
           <h1>404 error</h1>

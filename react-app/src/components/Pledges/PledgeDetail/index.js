@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { createPledge, getAllPledgesByProjectId, updatePledge } from '../../store/pledge';
-import { fetchOneProject } from '../../store/project'
-import { fetchProjectRewards } from '../../store/reward';
-import './PledgePage.css'
-// import { Redirect } from 'react-router-dom';
 
+import { createPledge, getAllPledgesByProjectId, updatePledge } from '../../../store/pledge';
+import { fetchOneProject } from '../../../store/project';
+import { fetchProjectRewards } from '../../../store/reward';
 
-const PledgeDetails = () => {
+import '../PledgePage.css'
+
+const PledgeDetails = ({type,projectId,pledgeId}) => {
+    console.log(projectId)
     const dispatch = useDispatch()
-    const { id } = useParams()
+    const id=projectId
     const history = useHistory()
+    const sessionUser = useSelector(state => state.session.user);
 
-    let userId
-    const sessionUser = useSelector(state => state.session.user)
-    // console.log(sessionUser, 'dddddddddddddddddddd')
-    // if(sessionUser){
-    //     userId = sessionUser.id
-    // }
+    let project = useSelector(state => {return state.projects[id]})
+    // console.log('project page', project)
+
+    let rewards = useSelector(state => state.rewards)
+    // console.log('rewards------', rewards)
+    let rewardsArr = Object.values(rewards)
+    // console.log('rewardsArr-----', rewardsArr)
+
 
     useEffect(() => {
         dispatch(fetchOneProject(id))
@@ -26,22 +30,6 @@ const PledgeDetails = () => {
         dispatch(getAllPledgesByProjectId(id))
     }, [dispatch])
 
-    const [validationErrors, setValidationErrors] = useState([])
-
-    useEffect(() => {
-        const errors = []
-        if(!sessionUser) errors.push('User must be logged in to leave a pledge')
-        setValidationErrors(errors)
-    }, [dispatch])
-
-    let project = useSelector(state => {return state.projects[id]})
-    // console.log('project page', project)
-
-    let rewards = useSelector(state => state.rewards)
-    let pledges = useSelector(state => state.pledges)
-    // console.log('rewards------', rewards)
-    let rewardsArr = Object.values(rewards)
-    // console.log('rewardsArr-----', rewardsArr)
 
     // let pledges = useSelector(state => {return state.pledges[id]})
     if(!rewardsArr) return null
@@ -59,7 +47,6 @@ const PledgeDetails = () => {
         dispatch(updatePledge(id))
 
     }
-    console.log(pledges.length, '00000000000')
 
 
     const createPledgeBtn = (rewardId, projectId) => {
@@ -68,9 +55,15 @@ const PledgeDetails = () => {
             rewardId: rewardId,
             projectId: projectId
         }
-        if(!pledges)
-        dispatch(createPledge(payload))
-        // history.push('/')
+        if(type="Create Pledge"){
+            dispatch(createPledge(payload))
+            history.push(`/profile/pledges`)
+        }
+        if(type-"Edit Pledge"){
+            payload[id]=pledgeId
+            dispatch(updatePledge(payload))
+        }
+
     }
     console.log((sessionUser && sessionUser.id === project.creator.id), 'dddddddddddddddddddddddddd')
 
@@ -114,9 +107,9 @@ const PledgeDetails = () => {
                             <h6 className='reward-estimated'>SHIPS TO</h6>
                             <h5 className='reward-estimated'>Anywhere in the world</h5>
                         </div>
-                        {sessionUser && sessionUser.id === project.creator.id ? null : (
-                            <button className='pledge-button' disabled={validationErrors.length > 0} onClick={() => createPledgeBtn(reward.id, reward.projectId)}>Pledge {reward.price}</button>
-                        )}
+                        {/* {sessionUser && sessionUser.id === project.creator.id ? null : ( */}
+                            {/* <button className='pledge-button' disabled={validationErrors.length > 0} onClick={() => createPledgeBtn(reward.id, reward.projectId)}>Pledge {reward.price}</button> */}
+                        {/* )} */}
                     </div>
              </ul>
               ))}
