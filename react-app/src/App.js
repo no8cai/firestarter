@@ -22,8 +22,7 @@ import EditReward from './components/Rewards/EditReward';
 import SearchBar from './components/Search/SearchBar';
 import { SearchModal, SearchModalProvider } from './context/SearchModal';
 import DiscoverPage from './components/Search/DiscoverAllProjects';
-// import PledgeDetails from './components/Pledges';
-import CreatePledge from './components/Pledges/CreatePledge';
+import CreateAPledge from './components/Pledges/CreateAPledge';
 
 
 function App() {
@@ -84,8 +83,8 @@ function App() {
         <Route path='/discover' exact={true}>
           <DiscoverPage />
           </Route>
-        <Route path='/projects/:projectId/createpledges' exact={true}>
-          <CreatePledge />
+        <Route path='/projects/:projectId/createpledges'>
+          <CreateAPledge/>
         </Route>
         <Route>
           <h1>404 error</h1>

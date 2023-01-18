@@ -1,15 +1,19 @@
 import PledgeDetails from "../PledgeDetail"
 import { useParams } from "react-router-dom"
 
-const CreatePledge=()=>{
+const CreateAPledge=()=>{
 
-    const { projectId } = useParams()
+    const {projectId} = useParams()
          
     const pledgeId=0;
 
     return(
+        
+        // <>
+        // <h1>welcome</h1>
+        // </>
         <PledgeDetails type="Create Pledge" projectId={projectId} pledgeId={pledgeId}/>
     )
 }
 
-export default CreatePledge
+export default CreateAPledge
