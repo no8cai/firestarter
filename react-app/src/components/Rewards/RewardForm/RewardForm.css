@@ -1,0 +1,11 @@
+.reward-form-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reward-form-form{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}

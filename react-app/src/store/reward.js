@@ -51,8 +51,9 @@ export const fetchProjectRewards = (projectId) => async dispatch => {
 //     }
 // }
 
-export const fetchCreateReward = (reward) => async dispatch => {
-    const response = await fetch(`/api/rewards`, {
+export const fetchCreateReward = (reward, projectId) => async dispatch => {
+    console.log('APPLE_FETCH', reward)
+    const response = await fetch(`/api/projects/${projectId}/rewards`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -109,7 +110,7 @@ const rewardsReducer = (state = initialState, action) => {
                 newState[reward.id] = reward
             })
             return newState
-            
+
         // case READ_SINGLE_REWARD:
         //     const oneState = {...state}
         //     oneState[action.reward.id] = action.reward
