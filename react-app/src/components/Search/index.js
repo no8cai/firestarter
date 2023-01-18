@@ -9,7 +9,7 @@ function SearchResultPage() {
   const params = useParams();
   const dispatch = useDispatch();
   let { searchItem1 } = params;
-  // console.log(searchItem)
+  console.log(searchItem1)
 
   useEffect(() => {
     dispatch(fetchAllProjects());
@@ -56,7 +56,7 @@ function SearchResultPage() {
   }
   let filteredResults = results.filter((result, index) => results.indexOf(result) === index);
 
-  if (!allProjects) return null;
+  if (!allProjects || !allPledges ) return null;
 
   return (
     <div className="main-container">

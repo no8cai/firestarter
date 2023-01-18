@@ -20,6 +20,7 @@ import CreateReward from './components/Rewards/CreateReward';
 import EditReward from './components/Rewards/EditReward';
 import SearchBar from './components/Search/SearchBar';
 import { SearchModal, SearchModalProvider } from './context/SearchModal';
+import DiscoverPage from './components/Search/DiscoverAllProjects';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -77,6 +78,9 @@ function App() {
         </Route>
         <Route path='/discover/:searchItem1' >
           <SearchResultPage />
+        </Route>
+        <Route path='/discover' exact={true}>
+          <DiscoverPage />
         </Route>
       </Switch>
       )}

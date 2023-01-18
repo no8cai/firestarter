@@ -1,5 +1,5 @@
 #searchmodal {
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     left: 0;
@@ -16,6 +16,7 @@
     align-items: center;
     padding-left: 1rem;
     padding-right: 1rem;
+    box-shadow: 0 3px 7px -2px lightgray;
   }
   
   /* #searchmodal-background {
@@ -40,6 +41,6 @@
     justify-content: center;
     align-items: center;
     /* border: red solid 1px; */
-    width: 100%;
+    width: 99%;
     height: 100%;
   }
