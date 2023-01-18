@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { useEffect } from "react";
 import { NavLink } from 'react-router-dom';
@@ -10,15 +11,15 @@ const RewardManager=()=>{
 
     const dispatch = useDispatch();
     const {projectId}=useParams();
-    
+
     const rewardsObj = useSelector(state => state.rewards)
     const rewards = Object.values(rewardsObj).filter(el=>el.projectId==projectId)
-    const history=useHistory(); 
+    const history=useHistory();
     console.log(projectId)
 
     useEffect(() => {
         dispatch(fetchProjectRewards(projectId));
-    }, [dispatch]); 
+    }, [dispatch]);
 
     const editEvents=(id)=>{
         history.push(`/editReward/${id}`)

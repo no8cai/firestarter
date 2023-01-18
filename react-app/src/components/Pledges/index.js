@@ -38,6 +38,7 @@ const PledgeDetails = () => {
     // console.log('project page', project)
 
     let rewards = useSelector(state => state.rewards)
+    let pledges = useSelector(state => state.pledges)
     // console.log('rewards------', rewards)
     let rewardsArr = Object.values(rewards)
     // console.log('rewardsArr-----', rewardsArr)
@@ -58,6 +59,7 @@ const PledgeDetails = () => {
         dispatch(updatePledge(id))
 
     }
+    console.log(pledges.length, '00000000000')
 
 
     const createPledgeBtn = (rewardId, projectId) => {
@@ -66,6 +68,7 @@ const PledgeDetails = () => {
             rewardId: rewardId,
             projectId: projectId
         }
+        if(!pledges)
         dispatch(createPledge(payload))
         // history.push('/')
     }

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Route, Switch, NavLink } from 'react-router-dom';
 import PledgeManager from './PledgesList';
 import ProjectManager from './ProjectList';
@@ -17,7 +18,7 @@ const ManageCenter=()=>{
         <NavLink to={`/profile/pledges`} className="links">
         <div>Backed</div>
         </NavLink>
-        
+
         <Switch>
           <Route exact path={'/profile/pledges'}>
           <PledgeManager/>
@@ -35,7 +36,7 @@ const ManageCenter=()=>{
           <EditReward/>
           </Route>
         </Switch>
-        </div>    
+        </div>
     )
 }
 

@@ -1,5 +1,5 @@
 import { useDispatch,useSelector } from "react-redux";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { NavLink } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { getPledgesByCurrentUser } from "../../../store/pledge";
@@ -10,12 +10,12 @@ const PledgeManager=()=>{
 
     const pledgesObj = useSelector(state => state.pledges.userPledges)
     const pledges = Object.values(pledgesObj);
-    const history=useHistory();  
+    const history=useHistory();
 
     useEffect(() => {
         dispatch(getPledgesByCurrentUser());
-  }, [dispatch]); 
-    
+  }, [dispatch]);
+
     return(
         <h1>
         {pledges.map(({id,Project,Reward }) => (
