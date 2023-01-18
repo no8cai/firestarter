@@ -13,9 +13,10 @@ import Landing from './components/HomePage';
 import Footer from "./components/Footer"
 import Navigation from './components/Navigation';
 import * as sessionActions from "./store/session";
-import CreatProject from './components/Projects/CreateProject';
 import Testing from './components/Testing';
 import SearchResultPage from './components/Search';
+import ManageCenter from './components/Profile';
+import ProjectEntry from './components/Projects';
 import CreateReward from './components/Rewards/CreateReward';
 import EditReward from './components/Rewards/EditReward';
 import PledgeDetails from './components/Pledges';
@@ -45,15 +46,13 @@ function App() {
         <Route path='/' exact={true}>
           <Landing />
         </Route>
-        <Route exact path='/createproject'>
-          <CreatProject />
+        <Route path={['/profile','/createReward','/editReward/:rewardId']} >
+          <ManageCenter />
         </Route>
-        <Route exact path='/createReward/:projectId'>
-          <CreateReward/>
+          <Route path={['/createproject','/editproject/:projectId']} >
+          <ProjectEntry />
         </Route>
-        <Route exact path='/editReward/:Id'>
-          <EditReward/>
-        </Route>
+
         {/* <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
@@ -69,7 +68,7 @@ function App() {
         {/* <Route path='/' exact={true} >
           <h1>My Home Page</h1>
         </Route> */}
-        <Route path='/projects/:id' exact={true}>
+        <Route path='/projects/:id'exact={true} >
           <SingleProject/>
         </Route>
         <Route path='/testing' exact={true}>
@@ -78,8 +77,11 @@ function App() {
         <Route path='/discover/:searchItem1' >
           <SearchResultPage />
         </Route>
-        <Route path='/projects/:id/pledges' exact={true}>
+        {/* <Route path='/projects/:id/pledges' exact={true}>
           <PledgeDetails />
+        </Route> */}
+        <Route>
+          <h1>404 error</h1>
         </Route>
       </Switch>
       )}

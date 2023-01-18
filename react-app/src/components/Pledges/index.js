@@ -22,7 +22,6 @@ const PledgeDetails = () => {
 
     useEffect(() => {
         dispatch(fetchOneProject(id))
-        console.log('fetching one project',fetchOneProject(id))
         dispatch(fetchProjectRewards(id))
         dispatch(getAllPledgesByProjectId(id))
     }, [dispatch])
@@ -116,9 +115,8 @@ const PledgeDetails = () => {
                             <button className='pledge-button' disabled={validationErrors.length > 0} onClick={() => createPledgeBtn(reward.id, reward.projectId)}>Pledge {reward.price}</button>
                         )}
                     </div>
-</ul>
-)
-)}
+             </ul>
+              ))}
 
             </div>
             <div className='guaranteed-container'>

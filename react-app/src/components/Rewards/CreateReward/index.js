@@ -1,18 +1,21 @@
-// import { fetchCreateReward } from "../../../store/reward";
-// import RewardForm from "../RewardForm";
+import { fetchCreateReward } from "../../../store/reward";
+import RewardForm from "../RewardForm";
+import { useParams } from "react-router-dom";
 
-// const CreateReward=()=>{
-//     const reward={
-//         description:"",
-//         estimatedDelivery:"",
-//         price:"",
-//         title:"",
-//         title:"",
-//     }
+const CreateReward=()=>{
 
-//     return (
-//         <RewardForm reward={reward} formType="Create Reward"/>
-//     )
-// }
+    const {projectId}=useParams()
+    const reward={
+        description:"",
+        estimatedDelivery:"",
+        price:"",
+        title:"",
 
-// export default CreateReward
+    }
+
+    return (
+        <RewardForm reward={reward} formType="Create Reward" projectId={projectId}/>
+    )
+}
+
+export default CreateReward
