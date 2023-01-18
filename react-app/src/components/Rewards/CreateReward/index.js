@@ -1,5 +1,5 @@
 import { fetchCreateReward } from "../../../store/reward";
-import RewardForm from "../RewardForm"; 
+import RewardForm from "../RewardForm";
 
 const CreateReward=()=>{
     const reward={
@@ -7,8 +7,8 @@ const CreateReward=()=>{
         estimatedDelivery:"",
         price:"",
         title:"",
-        country:"",
-        title:""
+        title:"",
+        // projectId:5
     }
 
     return (

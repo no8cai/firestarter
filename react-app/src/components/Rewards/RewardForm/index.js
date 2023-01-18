@@ -7,6 +7,7 @@ import './RewardForm.css'
 ////MEEEEEEEEEEEE
 
 const RewardForm=({reward,formType})=>{
+    let projectId = 1 //currently being hard coded in
 
     let initDescription,initEstimatedDelivery,initPrice,initTitle
     const history=useHistory()
@@ -20,7 +21,7 @@ const RewardForm=({reward,formType})=>{
     }
     else{
         initDescription='';
-        initEstimatedDelivery='';
+        initEstimatedDelivery='2024-01'; //
         initPrice=0;
         initTitle='';
     }
@@ -60,11 +61,12 @@ const RewardForm=({reward,formType})=>{
 
     const handleSubmit = (e)=>{
         e.preventDefault();
-        const tempReward = { ...reward, title, description, price, estimatedDelivery};
+        const tempReward = { ...reward, title, description, price, estimatedDelivery}; //projectId:5
         const errors=[]
+        console.log('in tempReward is price a num', tempReward)
 
         if(formType==="Create Reward"){
-            dispatch(fetchCreateReward(tempReward))
+            dispatch(fetchCreateReward(tempReward, projectId))
             .then(()=>{history.push(`/`)})
             .catch(async (err)=>{
               const errobj=await err.json();
@@ -96,13 +98,15 @@ const RewardForm=({reward,formType})=>{
 
             <div className='reward-form-list-item'>
                 <label>
-                Estimated Delivery
+                Estimated Delivery must be in the exact format of "September 2024"
                 </label>
                 <input
-                className='input'
-                placeholder='August 2023'
-                type="text"
-                name="Estimated Delivery"
+                name='Estimated Delivery'
+                type="month"
+                id="start"
+                min="2023-01"
+                // type='text'
+                // placeholder="July 2024"
                 onChange={(e) => setEstimatedDelivery(e.target.value)}
                 value={estimatedDelivery}/>
             </div>
@@ -127,8 +131,9 @@ const RewardForm=({reward,formType})=>{
                 <input
                 className='input'
                 placeholder='price'
-                type="text"
+                type="number"
                 name="price"
+                min='1'
                 onChange={(e) => setPrice(e.target.value)}
                 value={price}/>
             </div>
