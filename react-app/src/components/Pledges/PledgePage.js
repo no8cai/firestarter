@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { createPledge } from '../../store/pledge';
+import { createPledge, getAllPledgesByProjectId } from '../../store/pledge';
 import { fetchOneProject } from '../../store/project'
 import { fetchProjectRewards } from '../../store/reward';
 import './PledgePage.css'
@@ -16,6 +16,7 @@ const PledgeDetails = () => {
         dispatch(fetchOneProject(id))
         console.log('fetching one project',fetchOneProject(id))
         dispatch(fetchProjectRewards(id))
+        dispatch(getAllPledgesByProjectId(id))
     }, [dispatch])
 
     let project = useSelector(state => {return state.projects[id]})
@@ -25,15 +26,22 @@ const PledgeDetails = () => {
     // console.log('rewards------', rewards)
     let rewardsArr = Object.values(rewards)
     // console.log('rewardsArr-----', rewardsArr)
+
+    // let pledges = useSelector(state => {return state.pledges[id]})
     if(!rewardsArr) return null
     if(!project) return null
+    // if(!pledges) return null
+    const payload = {
+        rewardId: id,
+        projectId: id
+    }
+
 
     const createPledgeBtn = (e) => {
         e.preventDefault()
-        dispatch(createPledge())
-        history.push('/')
+        dispatch(createPledge(payload))
+        // history.push('/')
     }
-
 
     return(
         <>
@@ -103,12 +111,6 @@ const PledgeDetails = () => {
                 <h3>FREQUENTLY ASKED QUESTIONS</h3>
             </div>
             <div className='faq'>
-                {/* <ul>
-                    <li>
-                    <a href='#question1'>How do I pledge?</a>
-                    <div id='question1'>Enter your pledge amount and select a reward. Then, enter your payment.</div>
-                    </li>
-                </ul> */}
                 <details>
                     <summary>How do I pledge?</summary>
                     Enter your pledge amount and select a reward. Then, enter your payment.

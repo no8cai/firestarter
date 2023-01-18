@@ -62,7 +62,7 @@ function App() {
         <Route path='/testing' exact={true}>
           <Testing/>
         </Route>
-        <Route path='/project/:id/pledges' exact={true}>
+        <Route path='/projects/:id/pledges' exact={true}>
           <PledgeDetails />
         </Route>
       </Switch>
