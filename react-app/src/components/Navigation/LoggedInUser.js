@@ -69,7 +69,7 @@ function UserDataModal({user}) {
                 </div>
                 <div className="nav-backed-container">
                   <p>Backed Projects</p>
-                  {user && (pledges.map(pledge => {
+                  {user && (pledges.slice(0, 4).map(pledge => {
                     return (
                         <div key={pledge.id} className="nav-backed-item">
                             <Link to={`/projects/${pledge.Project.id}`}>
@@ -83,7 +83,7 @@ function UserDataModal({user}) {
                 </div>
                 <div className="nav-created-container">
                   <p>Created Projects</p>
-                  {user && projects.length ? (userProjects.map(project => {
+                  {user && projects.length ? (userProjects.slice(0, 4).map(project => {
                     return (
                         <div key={project.id} className="nav-backed-item">
                             <Link to={`/projects/${project.id}`}>
