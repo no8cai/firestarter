@@ -34,6 +34,13 @@ function Landing() {
 
     if (!projectsObj || !randProject || !pledgesObj || pledges.length == 0) return null
 
+    let pledgeTotal = 0
+    let randPledges = pledges.filter(pledge => pledge.id === randId)
+    randPledges.forEach(pledge => {
+        pledgeTotal += pledge.Reward.price
+    })
+    let currentProgress = ((pledgeTotal * 20000)/(randProject.fundingGoal)*100).toFixed(2)
+    // console.log(currentProgress, pledgeTotal, randProject.fundingGoal)
 
     return (
         <div className="main-container">
@@ -76,6 +83,9 @@ function Landing() {
                 <span className="home-section-title">FEATURE PROJECT</span>
                 <Link className="feature-link" to={`/projects/${randProject.id}`}>
                     <div className="feature-image"><img className='img' src={randProject.imageUrl}></img></div>
+                    <div className="sp-add-border sp-bar-back" role='progressbar'>
+                    <div className='sp-green-bar' style={{width: `${currentProgress}%`}}></div>
+                    </div>
                 <div className="feature-title">{randProject.title}</div>
                 <div className="feature description">{randProject.description}</div>
                 <div className="feature-creator">by {randProject.creator.username}</div>
@@ -100,7 +110,7 @@ function Landing() {
                     <div className="rec-project-thumbnail"><img className='img' src={project.imageUrl}></img></div>
                     <div className="rec-project-details">
                         <span className="rec-project-title">{project.title}</span>
-                        <span className="rec-project-funded">{counter !== 0 ? parseFloat((pledgeTotal * 1000000)/project.fundingGoal).toFixed(2) : 0}% funded</span>
+                        <span className="rec-project-funded">{counter !== 0 ? parseFloat(((pledgeTotal *1000)/project.fundingGoal)*100).toFixed(2) : 0}% funded</span>
                         <span className="rec-project-creator">By {project.creator.username}</span>
                         <div className="rec-project-bookmark-likes">Bookmark, like, dislike buttons</div>
                     </div>

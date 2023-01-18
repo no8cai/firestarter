@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProjects } from "../../store/project";
 import "./Search.css";
 import { Link, useParams } from "react-router-dom";
+import { getAllPledges } from "../../store/pledge";
 
 function SearchResultPage() {
   const params = useParams();
@@ -12,7 +13,12 @@ function SearchResultPage() {
 
   useEffect(() => {
     dispatch(fetchAllProjects());
+    dispatch(getAllPledges())
   }, [dispatch]);
+
+  const allPledges = useSelector((state) => state.pledges.allPledges)
+  const pledges = Object.values(allPledges)
+
   const allProjects = useSelector((state) => state.projects);
   const projects = Object.values(allProjects);
   let results = [];
@@ -94,6 +100,21 @@ function SearchResultPage() {
       </div>
       <div className="all-projects">
         {results.length ? (filteredResults.map((project) => {
+            let pledgeTotal = 0
+            let counter = 0
+            pledges.forEach(pledge => {
+              if (project.id === pledge.Project.id){
+                pledgeTotal += pledge.Reward.price
+                counter++
+              }
+            })
+            let currentProgress = ((pledgeTotal * 20000)/(project.fundingGoal)*100).toFixed(2)
+            let oneDay = 24 * 60 * 60 * 1000
+            let splitStart = project.startDate.split('-')
+            let splitEnd = project.endDate.split('-')
+            let firstDate = new Date(splitStart[2], splitStart[0], splitStart[1])
+            let secondDate = new Date(splitEnd[2], splitEnd[0], splitEnd[1])
+            let diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay))
             return (
               <Link key={project.id} to={`/projects/${project.id}`}>
                 <div className="projects-holder">
@@ -103,10 +124,14 @@ function SearchResultPage() {
                     <div>{project.title}</div>
                     <div>{project.description}</div>
                     <div>by {project.creator.username}</div>
-                    <div>GREEN FUNDING BAR MATH AAAA</div>
-                    <div>$1111 pledged</div>
-                    <div>% funded</div>
-                    <div>Time until end?</div>
+
+                    <div className="sp-add-border sp-bar-back" role='progressbar'>
+                    <div className='sp-green-bar' style={{width: `${currentProgress}%`}}></div>
+                    </div>
+                    
+                    <div>${pledgeTotal} pledged</div>
+                    <div>{counter !== 0 ? parseFloat(((pledgeTotal *1000)/project.fundingGoal)*100).toFixed(2) : 0}% funded</div>
+                    <div>{diffDays} days to go</div>
                     <div>
                       <span>{project.category}</span>
                       <span>
