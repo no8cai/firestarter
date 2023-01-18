@@ -39,7 +39,7 @@ def create_reward(projectId):
     if authenticate()['id'] == project.creatorId:
         if form.validate_on_submit():
             new_reward = Reward()
-            print('BANANA', new_reward)
+            #print('BANANA', new_reward)
             form.populate_obj(new_reward)
             # assign projectId
             new_reward.projectId = projectId

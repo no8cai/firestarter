@@ -36,7 +36,8 @@ const SingleProject = () => {
     let allPledges3 = ''
     let totalPledges = 0
     if(allPledges) {
-        allPledges2 = allPledges.PledgesByProjectId
+        allPledges2 = allPledges.pledgesById
+        console.log('allPledges2', allPledges, allPledges2)
         if(allPledges2) {
             allPledges3 = Object.values(allPledges2)
             if(allPledges3) {
@@ -49,7 +50,7 @@ const SingleProject = () => {
         return null
     }
 
-  if (oneProject && allPledges3) {
+  if (oneProject && allPledges3) { //
     let currentProgress = ((totalPledges * 100)/(oneProject.fundingGoal)).toFixed(2)
     //console.log('what is current progress', currentProgress)
     return (
@@ -78,11 +79,11 @@ const SingleProject = () => {
             </div>
             <div className="sp-add-border sp-basic-budget">
                 <h2 className='sp-green'>${totalPledges}</h2>
-                <h8>pledged of ${Math.floor(oneProject.fundingGoal)} goal</h8>
+                <h7>pledged of ${Math.floor(oneProject.fundingGoal)} goal</h7>
                 <h2>{allPledges3.length} </h2>
-                <h8>backers </h8>
+                <h7>backers </h7>
                 <h2>{diffDays} </h2>
-                <h8>days to go</h8>
+                <h7>days to go</h7>
             </div>
             <div className="sp-add-border sp-right-side-buttons">
                 <button className='sp-green-button'>Back this project</button>
