@@ -15,7 +15,6 @@ const PledgeDetails = () => {
 
     useEffect(() => {
         dispatch(fetchOneProject(id))
-        console.log('fetching one project',fetchOneProject(id))
         dispatch(fetchProjectRewards(id))
         dispatch(getAllPledgesByProjectId(id))
     }, [dispatch])
@@ -92,11 +91,10 @@ const PledgeDetails = () => {
                             <h6 className='reward-estimated'>SHIPS TO</h6>
                             <h5 className='reward-estimated'>Anywhere in the world</h5>
                         </div>
-                        <button className='pledge-button' onClick={createPledgeBtn(reward.id, reward.projectId)}>Pledge {reward.price}</button>
+                        <button className='pledge-button' onClick={()=>createPledgeBtn(reward.id, reward.projectId)}>Pledge {reward.price}</button>
                     </div>
-</ul>
-)
-)}
+             </ul>
+              ))}
 
             </div>
             <div className='guaranteed-container'>
