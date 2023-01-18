@@ -7,7 +7,7 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
-import SingleProject from './components/SingleProject'
+import SingleProject from './components/SingleProject/Index'
 import { authenticate } from './store/session';
 import Landing from './components/HomePage';
 import Footer from "./components/Footer"
@@ -64,7 +64,7 @@ function App() {
           <h1>My Home Page</h1>
         </Route> */}
         <Route path='/projects/:id' exact={true}>
-          <SingleProject/>
+          {/* <SingleProject/> */}
         </Route>
         <Route path='/testing' exact={true}>
           <Testing/>
