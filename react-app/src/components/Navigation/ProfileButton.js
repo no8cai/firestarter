@@ -7,6 +7,7 @@ import SignupFormModal from '../SignupFormModal';
 import { Link, Route, useHistory } from 'react-router-dom'
 import OpenModalButton from '../OpenModalButton';
 import './Navigation.css'
+import UserDataModal from "./LoggedInUser";
 
 function ProfileButton({ user }) {
     const history = useHistory()
@@ -53,12 +54,8 @@ function ProfileButton({ user }) {
         <div className={ulClassName} ref={ulRef}>
           {user ? (
             <div className='modal-dropdown'>
-              <div className='dropdown-container'>
-                <p>{user.username}</p>
-                <p id="useremailline">{user.email}</p>
-                <p className="logoutbutton"><button onClick={logout}>Logout</button></p>
-              </div>
-              
+              <UserDataModal user={user}/>
+              {/* <p className="logoutbutton"><button onClick={logout}>Logout</button></p> */}
             </div>
           ) : (
             <div className='signup-button'>

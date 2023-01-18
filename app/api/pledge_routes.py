@@ -19,7 +19,7 @@ def all_pledges():
 @login_required
 def all_backers_pledges_test():
     currentId=current_user.get_id()
-    return {"Pledges":[pledge.to_dict() for pledge in db.session.query(Pledge).all() if int(pledge.backerId)==int(currentId)]}
+    return {"Pledges":[pledge.to_dict_full() for pledge in db.session.query(Pledge).all() if int(pledge.backerId)==int(currentId)]}
 
 
 # PL3: Get all pledges by project id - DONE, error message done

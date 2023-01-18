@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import configureStore from './store';
 import { ModalProvider, Modal } from './context/Modal';
+import ProjectForm from './components/Projects/ProjectForm';
 
 const store = configureStore();
 
@@ -13,6 +14,7 @@ ReactDOM.render(
     <ModalProvider>
       <Provider store={store}>
         <App />
+        {/* <ProjectForm/> */}
         <Modal />
       </Provider>
     </ModalProvider>

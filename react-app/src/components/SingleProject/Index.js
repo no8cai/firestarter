@@ -4,8 +4,9 @@ import './SingleProject.css'
 import React, { useEffect, useState } from 'react'
 import { fetchOneProject } from '../../store/project'
 import { fetchProjectRewards } from '../../store/reward'
-import { getAllPledgesByProjectId} from '../../store/pledge' //not working in the reducer yet
+import { getAllPledgesByProjectId} from '../../store/pledge'
 import { getAllPledges } from '../../store/pledge';
+import {fetchDeleteReward} from '../../store/reward'
 
 
 const SingleProject = () => {
@@ -32,31 +33,29 @@ const SingleProject = () => {
    }
 
     const allPledges = useSelector(state => state.pledges)
-    let allPledges2 = ''
-    let allPledges3 = ''
+    let allPledgesArray = []
     let totalPledges = 0
-    if(allPledges) {
-        allPledges2 = allPledges.PledgesByProjectId
-        if(allPledges2) {
-            allPledges3 = Object.values(allPledges2)
-            if(allPledges3) {
-                allPledges3.forEach(pledge => {
-                            totalPledges += parseFloat(pledge.Reward.price)
-                        })
-            }
-        }
+    if(allPledges.pledgesById) {
+        allPledgesArray = Object.values(allPledges.pledgesById)
+        allPledgesArray.forEach(pledge => {
+            totalPledges += parseFloat(pledge.Reward.price)})
     } else {
         return null
     }
+    const tempDeleteRewardId = 6
+    const handleRemoveReward = (rewardId) => {
+        console.log('for delete do we have rewardId', rewardId)
+        dispatch(fetchDeleteReward(rewardId))
+    }
 
-  if (oneProject && allPledges3) {
+  if (oneProject && allPledgesArray) { //
     let currentProgress = ((totalPledges * 100)/(oneProject.fundingGoal)).toFixed(2)
-    //console.log('what is current progress', currentProgress)
     return (
         <div className='sp-extra-outer-div'>
         <div className='sp-whole-page'>
     <div className="sp-title sp-add-border">
         <h1>{oneProject.title}</h1>
+        <button className='sp-delete-reward'onClick={()=> {handleRemoveReward(tempDeleteRewardId)}}>Temporary location of delete reward button </button>
     </div>
     <div className="sp-main-content add-border">
         <div className="sp-left-side-media add-border">
@@ -72,17 +71,16 @@ const SingleProject = () => {
 
         <div className="sp-right-side sp-add-border">
             <div className="sp-add-border sp-bar-back" role='progressbar'
-            // aria-valuenow={100} aria-valuemin={0} aria-valuemax={100}
             >
                 <div className='sp-green-bar' style={{width: `${currentProgress}%`}}></div>
             </div>
             <div className="sp-add-border sp-basic-budget">
                 <h2 className='sp-green'>${totalPledges}</h2>
-                <h8>pledged of ${Math.floor(oneProject.fundingGoal)} goal</h8>
-                <h2>{allPledges3.length} </h2>
-                <h8>backers </h8>
+                <p>pledged of ${Math.floor(oneProject.fundingGoal)} goal</p>
+                <h2>{allPledgesArray.length} </h2>
+                <p>backers </p>
                 <h2>{diffDays} </h2>
-                <h8>days to go</h8>
+                <p>days to go</p>
             </div>
             <div className="sp-add-border sp-right-side-buttons">
                 <button className='sp-green-button'>Back this project</button>
@@ -91,9 +89,7 @@ const SingleProject = () => {
                 <p>All or nothing. This project will only be funded
                     if it reaches its goal by {date2.toDateString()}.</p>
             </div>
-
         </div>
-
     </div>
     <div className="sp-add-border sp-about-kickstarter">
         <div><i className="fa-solid fa-people-arrows sp-center-icon"></i><p>Fire Starter connects creators with backers to fund projects.</p> </div>
@@ -124,6 +120,7 @@ const SingleProject = () => {
 
         </div>
         <div className="sp-add-border sp-bottom-right">
+
             <div>About the creator: {oneProject.creator.username}</div>
             <div>Support</div>
             <div>Pledge without reward</div>

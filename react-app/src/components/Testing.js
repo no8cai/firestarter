@@ -10,9 +10,9 @@ const Testing = () => {
     //PL2 - current user -
     const return2 = await dispatch(getPledgesByCurrentUser())
     // //PL3 - project id - done
-    const return3 = await dispatch(getAllPledgesByProjectId(1))
+    // const return3 = await dispatch(getAllPledgesByProjectId(1))
     //PL4 - DONE
-    const return4 = await dispatch(getOnePledge(3))
+    // const return4 = await dispatch(getOnePledge(3))
     //PL5
     // const return5 = await dispatch(createPledge(pledge))
     // //PL6
