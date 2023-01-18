@@ -1,6 +1,7 @@
 import { fetchCreateReward } from "../../../store/reward";
 import RewardForm from "../RewardForm";
 import { useParams } from "react-router-dom";
+import React from "react";
 
 const CreateReward=()=>{
 

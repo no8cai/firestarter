@@ -25,7 +25,8 @@ const SingleProject = () => {
  }, [dispatch])
 
    const addPledgesEvents=(project_Id)=>{
-          history.push(`/projects/${project_Id}/createpledges`)
+        //   history.push(`/projects/${project_Id}/createpledges`)
+        history.push(`/projects/${project_Id}/createpledges`)
    }
 
 
