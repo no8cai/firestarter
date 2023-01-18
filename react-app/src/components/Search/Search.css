@@ -41,3 +41,14 @@
    justify-content: space-between;
    margin-bottom: 1em;
 }
+
+.searchbar-holder {
+    width: 100% !important;
+    height: 2rem;
+    display: flex;
+    justify-content: none;
+}
+
+.searchbar-input {
+    width: 100%
+}

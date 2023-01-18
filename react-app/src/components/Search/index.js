@@ -35,10 +35,10 @@ function SearchResultPage() {
             }
           }
           // searches through REWARDS
-          if (Array.isArray(project[key])){
+          if (Array.isArray(project[key] && project[key].length)){
             project[key].forEach(reward => {
               for (let rewardKey in reward) {
-                if(reward[rewardKey].toString().toLowerCase().includes(searchItem1.toLowerCase())){
+                if(reward[rewardKey] !== undefined && reward[rewardKey].toString().toLowerCase().includes(searchItem1.toLowerCase())){
                   results.push(project)
                 }
                 
@@ -49,30 +49,9 @@ function SearchResultPage() {
           if (project[key].toString().toLowerCase().includes(searchItem1.toLowerCase())
           ) {
               results.push(project);
-            // results.forEach(result => {
-            //     console.log("AAAAAAAA", project.id, result.id)
-            //     if(project.id === result.id){
-            //         return console.log("DUPLICATE")
-            //     } else {
-            //         console.log("should only be one of these", project)
-            //     }
-            // })
           }
         }
-        // } else if (results.length === 0 && resultTrigger === 'no') {
-        // resultTrigger = 'yes'
-        //     for (let key in project) {
-        //         if (project[key].toString().toLowerCase().includes(searchItem1.toLowerCase())) {
-        //             if (results.length === 0){
-        //                 results.push(project)
-        //             } else {
-        //                 console.log('results arent 0')
-        //             }
-        //         }
-        //     }
       }
-
-      // }
     );
   }
   let filteredResults = results.filter((result, index) => results.indexOf(result) === index);

@@ -5,6 +5,9 @@ import './Navigation.css'
 import LogoutButton from "../auth/LogoutButton";
 import OpenModalButton from '../OpenModalButton';
 import ProfileButton from './ProfileButton';
+import SearchBar from "../Search/SearchBar";
+import OpenSearchModal from "../Search/OpenSearchModal"
+import OpenModalMenuItem from "./OpenModalMenuItem";
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
@@ -50,7 +53,14 @@ function Navigation({ isLoaded }) {
            </div>
    
            <div className="right-nav">
-               <span>Search</span>
+            <div>
+                <OpenSearchModal
+                itemText="Search"
+                onItemClick={closeMenu}
+                modalComponent={<SearchBar />}
+              />
+            </div>
+           
 
 
                 <span>

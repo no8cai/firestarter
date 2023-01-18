@@ -201,3 +201,11 @@
     justify-content: flex-start;
     align-items: flex-start;
 }
+
+.descr-text {
+    display: block;
+  /* width: 100px; */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

@@ -89,14 +89,14 @@ function Landing() {
                     <div className='sp-green-bar' style={{width: `${currentProgress}%`}}></div>
                     </div>
                 <div className="feature-title">{randProject.title}</div>
-                <div className="feature description">{randProject.description}</div>
+                <div className="feature-description"><span className="descr-text">{randProject.description}</span></div>
                 <div className="feature-creator">by {randProject.creator.username}</div>
                 </Link>
                 
             </div>
             <div className="rec-holder">
                 <span className="home-section-title">RECOMMENDED FOR YOU</span>
-                    {projects.length && (projects.slice(0).reverse().map(project => {
+                    {projects.length && (projects.slice(0).reverse().slice(0, 3).map(project => {
                         let pledgeTotal = 0
                         let counter = 0
                         pledges.forEach(pledge => {
