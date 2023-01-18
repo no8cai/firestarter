@@ -2,7 +2,6 @@ import { fetchCreateProject } from "../../../store/project";
 import ProjectForm from "../ProjectForm";
 
 const CreatProject=()=>{
-
     
     const project={
         creatorId:"",

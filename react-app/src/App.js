@@ -77,12 +77,12 @@ function App() {
         <Route path='/discover/:searchItem1' >
           <SearchResultPage />
         </Route>
-        <Route path='/projects/:id/pledges' exact={true}>
+        {/* <Route path='/projects/:id/pledges' exact={true}>
           <PledgeDetails />
-        </Route>
+        </Route> */}
         <Route>
           <h1>404 error</h1>
-          </Route>
+        </Route>
       </Switch>
       )}
       <Footer />
