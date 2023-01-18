@@ -7,7 +7,7 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
-import SingleProject from './components/SingleProject'
+import SingleProject from './components/SingleProject/Index';
 import { authenticate } from './store/session';
 import Landing from './components/HomePage';
 import Footer from "./components/Footer"
@@ -18,6 +18,8 @@ import Testing from './components/Testing';
 import SearchResultPage from './components/Search';
 import CreateReward from './components/Rewards/CreateReward';
 import EditReward from './components/Rewards/EditReward';
+import PledgeDetails from './components/Pledges';
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);

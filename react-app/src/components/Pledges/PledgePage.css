@@ -8,6 +8,8 @@
     width: 100%;
 } */
 
+a:link { text-decoration: none;}
+
 .pledge-main-container {
     align-items: center;
     flex-direction: column;

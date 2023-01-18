@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { createPledge, getAllPledgesByProjectId } from '../../store/pledge';
+import { createPledge, getAllPledgesByProjectId, updatePledge } from '../../store/pledge';
 import { fetchOneProject } from '../../store/project'
 import { fetchProjectRewards } from '../../store/reward';
 import './PledgePage.css'
+// import { Redirect } from 'react-router-dom';
 
 
 const PledgeDetails = () => {
@@ -20,7 +21,7 @@ const PledgeDetails = () => {
     }, [dispatch])
 
     let project = useSelector(state => {return state.projects[id]})
-    console.log('project page', project)
+    // console.log('project page', project)
 
     let rewards = useSelector(state => state.rewards)
     // console.log('rewards------', rewards)
@@ -31,14 +32,22 @@ const PledgeDetails = () => {
     if(!rewardsArr) return null
     if(!project) return null
     // if(!pledges) return null
-    const payload = {
-        rewardId: id,
-        projectId: id
+
+
+
+    const editPledgeBtn = (e) => {
+        e.preventDefault()
+        dispatch(updatePledge(id))
+
     }
 
 
-    const createPledgeBtn = (e) => {
-        e.preventDefault()
+    const createPledgeBtn = (rewardId, projectId) => {
+        // e.preventDefault()
+        const payload = {
+            rewardId: rewardId,
+            projectId: projectId
+        }
         dispatch(createPledge(payload))
         // history.push('/')
     }
@@ -48,17 +57,12 @@ const PledgeDetails = () => {
         <div className='pledge-main-container'>
 
             <div className='pledge-project-title'>
-
-                <Link className='project-link' key={project.title} to={`/project/${project.id}`}>
+                <Link className='project-link' key={project.title} to={`/projects/${project.id}`}>
                 <h1>{project.title}</h1>
                 </Link>
                 <h5>{project.creator.username}</h5>
-
             </div>
-
         <div className='pledge-outter-container'>
-
-
             <div className='pledge-ul-nav'>
                 <p>Rewards {'>'} Payment</p>
             </div>
@@ -68,14 +72,12 @@ const PledgeDetails = () => {
                 <p>Select an option below</p>
             </div>
 
-
-
-
             <div className='pledge-container'>
-
             <div className='reward-container'>
-                {rewardsArr.map(reward => {
-                    return (
+                {rewardsArr.map(reward =>
+                 (
+                    <ul key={reward.id}>
+
                     <div className='reward-card'>
 
                         <div className='reward-card-details'>
@@ -90,21 +92,17 @@ const PledgeDetails = () => {
                             <h6 className='reward-estimated'>SHIPS TO</h6>
                             <h5 className='reward-estimated'>Anywhere in the world</h5>
                         </div>
-                        <button className='pledge-button' onClick={createPledgeBtn}>Pledge {reward.price}</button>
-
+                        <button className='pledge-button' onClick={createPledgeBtn(reward.id, reward.projectId)}>Pledge {reward.price}</button>
                     </div>
-
+</ul>
 )
-})}
+)}
 
             </div>
             <div className='guaranteed-container'>
-
             <div className='guaranteed-description'>
                 <img className='guaranteed-img' src='' alt="Rewards aren't guaranteed."/>
                 <p>Your pledge will support an ambitious creative project that has yet to be developed. There’s a risk that, despite a creator’s best efforts, your reward will not be fulfilled, and we urge you to consider this risk prior to pledging. Kickstarter is not responsible for project claims or reward fulfillment.</p>
-
-
             </div>
 
             <div className='faq-h3'>
@@ -135,14 +133,13 @@ const PledgeDetails = () => {
                     <summary>If this project is funded, how do I get my reward?</summary>
                     When your reward is ready, {project.creator.username} will send you an email for delivery information.
                 </details>
-
+                <button className='pledge-button' onClick={editPledgeBtn}>Edit pledge</button>
             </div>
         </div>
         </div>
         </div>
-
-    </div>
-                </>
-    )
-}
-export default PledgeDetails
+        </div>
+        </>
+        )
+    }
+    export default PledgeDetails
