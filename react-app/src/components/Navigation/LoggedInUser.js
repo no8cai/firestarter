@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-// import { logout } from '../../store/session';
-// import OpenModalMenuItem from './OpenModalMenuItem';
-// import LoginFormModal from '../LoginFormModal';
-// import SignupFormModal from '../SignupFormModal';
+import { logout } from '../../store/session';
+import OpenModalMenuItem from './OpenModalMenuItem';
+import LoginFormModal from '../LoginFormModal';
+import SignupFormModal from '../SignupFormModal';
 import { Link, Route, useHistory } from 'react-router-dom'
-// import OpenModalButton from '../OpenModalButton';
+import OpenModalButton from '../OpenModalButton';
 import './Navigation.css'
 import { getAllPledges, getPledgesByCurrentUser } from "../../store/pledge";
 import { fetchAllProjects } from "../../store/project";
@@ -44,13 +44,17 @@ function UserDataModal({user}) {
     }, [showMenu]);
   
     const closeMenu = () => setShowMenu(false);
+
+    const onLogout = async (e) => {
+    await dispatch(logout());
+  };
   
-    const logout = (e) => {
-      e.preventDefault();
-      dispatch(logout());
-      closeMenu();
-      history.push('/')
-    };
+    // const logout = (e) => {
+    //   e.preventDefault();
+    //   dispatch(logout());
+    //   closeMenu();
+    //   history.push('/')
+    // };
     if (!userPledges || !user || !allProjects) return null
     // if (!userPledges || !user) return null
 
@@ -94,7 +98,7 @@ function UserDataModal({user}) {
                 </div>
                 </div>
                 
-                <p className="logoutbutton"><button onClick={logout}>Logout</button></p>
+                <p className="logoutbutton"><button onClick={onLogout}>Logout</button></p>
               </div>
     )
 }
