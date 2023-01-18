@@ -8,6 +8,7 @@ import { Link, Route, useHistory } from 'react-router-dom'
 // import OpenModalButton from '../OpenModalButton';
 import './Navigation.css'
 import { getAllPledges, getPledgesByCurrentUser } from "../../store/pledge";
+import { fetchAllProjects } from "../../store/project";
 
 function UserDataModal({user}) {
     const history = useHistory()
@@ -17,15 +18,16 @@ function UserDataModal({user}) {
 
     useEffect(() => {
         dispatch(getPledgesByCurrentUser())
+        // dispatch(fetchAllProjects())
     }, [dispatch])
 
     const userPledges = useSelector(state => state.pledges.userPledges)
     const pledges = Object.values(userPledges)
+
+    const allProjects = useSelector(state => state.projects)
+    const projects = Object.values(allProjects)
+    let userProjects = projects.filter(project => project.creatorId === user.id)
     
-    // const openMenu = () => {
-    //   if (showMenu) return;
-    //   setShowMenu(true);
-    // };
   
     useEffect(() => {
       if (!showMenu) return;
@@ -49,8 +51,8 @@ function UserDataModal({user}) {
       closeMenu();
       history.push('/')
     };
-    if (!userPledges || !user) return null
-    // if (!userPledgesObj || !user) return null
+    if (!userPledges || !user || !allProjects) return null
+    // if (!userPledges || !user) return null
 
     return (
         <div className='dropdown-container'>
@@ -77,6 +79,18 @@ function UserDataModal({user}) {
                 </div>
                 <div className="nav-created-container">
                   <p>Created Projects</p>
+                  {user && projects.length ? (userProjects.map(project => {
+                    return (
+                        <div key={project.id} className="nav-backed-item">
+                            <Link to={`/projects/${project.id}`}>
+
+                            <div className="nav-thumbnail">{<img className="backed-thumbnail" src={project.imageUrl}></img>}</div>
+                            <div className="nav-backed-title">{project.title}</div>
+                            </Link>
+                        </div>
+                    )
+                  })): (null)}
+                  <div>Create Project Button</div>
                 </div>
                 </div>
                 

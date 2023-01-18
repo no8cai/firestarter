@@ -28,6 +28,24 @@ function SearchResultPage() {
         // delete project.rewards;
         delete project.videoUrl;
         for (let key in project) {
+          // searches for username ONLY
+          if (typeof project[key] === 'object'){
+            if (project[key].username !== undefined && project[key].username.toLowerCase().includes(searchItem1.toLowerCase())){
+              results.push(project)
+            }
+          }
+          // searches through REWARDS
+          if (Array.isArray(project[key])){
+            project[key].forEach(reward => {
+              for (let rewardKey in reward) {
+                if(reward[rewardKey].toString().toLowerCase().includes(searchItem1.toLowerCase())){
+                  results.push(project)
+                }
+                
+              }
+            })
+          }
+
           if (project[key].toString().toLowerCase().includes(searchItem1.toLowerCase())
           ) {
               results.push(project);
@@ -58,8 +76,6 @@ function SearchResultPage() {
     );
   }
   let filteredResults = results.filter((result, index) => results.indexOf(result) === index);
-  // console.log(projects.length)
-//   console.log("QQQQQQQQQQQQQQQQ", filteredResults);
 
   if (!allProjects) return null;
 

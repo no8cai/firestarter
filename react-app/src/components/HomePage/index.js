@@ -12,7 +12,7 @@ function Landing() {
     
     useEffect(() => {
         dispatch(fetchAllProjects())
-        dispatch(fetchOneProject())
+        // dispatch(fetchOneProject())
         dispatch(getAllPledges())
     }, [dispatch])
 
@@ -29,13 +29,15 @@ function Landing() {
     const projectsObj = useSelector(state => state.projects)
     const projects = Object.values(projectsObj)
     // console.log(projects)
-    let randId = Math.floor(Math.random() * (projects.length) + 1)
+    const randId = Math.floor(Math.random() * (projects.length) + 1)
+    // console.log("MATH", randId)
     const randProject = useSelector(state => state.projects[randId])
+    // console.log("AAAAAAAAA", randProject)
 
     if (!projectsObj || !randProject || !pledgesObj || pledges.length == 0) return null
 
     let pledgeTotal = 0
-    let randPledges = pledges.filter(pledge => pledge.id === randId)
+    let randPledges = pledges.filter(pledge => pledge.projectId === randId)
     randPledges.forEach(pledge => {
         pledgeTotal += pledge.Reward.price
     })
