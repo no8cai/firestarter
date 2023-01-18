@@ -6,22 +6,22 @@ const EditProject=()=>{
 
     const {projectId}=useParams();
 
-    const tempproject = useSelector(state=>state.projects)
+    const tempproject = useSelector(state=>state.projects[projectId])
     
     const project={
-    //     // creatorId:tempproject.creatorId,
-    //     category:tempproject.category,
-    //     city:tempproject.city,
-    //     state:tempproject.state,
-    //     country:tempproject.country,
-    //     title:tempproject.title,
-    //     imageUrl:tempproject.imageUrl,
-    //     videoUrl:tempproject.videoUrl,
-    //     fundingGoal:tempproject.fundingGoal,
-    //     startDate:tempproject.startDate,
-    //     endDate:tempproject.endDate,
-    //     description:tempproject.description,
-    //     risks:tempproject.risks,
+        id:tempproject.id,
+        creatorId:tempproject.creatorId,
+        category:tempproject.category,
+        city:tempproject.city,
+        state:tempproject.state,
+        country:tempproject.country,
+        title:tempproject.title,
+        imageUrl:tempproject.imageUrl,
+        fundingGoal:tempproject.fundingGoal,
+        startDate:tempproject.startDate,
+        endDate:tempproject.endDate,
+        description:tempproject.description,
+        risks:tempproject.risks,
     }
 
     return (

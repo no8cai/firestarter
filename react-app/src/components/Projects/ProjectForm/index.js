@@ -10,6 +10,7 @@ const ProjectForm=({project,formType})=>{
     const history=useHistory()
     const dispatch = useDispatch();
 
+    console.log(project.id)
     if(formType==="Edit Project"){
         initTitle=project.title;
         initCategory=project.category;
@@ -92,11 +93,21 @@ const ProjectForm=({project,formType})=>{
             dispatch(fetchCreateProject(tempProject))
             .then(()=>{history.push(`/`)})
             .catch(async (err)=>{
-              const errobj=await err.json();
+              const errobj=await err;
               errors.push(errobj.message)
               setValidationErrors(errors)
             
             });
+            }
+        else if(formType==="Edit Project"){
+                dispatch(fetchUpdateProject(tempProject))
+                .then(history.push('/profile'))
+                .catch(async (err)=>{
+                  const errobj=await err;
+                  errors.push(errobj.message)
+                  setValidationErrors(errors)
+                  
+                });
             }
     }
 

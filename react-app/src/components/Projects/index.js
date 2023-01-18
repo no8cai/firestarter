@@ -1,26 +1,16 @@
-import { Route, Switch, NavLink } from 'react-router-dom';
+import { Route, Switch, NavLink,Link } from 'react-router-dom';
 import CreatProject from './CreateProject';
 import { useSelector } from 'react-redux';
-import ProjectList from './ProjectList';
+import EditProject from './EditProject';
+import './Projects.css'
 
-const Profilepage=()=>{
-    const sessionUser = useSelector(state => state.session.user);
-    const projectsObj = useSelector(state => state.projects)
-    const userprojects=Object.values(projectsObj).filter(el=>el.creatorId=sessionUser.id)
-    console.log(userprojects)
-    console.log(sessionUser.id)
-    console.log(projectsObj)
+const ProjectEntry=()=>{
 
     return (
         <div>
-            <div>
-                <div>current user projects</div>
-                <div>create new project</div>
-                <div>current project rewards</div>
-            </div>
             <Switch>
-            <Route exact path={'/createproject'}>
-            <CreatProject/>
+            <Route path={'/editproject/:projectId'}>
+            <EditProject/>
             </Route>
             <Route exact path={'/createproject'}>
             <CreatProject/>
@@ -30,4 +20,4 @@ const Profilepage=()=>{
     )
 }
 
-export default Profilepage
+export default ProjectEntry

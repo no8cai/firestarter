@@ -13,11 +13,10 @@ import Landing from './components/HomePage';
 import Footer from "./components/Footer"
 import Navigation from './components/Navigation';
 import * as sessionActions from "./store/session";
-import CreatProject from './components/Projects/CreateProject';
-import EditProject from './components/Projects/EditProject';
 import Testing from './components/Testing';
 import SearchResultPage from './components/Search';
-import Profilepage from './components/Projects';
+import ManageCenter from './components/Profile';
+import ProjectEntry from './components/Projects';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -43,8 +42,11 @@ function App() {
         <Route path='/' exact={true}>
           <Landing />
         </Route>
-        <Route path={['/profile','/createproject','/editproject/:projectId','/editreward']} >
-          <Profilepage />
+        <Route path={['/profile']} >
+          <ManageCenter />
+        </Route>
+          <Route path={['/createproject','/editproject/:projectId']} >
+          <ProjectEntry />
         </Route>
         {/* <Route path='/login' exact={true}>
           <LoginForm />
@@ -61,7 +63,7 @@ function App() {
         {/* <Route path='/' exact={true} >
           <h1>My Home Page</h1>
         </Route> */}
-        <Route path='/projects/:id' exact={true}>
+        <Route path='/projects/:id'exact={true} >
           <SingleProject/>
         </Route>
         <Route path='/testing' exact={true}>
