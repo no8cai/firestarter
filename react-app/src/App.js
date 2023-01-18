@@ -17,6 +17,7 @@ import CreatProject from './components/Projects/CreateProject';
 import Testing from './components/Testing';
 import SearchResultPage from './components/Search';
 import CreateReward from './components/Rewards/CreateReward';
+import EditReward from './components/Rewards/EditReward';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -45,8 +46,11 @@ function App() {
         <Route exact path='/createproject'>
           <CreatProject />
         </Route>
-        <Route exact path='/createReward'>
+        <Route exact path='/createReward/:projectId'>
           <CreateReward/>
+        </Route>
+        <Route exact path='/editReward/:Id'>
+          <EditReward/>
         </Route>
         {/* <Route path='/login' exact={true}>
           <LoginForm />

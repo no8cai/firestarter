@@ -8,7 +8,6 @@ const CreateReward=()=>{
         price:"",
         title:"",
         title:"",
-        // projectId:5
     }
 
     return (

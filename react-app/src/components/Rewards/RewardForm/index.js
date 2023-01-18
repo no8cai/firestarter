@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCreateReward,fetchUpdateReward } from "../../../store/reward";
+import { fetchCreateReward, fetchUpdateReward } from "../../../store/reward";
 import './RewardForm.css'
 
-////MEEEEEEEEEEEE
-
 const RewardForm=({reward,formType})=>{
-    let projectId = 1 //currently being hard coded in
+    const {projectId} = useParams()
 
     let initDescription,initEstimatedDelivery,initPrice,initTitle
     const history=useHistory()
@@ -21,7 +19,7 @@ const RewardForm=({reward,formType})=>{
     }
     else{
         initDescription='';
-        initEstimatedDelivery='2024-01'; //
+        initEstimatedDelivery='2024-01';
         initPrice=0;
         initTitle='';
     }
@@ -55,15 +53,10 @@ const RewardForm=({reward,formType})=>{
 
       }, [title,description,price,estimatedDelivery]);
 
-
-
-
-
     const handleSubmit = (e)=>{
         e.preventDefault();
-        const tempReward = { ...reward, title, description, price, estimatedDelivery}; //projectId:5
+        const tempReward = { ...reward, title, description, price, estimatedDelivery};
         const errors=[]
-        console.log('in tempReward is price a num', tempReward)
 
         if(formType==="Create Reward"){
             dispatch(fetchCreateReward(tempReward, projectId))
@@ -74,6 +67,15 @@ const RewardForm=({reward,formType})=>{
               setValidationErrors(errors)
             });
             }
+            if(formType==="Edit Reward"){
+                dispatch(fetchUpdateReward(tempReward, projectId))
+                .then(()=>{history.push(`/`)})
+                .catch(async (err)=>{
+                  const errobj=await err.json();
+                  errors.push(errobj.message)
+                  setValidationErrors(errors)
+                });
+                }
     }
 
     return (
@@ -98,15 +100,13 @@ const RewardForm=({reward,formType})=>{
 
             <div className='reward-form-list-item'>
                 <label>
-                Estimated Delivery must be in the exact format of "September 2024"
+                Estimated Delivery
                 </label>
                 <input
                 name='Estimated Delivery'
                 type="month"
                 id="start"
                 min="2023-01"
-                // type='text'
-                // placeholder="July 2024"
                 onChange={(e) => setEstimatedDelivery(e.target.value)}
                 value={estimatedDelivery}/>
             </div>
@@ -144,7 +144,6 @@ const RewardForm=({reward,formType})=>{
 
             <div className='reward-form-error-sec'>
             <div className='error-title'>
-            {/* <i className="fa-solid fa-circle-exclamation ertlbu" /> */}
             <h4>Validation Checking List</h4>
             </div>
             {!!validationErrors.length && (
