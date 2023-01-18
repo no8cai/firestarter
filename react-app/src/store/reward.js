@@ -27,9 +27,9 @@ const editReward = (reward) => ({
 })
 
 
-const deleteReward = (rewardId) => ({
+const deleteReward = (id) => ({
     type: DELETE_REWARD,
-    rewardId
+    id
 })
 
 
@@ -51,8 +51,9 @@ export const fetchProjectRewards = (projectId) => async dispatch => {
 //     }
 // }
 
-export const fetchCreateReward = (reward) => async dispatch => {
-    const response = await fetch(`/api/rewards`, {
+export const fetchCreateReward = (reward, projectId) => async dispatch => {
+   
+    const response = await fetch(`/api/projects/${projectId}/rewards`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -83,15 +84,12 @@ export const fetchUpdateReward = (reward) => async dispatch => {
     if(response.status>=400) throw response
 }
 
-export const fetchDeleteReward = rewardId => async dispatch => {
-    const response = await fetch(`/api/rewards/${rewardId}`, {
+export const fetchDeleteReward = (id) => async dispatch => {
+    const response = await fetch(`/api/rewards/${id}`, {
         method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        }
     })
     if(response.ok){
-        dispatch(deleteReward(rewardId))
+        dispatch(deleteReward(id))
         return response
     }
     if(response.status>=400) throw response
@@ -109,7 +107,7 @@ const rewardsReducer = (state = initialState, action) => {
                 newState[reward.id] = reward
             })
             return newState
-            
+
         // case READ_SINGLE_REWARD:
         //     const oneState = {...state}
         //     oneState[action.reward.id] = action.reward
@@ -127,7 +125,7 @@ const rewardsReducer = (state = initialState, action) => {
 
         case DELETE_REWARD:
             newState = {...state}
-            delete newState[action.rewardId]
+            delete newState[action.id]
             return newState
 
         default:

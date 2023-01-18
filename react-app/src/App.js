@@ -7,7 +7,7 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
-import SingleProject from './components/SingleProject/Index'
+import SingleProject from './components/SingleProject';
 import { authenticate } from './store/session';
 import Landing from './components/HomePage';
 import Footer from "./components/Footer"
@@ -17,6 +17,7 @@ import Testing from './components/Testing';
 import SearchResultPage from './components/Search';
 import ManageCenter from './components/Profile';
 import ProjectEntry from './components/Projects';
+import CreateReward from './components/Rewards/CreateReward';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -42,12 +43,13 @@ function App() {
         <Route path='/' exact={true}>
           <Landing />
         </Route>
-        <Route path={['/profile']} >
+        <Route path={['/profile','/createReward','/editReward/:rewardId']} >
           <ManageCenter />
         </Route>
           <Route path={['/createproject','/editproject/:projectId']} >
           <ProjectEntry />
         </Route>
+
         {/* <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
@@ -69,8 +71,11 @@ function App() {
         <Route path='/testing' exact={true}>
           <Testing/>
         </Route>
-        <Route path='/discover/:category' exact={true}>
+        <Route path='/discover/:searchItem1' >
           <SearchResultPage />
+        </Route>
+        <Route>
+          <h1>404 error</h1>
         </Route>
       </Switch>
       )}

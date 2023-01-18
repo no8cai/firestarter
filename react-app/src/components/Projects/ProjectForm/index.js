@@ -5,11 +5,11 @@ import { fetchCreateProject,fetchUpdateProject,fetchDeleteProject } from "../../
 import './ProjectForm.css'
 
 const ProjectForm=({project,formType})=>{
-    
+
     let initTitle,initCategory,initCity,initState,initCountry,initImageUrl,initFundingGoal,initStartDate,initEndDate,initDescription,initRisks
     const history=useHistory()
     const dispatch = useDispatch();
-
+ 
     console.log(project.id)
     if(formType==="Edit Project"){
         initTitle=project.title;
@@ -59,7 +59,7 @@ const ProjectForm=({project,formType})=>{
           setValidationErrors([]);
           return;
         }
-        
+
         const errors =[];
         if(title.length<=0){errors.push("Project's title field is required");}
         else if(title.length>=50){errors.push("Project's title must be less than 50 characters")}
@@ -70,14 +70,14 @@ const ProjectForm=({project,formType})=>{
         if(imageUrl.length<=0){errors.push("Project's imageUrl field is required");}
         if(isNaN(fundingGoal)){errors.push("Project's funding goal must be a number");}
         else if(fundingGoal<=0){errors.push("Project's funding goal must be greater than 0");}
-        else if(!(/^\d+(\.\d{1,2})?$/.test(fundingGoal))){errors.push("Project's funding goal must be within 2 digits");}
+        else if(!(/^\d+(\.\d{1,2})?$/.test(fundingGoal))){errors.push("Project's funding goal must be within 2 decimal places");}
         if(startDate.length<=0){errors.push("Project's start date field is required");}
         if(endDate.length<=0){errors.push("Project's end date field is required");}
         if(description.length<=0){errors.push("Project's description field is required");}
-        if(risks.length<=0){errors.push("Project's risk field is required");}        
-  
+        if(risks.length<=0){errors.push("Project's risk field is required");}
+
         setValidationErrors(errors);
-  
+
       }, [title,category,city,state,country,imageUrl,fundingGoal,startDate,endDate,description,risks]);
 
 
@@ -91,12 +91,12 @@ const ProjectForm=({project,formType})=>{
 
         if(formType==="Create Project"){
             dispatch(fetchCreateProject(tempProject))
-            .then(()=>{history.push(`/`)})
+            .then(()=>{history.push(`/profile`)})
             .catch(async (err)=>{
               const errobj=await err;
               errors.push(errobj.message)
               setValidationErrors(errors)
-            
+
             });
             }
         else if(formType==="Edit Project"){
@@ -112,7 +112,15 @@ const ProjectForm=({project,formType})=>{
     }
 
     const deleteEvents= (id)=>{
+        const errors=[]
         dispatch(fetchDeleteProject(id))
+        .then(history.push('/profile'))
+        .catch(async (err)=>{
+          const errobj=await err;
+          errors.push(errobj.message)
+          setValidationErrors(errors)
+          
+        });
         }
 
     return (
@@ -122,7 +130,7 @@ const ProjectForm=({project,formType})=>{
         <form className='projectform-form' onSubmit={handleSubmit}>
 
             <div className='projectform-listitem'>
-            
+
             <label>
              Title
              </label>
@@ -135,7 +143,7 @@ const ProjectForm=({project,formType})=>{
               value={title}/></div>
 
             <div className='projectform-listitem'>
-            
+
             <label>
              Category
              </label>
@@ -146,7 +154,7 @@ const ProjectForm=({project,formType})=>{
               name="category"
               onChange={(e) => setCategory(e.target.value)}
               value={category}/></div>
-             
+
              <div className='projectform-listitem'>
              <label>
              City
@@ -170,7 +178,7 @@ const ProjectForm=({project,formType})=>{
               name="state"
               onChange={(e) => setState(e.target.value)}
               value={state}/></div>
-             
+
              <div className='projectform-listitem'>
              <label>
              Country
@@ -230,7 +238,7 @@ const ProjectForm=({project,formType})=>{
               name="Description"
               onChange={(e) => setDescription(e.target.value)}
               value={description}/></div>
-             
+
              <div className='projectform-listitem'>
              <label>
              Risks
@@ -260,7 +268,7 @@ const ProjectForm=({project,formType})=>{
             </form>
 
             {formType==="Edit Project" &&(
-                <button onClick={()=>deleteEvents(5)}>delete</button>
+                <button onClick={()=>deleteEvents(project.id)}>delete</button>
                 )}
             <div className='projectform-errorsec'>
             <div className='error-title'>

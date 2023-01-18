@@ -5,6 +5,9 @@ import { useHistory } from "react-router-dom";
 import { fetchAllProjects } from "../../../store/project";
 import { fetchDeleteProject } from "../../../store/project";
 import './ProjectList.css'
+
+
+
 const ProjectManager=()=>{
     
     const dispatch = useDispatch();
@@ -22,6 +25,13 @@ const ProjectManager=()=>{
         history.push(`/editproject/${id}`)
     }
  
+    const rewardEvents=(id)=>{
+        history.push(`/profile/${id}/rewards`)
+    }
+
+    const addRewardEvents=(id)=>{
+        history.push(`/createReward/${id}`)
+    }
     const deleteEvents= (id)=>{
         // const spotreviews=Object.values(spotreviewsObj).filter(review=>{return review.spotId===+id});
         // if(spotreviews.length>0){
@@ -52,6 +62,8 @@ const ProjectManager=()=>{
                 </div>
                 <div className="button-section">
                     <button onClick={()=>editEvents(id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Edit</button>
+                    <button onClick={()=>rewardEvents(id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Project Rewards</button>
+                    <button onClick={()=>addRewardEvents(id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Add New Reward</button>   
                     {/* <button onClick={()=>deleteEvents(id)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button> */}
                 </div>
                 </div>
