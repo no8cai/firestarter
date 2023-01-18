@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
-import { fetchCreateProject,fetchUpdateProject } from "../../../store/project";
+import { fetchCreateProject,fetchUpdateProject,fetchDeleteProject } from "../../../store/project";
 import './ProjectForm.css'
 
 const ProjectForm=({project,formType})=>{
@@ -9,7 +9,8 @@ const ProjectForm=({project,formType})=>{
     let initTitle,initCategory,initCity,initState,initCountry,initImageUrl,initFundingGoal,initStartDate,initEndDate,initDescription,initRisks
     const history=useHistory()
     const dispatch = useDispatch();
-
+ 
+    console.log(project.id)
     if(formType==="Edit Project"){
         initTitle=project.title;
         initCategory=project.category;
@@ -90,15 +91,37 @@ const ProjectForm=({project,formType})=>{
 
         if(formType==="Create Project"){
             dispatch(fetchCreateProject(tempProject))
-            .then(()=>{history.push(`/`)})
+            .then(()=>{history.push(`/profile`)})
             .catch(async (err)=>{
-              const errobj=await err.json();
+              const errobj=await err;
               errors.push(errobj.message)
               setValidationErrors(errors)
 
             });
             }
+        else if(formType==="Edit Project"){
+                dispatch(fetchUpdateProject(tempProject))
+                .then(history.push('/profile'))
+                .catch(async (err)=>{
+                  const errobj=await err;
+                  errors.push(errobj.message)
+                  setValidationErrors(errors)
+                  
+                });
+            }
     }
+
+    const deleteEvents= (id)=>{
+        const errors=[]
+        dispatch(fetchDeleteProject(id))
+        .then(history.push('/profile'))
+        .catch(async (err)=>{
+          const errobj=await err;
+          errors.push(errobj.message)
+          setValidationErrors(errors)
+          
+        });
+        }
 
     return (
         <div className="projectfrom-container">
@@ -241,9 +264,12 @@ const ProjectForm=({project,formType})=>{
               value={fundingGoal}/></div>
 
              <input type="submit" value={formType} className="projectbutton" disabled={!!validationErrors.length}/>
+
             </form>
 
-
+            {formType==="Edit Project" &&(
+                <button onClick={()=>deleteEvents(project.id)}>delete</button>
+                )}
             <div className='projectform-errorsec'>
             <div className='error-title'>
             {/* <i className="fa-solid fa-circle-exclamation ertlbu" /> */}

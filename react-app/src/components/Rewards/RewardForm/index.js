@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCreateReward, fetchUpdateReward } from "../../../store/reward";
 import './RewardForm.css'
 
-const RewardForm=({reward,formType})=>{
-    const {projectId} = useParams()
+////MEEEEEEEEEEEE
+
+const RewardForm=({reward,formType,projectId})=>{
 
     let initDescription,initEstimatedDelivery,initPrice,initTitle
     const history=useHistory()
@@ -60,22 +61,22 @@ const RewardForm=({reward,formType})=>{
 
         if(formType==="Create Reward"){
             dispatch(fetchCreateReward(tempReward, projectId))
-            .then(()=>{history.push(`/`)})
+            .then(()=>{history.push(`/profile`)})
             .catch(async (err)=>{
-              const errobj=await err.json();
+              const errobj=await err;
               errors.push(errobj.message)
               setValidationErrors(errors)
             });
             }
-            if(formType==="Edit Reward"){
-                dispatch(fetchUpdateReward(tempReward, projectId))
-                .then(()=>{history.push(`/`)})
+        else if(formType==="Edit Reward"){
+                dispatch(fetchUpdateReward(tempReward))
+                .then(history.push('/profile'))
                 .catch(async (err)=>{
-                  const errobj=await err.json();
+                  const errobj=await err;
                   errors.push(errobj.message)
-                  setValidationErrors(errors)
+                  setValidationErrors(errors)             
                 });
-                }
+            }
     }
 
     return (

@@ -1,3 +1,4 @@
+import React from 'react';
 import './HomePage.css'
 import { useDispatch, useSelector} from 'react-redux';
 import { Link, Route } from 'react-router-dom';
@@ -18,6 +19,8 @@ function Landing() {
 
     const pledgesObj = useSelector(state => state.pledges.allPledges)
     const pledges = Object.values(pledgesObj)
+
+    
 
     let totalPledges = 0
     if (pledgesObj){
@@ -44,6 +47,9 @@ function Landing() {
     let currentProgress = ((pledgeTotal * 20000)/(randProject.fundingGoal)*100).toFixed(2)
     // console.log(currentProgress, pledgeTotal, randProject.fundingGoal)
 
+    
+
+
     return (
         <div className="main-container">
     <div className="categories-bar">
@@ -62,7 +68,7 @@ function Landing() {
             <h1 className="headline">Bring a creative project to life.</h1>
             <p className="subtext">ON FIRESTARTER:</p>
         </div>
-    
+
         <div className="numbers-holder">
             <div className="numbers-box">
                 <span className="nums-text">{projects.length}</span>
@@ -183,7 +189,7 @@ function Landing() {
         Etc....
     </div> */}
 
-    
+
     </div>
     )
 }

@@ -1,35 +1,25 @@
+import { fetchCreateReward } from "../../../store/reward";
 import RewardForm from "../RewardForm";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchOneReward } from '../../../store/reward'
-import { useEffect, useState } from 'react'
+import { useSelector } from "react-redux";
 
-const EditReward = ()=>{ //not yet functional, need to first create get all Rewards
-    const dispatch = useDispatch()
-    const {Id}=useParams();
+const EditReward=()=>{
 
-    const findProjectTest = async () => {
-        const returnReward = await dispatch(fetchOneReward(Id))
-      }
+    const {rewardId}=useParams()
+    
+    const tempReward = useSelector(state=>state.rewards[rewardId])
 
-    useEffect(() => {
-        findProjectTest()
-     }, [dispatch])
-
-    const tempReward = useSelector(state=>state.rewards)
-    if(tempReward[Id]) {
-        const reward={
-            id:tempReward[Id].id,
-            estimatedDelivery:tempReward[Id].estimatedDelivery,
-            description:tempReward[Id].description,
-            price: tempReward[Id].price,
-            title:tempReward[Id].title,
-        }
-        return (
-            <RewardForm reward={reward} formType="Edit Reward"/>
-        )
+    const reward={
+        id:tempReward.id,
+        description:tempReward.description,
+        estimatedDelivery:tempReward.estimatedDelivery,
+        price:tempReward.price,
+        title:tempReward.title,
     }
-    return (null)
+
+    return (
+        <RewardForm reward={reward} formType="Edit Reward" projectId={tempReward.projectId}/>
+    )
 }
 
 export default EditReward

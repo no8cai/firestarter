@@ -25,5 +25,6 @@ class Reward(db.Model):
             'title': self.title,
             'price': str(self.price),
             'description': self.description,
-            'estimatedDelivery': self.estimatedDelivery
+            'estimatedDelivery': self.estimatedDelivery,
+            'projectId':self.projectId
         }

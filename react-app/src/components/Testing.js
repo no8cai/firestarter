@@ -1,5 +1,5 @@
 import { useDispatch, useSelector} from 'react-redux';
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getAllPledges, getOnePledge, getAllPledgesByProjectId, getPledgesByCurrentUser,  createPledge, updatePledge, deletePledge } from '../store/pledge';
 
 const Testing = () => {

@@ -64,6 +64,9 @@ function UserDataModal({user}) {
 
                 <div className="nav-user-info">
                   <p>User Info</p>
+                  <Link to={'/profile'}>
+                  <p>Profile</p>
+                  </Link>
                   <p>{user.username}</p>
                 <p id="useremailline">{user.email}</p>
                 </div>
@@ -94,7 +97,9 @@ function UserDataModal({user}) {
                         </div>
                     )
                   })): (null)}
-                  <div>Create Project Button</div>
+                  <Link to={`/createproject`}>
+                  <div>Create Project</div>
+                  </Link>             
                 </div>
                 </div>
                 

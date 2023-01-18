@@ -1,7 +1,7 @@
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
 import './SingleProject.css'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { fetchOneProject } from '../../store/project'
 import { fetchProjectRewards } from '../../store/reward'
 import { getAllPledgesByProjectId} from '../../store/pledge'
@@ -23,6 +23,11 @@ const SingleProject = () => {
   useEffect(() => {
     findProjectTest()
  }, [dispatch])
+
+   const addPledgesEvents=(project_Id)=>{
+          history.push(`/projects/${project_Id}/createpledges`)
+   }
+
 
    let oneProject = useSelector(state => {return state.projects[id]})
    if(oneProject) {
@@ -83,7 +88,7 @@ const SingleProject = () => {
                 <p>days to go</p>
             </div>
             <div className="sp-add-border sp-right-side-buttons">
-                <button className='sp-green-button'>Back this project</button>
+                <button onClick={()=>addPledgesEvents(id)} className='sp-green-button'>Back this project</button>
                 <br/>
                 <button className='sp-remind-me'><i className="fa-regular fa-bookmark"></i> Remind me</button>
                 <p>All or nothing. This project will only be funded
