@@ -1,6 +1,7 @@
-import React, { useRef, useState, useContext } from 'react';
+import React, { useRef, useState, useContext, useHistory } from 'react';
 import ReactDOM from 'react-dom';
 import './SearchModal.css';
+import { Link } from 'react-router-dom';
 
 const SearchModalContext = React.createContext();
 
@@ -47,7 +48,7 @@ export function SearchModal() {
   // Render the following component to the div referenced by the modalRef
   return ReactDOM.createPortal(
     <div id="searchmodal">
-      <div id="searchmodal-background" onClick={closeModal} />
+      {/* <div id="searchmodal-background" onClick={closeModal} /> */}
       <div id="searchmodal-content">
         {modalContent}
       </div>

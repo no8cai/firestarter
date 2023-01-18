@@ -18,6 +18,8 @@ import Testing from './components/Testing';
 import SearchResultPage from './components/Search';
 import CreateReward from './components/Rewards/CreateReward';
 import EditReward from './components/Rewards/EditReward';
+import SearchBar from './components/Search/SearchBar';
+import { SearchModal, SearchModalProvider } from './context/SearchModal';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -35,8 +37,8 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      {/* <NavBar /> */}
+    // <BrowserRouter>
+    <>
       <Navigation isLoaded={loaded} />
       {loaded && (
       <Switch>
@@ -79,7 +81,8 @@ function App() {
       </Switch>
       )}
       <Footer />
-    </BrowserRouter>
+      </>
+    // </BrowserRouter>
   );
 }
 
