@@ -48,6 +48,7 @@ def add_pledge():
     form = PledgeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        print('---------------------------')
         reward=Reward.query.get(form.data["rewardId"])
         if not reward:
             return {
@@ -62,6 +63,7 @@ def add_pledge():
         db.session.add(new_pledge)
         db.session.commit()
         return new_pledge.to_dict(),201
+
 
     return {
         'message':'Validation Error',

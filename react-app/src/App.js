@@ -18,6 +18,9 @@ import SearchResultPage from './components/Search';
 import ManageCenter from './components/Profile';
 import ProjectEntry from './components/Projects';
 import CreateReward from './components/Rewards/CreateReward';
+import EditReward from './components/Rewards/EditReward';
+import PledgeDetails from './components/Pledges';
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -74,9 +77,12 @@ function App() {
         <Route path='/discover/:searchItem1' >
           <SearchResultPage />
         </Route>
+        <Route path='/projects/:id/pledges' exact={true}>
+          <PledgeDetails />
+        </Route>
         <Route>
           <h1>404 error</h1>
-        </Route>
+          </Route>
       </Switch>
       )}
       <Footer />
