@@ -24,6 +24,7 @@ function SearchBar(){
         if (isOpen === false){
             if (isOpen === true){
                 closeModal()
+                setIsOpen(false)
             } else {
                 setIsOpen(true)
             }
@@ -39,7 +40,6 @@ function SearchBar(){
 
         e.preventDefault();
         closeModal()
-        console.log('enter')
         history.push(`/discover/${searchCriteria}`)
       };
     
@@ -47,7 +47,7 @@ function SearchBar(){
     return (
         <div className="searchbar-holder">
             <form className="whole-searchbar" onSubmit={handleSubmit}>
-                <input className="searchbar-input" placeholder="Search for projects or categories" type="text" value={searchCriteria} title="Searchbar" onChange={(e) => setSearchCriteria(e.target.value)} />
+                <input className="searchbar-input" minLength="3" placeholder="Search for projects or categories" type="text" value={searchCriteria} title="Searchbar" onChange={(e) => setSearchCriteria(e.target.value)} />
                 <button type="submit" hidden >Submit</button>
             </form>
             <button className="searchbar-exit" onClick={closeModal}>X</button>

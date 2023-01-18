@@ -9,7 +9,7 @@ function SearchResultPage() {
   const params = useParams();
   const dispatch = useDispatch();
   let { searchItem1 } = params;
-  console.log(searchItem1)
+  // console.log(searchItem1)
 
   useEffect(() => {
     dispatch(fetchAllProjects());
@@ -20,37 +20,58 @@ function SearchResultPage() {
   const pledges = Object.values(allPledges)
 
   const allProjects = useSelector((state) => state.projects);
+  // const allProjectsAgain = useSelector((state) => state.projects);
   const projects = Object.values(allProjects);
+  // const projectsDupe = Object.values(allProjectsAgain)
+  const projectsDupe = Object.values(allProjects)
+
   let results = [];
+  let currentIndex = 0
   if (projects.length) {
     projects.forEach((project) => {
         // delete project.creator;
         // delete project.rewards;
+        delete project.creator.email
+        delete project.creator.id
+        delete project.creatorId
         delete project.videoUrl;
+        // delete project.id
         for (let key in project) {
-          // searches for username ONLY
+
+          // ignore searching these keys
+          if (key !== 'imageUrl' && key !== 'id' && key !== 'startDate' && key !== 'endDate'){
+
+            // searches for username ONLY
           if (typeof project[key] === 'object'){
             if (project[key].username !== undefined && project[key].username.toLowerCase().includes(searchItem1.toLowerCase())){
-              results.push(project)
+              // results.push(project)
+              results.push(projectsDupe[currentIndex]);
             }
           }
           // searches through REWARDS
-          if (Array.isArray(project[key] && project[key].length)){
+          if (Array.isArray(project[key]) && project[key].length){
             project[key].forEach(reward => {
+              delete reward.id
+              delete reward.price
+              delete reward.estimatedDelivery
               for (let rewardKey in reward) {
                 if(reward[rewardKey] !== undefined && reward[rewardKey].toString().toLowerCase().includes(searchItem1.toLowerCase())){
-                  results.push(project)
+                  // results.push(project)
+                  results.push(projectsDupe[currentIndex]);
                 }
                 
               }
             })
           }
-
           if (project[key].toString().toLowerCase().includes(searchItem1.toLowerCase())
           ) {
-              results.push(project);
+            // results.push(project)
+            results.push(projectsDupe[currentIndex]);
           }
         }
+          }
+          
+        currentIndex++
       }
     );
   }
@@ -117,7 +138,7 @@ function SearchResultPage() {
                   <div className="project-details">
                     {/* <div className="project-details-top"> */}
                     <div>{project.title}</div>
-                    <div>{project.description}</div>
+                    <span className="descr-text">{project.description}</span>
                     <div>by {project.creator.username}</div>
 
                     <div className="sp-add-border sp-bar-back" role='progressbar'>

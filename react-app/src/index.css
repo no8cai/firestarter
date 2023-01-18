@@ -32,3 +32,8 @@ body {
   justify-content: center;
   align-items: center;
 } */
+
+a:link {
+  text-decoration: none;
+}
+

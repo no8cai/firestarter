@@ -80,7 +80,7 @@ function DiscoverPage() {
                     <div className="project-details">
                       {/* <div className="project-details-top"> */}
                       <div>{project.title}</div>
-                      <div>{project.description}</div>
+                      <span className="descr-text">{project.description}</span>
                       <div>by {project.creator.username}</div>
   
                       <div className="sp-add-border sp-bar-back" role='progressbar'>
