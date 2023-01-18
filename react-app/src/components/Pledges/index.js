@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { createPledge, getAllPledgesByProjectId, updatePledge } from '../../store/pledge';
@@ -13,11 +13,26 @@ const PledgeDetails = () => {
     const { id } = useParams()
     const history = useHistory()
 
+    let userId
+    const sessionUser = useSelector(state => state.session.user)
+    // console.log(sessionUser, 'dddddddddddddddddddd')
+    // if(sessionUser){
+    //     userId = sessionUser.id
+    // }
+
     useEffect(() => {
         dispatch(fetchOneProject(id))
         console.log('fetching one project',fetchOneProject(id))
         dispatch(fetchProjectRewards(id))
         dispatch(getAllPledgesByProjectId(id))
+    }, [dispatch])
+
+    const [validationErrors, setValidationErrors] = useState([])
+
+    useEffect(() => {
+        const errors = []
+        if(!sessionUser) errors.push('User must be logged in to leave a pledge')
+        setValidationErrors(errors)
     }, [dispatch])
 
     let project = useSelector(state => {return state.projects[id]})
@@ -33,6 +48,10 @@ const PledgeDetails = () => {
     if(!project) return null
     // if(!pledges) return null
 
+    function alertUserLogIn() {
+        alert('I am working')
+    }
+
 
 
     const editPledgeBtn = (e) => {
@@ -43,7 +62,7 @@ const PledgeDetails = () => {
 
 
     const createPledgeBtn = (rewardId, projectId) => {
-        // e.preventDefault()
+        if(!sessionUser) return alert('I am working')
         const payload = {
             rewardId: rewardId,
             projectId: projectId
@@ -51,6 +70,7 @@ const PledgeDetails = () => {
         dispatch(createPledge(payload))
         // history.push('/')
     }
+    console.log((sessionUser && sessionUser.id === project.creator.id), 'dddddddddddddddddddddddddd')
 
     return(
         <>
@@ -92,7 +112,9 @@ const PledgeDetails = () => {
                             <h6 className='reward-estimated'>SHIPS TO</h6>
                             <h5 className='reward-estimated'>Anywhere in the world</h5>
                         </div>
-                        <button className='pledge-button' onClick={createPledgeBtn(reward.id, reward.projectId)}>Pledge {reward.price}</button>
+                        {sessionUser && sessionUser.id === project.creator.id ? null : (
+                            <button className='pledge-button' disabled={validationErrors.length > 0} onClick={() => createPledgeBtn(reward.id, reward.projectId)}>Pledge {reward.price}</button>
+                        )}
                     </div>
 </ul>
 )
@@ -133,7 +155,7 @@ const PledgeDetails = () => {
                     <summary>If this project is funded, how do I get my reward?</summary>
                     When your reward is ready, {project.creator.username} will send you an email for delivery information.
                 </details>
-                <button className='pledge-button' onClick={editPledgeBtn}>Edit pledge</button>
+                <button className='pledge-button' onClick={() => editPledgeBtn}>Edit pledge</button>
             </div>
         </div>
         </div>
