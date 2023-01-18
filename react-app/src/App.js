@@ -83,7 +83,7 @@ function App() {
         </Route>
         <Route>
           <h1>404 error</h1>
-          </Route>
+        </Route>
       </Switch>
       )}
       <Footer />

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory, useParams } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     const dispatch = useDispatch()
     const id=projectId
     const history = useHistory()
-
+    const sessionUser = useSelector(state => state.session.user);
     
     let project = useSelector(state => {return state.projects[id]})
     // console.log('project page', project)
@@ -36,6 +36,10 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     if(!project) return null
     // if(!pledges) return null
 
+    function alertUserLogIn() {
+        alert('I am working')
+    }
+
 
 
     const editPledgeBtn = (e) => {
@@ -45,11 +49,11 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     }
 
 
-    const createPledgeBtn = (rewardId,project_Id) => {
-        // e.preventDefault()
-        const payload={
-            rewardId:rewardId,
-            projectId:project_Id
+    const createPledgeBtn = (rewardId, projectId) => {
+        if(!sessionUser) return alert('I am working')
+        const payload = {
+            rewardId: rewardId,
+            projectId: projectId
         }
         if(type="Create Pledge"){
             dispatch(createPledge(payload))
@@ -61,6 +65,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
         }
 
     }
+    console.log((sessionUser && sessionUser.id === project.creator.id), 'dddddddddddddddddddddddddd')
 
     return(
         <>
@@ -102,9 +107,9 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
                             <h6 className='reward-estimated'>SHIPS TO</h6>
                             <h5 className='reward-estimated'>Anywhere in the world</h5>
                         </div>
-                        <button className='pledge-button' onClick={()=>createPledgeBtn(reward.id,reward.projectId)}>Pledge {reward.price}</button>
- 
-
+                        {/* {sessionUser && sessionUser.id === project.creator.id ? null : ( */}
+                            {/* <button className='pledge-button' disabled={validationErrors.length > 0} onClick={() => createPledgeBtn(reward.id, reward.projectId)}>Pledge {reward.price}</button> */}
+                        {/* )} */}
                     </div>
              </ul>
               ))}
@@ -144,7 +149,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
                     <summary>If this project is funded, how do I get my reward?</summary>
                     When your reward is ready, {project.creator.username} will send you an email for delivery information.
                 </details>
-                <button className='pledge-button' onClick={editPledgeBtn}>Edit pledge</button>
+                <button className='pledge-button' onClick={() => editPledgeBtn}>Edit pledge</button>
             </div>
         </div>
         </div>
