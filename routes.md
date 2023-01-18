@@ -711,7 +711,7 @@ Returns all of the rewards that belong to a project specified by ID.
   }
   ```
 
-### R3 - Get reward details based on reward ID - DONE (Probably don't need this)
+### R3 - Get reward details based on reward ID - DONE
 
 Returns reward details based on reward ID.
 

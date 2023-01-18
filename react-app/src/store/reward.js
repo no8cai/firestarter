@@ -11,10 +11,10 @@ const getProjectRewards = ({Rewards}) => ({
     Rewards
 })
 
-// const getOne = (reward) => ({
-//     type: READ_SINGLE_REWARD,
-//     reward
-// })
+const getOne = (reward) => ({
+    type: READ_SINGLE_REWARD,
+    reward
+})
 
 const createReward = (reward) => ({
     type: CREATE_REWARD,
@@ -43,16 +43,16 @@ export const fetchProjectRewards = (projectId) => async dispatch => {
     if(response.status>=400) throw response
 }
 
-// export const getOneReward = (backerId) => async dispatch => {
-//     const response = await fetch(`/api/rewards/${backerId}`)
-//     if(response.ok){
-//         const singlereward = await response.json()
-//         dispatch(getOne(singlereward))
-//     }
-// }
+export const fetchOneReward = (Id) => async dispatch => {
+    const response = await fetch(`/api/rewards/${Id}`)
+    if(response.ok){
+        const singleReward = await response.json()
+        dispatch(getOne(singleReward))
+    }
+    if(response.status>=400) throw response
+}
 
 export const fetchCreateReward = (reward, projectId) => async dispatch => {
-    console.log('APPLE_FETCH', reward)
     const response = await fetch(`/api/projects/${projectId}/rewards`, {
         method: 'POST',
         headers: {
@@ -111,10 +111,10 @@ const rewardsReducer = (state = initialState, action) => {
             })
             return newState
 
-        // case READ_SINGLE_REWARD:
-        //     const oneState = {...state}
-        //     oneState[action.reward.id] = action.reward
-        //     return oneState
+        case READ_SINGLE_REWARD:
+            const oneState = {...state}
+            oneState[action.reward.id] = action.reward
+            return oneState
 
         case CREATE_REWARD:
             newState = {...state}

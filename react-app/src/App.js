@@ -49,7 +49,7 @@ function App() {
         <Route exact path='/createReward/:projectId'>
           <CreateReward/>
         </Route>
-        <Route exact path='/editReward/:rewardId'>
+        <Route exact path='/editReward/:Id'>
           <EditReward/>
         </Route>
         {/* <Route path='/login' exact={true}>
