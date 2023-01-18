@@ -1,24 +1,20 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { createPledge, getAllPledgesByProjectId, updatePledge } from '../../store/pledge';
-import { fetchOneProject } from '../../store/project'
-import { fetchProjectRewards } from '../../store/reward';
-import './PledgePage.css'
-// import { Redirect } from 'react-router-dom';
 
+import { createPledge, getAllPledgesByProjectId, updatePledge } from '../../../store/pledge';
+import { fetchOneProject } from '../../../store/project';
+import { fetchProjectRewards } from '../../../store/reward';
 
-const PledgeDetails = () => {
+import '../PledgePage.css'
+
+const PledgeDetails = ({type,projectId,pledgeId}) => {
+    console.log(projectId)
     const dispatch = useDispatch()
-    const { id } = useParams()
+    const id=projectId
     const history = useHistory()
 
-    useEffect(() => {
-        dispatch(fetchOneProject(id))
-        dispatch(fetchProjectRewards(id))
-        dispatch(getAllPledgesByProjectId(id))
-    }, [dispatch])
-
+    
     let project = useSelector(state => {return state.projects[id]})
     // console.log('project page', project)
 
@@ -26,6 +22,14 @@ const PledgeDetails = () => {
     // console.log('rewards------', rewards)
     let rewardsArr = Object.values(rewards)
     // console.log('rewardsArr-----', rewardsArr)
+
+
+    useEffect(() => {
+        dispatch(fetchOneProject(id))
+        dispatch(fetchProjectRewards(id))
+        dispatch(getAllPledgesByProjectId(id))
+    }, [dispatch])
+
 
     // let pledges = useSelector(state => {return state.pledges[id]})
     if(!rewardsArr) return null
@@ -41,14 +45,21 @@ const PledgeDetails = () => {
     }
 
 
-    const createPledgeBtn = (rewardId, projectId) => {
+    const createPledgeBtn = (rewardId,project_Id) => {
         // e.preventDefault()
-        const payload = {
-            rewardId: rewardId,
-            projectId: projectId
+        const payload={
+            rewardId:rewardId,
+            projectId:project_Id
         }
-        dispatch(createPledge(payload))
-        // history.push('/')
+        if(type="Create Pledge"){
+            dispatch(createPledge(payload))
+            history.push(`/profile/pledges`)
+        }
+        if(type-"Edit Pledge"){
+            payload[id]=pledgeId
+            dispatch(updatePledge(payload))
+        }
+
     }
 
     return(
@@ -91,7 +102,9 @@ const PledgeDetails = () => {
                             <h6 className='reward-estimated'>SHIPS TO</h6>
                             <h5 className='reward-estimated'>Anywhere in the world</h5>
                         </div>
-                        <button className='pledge-button' onClick={()=>createPledgeBtn(reward.id, reward.projectId)}>Pledge {reward.price}</button>
+                        <button className='pledge-button' onClick={()=>createPledgeBtn(reward.id,reward.projectId)}>Pledge {reward.price}</button>
+ 
+
                     </div>
              </ul>
               ))}

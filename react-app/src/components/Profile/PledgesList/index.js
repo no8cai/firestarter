@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { NavLink } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { getPledgesByCurrentUser } from "../../../store/pledge";
+import { deletePledge } from "../../../store/pledge";
 
 const PledgeManager=()=>{
 
@@ -15,7 +16,15 @@ const PledgeManager=()=>{
     useEffect(() => {
         dispatch(getPledgesByCurrentUser());
   }, [dispatch]); 
-    
+
+  const editEvents=(projectId,pledgeId)=>{
+    history.push(`/projects/${projectId}/editpledge/${pledgeId}`)
+}
+
+  const deleteEvents=(id)=>{
+    dispatch(deletePledge(id))
+   }
+
     return(
         <h1>
         {pledges.map(({id,Project,Reward }) => (
@@ -35,10 +44,10 @@ const PledgeManager=()=>{
             </NavLink>
         </div>
         <div className="button-section">
-            <button className="buttons"><i className="fa-regular fa-pen-to-square" />Edit</button>
-            <button className='buttons'><i className="fa-solid fa-trash-can" />Delete</button>
-            {/* <button onClick={()=>editEvents(id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Edit</button> */}
-            {/* <button onClick={()=>deleteEvents(id)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button> */}
+            {/* <button className="buttons"><i className="fa-regular fa-pen-to-square" />Edit</button> */}
+            {/* <button className='buttons'><i className="fa-solid fa-trash-can" />Delete</button> */}
+            <button onClick={()=>editEvents(Project.id,id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Edit</button>
+            <button onClick={()=>deleteEvents(id)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button>
         </div>
         </div>
       ))}

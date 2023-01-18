@@ -1,15 +1,18 @@
+import React from 'react';
 import { Route, Switch, NavLink } from 'react-router-dom';
 import PledgeManager from './PledgesList';
 import ProjectManager from './ProjectList';
 import RewardManager from './RewardList';
 import CreateReward from '../Rewards/CreateReward';
 import EditReward from '../Rewards/EditReward';
+import EditPledge from '../Pledges/EditPledges';
 import "./Profile.css"
 
 const ManageCenter=()=>{
 
     return(
         <div className='usermanage'>
+        <div>
         <h1>Current User</h1>
         <NavLink to={`/profile`} className="links">
         <div>Projects</div>
@@ -17,7 +20,8 @@ const ManageCenter=()=>{
         <NavLink to={`/profile/pledges`} className="links">
         <div>Backed</div>
         </NavLink>
-        
+        </div>
+
         <Switch>
           <Route exact path={'/profile/pledges'}>
           <PledgeManager/>
@@ -33,6 +37,9 @@ const ManageCenter=()=>{
           </Route>
           <Route path={'/editReward/:rewardId'}>
           <EditReward/>
+          </Route>
+          <Route path={'/projects/:projectId/editpledge/:pledgeId'}>
+          <EditPledge/>
           </Route>
         </Switch>
         </div>    

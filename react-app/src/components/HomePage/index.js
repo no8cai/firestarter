@@ -20,6 +20,8 @@ function Landing() {
     const pledgesObj = useSelector(state => state.pledges.allPledges)
     const pledges = Object.values(pledgesObj)
 
+    
+
     let totalPledges = 0
     if (pledgesObj){
         pledges.forEach(pledge => {
@@ -44,6 +46,9 @@ function Landing() {
     })
     let currentProgress = ((pledgeTotal * 20000)/(randProject.fundingGoal)*100).toFixed(2)
     // console.log(currentProgress, pledgeTotal, randProject.fundingGoal)
+
+    
+
 
     return (
         <div className="main-container">
