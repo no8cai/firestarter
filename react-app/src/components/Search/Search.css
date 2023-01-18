@@ -41,3 +41,30 @@
    justify-content: space-between;
    margin-bottom: 1em;
 }
+
+.searchbar-holder {
+    width: 100% ;
+    height: 2rem;
+    display: flex;
+    justify-content: row;
+}
+
+.searchbar-input {
+    width: 100%;
+    padding-left: 2rem;
+    height: 2rem;
+    border: 0;
+}
+
+.searchbar-input:focus {
+    outline: none;
+}
+
+.searchbar-exit {
+    width: 10%
+}
+
+.whole-searchbar {
+    width: 100%;
+    margin-top: 0px;
+}

@@ -17,6 +17,13 @@ import Testing from './components/Testing';
 import SearchResultPage from './components/Search';
 import ManageCenter from './components/Profile';
 import ProjectEntry from './components/Projects';
+import CreateReward from './components/Rewards/CreateReward';
+import EditReward from './components/Rewards/EditReward';
+import SearchBar from './components/Search/SearchBar';
+import { SearchModal, SearchModalProvider } from './context/SearchModal';
+import DiscoverPage from './components/Search/DiscoverAllProjects';
+// import PledgeDetails from './components/Pledges';
+import CreatePledge from './components/Pledges/CreatePledge';
 import CreateAPledge from './components/Pledges/CreateAPledge';
 
 
@@ -36,8 +43,8 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      {/* <NavBar /> */}
+    // <BrowserRouter>
+    <>
       <Navigation isLoaded={loaded} />
       {loaded && (
       <Switch>
@@ -75,6 +82,9 @@ function App() {
         <Route path='/discover/:searchItem1' >
           <SearchResultPage />
         </Route>
+        <Route path='/discover' exact={true}>
+          <DiscoverPage />
+          </Route>
         <Route path='/projects/:projectId/createpledges'>
           <CreateAPledge/>
         </Route>
@@ -84,7 +94,8 @@ function App() {
       </Switch>
       )}
       <Footer />
-    </BrowserRouter>
+      </>
+    // </BrowserRouter>
   );
 }
 
