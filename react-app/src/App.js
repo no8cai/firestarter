@@ -7,7 +7,7 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
-import SingleProject from './components/SingleProject/Index'
+import SingleProject from './components/SingleProject'
 import { authenticate } from './store/session';
 import Landing from './components/HomePage';
 import Footer from "./components/Footer"
@@ -16,6 +16,7 @@ import * as sessionActions from "./store/session";
 import CreatProject from './components/Projects/CreateProject';
 import Testing from './components/Testing';
 import SearchResultPage from './components/Search';
+import CreateReward from './components/Rewards/CreateReward';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -43,6 +44,9 @@ function App() {
         </Route>
         <Route exact path='/createproject'>
           <CreatProject />
+        </Route>
+        <Route exact path='/createReward'>
+          <CreateReward/>
         </Route>
         {/* <Route path='/login' exact={true}>
           <LoginForm />
