@@ -17,10 +17,7 @@ import Testing from './components/Testing';
 import SearchResultPage from './components/Search';
 import ManageCenter from './components/Profile';
 import ProjectEntry from './components/Projects';
-import CreateReward from './components/Rewards/CreateReward';
-import EditReward from './components/Rewards/EditReward';
-// import PledgeDetails from './components/Pledges';
-import CreatePledge from './components/Pledges/CreatePledge';
+import CreateAPledge from './components/Pledges/CreateAPledge';
 
 
 function App() {
@@ -78,8 +75,8 @@ function App() {
         <Route path='/discover/:searchItem1' >
           <SearchResultPage />
         </Route>
-        <Route path='/projects/:projectId/createpledges' exact={true}>
-          <CreatePledge />
+        <Route path='/projects/:projectId/createpledges'>
+          <CreateAPledge/>
         </Route>
         <Route>
           <h1>404 error</h1>

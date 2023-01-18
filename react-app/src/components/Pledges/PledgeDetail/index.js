@@ -9,11 +9,11 @@ import { fetchProjectRewards } from '../../../store/reward';
 import '../PledgePage.css'
 
 const PledgeDetails = ({type,projectId,pledgeId}) => {
-    console.log(projectId)
+
     const dispatch = useDispatch()
     const id=projectId
     const history = useHistory()
-    const sessionUser = useSelector(state => state.session.user);
+    // const sessionUser = useSelector(state => state.session.user);
     
     let project = useSelector(state => {return state.projects[id]})
     // console.log('project page', project)
@@ -36,11 +36,6 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     if(!project) return null
     // if(!pledges) return null
 
-    function alertUserLogIn() {
-        alert('I am working')
-    }
-
-
 
     const editPledgeBtn = (e) => {
         e.preventDefault()
@@ -50,7 +45,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
 
 
     const createPledgeBtn = (rewardId, projectId) => {
-        if(!sessionUser) return alert('I am working')
+        // if(!sessionUser) return alert('I am working')
         const payload = {
             rewardId: rewardId,
             projectId: projectId
@@ -65,7 +60,6 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
         }
 
     }
-    console.log((sessionUser && sessionUser.id === project.creator.id), 'dddddddddddddddddddddddddd')
 
     return(
         <>
@@ -109,6 +103,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
                         </div>
                         {/* {sessionUser && sessionUser.id === project.creator.id ? null : ( */}
                             {/* <button className='pledge-button' disabled={validationErrors.length > 0} onClick={() => createPledgeBtn(reward.id, reward.projectId)}>Pledge {reward.price}</button> */}
+                            <button className='pledge-button' onClick={() => createPledgeBtn(reward.id, reward.projectId)}>Pledge {reward.price}</button>
                         {/* )} */}
                     </div>
              </ul>
