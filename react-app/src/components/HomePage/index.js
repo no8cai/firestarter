@@ -1,3 +1,4 @@
+import React from 'react';
 import './HomePage.css'
 import { useDispatch, useSelector} from 'react-redux';
 import { Link, Route } from 'react-router-dom';
@@ -62,7 +63,7 @@ function Landing() {
             <h1 className="headline">Bring a creative project to life.</h1>
             <p className="subtext">ON FIRESTARTER:</p>
         </div>
-    
+
         <div className="numbers-holder">
             <div className="numbers-box">
                 <span className="nums-text">{projects.length}</span>
@@ -183,7 +184,7 @@ function Landing() {
         Etc....
     </div> */}
 
-    
+
     </div>
     )
 }

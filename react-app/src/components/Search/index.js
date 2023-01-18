@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProjects } from "../../store/project";
 import "./Search.css";
@@ -41,7 +41,7 @@ function SearchResultPage() {
                 if(reward[rewardKey].toString().toLowerCase().includes(searchItem1.toLowerCase())){
                   results.push(project)
                 }
-                
+
               }
             })
           }
@@ -144,7 +144,7 @@ function SearchResultPage() {
                     <div className="sp-add-border sp-bar-back" role='progressbar'>
                     <div className='sp-green-bar' style={{width: `${currentProgress}%`}}></div>
                     </div>
-                    
+
                     <div>${pledgeTotal} pledged</div>
                     <div>{counter !== 0 ? parseFloat(((pledgeTotal *1000)/project.fundingGoal)*100).toFixed(2) : 0}% funded</div>
                     <div>{diffDays} days to go</div>

@@ -2,7 +2,7 @@ import RewardForm from "../RewardForm";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchOneReward } from '../../../store/reward'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const EditReward = ()=>{ //not yet functional, need to first create get all Rewards
     const dispatch = useDispatch()

@@ -1,0 +1,123 @@
+/* div {
+    display: block;
+} */
+
+/* .pledge-outter-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+} */
+
+a:link { text-decoration: none;}
+
+.pledge-main-container {
+    align-items: center;
+    flex-direction: column;
+    margin-right: 0;
+    margin-top: 5rem;
+}
+
+.pledge-project-title {
+    border-bottom: .1em solid #d3d3d3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding-top: 2rem; */
+}
+
+.pledge-ul-nav {
+    display: flex;
+    /* align-items: flex-start; */
+    padding-left: 13%;
+}
+
+.reward-selection-text {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10%;
+}
+
+.reward-container {
+    width: 55%;
+    padding-left: 2rem;
+    margin-left: 4rem;
+}
+
+.reward-card-details {
+    margin-left: 2rem;
+    margin-right: 4rem;
+}
+
+.reward-card-shipping {
+    margin-right: 20rem
+}
+
+
+
+.pledge-container {
+    /* border: 1em solid red; */
+    /* display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between; */
+    /* padding-left: 4rem;
+    padding-right: 4rem; */
+    padding-left: 10%;
+    padding-right: 10%;
+    /* align-items: center; */
+    display: flex;
+    flex-direction: row;
+    margin: 1rem auto;
+    min-width: 80rem;
+    padding-bottom: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.reward-card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: normal;
+    justify-content: normal;
+    align-items: normal;
+    border: .1rem solid #d3d3d3;
+    column-gap: 5rem;
+    margin-top: 1rem;
+}
+
+.reward-card:hover{
+    box-shadow: 1px 5px 5px lightgray;
+}
+
+.guaranteed-container {
+    align-items: center;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    width: 30%;
+}
+
+.guaranteed-img {
+    align-items: center;
+}
+
+summary {
+    font-weight: bold;
+    padding: 0.5em
+}
+
+details[open] {
+    padding: .5em;
+}
+
+.pledge-button {
+    background-color: #028858;
+    color: white;
+    border: none;
+    margin: 5px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 6rem;
+    height: 1.5rem;
+    margin-left: 5rem;
+
+}
