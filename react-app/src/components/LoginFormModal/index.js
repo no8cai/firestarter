@@ -17,22 +17,54 @@ function LoginFormModal() {
 
     const history = useHistory()
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = await dispatch(login(email, password)).then(closeModal).then(history.push('/'));
-    if (data) {
-        setErrors(data)
-    }
-  };
+    const onLogin = async (e) => {
+      e.preventDefault();
+      const data = await dispatch(login(email, password));
+      if (data) {
+        setErrors(data);
+      }
+    };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const data = await dispatch(login(email, password)).then(closeModal).then(history.push('/'));
+  //   if (data) {
+  //       setErrors(data)
+  //   }
+  // };
 
   const demoLogin = async (e) => {
     e.preventDefault();
+
     const demoEmail = 'brad@aa.io'
     const demoPassword = 'passwordBrad'
-    const data = await dispatch(login(demoEmail, demoPassword)).then(closeModal).then(history.push('/'));
+
+    const data = await dispatch(login(demoEmail, demoPassword));
     if (data) {
-        setErrors(data)
+      setErrors(data);
     }
+    // e.preventDefault();
+    // const demoEmail = 'brad@aa.io'
+    // const demoPassword = 'passwordBrad'
+    // const data = await dispatch(login(demoEmail, demoPassword)).then(closeModal).then(history.push('/'));
+    // if (data) {
+    //     setErrors(data)
+    // }
+  }
+
+  const updateEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const updatePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  if (user) {
+    closeModal()
+    // pushes to profile page like Kickstarter does on login; can remove to stay on whatever page logged in on originally
+    // history.push('/profile')
+    return <Redirect to='/profile' />;
   }
 
 
@@ -47,10 +79,10 @@ function LoginFormModal() {
 
     <div className='form-holder'>
 
-      <form className='login-form-css' onSubmit={handleSubmit}>
+      <form className='login-form-css' onSubmit={onLogin}>
         <ul className='errorlist'>
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <div key={idx}>{error}</div>
           ))}
         </ul>
           <div className='input-holder'>
@@ -62,7 +94,7 @@ function LoginFormModal() {
             value={email}
             placeholder='Email'
             title='Email Address'
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={updateEmail}
             required
           />
         </label>
@@ -74,7 +106,7 @@ function LoginFormModal() {
             value={password}
             placeholder='Password'
             title='Password'
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={updatePassword}
             required
           />
         </label>

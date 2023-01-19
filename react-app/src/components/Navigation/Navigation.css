@@ -91,6 +91,26 @@
 
 }
 
+.profile-dropdown2{
+    border: gray 1px solid;
+    /* justify-content: left; */
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 10rem;
+    /* border-radius: 5%; */
+    /* box-shadow: 0px 0px 10px 1px lightgray; */
+    position: relative;
+    /* border: red 1px solid; */
+    position: absolute;
+    margin-top: 0.5rem;
+    z-index: 99;
+    float: right;
+    background: white;
+    right: 4rem;
+    left: auto;
+}
+
 /* li {
     padding-top: 1em;
 } */

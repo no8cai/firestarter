@@ -43,7 +43,8 @@ function ProfileButton({ user }) {
       history.push('/')
     };
   
-    const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+    let ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+    if (!user) ulClassName = "profile-dropdown2" + (showMenu ? "" : " hidden")
   
     return (
       <div className='profile-button-div'>
@@ -58,7 +59,7 @@ function ProfileButton({ user }) {
               {/* <p className="logoutbutton"><button onClick={logout}>Logout</button></p> */}
             </div>
           ) : (
-            <div className='signup-button'>
+              <div className='signup-button'>
             <div className='login-button'>
               <OpenModalMenuItem
                 itemText="Log In"
@@ -75,6 +76,7 @@ function ProfileButton({ user }) {
                 modalComponent={<SignupFormModal />}
               />
             </div>
+            
           )}
         </div>
       </div>
