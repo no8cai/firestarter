@@ -195,3 +195,42 @@
 .sp-css-fix {
     white-space: pre-wrap; /* or pre-line */
   }
+
+  .sp-profile-photo {
+    height: 3em;
+    width: 3em;
+    object-fit: cover;
+    border-radius: 50%;
+
+  }
+
+.sp-right-box {
+    height: 12em;
+    width: 12em;
+    border: lightgrey .1em solid;
+    padding: .5em;
+
+
+}
+
+.sp-outer-profile-photo {
+    height: 1em;
+    width: 12em;
+    /* border: purple .1em solid; */
+    display: flex;
+    justify-content: center;
+
+}
+
+
+.sp-support-button {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+
+.sp-broken {
+    margin-top: 5em;
+    display: flex;
+    justify-content: center;
+}
