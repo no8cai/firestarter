@@ -27,8 +27,8 @@ function LoginFormModal() {
 
   const demoLogin = async (e) => {
     e.preventDefault();
-    const demoEmail = 'demo@aa.io'
-    const demoPassword = 'password'
+    const demoEmail = 'brad@aa.io'
+    const demoPassword = 'passwordBrad'
     const data = await dispatch(login(demoEmail, demoPassword)).then(closeModal).then(history.push('/'));
     if (data) {
         setErrors(data)

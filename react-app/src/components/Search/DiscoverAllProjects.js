@@ -25,7 +25,7 @@ function DiscoverPage() {
         <div className="main-container">
         {/* <div className="categories-bar">
           <span>
-            <Link to="/discover/art">Arts</Link>
+            <Link to="/discover/arts">Arts</Link>
           </span>
           <span>
             <Link to="/discover/comicsillustration">Comics & Illustration</Link>

@@ -88,7 +88,7 @@ function SearchResultPage() {
     <div className="main-container">
       <div className="categories-bar">
         <span>
-          <Link to="/discover/art">Arts</Link>
+          <Link to="/discover/arts">Arts</Link>
         </span>
         <span>
           <Link to="/discover/comics&illustration">Comics & Illustration</Link>
@@ -143,7 +143,8 @@ function SearchResultPage() {
                 counter++
               }
             })
-            let currentProgress = ((pledgeTotal * 20000)/(project.fundingGoal)*100).toFixed(2)
+            let currentProgress = ((pledgeTotal * 200)/(project.fundingGoal)*100).toFixed(2)
+            console.log(currentProgress)
             let oneDay = 24 * 60 * 60 * 1000
             let splitStart = project.startDate.split('-')
             let splitEnd = project.endDate.split('-')

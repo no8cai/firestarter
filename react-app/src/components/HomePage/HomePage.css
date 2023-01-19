@@ -19,6 +19,7 @@
     flex-direction: row;
     justify-content: center;
     padding-bottom: 1rem;
+    background: white;
 }
 
 .categories-bar> span> a:link:hover {

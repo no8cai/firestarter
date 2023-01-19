@@ -6,6 +6,7 @@ import { fetchAllProjects, fetchOneProject } from '../../store/project';
 import { useEffect, useState } from 'react'
 import { getAllPledges, getAllPledgesByProjectId, getPledgesByCurrentUser } from '../../store/pledge';
 import SearchResultPage from '../Search';
+import background from '../../../src/kstrtrbg.png'
 
 
 function Landing() {
@@ -51,10 +52,10 @@ function Landing() {
 
 
     return (
-        <div className="main-container">
+        <div className="main-container" style={{ backgroundImage: `url('${background}'`, backgroundRepeat  : 'no-repeat', }}>
     <div className="categories-bar">
         <span>
-          <Link to="/discover/art">Arts</Link>
+          <Link to="/discover/arts">Arts</Link>
         </span>
         <span>
           <Link to="/discover/comics&illustration">Comics & Illustration</Link>
@@ -149,7 +150,7 @@ function Landing() {
     <div className="line-break"></div>
 
     <div className="content-container">
-        Small project section
+        
     </div>
 
     <div className="line-break"></div>
