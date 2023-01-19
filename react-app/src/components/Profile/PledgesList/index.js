@@ -17,7 +17,6 @@ const PledgeManager=()=>{
         dispatch(getPledgesByCurrentUser());
   }, [dispatch]);
 
-  }, [dispatch]);
 
   const editEvents=(projectId,pledgeId)=>{
     history.push(`/projects/${projectId}/editpledge/${pledgeId}`)
@@ -60,4 +59,3 @@ const PledgeManager=()=>{
 
 export default PledgeManager
 
-export default PledgeManager

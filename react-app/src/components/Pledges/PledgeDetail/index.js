@@ -32,11 +32,17 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
         dispatch(getAllPledgesByProjectId(id))
     }, [dispatch])
 
+    // let userId = 10
 
-    // let pledges = useSelector(state => {return state.pledges[id]})
+    // let pledges = useSelector(state => {return state.pledges})
+    // let pledgesArr = Object.values(pledges)
+    // console.log('-----------', pledges.userPledges[userId])
+    // console.log('------------', pledgesArr[1])
+    // console.log('**********', JSON.stringify(pledges).valueOf('backerId'))
+    console.log()
     if(!rewardsArr) return null
     if(!project) return null
-    // if(!pledges) return null
+    if(!pledges) return null
 
 
     const editPledgeBtn = (e) => {
@@ -44,6 +50,10 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
         dispatch(updatePledge(id))
 
     }
+
+
+
+
 
 
     const createPledgeBtn = (rewardId, projectId) => {
@@ -79,7 +89,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
             </div>
 
             <div className='reward-selection-text'>
-                <h2>Select your reward</h2>
+                <h2>Select your reward {pledges.userPledges.city}</h2>
                 <p>Select an option below</p>
             </div>
 
