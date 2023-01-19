@@ -1,9 +1,10 @@
+import React from "react";
 import { fetchCreateProject } from "../../../store/project";
 import ProjectForm from "../ProjectForm";
-import React from "react"
+
 
 const CreatProject=()=>{
-    
+
     const project={
         creatorId:"",
         category:"",

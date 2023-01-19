@@ -1,3 +1,4 @@
+import React from "react";
 import { fetchCreateReward } from "../../../store/reward";
 import RewardForm from "../RewardForm";
 import { useParams } from "react-router-dom";
@@ -7,7 +8,7 @@ import React from "react"
 const EditReward=()=>{
 
     const {rewardId}=useParams()
-    
+
     const tempReward = useSelector(state=>state.rewards[rewardId])
 
     const reward={

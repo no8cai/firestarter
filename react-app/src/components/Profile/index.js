@@ -27,6 +27,7 @@ const ManageCenter=()=>{
         <NavLink to={`/profile/pledges`} className="profile-links">
         <div className='profile-bu'>Backed</div>
         </NavLink>
+
         </div>
 
        
@@ -51,7 +52,7 @@ const ManageCenter=()=>{
           <EditPledge/>
           </Route>
         </Switch>
-        </div>    
+        </div>
     )
 }
 
