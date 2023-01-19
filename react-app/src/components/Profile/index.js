@@ -6,22 +6,31 @@ import RewardManager from './RewardList';
 import CreateReward from '../Rewards/CreateReward';
 import EditReward from '../Rewards/EditReward';
 import EditPledge from '../Pledges/EditPledges';
+import { useSelector } from 'react-redux';
 import "./Profile.css"
 
 const ManageCenter=()=>{
 
+  const sessionUser = useSelector(state => state.session.user);
+    
     return(
-        <div className='usermanage'>
-        <div>
-        <h1>Current User</h1>
-        <NavLink to={`/profile`} className="links">
-        <div>Projects</div>
+        <div className='profile-manage'>
+        <div className='profile-userinfo'>
+        <img src='https://ksr-ugc.imgix.net/missing_user_avatar.png?ixlib=rb-4.0.2&w=80&h=80&fit=crop&v=&auto=format&frame=1&q=92&s=6db01a5e4fc00d7967e45fbcb6ff2f74' className="profile-icon"/>
+        <h1>{sessionUser.username}</h1>
+        </div>
+  
+        <div className='profile-barlist'>
+        <NavLink to={`/profile`} className="profile-links">
+        <div className='profile-bu'>Projects</div>
         </NavLink>
-        <NavLink to={`/profile/pledges`} className="links">
-        <div>Backed</div>
+        <NavLink to={`/profile/pledges`} className="profile-links">
+        <div className='profile-bu'>Backed</div>
         </NavLink>
 
         </div>
+
+       
 
         <Switch>
           <Route exact path={'/profile/pledges'}>

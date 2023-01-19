@@ -1,6 +1,7 @@
 import React from "react"
 import PledgeDetails from "../PledgeDetail"
 import { useParams } from "react-router-dom"
+import React from "react"
 
 const CreateAPledge=()=>{
 
@@ -10,9 +11,6 @@ const CreateAPledge=()=>{
 
     return(
 
-        // <>
-        // <h1>welcome</h1>
-        // </>
         <PledgeDetails type="Create Pledge" projectId={projectId} pledgeId={pledgeId}/>
     )
 }

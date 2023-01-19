@@ -4,6 +4,8 @@ import { fetchAllProjects } from "../../store/project";
 import "./Search.css";
 import { Link, useParams } from "react-router-dom";
 import { getAllPledges } from "../../store/pledge";
+import React from "react";
+
 
 function DiscoverPage() {
     const dispatch = useDispatch();
@@ -23,9 +25,9 @@ function DiscoverPage() {
 
     return (
         <div className="main-container">
-        <div className="categories-bar">
+        {/* <div className="categories-bar">
           <span>
-            <Link to="/discover/art">Arts</Link>
+            <Link to="/discover/arts">Arts</Link>
           </span>
           <span>
             <Link to="/discover/comicsillustration">Comics & Illustration</Link>
@@ -49,13 +51,13 @@ function DiscoverPage() {
             <Link to="/discover/publishing">Publishing</Link>
           </span>
         </div>
-        <div className="search-num">
+        <div className="search-num"> */}
           {/* {results.length ? (
             <div>
               Explore {filteredResults.length} project{filteredResults.length > 1 ? "s" : ""}
             </div>
           ) : <div>We can't find projects that match your search</div>} */}
-        </div>
+        {/* </div> */}
         <div className="all-projects">
           {projects.length ? (projects.map((project) => {
               let pledgeTotal = 0

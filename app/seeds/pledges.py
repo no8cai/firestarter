@@ -1,13 +1,17 @@
 from app.models import db, Pledge, environment, SCHEMA
 
 def seed_pledges():
-    pledge1 = Pledge(rewardId=1, projectId=2, backerId=1)
-    pledge2 = Pledge(rewardId=1, projectId=3, backerId=2)
-    pledge3 = Pledge(rewardId=1, projectId=1, backerId=3)
 
-    db.session.add(pledge1)
-    db.session.add(pledge2)
-    db.session.add(pledge3)
+    for project in range (1,19):
+        for reward in range(1,4):
+            for backer in range(1,3):
+                if reward == 2:
+                    backer = backer + 2
+                elif reward == 3:
+                    backer = backer + 4
+                db.session.add(Pledge(rewardId=reward, projectId=project, backerId=backer))
+
+
     db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

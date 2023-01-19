@@ -58,11 +58,20 @@ def add_pledge():
             }, 404
         project_Id=reward.projectId
         currentId=current_user.get_id()
+
+        user_Pledges=Pledge.query.filter(Pledge.projectId==project_Id).filter(Pledge.backerId==currentId).all()
+        if user_Pledges:
+            return {
+              'message':'Validation Error',
+              "errors": "One user can only back one project",
+              'statusCode': 400
+            }, 400
+
         new_pledge = Pledge(backerId=currentId,projectId=project_Id)
         form.populate_obj(new_pledge)
         db.session.add(new_pledge)
         db.session.commit()
-        return new_pledge.to_dict(),201
+        return new_pledge.to_dict_full(),201
 
 
     return {
@@ -113,7 +122,7 @@ def edit_pledge(id):
         form.populate_obj(current_pledge)
         db.session.add(current_pledge)
         db.session.commit()
-        return current_pledge.to_dict()
+        return current_pledge.to_dict_full()
 
     return {
         'message':'Validation Error',

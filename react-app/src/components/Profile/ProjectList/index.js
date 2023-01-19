@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import { useDispatch,useSelector } from "react-redux";
 import { useEffect } from "react";
 import { NavLink } from 'react-router-dom';
@@ -16,6 +16,7 @@ const ProjectManager=()=>{
     const projectsObj = useSelector(state => state.projects)
     const userprojects=Object.values(projectsObj).filter(el=>el.creatorId==sessionUser.id)
     const history=useHistory();
+
 
 
     useEffect(() => {
@@ -43,6 +44,7 @@ const ProjectManager=()=>{
         dispatch(fetchDeleteProject(id))
     }
 
+    if(!userprojects) return null
 
     return(
         <h1>

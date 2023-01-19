@@ -4,13 +4,16 @@ import { NavLink } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { getPledgesByCurrentUser } from "../../../store/pledge";
 import { deletePledge } from "../../../store/pledge";
+import React from "react"
 
 const PledgeManager=()=>{
 
     const dispatch = useDispatch();
-
+    const sessionUser = useSelector(state => state.session.user);
     const pledgesObj = useSelector(state => state.pledges.userPledges)
     const pledges = Object.values(pledgesObj);
+    const history=useHistory();
+    const pledges = Object.values(pledgesObj).filter(el=>el.backerId==sessionUser.id);
     const history=useHistory();
 
     useEffect(() => {
@@ -58,4 +61,3 @@ const PledgeManager=()=>{
 }
 
 export default PledgeManager
-
