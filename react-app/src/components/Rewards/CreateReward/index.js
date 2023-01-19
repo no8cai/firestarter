@@ -1,18 +1,18 @@
-// import { fetchCreateReward } from "../../../store/reward";
-// import RewardForm from "../RewardForm";
+import { fetchCreateReward } from "../../../store/reward";
+import RewardForm from "../RewardForm";
 
-// const CreateReward=()=>{
-//     const reward={
-//         description:"",
-//         estimatedDelivery:"",
-//         price:"",
-//         title:"",
-//         title:"",
-//     }
+const CreateReward=()=>{
+    const reward={
+        description:"",
+        estimatedDelivery:"",
+        price:"",
+        title:"",
+        title:"",
+    }
 
-//     return (
-//         <RewardForm reward={reward} formType="Create Reward"/>
-//     )
-// }
+    return (
+        <RewardForm reward={reward} formType="Create Reward"/>
+    )
+}
 
-// export default CreateReward
+export default CreateReward

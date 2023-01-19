@@ -187,8 +187,10 @@ const ProjectForm=({project,formType})=>{
              <input
               className='input'
               placeholder='type your startDate'
-              type="text"
               name="startDate"
+              type="date"
+              id="start"
+              min="2023-01-17"
               onChange={(e) => setStartDate(e.target.value)}
               value={startDate}/></div>
 
@@ -199,7 +201,9 @@ const ProjectForm=({project,formType})=>{
              <input
               className='input'
               placeholder='type your end date'
-              type="text"
+              type="date"
+              id="start"
+              min="2023-01-17"
               name="endDate"
               onChange={(e) => setEndDate(e.target.value)}
               value={endDate}/></div>

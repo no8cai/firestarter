@@ -55,6 +55,7 @@ const SingleProject = () => {
         <div className='sp-whole-page'>
     <div className="sp-title sp-add-border">
         <h1>{oneProject.title}</h1>
+        <h4>By {oneProject.creator.username}</h4>
         <button className='sp-delete-reward'onClick={()=> {handleRemoveReward(tempDeleteRewardId)}}>Temporary location of delete reward button </button>
     </div>
     <div className="sp-main-content add-border">

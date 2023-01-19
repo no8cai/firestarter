@@ -152,6 +152,7 @@ function SearchResultPage() {
                       <span>{project.category}</span>
                       <span>
                         {project.city}, {project.country}
+                        <br/>
                       </span>
                     </div>
                     {/* </div> */}

@@ -19,7 +19,7 @@ const RewardForm=({reward,formType})=>{
     }
     else{
         initDescription='';
-        initEstimatedDelivery='2024-01';
+        initEstimatedDelivery="2023-10-01";
         initPrice=0;
         initTitle='';
     }
@@ -104,9 +104,9 @@ const RewardForm=({reward,formType})=>{
                 </label>
                 <input
                 name='Estimated Delivery'
-                type="month"
+                type="date"
                 id="start"
-                min="2023-01"
+                min="2023-01-17"
                 onChange={(e) => setEstimatedDelivery(e.target.value)}
                 value={estimatedDelivery}/>
             </div>
