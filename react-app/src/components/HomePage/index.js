@@ -38,7 +38,7 @@ function Landing() {
     const randProject = useSelector(state => state.projects[randId])
     // console.log("AAAAAAAAA", randProject)
 
-    if (!projectsObj || !randProject || !pledgesObj || pledges.length == 0) return null
+    if (!projectsObj || !randProject || !pledgesObj ) return null
 
     let pledgeTotal = 0
     let randPledges = pledges.filter(pledge => pledge.projectId === randId)

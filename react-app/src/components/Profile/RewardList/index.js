@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { fetchProjectRewards } from "../../../store/reward";
 import { useParams } from "react-router-dom";
 import { fetchDeleteReward } from "../../../store/reward";
+import CreateReward from "../../Rewards/CreateReward";
 
 const RewardManager=()=>{
 
@@ -30,7 +31,7 @@ const RewardManager=()=>{
 
     return(
         <h1>
-        {rewards.map(({id,title,price,description,estimatedDelivery }) => (
+        {rewards.length ? (rewards.map(({id,title,price,description,estimatedDelivery }) => (
         <div key={id} className='managebox'>
         <div className='boxitems'>
             <NavLink to={`/`} className="links">
@@ -54,7 +55,12 @@ const RewardManager=()=>{
             <button onClick={()=>deleteEvents(id)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button>
         </div>
         </div>
-      ))}
+      ))): (<div className="reward-form-container">
+            <div>
+                This project has no rewards yet. Add a reward.
+                <div><CreateReward /></div>
+            </div>
+      </div>)}
 </h1>
     )
 }

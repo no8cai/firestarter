@@ -43,7 +43,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     console.log()
     if(!rewardsArr) return null
     if(!project) return null
-    if(!pledges) return null
+    // if(!pledges) return null
 
 
     const editPledgeBtn = (rewardId, projectId, pledgeId) => {
@@ -67,7 +67,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
             rewardId: rewardId,
         }
            dispatch(createPledge(payload))
-            .then(()=>{history.push(`/profile`)})
+            .then(()=>{history.push(`/profile/${projectId}/rewards`)})
             .catch( (err) => {
                      alert("one user can not backup more project")
                   }
@@ -91,7 +91,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
             </div>
 
             <div className='reward-selection-text'>
-                <h2>Select your reward {pledges.userPledges.city}</h2>
+                <h2>Select your reward </h2>
                 <p>Select an option below</p>
             </div>
 

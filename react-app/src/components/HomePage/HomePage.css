@@ -105,6 +105,7 @@
     justify-content: space-around;
     box-shadow: 0.5px 2px 10px lightgray;
     padding: 0px;
+    background-color: white;
 }
 
 .numbers-box {
