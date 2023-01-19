@@ -26,7 +26,6 @@ function Landing() {
     let totalPledges = 0
     if (pledgesObj){
         pledges.forEach(pledge => {
-            console.log('what is pledge', pledge)
             totalPledges += parseFloat(pledge.Reward.price)
         })
     }
@@ -140,7 +139,7 @@ function Landing() {
                         <span className="rec-project-funded">{counter !== 0 ? Math.ceil(((pledgeTotal)/project.fundingGoal)*100) : 0}% funded</span>
                         <span className="rec-project-creator">By {project.creator.username}</span>
                         <div className="rec-project-bookmark-likes">
-                        <i class="fa-regular fa-bookmark"></i> <i class="fa-regular fa-thumbs-up"></i> <i class="fa-regular fa-thumbs-down"></i></div>
+                        <i className="fa-regular fa-bookmark"></i> <i className="fa-regular fa-thumbs-up"></i> <i className="fa-regular fa-thumbs-down"></i></div>
                     </div>
                         </Link>
                 </div>

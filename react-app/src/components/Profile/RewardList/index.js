@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 import { fetchProjectRewards } from "../../../store/reward";
 import { useParams } from "react-router-dom";
 import { fetchDeleteReward } from "../../../store/reward";
-import React from "react"
 
 const RewardManager=()=>{
 
