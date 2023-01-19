@@ -47,8 +47,17 @@ function UserDataModal({user}) {
     const closeMenu = () => setShowMenu(false);
 
     const onLogout = async (e) => {
+      closeMenu()
     await dispatch(logout());
+    history.push('/')
   };
+
+  const logoutButton = async (e) => {
+      e.preventDefault();
+      await dispatch(logout());
+      closeMenu();
+      history.push('/')
+    };
   
     console.log(userProjects.length)
     if (!userPledges || !user || !allProjects) return null
@@ -111,7 +120,7 @@ function UserDataModal({user}) {
                 </div>
                 </div>
                 
-                <p className="logoutbutton"><button onClick={onLogout}>Logout</button></p>
+                <p className="logoutbutton"><button onClick={logoutButton}>Logout</button></p>
               </div>
     )
 }
