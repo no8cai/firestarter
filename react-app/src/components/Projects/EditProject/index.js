@@ -2,7 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import ProjectForm from "../ProjectForm";
 import { useSelector } from "react-redux";
-// import React from "react"
 
 const EditProject=()=>{
 
