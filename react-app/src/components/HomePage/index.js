@@ -138,7 +138,8 @@ function Landing() {
                         <span className="rec-project-title">{project.title}</span>
                         <span className="rec-project-funded">{counter !== 0 ? Math.ceil(((pledgeTotal)/project.fundingGoal)*100) : 0}% funded</span>
                         <span className="rec-project-creator">By {project.creator.username}</span>
-                        <div className="rec-project-bookmark-likes">Bookmark, like, dislike buttons</div>
+                        <div className="rec-project-bookmark-likes">
+                        <i class="fa-regular fa-bookmark"></i> <i class="fa-regular fa-thumbs-up"></i> <i class="fa-regular fa-thumbs-down"></i></div>
                     </div>
                         </Link>
                 </div>
