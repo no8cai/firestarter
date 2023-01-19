@@ -19,6 +19,7 @@
     flex-direction: row;
     justify-content: center;
     padding-bottom: 1rem;
+    background: white;
 }
 
 .categories-bar> span> a:link:hover {
@@ -48,6 +49,10 @@
 .categories-bar> span {
     padding-left: 1%;
     padding-right: 1%;
+}
+
+.categories-bar> span> a {
+    color: rgb(95, 95, 95);
 }
 
 .home-section-title {
@@ -229,8 +234,22 @@
 }
 
 .descr-text {
+    /* display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; */
+    max-width: 35rem;
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+           line-clamp: 2; 
+   -webkit-box-orient: vertical;
+}
+
+.rec-project-title {
+    width: 18rem;
     display: block;
-  /* width: 100px; */
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

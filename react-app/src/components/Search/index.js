@@ -4,12 +4,16 @@ import { fetchAllProjects } from "../../store/project";
 import "./Search.css";
 import { Link, useParams } from "react-router-dom";
 import { getAllPledges } from "../../store/pledge";
+import DiscoverPage from "./DiscoverAllProjects";
 
 function SearchResultPage() {
   const params = useParams();
   const dispatch = useDispatch();
   let { searchItem1 } = params;
-  // console.log(searchItem1)
+  
+  if(searchItem1 === 'comics&illustration') searchItem1 = 'comics & illustration'
+  if(searchItem1 === 'design&tech') searchItem1 = 'design & tech'
+  if(searchItem1 === 'food&craft') searchItem1 = 'food & craft'
 
   useEffect(() => {
     dispatch(fetchAllProjects());
@@ -29,17 +33,13 @@ function SearchResultPage() {
   let currentIndex = 0
   if (projects.length) {
     projects.forEach((project) => {
-        // delete project.creator;
-        // delete project.rewards;
         delete project.creator.email
         delete project.creator.id
-        delete project.creatorId
         delete project.videoUrl;
-        // delete project.id
         for (let key in project) {
 
           // ignore searching these keys
-          if (key !== 'imageUrl' && key !== 'id' && key !== 'startDate' && key !== 'endDate'){
+          if (key !== 'creatorId' && key !== 'imageUrl' && key !== 'id' && key !== 'startDate' && key !== 'endDate'){
 
             // searches for username ONLY
           if (typeof project[key] === 'object'){
@@ -83,19 +83,19 @@ function SearchResultPage() {
     <div className="main-container">
       <div className="categories-bar">
         <span>
-          <Link to="/discover/art">Arts</Link>
+          <Link to="/discover/arts">Arts</Link>
         </span>
         <span>
-          <Link to="/discover/comicsillustration">Comics & Illustration</Link>
+          <Link to="/discover/comics&illustration">Comics & Illustration</Link>
         </span>
         <span>
-          <Link to="/discover/tech">Design & Tech</Link>
+          <Link to="/discover/design&tech">Design & Tech</Link>
         </span>
         <span>
           <Link to="/discover/film">Film</Link>
         </span>
         <span>
-          <Link to="/discover/foodcraft">Food & Craft</Link>
+          <Link to="/discover/food&craft">Food & Craft</Link>
         </span>
         <span>
           <Link to="/discover/games">Games</Link>
@@ -107,24 +107,39 @@ function SearchResultPage() {
           <Link to="/discover/publishing">Publishing</Link>
         </span>
       </div>
-      <div className="search-num">
+      {/* <div className="headline-holder"> */}
+      <div className="search-body">
+        <div className="content-container">
         {results.length ? (
-          <div>
+          <div className="content-container-row2">
+<div className="headline-holder">
             Explore {filteredResults.length} project{filteredResults.length > 1 ? "s" : ""}
           </div>
-        ) : <div>We can't find projects that match your search</div>}
-      </div>
+          </div>
+
+        ) : 
+        <div className="content-container-row2">
+        <div className="search-headline-holder">
+          <span>We can't find projects that match your search</span>
+          <span>Check out a collection of popular and recommended options below</span>
+          
+          </div>
+          
+          </div>}
+          </div>
+      {/* </div> */}
       <div className="all-projects">
         {results.length ? (filteredResults.map((project) => {
             let pledgeTotal = 0
             let counter = 0
             pledges.forEach(pledge => {
               if (project.id === pledge.Project.id){
-                pledgeTotal += pledge.Reward.price
+                pledgeTotal += parseFloat(pledge.Reward.price)
                 counter++
               }
             })
-            let currentProgress = ((pledgeTotal * 20000)/(project.fundingGoal)*100).toFixed(2)
+            let currentProgress = ((pledgeTotal * 100)/(project.fundingGoal)).toFixed(2)
+            console.log(currentProgress)
             let oneDay = 24 * 60 * 60 * 1000
             let splitStart = project.startDate.split('-')
             let splitEnd = project.endDate.split('-')
@@ -146,7 +161,7 @@ function SearchResultPage() {
                     </div>
 
                     <div>${pledgeTotal} pledged</div>
-                    <div>{counter !== 0 ? parseFloat(((pledgeTotal *1000)/project.fundingGoal)*100).toFixed(2) : 0}% funded</div>
+                    <div>{counter !== 0 ? Math.ceil(((pledgeTotal)/project.fundingGoal)*100) : 0}% funded</div>
                     <div>{diffDays} days to go</div>
                     <div>
                       <span>{project.category}</span>
@@ -162,11 +177,17 @@ function SearchResultPage() {
             );
           })
         ) : (
-          <div>
-            <img src="https://cdn.dribbble.com/users/252114/screenshots/3840347/mong03b_still_2x.gif?compress=1&resize=400x300&vertical=top"></img>
-          </div>
+          // <div>
+          //   <div className="search-not-found">
+          //   <img src="https://cdn.dribbble.com/users/252114/screenshots/3840347/mong03b_still_2x.gif?compress=1&resize=400x300&vertical=top"></img>
+          // </div>
+          <DiscoverPage />
+          // </div>
+          
         )}
       </div>
+      </div>
+        
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { fetchAllProjects, fetchOneProject } from '../../store/project';
 import { useEffect, useState } from 'react'
 import { getAllPledges, getAllPledgesByProjectId, getPledgesByCurrentUser } from '../../store/pledge';
 import SearchResultPage from '../Search';
+import background from '../../../src/images/kstrtrbg.png'
 
 
 function Landing() {
@@ -43,26 +44,42 @@ function Landing() {
     let pledgeTotal = 0
     let randPledges = pledges.filter(pledge => pledge.projectId === randId)
     randPledges.forEach(pledge => {
-        pledgeTotal += pledge.Reward.price
+        pledgeTotal += parseFloat(pledge.Reward.price)
     })
-    let currentProgress = ((pledgeTotal * 20000)/(randProject.fundingGoal)*100).toFixed(2)
+    let currentProgress = ((pledgeTotal * 100)/(randProject.fundingGoal)).toFixed(2)
     // console.log(currentProgress, pledgeTotal, randProject.fundingGoal)
 
 
 
 
     return (
-        <div className="main-container">
+        <div className="main-container" style={{ backgroundImage: `url('${background}'`, backgroundRepeat  : 'no-repeat', }}>
     <div className="categories-bar">
-        <span><Link to="/discover/art">Arts</Link></span>
-        <span><Link to="/discover/comicsillustration">Comics & Illustration</Link></span>
-        <span><Link to="/discover/tech">Design & Tech</Link></span>
-        <span><Link to="/discover/film">Film</Link></span>
-        <span><Link to="/discover/foodcraft">Food & Craft</Link></span>
-        <span><Link to="/discover/games">Games</Link></span>
-        <span><Link to="/discover/music">Music</Link></span>
-        <span><Link to="/discover/publishing">Publishing</Link></span>
-    </div>
+        <span>
+          <Link to="/discover/arts">Arts</Link>
+        </span>
+        <span>
+          <Link to="/discover/comics&illustration">Comics & Illustration</Link>
+        </span>
+        <span>
+          <Link to="/discover/design&tech">Design & Tech</Link>
+        </span>
+        <span>
+          <Link to="/discover/film">Film</Link>
+        </span>
+        <span>
+          <Link to="/discover/food&craft">Food & Craft</Link>
+        </span>
+        <span>
+          <Link to="/discover/games">Games</Link>
+        </span>
+        <span>
+          <Link to="/discover/music">Music</Link>
+        </span>
+        <span>
+          <Link to="/discover/publishing">Publishing</Link>
+        </span>
+      </div>
 
     <div className="content-container">
         <div className="headline-holder">
@@ -76,7 +93,7 @@ function Landing() {
                 <span className="subtext">projects</span>
             </div>
             <div className="numbers-box">
-                <span className="nums-text">${totalPledges}.00</span>
+                <span className="nums-text">${totalPledges}</span>
                 <span className="subtext">towards creative work</span>
             </div>
             <div className="numbers-box">
@@ -119,7 +136,7 @@ function Landing() {
                     <div className="rec-project-thumbnail"><img className='img' src={project.imageUrl}></img></div>
                     <div className="rec-project-details">
                         <span className="rec-project-title">{project.title}</span>
-                        <span className="rec-project-funded">{counter !== 0 ? parseFloat(((pledgeTotal *1000)/project.fundingGoal)*100).toFixed(2) : 0}% funded</span>
+                        <span className="rec-project-funded">{counter !== 0 ? Math.ceil(((pledgeTotal)/project.fundingGoal)*100) : 0}% funded</span>
                         <span className="rec-project-creator">By {project.creator.username}</span>
                         <div className="rec-project-bookmark-likes">Bookmark, like, dislike buttons</div>
                     </div>
@@ -134,7 +151,7 @@ function Landing() {
     <div className="line-break"></div>
 
     <div className="content-container">
-        Small project section
+        
     </div>
 
     <div className="line-break"></div>
