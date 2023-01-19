@@ -139,11 +139,12 @@ function SearchResultPage() {
             let counter = 0
             pledges.forEach(pledge => {
               if (project.id === pledge.Project.id){
-                pledgeTotal += pledge.Reward.price
+                pledgeTotal += parseFloat(pledge.Reward.price)
+                console.log(pledge.Reward.price, "WWWWWWWWWWWWW")
                 counter++
               }
             })
-            let currentProgress = ((pledgeTotal * 200)/(project.fundingGoal)*100).toFixed(2)
+            let currentProgress = ((pledgeTotal * 100)/(project.fundingGoal)).toFixed(2)
             console.log(currentProgress)
             let oneDay = 24 * 60 * 60 * 1000
             let splitStart = project.startDate.split('-')
@@ -166,7 +167,7 @@ function SearchResultPage() {
                     </div>
 
                     <div>${pledgeTotal} pledged</div>
-                    <div>{counter !== 0 ? parseFloat(((pledgeTotal *1000)/project.fundingGoal)*100).toFixed(2) : 0}% funded</div>
+                    <div>{counter !== 0 ? Math.ceil(((pledgeTotal)/project.fundingGoal)*100) : 0}% funded</div>
                     <div>{diffDays} days to go</div>
                     <div>
                       <span>{project.category}</span>

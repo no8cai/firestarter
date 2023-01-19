@@ -43,9 +43,9 @@ function Landing() {
     let pledgeTotal = 0
     let randPledges = pledges.filter(pledge => pledge.projectId === randId)
     randPledges.forEach(pledge => {
-        pledgeTotal += pledge.Reward.price
+        pledgeTotal += parseFloat(pledge.Reward.price)
     })
-    let currentProgress = ((pledgeTotal * 20000)/(randProject.fundingGoal)*100).toFixed(2)
+    let currentProgress = ((pledgeTotal * 100)/(randProject.fundingGoal)).toFixed(2)
     // console.log(currentProgress, pledgeTotal, randProject.fundingGoal)
 
     
@@ -92,7 +92,7 @@ function Landing() {
                 <span className="subtext">projects</span>
             </div>
             <div className="numbers-box">
-                <span className="nums-text">${totalPledges}.00</span>
+                <span className="nums-text">${totalPledges}</span>
                 <span className="subtext">towards creative work</span>
             </div>
             <div className="numbers-box">
@@ -135,7 +135,7 @@ function Landing() {
                     <div className="rec-project-thumbnail"><img className='img' src={project.imageUrl}></img></div>
                     <div className="rec-project-details">
                         <span className="rec-project-title">{project.title}</span>
-                        <span className="rec-project-funded">{counter !== 0 ? parseFloat(((pledgeTotal *1000)/project.fundingGoal)*100).toFixed(2) : 0}% funded</span>
+                        <span className="rec-project-funded">{counter !== 0 ? Math.ceil(((pledgeTotal)/project.fundingGoal)*100) : 0}% funded</span>
                         <span className="rec-project-creator">By {project.creator.username}</span>
                         <div className="rec-project-bookmark-likes">Bookmark, like, dislike buttons</div>
                     </div>
