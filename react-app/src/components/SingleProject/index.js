@@ -7,6 +7,9 @@ import { fetchProjectRewards } from '../../store/reward'
 import { getAllPledgesByProjectId} from '../../store/pledge'
 import { getAllPledges } from '../../store/pledge';
 import {fetchDeleteReward} from '../../store/reward'
+import { fetchAllProjects } from '../../store/project';
+import { getPledgesByCurrentUser } from '../../store/pledge'
+
 
 
 const SingleProject = () => {
@@ -18,14 +21,41 @@ const SingleProject = () => {
   const findProjectTest = async () => {
     const returnProject = await dispatch(fetchOneProject(id))
     const allPledgeByProject = await dispatch(getAllPledgesByProjectId(id))
+    const allProjects = await dispatch(fetchAllProjects())
+    const allPledgesByCreatorOfProject = await dispatch(getPledgesByCurrentUser(oneProject.creatorId))
   }
 
   useEffect(() => {
     findProjectTest()
  }, [dispatch])
 
-
+   const addPledgesEvents=(project_Id)=>{
+        //   history.push(`/projects/${project_Id}/createpledges`)
+        history.push(`/projects/${project_Id}/createpledges`)
+   }
    let oneProject = useSelector(state => {return state.projects[id]})
+   let totalProjectsOfThisProjectsCreator = 0
+   const allProjects = useSelector(state => {return state.projects})
+   const allCreatorsPledges = useSelector(state => { return state.pledges.userPledges})
+
+   if(allProjects && oneProject && allCreatorsPledges) {
+    console.log('what is all creator pledges length', Object.values(allCreatorsPledges).length)
+
+    let arrayOfProjects = Object.values(allProjects)
+    //console.log('see allProjects', )
+    for (let i=0; i < arrayOfProjects.length; i+= 1 ) {
+        //console.log('what is prog',arrayOfProjects[i].creatorId, oneProject.creatorId)
+        if (arrayOfProjects[i].creatorId ==  oneProject.creatorId) {
+            totalProjectsOfThisProjectsCreator += 1
+        }
+
+    }
+   }
+
+
+
+
+
    if(oneProject) {
     var date1 = new Date(oneProject.startDate);
     var date2 = new Date(oneProject.endDate);
@@ -43,24 +73,18 @@ const SingleProject = () => {
     } else {
         return null
     }
-    const tempDeleteRewardId = 6
-    const handleRemoveReward = (rewardId) => {
-        console.log('for delete do we have rewardId', rewardId)
-        dispatch(fetchDeleteReward(rewardId))
-    }
-    
-    const addPledgesEvents=(project_Id)=>{
-            history.push(`/projects/${project_Id}/createpledges`)
-    }
 
-  if (oneProject && allPledgesArray) { //
+
+
+  if (oneProject && allPledgesArray && allProjects && allCreatorsPledges) { //
     let currentProgress = ((totalPledges * 100)/(oneProject.fundingGoal)).toFixed(2)
     return (
         <div className='sp-extra-outer-div'>
         <div className='sp-whole-page'>
     <div className="sp-title sp-add-border">
         <h1>{oneProject.title}</h1>
-        <button className='sp-delete-reward'onClick={()=> {handleRemoveReward(tempDeleteRewardId)}}>Temporary location of delete reward button </button>
+        <h4>By {oneProject.creator.username}</h4>
+
     </div>
     <div className="sp-main-content add-border">
         <div className="sp-left-side-media add-border">
@@ -116,7 +140,7 @@ const SingleProject = () => {
         <div className="sp-add-border sp-bottom-center">
             <div className="sp-story">
                 <h4>Story</h4>
-                <p>{oneProject.description}</p>
+                <p className='sp-css-fix'> {oneProject.description}</p>
             </div>
             <div className="sp-risks">
                 <h4>Risks</h4>
@@ -124,12 +148,24 @@ const SingleProject = () => {
             </div>
 
         </div>
-        <div className="sp-add-border sp-bottom-right">
+        <div>
 
-            <div>About the creator: {oneProject.creator.username}</div>
-            <div>Support</div>
-            <div>Pledge without reward</div>
-            <div>Pledge $10</div>
+        </div>
+        <div className="sp-add-border sp-bottom-right">
+            <div className='sp-outer-profile-photo'>
+            <img className='sp-profile-photo' src={'https://ksr-ugc.imgix.net/assets/039/344/204/8bee49558eb7cf83017f35b941be7143_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1669689332&auto=format&frame=1&q=92&s=d237fbbd7f761943309c1523d40c0527'} alt="Profile Image"/>
+            </div>
+
+            <div className='sp-right-box'>
+            <br/>
+            <br/>
+            <div>{oneProject.creator.username}</div>
+            <div>{totalProjectsOfThisProjectsCreator} created · {Object.values(allCreatorsPledges).length} backed </div>
+            <br/>
+            <div>{oneProject.creator.username} is a frequent contributor Fire Starter and has lead a variety of successful projects.</div>
+            </div>
+            <div className='sp-support-button'>Support</div>
+            <button onClick={()=>addPledgesEvents(id)} className='sp-green-button'>Back this project</button>
         </div>
     </div>
 
@@ -137,21 +173,7 @@ const SingleProject = () => {
 </div>
     )
   } else {
-    return(
-        <div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-
-            "something didn't work"
-        </div>
-
-    )
+    return(  <div className='sp-broken'>This page was not able to load</div> )
 
   }
 

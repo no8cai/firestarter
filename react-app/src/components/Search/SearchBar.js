@@ -47,7 +47,7 @@ function SearchBar(){
     return (
         <div className="searchbar-holder">
             <form className="whole-searchbar" onSubmit={handleSubmit}>
-                <input className="searchbar-input" minLength="3" placeholder="Search for projects or categories" type="text" value={searchCriteria} title="Searchbar" onChange={(e) => setSearchCriteria(e.target.value)} />
+                <input className="searchbar-input" minLength="3" placeholder="Search for projects or categories" type="text" value={searchCriteria} title="Searchbar" onChange={(e) => setSearchCriteria(e.target.value)} autoFocus/>
                 <button type="submit" hidden >Submit</button>
             </form>
             <button className="searchbar-exit" onClick={closeModal}>X</button>

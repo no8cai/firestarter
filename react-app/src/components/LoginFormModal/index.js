@@ -12,9 +12,9 @@ function LoginFormModal() {
     const [password, setPassword] = useState("");
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
-    
+
     const { closeModal } = useModal();
-    
+
     const history = useHistory()
 
   const handleSubmit = async (e) => {
@@ -27,8 +27,8 @@ function LoginFormModal() {
 
   const demoLogin = async (e) => {
     e.preventDefault();
-    const demoEmail = 'demo@aa.io'
-    const demoPassword = 'password'
+    const demoEmail = 'brad@aa.io'
+    const demoPassword = 'passwordBrad'
     const data = await dispatch(login(demoEmail, demoPassword)).then(closeModal).then(history.push('/'));
     if (data) {
         setErrors(data)
@@ -55,7 +55,7 @@ function LoginFormModal() {
         </ul>
           <div className='input-holder'>
         <label>
-          
+
           <input
           className='input-line'
             type="text"
@@ -67,7 +67,7 @@ function LoginFormModal() {
           />
         </label>
         <label>
-          
+
           <input
             type="password"
             className='input-line2'
@@ -88,7 +88,7 @@ function LoginFormModal() {
       <button type="submit">Demo User Login</button>
     </form>
             </div>
-     
+
     </div>
     </div>
   );

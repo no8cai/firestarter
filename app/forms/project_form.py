@@ -24,7 +24,7 @@ class ProjectForm(FlaskForm):
     endDate = StringField('endDate', validators=[DataRequired()])
     description = StringField('description', validators=[DataRequired()])
     risks = StringField('risks', validators=[DataRequired()])
-    
+
     #globle one time validation
     def validate(self, **kwargs):
         # Standard validators
