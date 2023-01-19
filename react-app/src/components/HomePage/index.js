@@ -53,7 +53,8 @@ function Landing() {
 
 
     return (
-        <div className="main-container" style={{ backgroundImage: `url('${background}'`, backgroundRepeat  : 'no-repeat', }}>
+        <div className="main-container" style={{ backgroundImage: `url('${background}'`, backgroundRepeat  : 'no-repeat', backgroundSize: 'fit',
+        width: '100%' }}>
     <div className="categories-bar">
         <span>
           <Link to="/discover/arts">Arts</Link>
