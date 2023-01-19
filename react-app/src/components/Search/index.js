@@ -10,7 +10,10 @@ function SearchResultPage() {
   const params = useParams();
   const dispatch = useDispatch();
   let { searchItem1 } = params;
-  console.log(searchItem1)
+  
+  if(searchItem1 === 'comics&illustration') searchItem1 = 'comics & illustration'
+  if(searchItem1 === 'design&tech') searchItem1 = 'design & tech'
+  if(searchItem1 === 'food&craft') searchItem1 = 'food & craft'
 
   useEffect(() => {
     dispatch(fetchAllProjects());
@@ -88,16 +91,16 @@ function SearchResultPage() {
           <Link to="/discover/art">Arts</Link>
         </span>
         <span>
-          <Link to="/discover/comicsillustration">Comics & Illustration</Link>
+          <Link to="/discover/comics&illustration">Comics & Illustration</Link>
         </span>
         <span>
-          <Link to="/discover/tech">Design & Tech</Link>
+          <Link to="/discover/design&tech">Design & Tech</Link>
         </span>
         <span>
           <Link to="/discover/film">Film</Link>
         </span>
         <span>
-          <Link to="/discover/foodcraft">Food & Craft</Link>
+          <Link to="/discover/food&craft">Food & Craft</Link>
         </span>
         <span>
           <Link to="/discover/games">Games</Link>

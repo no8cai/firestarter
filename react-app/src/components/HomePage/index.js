@@ -53,15 +53,31 @@ function Landing() {
     return (
         <div className="main-container">
     <div className="categories-bar">
-        <span><Link to="/discover/art">Arts</Link></span>
-        <span><Link to="/discover/comicsillustration">Comics & Illustration</Link></span>
-        <span><Link to="/discover/tech">Design & Tech</Link></span>
-        <span><Link to="/discover/film">Film</Link></span>
-        <span><Link to="/discover/foodcraft">Food & Craft</Link></span>
-        <span><Link to="/discover/games">Games</Link></span>
-        <span><Link to="/discover/music">Music</Link></span>
-        <span><Link to="/discover/publishing">Publishing</Link></span>
-    </div>
+        <span>
+          <Link to="/discover/art">Arts</Link>
+        </span>
+        <span>
+          <Link to="/discover/comics&illustration">Comics & Illustration</Link>
+        </span>
+        <span>
+          <Link to="/discover/design&tech">Design & Tech</Link>
+        </span>
+        <span>
+          <Link to="/discover/film">Film</Link>
+        </span>
+        <span>
+          <Link to="/discover/food&craft">Food & Craft</Link>
+        </span>
+        <span>
+          <Link to="/discover/games">Games</Link>
+        </span>
+        <span>
+          <Link to="/discover/music">Music</Link>
+        </span>
+        <span>
+          <Link to="/discover/publishing">Publishing</Link>
+        </span>
+      </div>
 
     <div className="content-container">
         <div className="headline-holder">

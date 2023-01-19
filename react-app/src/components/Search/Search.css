@@ -45,7 +45,10 @@
 
 .project-details {
     margin-bottom: 3em;
-    max-width: 18rem;
+    /* max-width: 18rem; */
+    padding-left: 1.5rem;
+    width: 20rem;
+    /* border: red solid 1px; */
 }
 
 .project-details-top {
