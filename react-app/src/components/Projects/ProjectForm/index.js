@@ -9,7 +9,7 @@ const ProjectForm=({project,formType})=>{
     let initTitle,initCategory,initCity,initState,initCountry,initImageUrl,initFundingGoal,initStartDate,initEndDate,initDescription,initRisks
     const history=useHistory()
     const dispatch = useDispatch();
- 
+
     console.log(project.id)
     if(formType==="Edit Project"){
         initTitle=project.title;
@@ -106,7 +106,7 @@ const ProjectForm=({project,formType})=>{
                   const errobj=await err;
                   errors.push(errobj.message)
                   setValidationErrors(errors)
-                  
+
                 });
             }
     }
@@ -119,7 +119,7 @@ const ProjectForm=({project,formType})=>{
           const errobj=await err;
           errors.push(errobj.message)
           setValidationErrors(errors)
-          
+
         });
         }
 
