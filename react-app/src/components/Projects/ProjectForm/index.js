@@ -125,12 +125,19 @@ const ProjectForm=({project,formType})=>{
 
     return (
         <div className="projectfrom-container">
-        <div>navbar</div>
+        <div className="projectform-titlesec">
         <div className='projectform-title'><h2>{formType}</h2></div>
+        <div className='projectform-title'><h4>Start with the basics</h4></div>
+        <div>Make it esay for people to learn about your project</div>
+        </div>
         <form className='projectform-form' onSubmit={handleSubmit}>
 
             <div className='projectform-listitem'>
-
+            <div className="title-context context">
+              <div className="projectform-subtitle">Project title</div>
+              <div>Write a clear, brief title and subtitle to help people quickly understand your project. Both will appear on your project and pre-launch pages.</div>
+            </div>
+            <div>
             <label>
              Title
              </label>
@@ -141,9 +148,14 @@ const ProjectForm=({project,formType})=>{
               name="title"
               onChange={(e) => setTitle(e.target.value)}
               value={title}/></div>
+              </div>
 
             <div className='projectform-listitem'>
-
+            <div className="context">
+              <div className="projectform-subtitle">Project category</div>
+              <div>Choose a category to help backers find your project.You can change these anytime before and during your campaign.</div>
+            </div>
+            <div>
             <label>
              Category
              </label>
@@ -154,8 +166,16 @@ const ProjectForm=({project,formType})=>{
               name="category"
               onChange={(e) => setCategory(e.target.value)}
               value={category}/></div>
-
-             <div className='projectform-listitem'>
+              </div>
+             
+             <div className="projectform-listitem">
+              <div className="context">
+                <div className="projectform-subtitle">Project location</div>
+                <div>Enter the location that best describes where your project is based.</div>
+              </div>
+            <div>
+            
+             <div className='projectform-locationlist'>
              <label>
              City
              </label>
@@ -167,7 +187,7 @@ const ProjectForm=({project,formType})=>{
               onChange={(e) => setCity(e.target.value)}
               value={city}/></div>
 
-             <div className='projectform-listitem'>
+             <div className='projectform-locationlist'>
              <label>
              State
              </label>
@@ -179,7 +199,7 @@ const ProjectForm=({project,formType})=>{
               onChange={(e) => setState(e.target.value)}
               value={state}/></div>
 
-             <div className='projectform-listitem'>
+             <div className='projectform-locationlist'>
              <label>
              Country
              </label>
@@ -189,9 +209,15 @@ const ProjectForm=({project,formType})=>{
               type="text"
               name="country"
               onChange={(e) => setCountry(e.target.value)}
-              value={country}/></div>
+              value={country}/></div></div>
+             </div>
 
-             <div className='projectform-listitem'>
+             <div className='projectform-listitem' >
+              <div className="context">
+                <div className="projectform-subtitle">Project image</div>
+                <div>Add an image that clearly represents your project. Choose one that looks good at different sizes—it’ll appear on your project page, across the Kickstarter website and mobile apps, and (when shared) on social channels.</div>
+              </div>
+             <div >
              <label>
              ImageUrl
              </label>
@@ -202,58 +228,90 @@ const ProjectForm=({project,formType})=>{
               name="ImageUrl"
               onChange={(e) => setImageUrl(e.target.value)}
               value={imageUrl}/></div>
+              </div>
 
              <div className='projectform-listitem'>
+             <div className="context">
+              <div className="projectform-subtitle">Target launch date</div>
+              <div>We’ll provide you with recommendations on when to complete steps that may take a few days to process. You can edit this date up until the moment you launch your project, which must always be done manually.</div>
+             </div>
+             <div>
              <label>
              startDate
              </label>
              <input
               className='input'
               placeholder='type your startDate'
-              type="text"
+              type="date"
               name="startDate"
+              min="2023-02-01"
               onChange={(e) => setStartDate(e.target.value)}
               value={startDate}/></div>
+              </div>
 
              <div className='projectform-listitem'>
+              <div className="context">
+                <div className="projectform-subtitle">Campaign end date</div>
+                <div>Set a time limit for your campaign. You will be able to change this after you launch.</div>
+              </div>
+             <div >
              <label>
              endDate
              </label>
              <input
               className='input'
               placeholder='type your end date'
-              type="text"
+              type="date"
               name="endDate"
+              min="2023-02-01"
               onChange={(e) => setEndDate(e.target.value)}
               value={endDate}/></div>
+              </div>
 
              <div className='projectform-listitem'>
+              <div className="context">
+                <div className="projectform-subtitle">Project description</div>
+                <div>Describe what you're raising funds to do, why you care about it, how you plan to make it happen, and who you are. Your description should tell backers everything they need to know. If possible, include images to show them what your project is all about and what rewards look like</div>
+              </div>
+             <div>
              <label>
              Description
              </label>
              <textarea
-              className='input'
-              placeholder='Description here'
+              className='projectform-textarea'
+              placeholder='Write about your project like you`re explaining it to a friend...'
               type="text"
               name="Description"
               onChange={(e) => setDescription(e.target.value)}
               value={description}/></div>
-
+              </div>
+             
              <div className='projectform-listitem'>
+              <div className="context">
+                <div className="projectform-subtitle">Risks and challenges</div>
+                <div>Be honest about the potential risks and challenges of this project and how you plan to overcome them to complete it.</div>
+              </div>
+             <div>
              <label>
-             Risks
+             Risks and challenges
              </label>
              <textarea
-              className='input'
-              placeholder='Risk here'
+              className='projectform-textarea'
+              placeholder='Common risks and challenges you may want to address include budgeting, timelines for rewards and the project itself, the size of your audience...'
               type="text"
               name="city"
               onChange={(e) => setRisks(e.target.value)}
               value={risks}/></div>
+              </div>
 
              <div className='projectform-listitem'>
+              <div className="context">
+                <div className="projectform-subtitle">Funding goal</div>
+                <div>Set an achievable goal that covers what you need to complete your project.Funding is all-or-nothing. If you don’t meet your goal, you won’t receive any money.</div>
+              </div>
+             <div>
              <label>
-             FundingGoal
+             Funding Goal
              </label>
              <input
               className='input'
@@ -262,9 +320,9 @@ const ProjectForm=({project,formType})=>{
               name="fundingGoal"
               onChange={(e) => setFundingGoal(e.target.value)}
               value={fundingGoal}/></div>
+             </div>
 
              <input type="submit" value={formType} className="projectbutton" disabled={!!validationErrors.length}/>
-
             </form>
 
             {formType==="Edit Project" &&(
