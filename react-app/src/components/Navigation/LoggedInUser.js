@@ -9,6 +9,7 @@ import OpenModalButton from '../OpenModalButton';
 import './Navigation.css'
 import { getAllPledges, getPledgesByCurrentUser } from "../../store/pledge";
 import { fetchAllProjects } from "../../store/project";
+import LogoutButton from "../auth/LogoutButton";
 
 function UserDataModal({user}) {
     const history = useHistory()
@@ -120,7 +121,10 @@ function UserDataModal({user}) {
                 </div>
                 </div>
                 
-                <p className="logoutbutton"><button onClick={logoutButton}>Logout</button></p>
+                <p className="logoutbutton">
+                  {/* <button onClick={onLogout}>Logout</button> */}
+                  <LogoutButton />
+                  </p>
               </div>
     )
 }

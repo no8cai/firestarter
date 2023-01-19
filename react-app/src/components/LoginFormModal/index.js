@@ -62,7 +62,9 @@ function LoginFormModal() {
 
   if (user) {
     closeModal()
-    return <Redirect to='/' />;
+    // pushes to profile page like Kickstarter does on login; can remove to stay on whatever page logged in on originally
+    // history.push('/profile')
+    return <Redirect to='/profile' />;
   }
 
 
