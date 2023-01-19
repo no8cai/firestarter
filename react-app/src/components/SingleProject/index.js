@@ -118,7 +118,7 @@ const SingleProject = () => {
         <div className="sp-add-border sp-bottom-center">
             <div className="sp-story">
                 <h4>Story</h4>
-                <p>{oneProject.description}</p>
+                <p className='sp-css-fix'> {oneProject.description}</p>
             </div>
             <div className="sp-risks">
                 <h4>Risks</h4>

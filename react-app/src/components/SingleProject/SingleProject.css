@@ -190,3 +190,8 @@
 .sp-delete-reward {
     color: red
 }
+
+
+.sp-css-fix {
+    white-space: pre-wrap; /* or pre-line */
+  }
