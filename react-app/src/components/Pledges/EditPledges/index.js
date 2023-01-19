@@ -1,7 +1,7 @@
 import React from "react"
 import PledgeDetails from "../PledgeDetail"
 import { useParams } from "react-router-dom"
-import React from "react"
+// import React from "react"
 
 const EditPledge=()=>{
 
