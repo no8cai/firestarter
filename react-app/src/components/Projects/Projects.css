@@ -1,0 +1,7 @@
+.projects-navitem{
+    color:blue
+}
+.project-navbar{
+    display: flex;
+    gap:10px;
+}

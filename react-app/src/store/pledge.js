@@ -102,7 +102,7 @@ export const updatePledge = (payload) => async dispatch => {
     })
     if(response.ok){
         const pledge = await response.json()
-        dispatch(getOne(pledge))
+        dispatch(edit(pledge))
         return pledge
     }
 }
@@ -160,6 +160,10 @@ const pledgesReducer = (state = initialState, action) => {
 
         case DELETE_PLEDGE:
             newState = { ...state, allPledges: { ...state.allPledges}, pledgesById: { ...state.pledgesById}, userPledges: { ...state.userPledges}}
+            delete newState.allPledges[action.backerId]
+            delete newState.pledgesById[action.backerId]
+            delete newState.userPledges[action.backerId]
+            return newState
         // case READ_PLEDGES:
         //     action.pledges.Pledges.forEach(pledge => {
         //         allPledges[pledge.id] = pledge

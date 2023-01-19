@@ -27,9 +27,9 @@ const edit = (project) => ({
     project
 })
 
-const remove = (projectId) => ({
+const remove = (id) => ({
     type: DELETE_PROJECT,
-    projectId
+    id
 })
 
 
@@ -85,15 +85,12 @@ export const fetchUpdateProject = (project) => async dispatch => {
     if(response.status>=400) throw response
 }
 
-export const fetchDeleteProject = projectId => async dispatch => {
-    const response = await fetch(`/api/projects/${projectId}`, {
+export const fetchDeleteProject = (id) => async dispatch => {
+    const response = await fetch(`/api/projects/${id}`, {
         method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        }
     })
     if(response.ok){
-        dispatch(remove(projectId))
+        dispatch(remove(id))
         return response
     }
     if(response.status>=400) throw response
@@ -129,9 +126,9 @@ const projectsReducer = (state = initialState, action) => {
 
         case DELETE_PROJECT:
             newState = {...state}
-            delete newState[action.projectId]
+            delete newState[action.id]
             return newState
-            
+
         default:
             return state
 

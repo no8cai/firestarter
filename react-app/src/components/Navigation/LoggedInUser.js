@@ -64,12 +64,15 @@ function UserDataModal({user}) {
 
                 <div className="nav-user-info">
                   <p>User Info</p>
+                  <Link to={'/profile'}>
+                  <p>Profile</p>
+                  </Link>
                   <p>{user.username}</p>
                 <p id="useremailline">{user.email}</p>
                 </div>
                 <div className="nav-backed-container">
                   <p>Backed Projects</p>
-                  {user && (pledges.map(pledge => {
+                  {user && (pledges.slice(0, 4).map(pledge => {
                     return (
                         <div key={pledge.id} className="nav-backed-item">
                             <Link to={`/projects/${pledge.Project.id}`}>
@@ -83,7 +86,7 @@ function UserDataModal({user}) {
                 </div>
                 <div className="nav-created-container">
                   <p>Created Projects</p>
-                  {user && projects.length ? (userProjects.map(project => {
+                  {user && projects.length ? (userProjects.slice(0, 4).map(project => {
                     return (
                         <div key={project.id} className="nav-backed-item">
                             <Link to={`/projects/${project.id}`}>
@@ -94,7 +97,9 @@ function UserDataModal({user}) {
                         </div>
                     )
                   })): (null)}
-                  <div>Create Project Button</div>
+                  <Link to={`/createproject`}>
+                  <div>Create Project</div>
+                  </Link>             
                 </div>
                 </div>
                 
