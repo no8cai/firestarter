@@ -1,18 +1,29 @@
 .all-projects {
     /* margin: 0.5em 0px 40px; */
     /* padding: 0px 0.5em; */
-    margin-top: 10rem;
+    margin-top: 2rem;
     display: flex;
     flex-wrap: wrap;
-   justify-content: space-around;
+   justify-content: space-between;
+   align-items: flex-start;
    min-width: 77rem;
    max-width: 77rem;
+}
+
+.search-info {
+    display: flex;
+    flex-wrap: wrap;
+   justify-content: space-between;
+   align-items: flex-start;
 }
 
 .projects-holder {
     display: flex;
     flex-direction: column;
     border: solid lightgray 1px;
+    height: 35rem;
+    margin-bottom: 5rem;
+    overflow: hidden;
 }
 
 .preview-image {
@@ -67,4 +78,23 @@
 .whole-searchbar {
     width: 100%;
     margin-top: 0px;
+}
+
+.search-not-found> img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: solid red 1px;
+}
+
+.search-body {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem;
+}
+
+.search-headline-holder {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
 }

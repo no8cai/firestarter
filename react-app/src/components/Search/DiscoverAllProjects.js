@@ -23,7 +23,7 @@ function DiscoverPage() {
 
     return (
         <div className="main-container">
-        <div className="categories-bar">
+        {/* <div className="categories-bar">
           <span>
             <Link to="/discover/art">Arts</Link>
           </span>
@@ -49,13 +49,13 @@ function DiscoverPage() {
             <Link to="/discover/publishing">Publishing</Link>
           </span>
         </div>
-        <div className="search-num">
+        <div className="search-num"> */}
           {/* {results.length ? (
             <div>
               Explore {filteredResults.length} project{filteredResults.length > 1 ? "s" : ""}
             </div>
           ) : <div>We can't find projects that match your search</div>} */}
-        </div>
+        {/* </div> */}
         <div className="all-projects">
           {projects.length ? (projects.map((project) => {
               let pledgeTotal = 0

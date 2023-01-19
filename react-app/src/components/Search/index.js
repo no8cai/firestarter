@@ -4,12 +4,13 @@ import { fetchAllProjects } from "../../store/project";
 import "./Search.css";
 import { Link, useParams } from "react-router-dom";
 import { getAllPledges } from "../../store/pledge";
+import DiscoverPage from "./DiscoverAllProjects";
 
 function SearchResultPage() {
   const params = useParams();
   const dispatch = useDispatch();
   let { searchItem1 } = params;
-  // console.log(searchItem1)
+  console.log(searchItem1)
 
   useEffect(() => {
     dispatch(fetchAllProjects());
@@ -76,6 +77,7 @@ function SearchResultPage() {
     );
   }
   let filteredResults = results.filter((result, index) => results.indexOf(result) === index);
+  // let filteredResults = results
 
   if (!allProjects || !allPledges ) return null;
 
@@ -107,13 +109,27 @@ function SearchResultPage() {
           <Link to="/discover/publishing">Publishing</Link>
         </span>
       </div>
-      <div className="search-num">
+      {/* <div className="headline-holder"> */}
+      <div className="search-body">
+        <div className="content-container">
         {results.length ? (
-          <div>
+          <div className="content-container-row2">
+<div className="headline-holder">
             Explore {filteredResults.length} project{filteredResults.length > 1 ? "s" : ""}
           </div>
-        ) : <div>We can't find projects that match your search</div>}
-      </div>
+          </div>
+
+        ) : 
+        <div className="content-container-row2">
+        <div className="search-headline-holder">
+          <span>We can't find projects that match your search</span>
+          <span>Check out a collection of popular and recommended options below</span>
+          
+          </div>
+          
+          </div>}
+          </div>
+      {/* </div> */}
       <div className="all-projects">
         {results.length ? (filteredResults.map((project) => {
             let pledgeTotal = 0
@@ -161,11 +177,17 @@ function SearchResultPage() {
             );
           })
         ) : (
-          <div>
-            <img src="https://cdn.dribbble.com/users/252114/screenshots/3840347/mong03b_still_2x.gif?compress=1&resize=400x300&vertical=top"></img>
-          </div>
+          // <div>
+          //   <div className="search-not-found">
+          //   <img src="https://cdn.dribbble.com/users/252114/screenshots/3840347/mong03b_still_2x.gif?compress=1&resize=400x300&vertical=top"></img>
+          // </div>
+          <DiscoverPage />
+          // </div>
+          
         )}
       </div>
+      </div>
+        
     </div>
   );
 }
