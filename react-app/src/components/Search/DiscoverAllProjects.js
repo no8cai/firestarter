@@ -4,6 +4,8 @@ import { fetchAllProjects } from "../../store/project";
 import "./Search.css";
 import { Link, useParams } from "react-router-dom";
 import { getAllPledges } from "../../store/pledge";
+import React from "react";
+
 
 function DiscoverPage() {
     const dispatch = useDispatch();

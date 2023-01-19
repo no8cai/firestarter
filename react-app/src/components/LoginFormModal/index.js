@@ -12,9 +12,9 @@ function LoginFormModal() {
     const [password, setPassword] = useState("");
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
-    
+
     const { closeModal } = useModal();
-    
+
     const history = useHistory()
 
   const handleSubmit = async (e) => {
@@ -55,7 +55,7 @@ function LoginFormModal() {
         </ul>
           <div className='input-holder'>
         <label>
-          
+
           <input
           className='input-line'
             type="text"
@@ -67,7 +67,7 @@ function LoginFormModal() {
           />
         </label>
         <label>
-          
+
           <input
             type="password"
             className='input-line2'
@@ -88,7 +88,7 @@ function LoginFormModal() {
       <button type="submit">Demo User Login</button>
     </form>
             </div>
-     
+
     </div>
     </div>
   );

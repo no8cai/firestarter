@@ -2,10 +2,98 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: 'LATO', 'Lucida Sans Regular', sans-serif;
+    padding-top: 10px;
+    padding-bottom: 40px;
 }
 
 .projectform-form{
     display: flex;
     flex-direction: column;
     gap:10px;
+    width: 100vw;
+    margin-top: 30px;
+}
+
+.projectform-listitem{
+    display: flex;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-top: 1px solid rgb(0, 0, 0,20%);
+    
+}
+
+.projectform-titlesec{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:15px
+}
+
+.context{
+    padding-left: 5vw;
+    width: 40vw;
+    padding-right: 40px;
+}
+input{
+    width: 50vw;
+    border: 1px solid rgb(0, 0, 0,10%);
+    border-radius: 2px;
+    height: 40px;
+
+}
+.projectform-textarea{
+    width: 50vw;
+    height: 200px;
+    border: 1px solid rgb(0, 0, 0,10%);
+}
+
+.projectform-location{
+    display: flex
+}
+
+.projectform-subtitle{
+    font-size: 18px;
+}
+
+.projectform-subtext{
+    font-size: 14px;
+    padding-top: 10px;
+    color:#656969;
+}
+label{
+    font-size: 14px;
+}
+
+.projectform-title1{
+    font-size: 22px;
+}
+
+.projectform-title2{
+    font-size: 22px;
+}
+
+.projectform-title3{
+    font-size: 17px;
+    color: #656969;
+}
+
+.projectbutton{
+    align-items: center;
+    background-color: #028858;
+    color:white;
+    cursor: pointer;
+    border:#028858 solid 1px;
+}
+.projectbutton:hover{
+    background-color:#015738;
+}
+.projectform-button{
+    display: flex;
+    justify-content: center;
+
+}
+.projectform-delebutton{
+    background-color: #028858;
+    border:#028858 solid 1px;
 }

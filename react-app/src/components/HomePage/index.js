@@ -11,7 +11,7 @@ import background from '../../../src/images/kstrtrbg.png'
 
 function Landing() {
     const dispatch = useDispatch()
-    
+
     useEffect(() => {
         dispatch(fetchAllProjects())
         // dispatch(fetchOneProject())
@@ -21,15 +21,16 @@ function Landing() {
     const pledgesObj = useSelector(state => state.pledges.allPledges)
     const pledges = Object.values(pledgesObj)
 
-    
+
 
     let totalPledges = 0
     if (pledgesObj){
         pledges.forEach(pledge => {
+            console.log('what is pledge', pledge)
             totalPledges += parseFloat(pledge.Reward.price)
         })
     }
-    
+
     const projectsObj = useSelector(state => state.projects)
     const projects = Object.values(projectsObj)
     // console.log(projects)
@@ -48,7 +49,7 @@ function Landing() {
     let currentProgress = ((pledgeTotal * 100)/(randProject.fundingGoal)).toFixed(2)
     // console.log(currentProgress, pledgeTotal, randProject.fundingGoal)
 
-    
+
 
 
     return (
@@ -115,7 +116,7 @@ function Landing() {
                 <div className="feature-description"><span className="descr-text">{randProject.description}</span></div>
                 <div className="feature-creator">by {randProject.creator.username}</div>
                 </Link>
-                
+
             </div>
             <div className="rec-holder">
                 <span className="home-section-title">RECOMMENDED FOR YOU</span>
@@ -160,7 +161,7 @@ function Landing() {
     <div className="content-container-row2">
         <div className="home-section-title">DEVS</div>
         <div className="devbox1"></div>
-     </div>   
+     </div>
         <div className="devbox">
             <div className='each-dev'>
                     <div className="dev-img-holder"></div>
@@ -180,7 +181,7 @@ function Landing() {
             </div>
         </div>
     </div>
-    
+
 
     {/* <div className="line-break"></div>
 

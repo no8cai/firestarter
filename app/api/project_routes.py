@@ -47,7 +47,7 @@ def add_project():
         form.populate_obj(new_project)
         db.session.add(new_project)
         db.session.commit()
-        return new_project.to_dict(),201
+        return new_project.to_dict_full(),201
     
     return {
         'message':'Validation Error',
@@ -82,7 +82,7 @@ def edit_project(id):
         form.populate_obj(oneProject)
         db.session.add(oneProject)
         db.session.commit()
-        return oneProject.to_dict()
+        return oneProject.to_dict_full()
 
     return {
         'message':'Validation Error',
