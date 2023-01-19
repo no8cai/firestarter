@@ -35,12 +35,6 @@ const ProjectManager=()=>{
         history.push(`/createReward/${id}`)
     }
     const deleteEvents= (id)=>{
-        // const spotreviews=Object.values(spotreviewsObj).filter(review=>{return review.spotId===+id});
-        // if(spotreviews.length>0){
-        //     spotreviews.forEach((el)=>{
-        //       dispatch(deleteReview(el.id))
-        //     })
-        // }
         dispatch(fetchDeleteProject(id))
     }
 
@@ -67,7 +61,6 @@ const ProjectManager=()=>{
                     <button onClick={()=>editEvents(id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Edit</button>
                     <button onClick={()=>rewardEvents(id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Project Rewards</button>
                     <button onClick={()=>addRewardEvents(id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Add New Reward</button>
-                    {/* <button onClick={()=>deleteEvents(id)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button> */}
                 </div>
                 </div>
               ))}

@@ -4,15 +4,13 @@ import { NavLink } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { getPledgesByCurrentUser } from "../../../store/pledge";
 import { deletePledge } from "../../../store/pledge";
-import React from "react"
 
 const PledgeManager=()=>{
 
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const pledgesObj = useSelector(state => state.pledges.userPledges)
-    const pledges = Object.values(pledgesObj);
-    const history=useHistory();
+
     const pledges = Object.values(pledgesObj).filter(el=>el.backerId==sessionUser.id);
     const history=useHistory();
 
@@ -39,8 +37,6 @@ const PledgeManager=()=>{
             <div>{Reward.price}</div>
             <div>{Reward.title}</div>
             <div className='manageaddress'>
-               {/* <div>{`${city},${state},${country}`}</div> */}
-               {/* <div><i className="fas fa-star" />{avgRating}</div> */}
             </div>
             <div>
                {/* {`${fundingGoal}`} */}
@@ -48,8 +44,6 @@ const PledgeManager=()=>{
             </NavLink>
         </div>
         <div className="button-section">
-            {/* <button className="buttons"><i className="fa-regular fa-pen-to-square" />Edit</button> */}
-            {/* <button className='buttons'><i className="fa-solid fa-trash-can" />Delete</button> */}
             <button onClick={()=>editEvents(Project.id,id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Edit</button>
             <button onClick={()=>deleteEvents(id)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button>
         </div>

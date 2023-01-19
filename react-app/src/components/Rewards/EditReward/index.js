@@ -3,7 +3,6 @@ import { fetchCreateReward } from "../../../store/reward";
 import RewardForm from "../RewardForm";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import React from "react"
 
 const EditReward=()=>{
 
