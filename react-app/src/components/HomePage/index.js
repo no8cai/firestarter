@@ -6,7 +6,7 @@ import { fetchAllProjects, fetchOneProject } from '../../store/project';
 import { useEffect, useState } from 'react'
 import { getAllPledges, getAllPledgesByProjectId, getPledgesByCurrentUser } from '../../store/pledge';
 import SearchResultPage from '../Search';
-import background from '../../../src/kstrtrbg.png'
+import background from '../../../src/images/kstrtrbg.png'
 
 
 function Landing() {

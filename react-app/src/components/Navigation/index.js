@@ -8,6 +8,7 @@ import ProfileButton from './ProfileButton';
 import SearchBar from "../Search/SearchBar";
 import OpenSearchModal from "../Search/OpenSearchModal"
 import OpenModalMenuItem from "./OpenModalMenuItem";
+import logo from '../../../src/images/flogo.png'
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
@@ -48,7 +49,7 @@ function Navigation({ isLoaded }) {
    
            <div className="mid-nav">
            <NavLink to='/' exact={true} activeClassName='active'>
-            FIRESTARTER
+            <img className='logo-img' src={logo}></img>
           </NavLink>
            </div>
    
