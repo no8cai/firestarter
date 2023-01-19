@@ -1,3 +1,4 @@
+import React from "react"
 import { useDispatch,useSelector } from "react-redux";
 import { useEffect } from "react";
 import { NavLink } from 'react-router-dom';
@@ -9,22 +10,23 @@ import './ProjectList.css'
 
 
 const ProjectManager=()=>{
-    
+
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const projectsObj = useSelector(state => state.projects)
     const userprojects=Object.values(projectsObj).filter(el=>el.creatorId==sessionUser.id)
-    const history=useHistory();  
+    const history=useHistory();
+
 
 
     useEffect(() => {
           dispatch(fetchAllProjects());
-    }, [dispatch]); 
- 
+    }, [dispatch]);
+
     const editEvents=(id)=>{
         history.push(`/editproject/${id}`)
     }
- 
+
     const rewardEvents=(id)=>{
         history.push(`/profile/${id}/rewards`)
     }
@@ -40,8 +42,9 @@ const ProjectManager=()=>{
         //     })
         // }
         dispatch(fetchDeleteProject(id))
-    } 
+    }
 
+    if(!userprojects) return null
 
     return(
         <h1>
@@ -63,7 +66,7 @@ const ProjectManager=()=>{
                 <div className="button-section">
                     <button onClick={()=>editEvents(id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Edit</button>
                     <button onClick={()=>rewardEvents(id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Project Rewards</button>
-                    <button onClick={()=>addRewardEvents(id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Add New Reward</button>   
+                    <button onClick={()=>addRewardEvents(id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Add New Reward</button>
                     {/* <button onClick={()=>deleteEvents(id)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button> */}
                 </div>
                 </div>

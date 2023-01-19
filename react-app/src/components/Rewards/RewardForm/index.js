@@ -111,7 +111,7 @@ const RewardForm=({reward,formType,projectId})=>{
                 name='Estimated Delivery'
                 type="date"
                 id="start"
-                min="2023-01-17"
+                min="2023-02"
                 onChange={(e) => setEstimatedDelivery(e.target.value)}
                 value={estimatedDelivery}/>
             </div>

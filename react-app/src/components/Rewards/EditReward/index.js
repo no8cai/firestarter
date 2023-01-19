@@ -1,3 +1,4 @@
+import React from "react";
 import { fetchCreateReward } from "../../../store/reward";
 import { fetchAllProjects } from "../../../store/project";
 import { fetchProjectRewards } from '../../../store/reward';
@@ -5,6 +6,8 @@ import RewardForm from "../RewardForm";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from 'react'
+import { useSelector } from "react-redux";
+// import React from "react"
 
 const EditReward=()=>{
 

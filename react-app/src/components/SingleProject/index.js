@@ -16,7 +16,7 @@ const SingleProject = () => {
     const { id } = useParams();
     const dispatch = useDispatch()
     const history = useHistory()
-
+    const sessionUser = useSelector(state => state.session.user);
 
   const findProjectTest = async () => {
     const returnProject = await dispatch(fetchOneProject(id))

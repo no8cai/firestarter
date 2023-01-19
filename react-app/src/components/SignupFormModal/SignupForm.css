@@ -62,8 +62,8 @@ button {
 }
 
 .input-holder {
-    border: gray solid 1px;
-    border-radius: 3% / 5%;
+    border: none;
+    /* border-radius: 3% / 5%; */
     margin-bottom: 2rem;
     width: 100%;
  
@@ -73,23 +73,26 @@ button {
     width: 94%;
     /* border-bottom: 0px; */
     padding: 1rem;
-    border-top: 0px;
+    /* border-top: 0px;
     border-left: 0px;
-    border-right: 0px;
+    border-right: 0px; */
     background: transparent;
-    border-bottom: 1px solid gray;
+    /* border-bottom: 1px solid lightgray; */
+    border: lightgray solid 1px;
     height: 0.5rem;
+    margin-bottom: 1rem;
 }
 .input-line2 { 
     width: 94%;
-    border-bottom: 0px;
+    /* border-bottom: 0px; */
     padding: 1rem;
-    border-top: 0px;
+    /* border-top: 0px;
     border-left: 0px;
-    border-right: 0px;
+    border-right: 0px; */
     background: transparent;
     /* border-bottom: 1px solid gray; */
     height: 0.5rem;
+    border: lightgray solid 1px;
 }
 
 .welcome {

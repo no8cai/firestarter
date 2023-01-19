@@ -1,5 +1,5 @@
 import { useDispatch,useSelector } from "react-redux";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { NavLink } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { getPledgesByCurrentUser } from "../../../store/pledge";
@@ -8,14 +8,17 @@ import { deletePledge } from "../../../store/pledge";
 const PledgeManager=()=>{
 
     const dispatch = useDispatch();
-
+    const sessionUser = useSelector(state => state.session.user);
     const pledgesObj = useSelector(state => state.pledges.userPledges)
-    const pledges = Object.values(pledgesObj);
-    const history=useHistory();  
+    // const pledges = Object.values(pledgesObj);
+    // const history=useHistory();
+    const pledges = Object.values(pledgesObj).filter(el=>el.backerId==sessionUser.id);
+    const history=useHistory();
 
     useEffect(() => {
         dispatch(getPledgesByCurrentUser());
-  }, [dispatch]); 
+  }, [dispatch]);
+
 
   const editEvents=(projectId,pledgeId)=>{
     history.push(`/projects/${projectId}/editpledge/${pledgeId}`)
