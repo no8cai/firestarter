@@ -9,20 +9,26 @@ import { fetchProjectRewards } from '../../../store/reward';
 import '../PledgePage.css'
 
 const PledgeDetails = ({type,projectId,pledgeId}) => {
+    console.log(projectId)
+    console.log(pledgeId)
 
     const dispatch = useDispatch()
     const id=projectId
     const history = useHistory()
-    // const sessionUser = useSelector(state => state.session.user);
+    const sessionUser = useSelector(state => state.session.user);
+
     
-    let project = useSelector(state => {return state.projects[id]})
+    console.log(sessionUser)
+    
+
+    let project = useSelector(state =>state.projects[id])
     // console.log('project page', project)
 
     let rewards = useSelector(state => state.rewards)
-    // console.log('rewards------', rewards)
-    let rewardsArr = Object.values(rewards)
-    // console.log('rewardsArr-----', rewardsArr)
 
+    // console.log('rewards------', rewards)
+    let rewardsArr = Object.values(rewards).filter((reward)=>reward.projectId===+projectId)
+    // console.log('rewardsArr-----', rewardsArr)
 
     useEffect(() => {
         dispatch(fetchOneProject(id))
@@ -31,35 +37,37 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     }, [dispatch])
 
 
+
     // let pledges = useSelector(state => {return state.pledges[id]})
     if(!rewardsArr) return null
     if(!project) return null
     // if(!pledges) return null
 
 
-    const editPledgeBtn = (e) => {
-        e.preventDefault()
-        dispatch(updatePledge(id))
-
+    const editPledgeBtn = (rewardId, projectId, pledgeId) => {
+        const payload = {
+            id:pledgeId,
+            rewardId: rewardId,
+        }
+            dispatch(updatePledge(payload))
+            history.push(`/profile`)
     }
 
 
     const createPledgeBtn = (rewardId, projectId) => {
         // if(!sessionUser) return alert('I am working')
+        
         const payload = {
             rewardId: rewardId,
-            projectId: projectId
         }
-        if(type="Create Pledge"){
-            dispatch(createPledge(payload))
-            history.push(`/profile/pledges`)
-        }
-        if(type-"Edit Pledge"){
-            payload[id]=pledgeId
-            dispatch(updatePledge(payload))
-        }
-
+           dispatch(createPledge(payload))
+            .then(()=>{history.push(`/profile`)})
+            .catch( (err) => {
+                     alert("one user can not backup more project")
+                  }
+            )        
     }
+
 
     return(
         <>
@@ -101,10 +109,12 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
                             <h6 className='reward-estimated'>SHIPS TO</h6>
                             <h5 className='reward-estimated'>Anywhere in the world</h5>
                         </div>
-                        {/* {sessionUser && sessionUser.id === project.creator.id ? null : ( */}
-                            {/* <button className='pledge-button' disabled={validationErrors.length > 0} onClick={() => createPledgeBtn(reward.id, reward.projectId)}>Pledge {reward.price}</button> */}
+                        {type==="Create Pledge" &&(
                             <button className='pledge-button' onClick={() => createPledgeBtn(reward.id, reward.projectId)}>Pledge {reward.price}</button>
-                        {/* )} */}
+                            )}
+                        {type==="Edit Pledge" &&(
+                            <button className='pledge-button' onClick={() => editPledgeBtn(reward.id, reward.projectId, pledgeId)}>Pledge {reward.price}</button>
+                            )}
                     </div>
              </ul>
               ))}
@@ -144,7 +154,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
                     <summary>If this project is funded, how do I get my reward?</summary>
                     When your reward is ready, {project.creator.username} will send you an email for delivery information.
                 </details>
-                <button className='pledge-button' onClick={() => editPledgeBtn}>Edit pledge</button>
+                {/* <button className='pledge-button' onClick={() => editPledgeBtn}>Edit pledge</button> */}
             </div>
         </div>
         </div>

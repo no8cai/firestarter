@@ -13,7 +13,7 @@ const SingleProject = () => {
     const { id } = useParams();
     const dispatch = useDispatch()
     const history = useHistory()
-
+    const sessionUser = useSelector(state => state.session.user);
 
   const findProjectTest = async () => {
     const returnProject = await dispatch(fetchOneProject(id))
@@ -23,11 +23,6 @@ const SingleProject = () => {
   useEffect(() => {
     findProjectTest()
  }, [dispatch])
-
-   const addPledgesEvents=(project_Id)=>{
-        //   history.push(`/projects/${project_Id}/createpledges`)
-        history.push(`/projects/${project_Id}/createpledges`)
-   }
 
 
    let oneProject = useSelector(state => {return state.projects[id]})
@@ -52,6 +47,10 @@ const SingleProject = () => {
     const handleRemoveReward = (rewardId) => {
         console.log('for delete do we have rewardId', rewardId)
         dispatch(fetchDeleteReward(rewardId))
+    }
+    
+    const addPledgesEvents=(project_Id)=>{
+            history.push(`/projects/${project_Id}/createpledges`)
     }
 
   if (oneProject && allPledgesArray) { //

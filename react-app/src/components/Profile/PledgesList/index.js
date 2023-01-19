@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { getPledgesByCurrentUser } from "../../../store/pledge";
 import { deletePledge } from "../../../store/pledge";
+import React from "react"
 
 const PledgeManager=()=>{
 
