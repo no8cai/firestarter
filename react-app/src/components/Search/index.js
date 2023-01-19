@@ -33,17 +33,13 @@ function SearchResultPage() {
   let currentIndex = 0
   if (projects.length) {
     projects.forEach((project) => {
-        // delete project.creator;
-        // delete project.rewards;
         delete project.creator.email
         delete project.creator.id
-        delete project.creatorId
         delete project.videoUrl;
-        // delete project.id
         for (let key in project) {
 
           // ignore searching these keys
-          if (key !== 'imageUrl' && key !== 'id' && key !== 'startDate' && key !== 'endDate'){
+          if (key !== 'creatorId' && key !== 'imageUrl' && key !== 'id' && key !== 'startDate' && key !== 'endDate'){
 
             // searches for username ONLY
           if (typeof project[key] === 'object'){
@@ -80,7 +76,6 @@ function SearchResultPage() {
     );
   }
   let filteredResults = results.filter((result, index) => results.indexOf(result) === index);
-  // let filteredResults = results
 
   if (!allProjects || !allPledges ) return null;
 
@@ -140,7 +135,6 @@ function SearchResultPage() {
             pledges.forEach(pledge => {
               if (project.id === pledge.Project.id){
                 pledgeTotal += parseFloat(pledge.Reward.price)
-                console.log(pledge.Reward.price, "WWWWWWWWWWWWW")
                 counter++
               }
             })

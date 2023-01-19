@@ -18,7 +18,7 @@ function UserDataModal({user}) {
 
     useEffect(() => {
         dispatch(getPledgesByCurrentUser())
-        // dispatch(fetchAllProjects())
+        dispatch(fetchAllProjects())
     }, [dispatch])
 
     const userPledges = useSelector(state => state.pledges.userPledges)
@@ -26,7 +26,8 @@ function UserDataModal({user}) {
 
     const allProjects = useSelector(state => state.projects)
     const projects = Object.values(allProjects)
-    let userProjects = projects.filter(project => project.creatorId === user.id)
+    console.log('userid',user.id)
+    let userProjects = projects.filter(project => parseInt(project.creatorId) === parseInt(user.id))
     
   
     useEffect(() => {
@@ -49,12 +50,7 @@ function UserDataModal({user}) {
     await dispatch(logout());
   };
   
-    // const logout = (e) => {
-    //   e.preventDefault();
-    //   dispatch(logout());
-    //   closeMenu();
-    //   history.push('/')
-    // };
+    console.log(userProjects.length)
     if (!userPledges || !user || !allProjects) return null
     // if (!userPledges || !user) return null
 
@@ -91,7 +87,7 @@ function UserDataModal({user}) {
                 </div>
                 <div className="nav-created-container">
                   <p>Created Projects</p>
-                  {user && projects.length ? (userProjects.slice(0, 2).map(project => {
+                  {user && userProjects.length ? (userProjects.slice(0, 2).map(project => {
                     return (
                         <div key={project.id} className="nav-backed-item">
                             <Link to={`/projects/${project.id}`}>
