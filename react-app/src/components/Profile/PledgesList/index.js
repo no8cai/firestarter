@@ -1,12 +1,13 @@
 import { useDispatch,useSelector } from "react-redux";
 import React, { useEffect } from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { getPledgesByCurrentUser } from "../../../store/pledge";
 import { deletePledge } from "../../../store/pledge";
+import './PledgeList.css'
 
 const PledgeManager=()=>{
-
+    const { pledgeId } = useParams()
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const pledgesObj = useSelector(state => state.pledges.userPledges)
@@ -30,7 +31,11 @@ const PledgeManager=()=>{
 
     return(
         <h1>
-        {pledges.map(({id,Project,Reward }) => (
+        {
+        pledges.map(({id,Project,Reward }) => {
+            
+        return (
+            
         <div key={id} className='managebox'>
         <div className='boxitems'>
             <NavLink to={`/`} className="links">
@@ -53,7 +58,8 @@ const PledgeManager=()=>{
             <button onClick={()=>deleteEvents(id)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button>
         </div>
         </div>
-      ))}
+      )}
+      )}
 </h1>
     )
 

@@ -57,7 +57,7 @@ function Navigation({ isLoaded }) {
            <div className="right-nav">
             <div className="search-button-holder">
                 <OpenSearchModal
-                itemText="Search"
+                itemText={"Search"}
                 onItemClick={closeMenu}
                 modalComponent={<SearchBar />}
               />

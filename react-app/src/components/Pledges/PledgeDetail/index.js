@@ -18,11 +18,12 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     const sessionUser = useSelector(state => state.session.user);
 
     const userPledges = useSelector(state => state.pledges.userPledges)
-    console.log(userPledges, "EEEEEEEEEEE")
+    // console.log(userPledges, "EEEEEEEEEEE")
     const uPledges = Object.values(userPledges)
     const filtered = uPledges.filter(pledge => parseInt(pledge.projectId) === parseInt(projectId))
     // const userFilter = uPledges.filter(pledge => pledgeId ===)
-    console.log("AAAAAAAAA",filtered)
+    // console.log("AAAAAAAAA",filtered[0].rewardId)
+    console.log(filtered)
     if (filtered.length === 0) console.log("no matching pledges") 
     
     let project = useSelector(state => {return state.projects[id]})
@@ -33,8 +34,22 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
 
     // console.log('rewards------', rewards)
     let rewardsArr = Object.values(rewards).filter((reward)=>reward.projectId===+projectId)
-    console.log('rewardsArr-----', rewardsArr)
-    // const rewardFilter = rewardsArr.filter(reward => )
+    // console.log('rewardsArr-----', rewardsArr)
+    const [ oKRewardId, setOkRewardId ] = useState(false)
+    const thisProjectsPledges = useSelector(state => state.pledges.pledgesById)
+    const pPledges = Object.values(thisProjectsPledges)
+    console.log("come ooon",pPledges)
+    const pfiltered = pPledges.filter(pledge => pledge.id === parseInt(pledgeId))
+    console.log("PPPPPPP", pfiltered)
+            // this means one of the rewards is correct
+            
+            // console.log('HELLO PLZ')
+            // && oKRewardId 
+        
+    
+    // if(rewardsArr.length === 0 ){
+    //     alert('NO')
+    // }
 
     useEffect(() => {
         dispatch(fetchOneProject(id))
@@ -51,7 +66,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     // console.log('-----------', pledges.userPledges[userId])
     // console.log('------------', pledgesArr[1])
     // console.log('**********', JSON.stringify(pledges).valueOf('backerId'))
-    if(!rewards) return null
+    if(!rewards || !thisProjectsPledges || !userPledges) return null
     // if(!rewardsArr) return null
     // if(!project) return null
     // if(!pledges) return null
@@ -68,9 +83,6 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
 
 
 
-
-
-
     const createPledgeBtn = (rewardId, projectId) => {
         // if(!sessionUser) return alert('I am working')
 
@@ -78,17 +90,20 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
             rewardId: rewardId,
         }
            dispatch(createPledge(payload))
-            .then(()=>{history.push(`/profile/${projectId}/rewards`)})
+            .then(()=>{history.push(`/profile/pledges`)})
             .catch( (err) => {
                      alert("one user can not backup more project")
                   }
             )
     }
 
+   
+
+
 
     return(
         <>
-        {project !== undefined && rewardsArr.length !== 0 ? (<div className='pledge-main-container'>
+        {project !== undefined && rewardsArr.length !== 0 && filtered.length !== 0 && pfiltered.length !== 0 ? (<div className='pledge-main-container'>
 
 <div className='pledge-project-title'>
     <Link className='project-link' key={project.title} to={`/projects/${project.id}`}>
@@ -108,11 +123,15 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
 
 <div className='pledge-container'>
 <div className='reward-container'>
-    {rewardsArr.map(reward =>
-     (
+    {rewardsArr.map(reward =>{
+        let chosenReward = "not-this-reward"
+        console.log(pledgeId, reward.id, reward.title)
+        if (filtered[0].rewardId === reward.id) {
+            chosenReward = "this-reward"}
+     return (
         <ul key={reward.id}>
 
-        <div className='reward-card'>
+        <div id={chosenReward} className='reward-card'>
 
             <div className='reward-card-details'>
                 {/* <input type='radio' />Pledge $20 */}
@@ -134,7 +153,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
                 )}
         </div>
  </ul>
-  ))}
+  )})}
 
 </div>
 <div className='guaranteed-container'>
