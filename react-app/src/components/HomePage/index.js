@@ -38,7 +38,7 @@ function Landing() {
     const randProject = useSelector(state => state.projects[randId])
     // console.log("AAAAAAAAA", randProject)
 
-    if (!projectsObj || !randProject || !pledgesObj || pledges.length == 0) return null
+    if (!projectsObj || !randProject || !pledgesObj ) return null
 
     let pledgeTotal = 0
     let randPledges = pledges.filter(pledge => pledge.projectId === randId)
@@ -152,7 +152,7 @@ function Landing() {
     <div className="line-break"></div>
 
     <div className="content-container">
-        
+
     </div>
 
     <div className="line-break"></div>
@@ -165,20 +165,38 @@ function Landing() {
      </div>
         <div className="devbox">
             <div className='each-dev'>
-                    <div className="dev-img-holder"></div>
-                    <div>Dev 1</div>
+                    <div className="dev-img-holder">
+                        <img className='img' src='https://media.licdn.com/dms/image/C5603AQFMpdB1qR9D6g/profile-displayphoto-shrink_200_200/0/1519277230393?e=1679529600&v=beta&t=q5W5OEJx_5Y3T47-a48OD2f2j_m79durB1DF6rX1Gys'></img>
+                    </div>
+                    <div className='dev-name'>Annika Mcpeek</div>
+                    <a href='https://github.com/amcpeek' ><i class="fa fa-github"></i></a>
+                    <a href='https://www.linkedin.com/in/annika-mcpeek/'><i class="fa fa-linkedin"></i></a>
             </div>
             <div className='each-dev'>
-                <div className="dev-img-holder"></div>
-                <div>Dev A</div>
+                <div className="dev-img-holder">
+                    <img className='img' src='https://media.licdn.com/dms/image/C5603AQFMpdB1qR9D6g/profile-displayphoto-shrink_200_200/0/1519277230393?e=1679529600&v=beta&t=q5W5OEJx_5Y3T47-a48OD2f2j_m79durB1DF6rX1Gys'></img>
+                </div>
+                <div className='dev-name'>Kirin Agcaoili</div>
+                <a href='https://github.com/kagc' ><i class="fa fa-github"></i></a>
+                <a href='https://www.linkedin.com/in/annika-mcpeek/'><i class="fa fa-linkedin"></i></a>
             </div>
             <div className='each-dev'>
-                <div className="dev-img-holder"></div>
-                <div>Dev α</div>
+                <div className="dev-img-holder">
+                <img className='img' src='https://media.licdn.com/dms/image/C5603AQFMpdB1qR9D6g/profile-displayphoto-shrink_200_200/0/1519277230393?e=1679529600&v=beta&t=q5W5OEJx_5Y3T47-a48OD2f2j_m79durB1DF6rX1Gys'></img>
+                </div>
+                <div className='dev-name'>Eric Chai</div>
+                <a href='https://github.com/no8cai' ><i class="fa fa-github"></i></a>
+                <a href='https://www.linkedin.com/in/annika-mcpeek/'><i class="fa fa-linkedin"></i></a>
             </div>
             <div className='each-dev'>
-                <div className="dev-img-holder"></div>
-                <div>Dev 👍</div>
+                <div className="dev-img-holder">
+                    <img className='img' src='https://media.licdn.com/dms/image/D4E03AQFxAGW_cPRZwQ/profile-displayphoto-shrink_200_200/0/1674225013679?e=1679529600&v=beta&t=W5qXSonUJhsxWL3pVSm_2nDOBGiUqqpm-1umhspVvz0'></img>
+
+                </div>
+                <div className='dev-name'>Cory Bogert</div>
+                <a href='https://github.com/Cory-Bogert' ><i class="fa fa-github"></i></a>
+                <a href='https://www.linkedin.com/in/cory-bogert-754a7a230/'><i class="fa fa-linkedin"></i></a>
+
             </div>
         </div>
     </div>

@@ -32,14 +32,6 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
         dispatch(getAllPledgesByProjectId(id))
     }, [dispatch])
 
-
-    // let userId = 10
-
-    // let pledges = useSelector(state => {return state.pledges})
-    // let pledgesArr = Object.values(pledges)
-    // console.log('-----------', pledges.userPledges[userId])
-    // console.log('------------', pledgesArr[1])
-    // console.log('**********', JSON.stringify(pledges).valueOf('backerId'))
     console.log()
     if(!rewardsArr) return null
     if(!project) return null
