@@ -155,7 +155,7 @@ const PledgeDetails2 = ({type,projectId,pledgeId}) => {
 </div>
 <div className='guaranteed-container'>
 <div className='guaranteed-description'>
-    <img className='guaranteed-img' src='' alt="Rewards aren't guaranteed."/>
+    <h3>Reward aren't guaranteed</h3>
     <p>Your pledge will support an ambitious creative project that has yet to be developed. There’s a risk that, despite a creator’s best efforts, your reward will not be fulfilled, and we urge you to consider this risk prior to pledging. Kickstarter is not responsible for project claims or reward fulfillment.</p>
 </div>
 
