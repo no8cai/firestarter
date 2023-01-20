@@ -40,7 +40,13 @@ input{
     border: 1px solid rgb(0, 0, 0,10%);
     border-radius: 2px;
     height: 40px;
+}
 
+select{
+    width: 50vw;
+    border: 1px solid rgb(0, 0, 0,10%);
+    border-radius: 2px;
+    height: 40px;
 }
 .projectform-textarea{
     width: 50vw;
