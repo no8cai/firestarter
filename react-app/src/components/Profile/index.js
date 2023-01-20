@@ -16,7 +16,7 @@ const ManageCenter=()=>{
     return(
         <div className='profile-manage'>
         <div className='profile-userinfo'>
-        <img src='https://ksr-ugc.imgix.net/missing_user_avatar.png?ixlib=rb-4.0.2&w=80&h=80&fit=crop&v=&auto=format&frame=1&q=92&s=6db01a5e4fc00d7967e45fbcb6ff2f74' className="profile-icon"/>
+        <img src='https://ksr-ugc.imgix.net/missing_user_avatar.png?ixlib=rb-4.0.2&w=80&h=80&fit=crop&v=&auto=format&frame=1&q=92&s=6db01a5e4fc00d7967e45fbcb6ff2f74' className="profile-icon01"/>
         <h1>{sessionUser.username}</h1>
         </div>
 

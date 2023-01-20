@@ -87,7 +87,7 @@ const allProjects = useSelector(state => {return state.projects})
 
     return(
         <h1>
-        {rewards.map(({id,title,price,description,estimatedDelivery }) => (
+        {rewards.length ? (rewards.map(({id,title,price,description,estimatedDelivery }) => (
         <div key={id} className='managebox'>
         <div className='boxitems'>
             <NavLink to={`/`} className="links">
@@ -111,7 +111,11 @@ const allProjects = useSelector(state => {return state.projects})
             <button onClick={()=>deleteEvents(id)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button>
         </div>
         </div>
-      ))}
+      ))): (<div className="reward-form-container">
+            <div>
+                This project has no rewards yet. Add a reward (Button here)
+            </div>
+      </div>)}
 </h1>
     )
 }

@@ -1,5 +1,5 @@
 import React from "react"
-import PledgeDetails from "../PledgeDetail"
+import PledgeDetails2 from "../PledgeDetail/PledgeDetail2"
 import { useParams } from "react-router-dom"
 
 const CreateAPledge=()=>{
@@ -10,7 +10,7 @@ const CreateAPledge=()=>{
 
     return(
 
-        <PledgeDetails type="Create Pledge" projectId={projectId} pledgeId={pledgeId}/>
+        <PledgeDetails2 type="Create Pledge" projectId={projectId} pledgeId={pledgeId}/>
     )
 }
 
