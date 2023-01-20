@@ -12,15 +12,22 @@ import background from '../../../src/images/kstrtrbg.png'
 function Landing() {
     const dispatch = useDispatch()
 
+    const projectsObj = useSelector(state => state.projects)
+    const projects = Object.values(projectsObj)
+    // const randId
+    const [ randId, setRandId ] = useState(Math.floor(Math.random() * (projects.length) + 1))
+    console.log('randId',randId)
+    const pledgesObj = useSelector(state => state.pledges.allPledges)
+        const pledges = Object.values(pledgesObj)
+
     useEffect(() => {
         dispatch(fetchAllProjects())
-        // dispatch(fetchOneProject())
+        dispatch(fetchOneProject(randId))
         dispatch(getAllPledges())
     }, [dispatch])
 
-    const pledgesObj = useSelector(state => state.pledges.allPledges)
-    const pledges = Object.values(pledgesObj)
 
+    // console.log("all pledges", pledgesObj)
 
 
     let totalPledges = 0
@@ -30,25 +37,27 @@ function Landing() {
         })
     }
 
-    const projectsObj = useSelector(state => state.projects)
-    const projects = Object.values(projectsObj)
     // console.log(projects)
-    const randId = Math.floor(Math.random() * (projects.length) + 1)
-    // console.log("MATH", randId)
     const randProject = useSelector(state => state.projects[randId])
     // console.log("AAAAAAAAA", randProject)
 
-    if (!projectsObj || !randProject || !pledgesObj ) return null
 
     let pledgeTotal = 0
-    let randPledges = pledges.filter(pledge => pledge.projectId === randId)
-    randPledges.forEach(pledge => {
-        pledgeTotal += parseFloat(pledge.Reward.price)
-    })
-    let currentProgress = ((pledgeTotal * 100)/(randProject.fundingGoal)).toFixed(2)
+    // let randPledges = pledges.filter(pledge => pledge.projectId === randId)
+    // randPledges.forEach(pledge => {
+    //     pledgeTotal += parseFloat(pledge.Reward.price)
+    // })
+    let currentProgress
+    // if (randProject !== undefined){
+    //     currentProgress = ((pledgeTotal * 100)/(randProject.fundingGoal)).toFixed(2)
+    // }
+
+
+
     // console.log(currentProgress, pledgeTotal, randProject.fundingGoal)
 
 
+    if (!projectsObj || !randProject || !pledgesObj ) return null
 
 
     return (
@@ -125,7 +134,7 @@ function Landing() {
                         let counter = 0
                         pledges.forEach(pledge => {
                             if (project.id == pledge.Project.id){
-                                pledgeTotal += pledge.Reward.price
+                                pledgeTotal += parseInt(pledge.Reward.price)
                                 counter++
                             }
                         })
