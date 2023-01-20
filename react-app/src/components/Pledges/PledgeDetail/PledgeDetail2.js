@@ -24,8 +24,8 @@ const PledgeDetails2 = ({type,projectId,pledgeId}) => {
     // const userFilter = uPledges.filter(pledge => pledgeId ===)
     // console.log("AAAAAAAAA",filtered[0].rewardId)
     // console.log(filtered)
-    // if (filtered.length === 0) console.log("no matching pledges") 
-    
+    // if (filtered.length === 0) console.log("no matching pledges")
+
     let project = useSelector(state => {return state.projects[id]})
 
     // console.log('project page', project)
@@ -42,11 +42,11 @@ const PledgeDetails2 = ({type,projectId,pledgeId}) => {
     // const pfiltered = pPledges.filter(pledge => pledge.id === parseInt(pledgeId))
     // console.log("PPPPPPP", pfiltered)
             // this means one of the rewards is correct
-            
+
             // console.log('HELLO PLZ')
-            // && oKRewardId 
-        
-    
+            // && oKRewardId
+
+
     // if(rewardsArr.length === 0 ){
     //     alert('NO')
     // }
@@ -97,7 +97,7 @@ const PledgeDetails2 = ({type,projectId,pledgeId}) => {
             )
     }
 
-   
+
 
 
 
@@ -124,7 +124,7 @@ const PledgeDetails2 = ({type,projectId,pledgeId}) => {
 <div className='pledge-container'>
 <div className='reward-container'>
     {rewardsArr.map(reward =>{
-        
+
      return (
         <ul key={reward.id}>
 
@@ -143,10 +143,10 @@ const PledgeDetails2 = ({type,projectId,pledgeId}) => {
                 <h5 className='reward-estimated'>Anywhere in the world</h5>
             </div>
             {type==="Create Pledge" &&(
-                <button className='pledge-button' onClick={() => createPledgeBtn(reward.id, reward.projectId)}>Pledge {reward.price}</button>
+                <button className='pledge-button' onClick={() => createPledgeBtn(reward.id, reward.projectId)}>Pledge</button>
                 )}
             {type==="Edit Pledge" &&(
-                <button className='pledge-button' onClick={() => editPledgeBtn(reward.id, reward.projectId, pledgeId)}>Pledge {reward.price}</button>
+                <button className='pledge-button' onClick={() => editPledgeBtn(reward.id, reward.projectId, pledgeId)}>Pledge</button>
                 )}
         </div>
  </ul>
@@ -193,7 +193,7 @@ const PledgeDetails2 = ({type,projectId,pledgeId}) => {
 </div>
 </div>
 </div>) : (<div className='pledge-main-container'> <h1>Oops, not found!</h1><img src="https://cdn.dribbble.com/users/252114/screenshots/3840347/mong03b_still_2x.gif?compress=1&resize=400x300&vertical=top"></img></div>)}
-        
+
         </>
         )
     }

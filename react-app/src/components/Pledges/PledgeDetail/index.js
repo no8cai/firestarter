@@ -27,8 +27,8 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     // const userFilter = uPledges.filter(pledge => pledgeId ===)
     // console.log("AAAAAAAAA",filtered[0].rewardId)
     // console.log(filtered)
-    // if (filtered.length === 0) console.log("no matching pledges") 
-    
+    // if (filtered.length === 0) console.log("no matching pledges")
+
     let project = useSelector(state => {return state.projects[id]})
 
     // console.log('project page', project)
@@ -56,11 +56,11 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     // }
     // console.log("PPPPPPP", pfiltered)
             // this means one of the rewards is correct
-            
+
             // console.log('HELLO PLZ')
-            // && oKRewardId 
-        
-    
+            // && oKRewardId
+
+
     // if(rewardsArr.length === 0 ){
     //     alert('NO')
     // }
@@ -215,7 +215,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
 </div>
 </div>
 </div>) : (<div className='pledge-main-container'> <h1>Oops, not found!</h1><img src="https://cdn.dribbble.com/users/252114/screenshots/3840347/mong03b_still_2x.gif?compress=1&resize=400x300&vertical=top"></img></div>)}
-        
+
         </>
         )
     }

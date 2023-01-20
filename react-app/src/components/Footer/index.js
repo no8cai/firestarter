@@ -13,30 +13,30 @@ function Footer() {
             <div className="footer-links">
                 <div className="footer-link-section">
                     <span className="footer-links-labels">ABOUT</span>
-                    <p>Link</p>
+                    <p><a href='https://github.com/no8cai/firestarter/blob/main/README.md' >Link</a></p>
                 </div>
                 <div className="footer-link-section">
                     <span className="footer-links-labels">SUPPORT</span>
-                    <p>Link</p>
+                    <p><a href='https://github.com/no8cai/firestarter/blob/main/README.md' >Link</a></p>
                 </div>
                 <div className="footer-link-section">
                     <span className="footer-links-labels">MORE FROM CLONESTARTER</span>
-                    <p>Link</p>
+                    <p><a href='https://github.com/no8cai/firestarter/blob/main/README.md' >Link</a></p>
                 </div>
             </div>
             <div className="footer-social-media">
-                <div className="footer-copywrite">Clonestarter, 2023</div>
                 <div className="footer-social-media-icons">
-                    <span>Facebook</span>
-                    <span>Twitter</span>
-                    <span>Insta</span>
+                    <span><a href='https://www.facebook.com/'><i class="fa fa-facebook"></i></a></span>
                 </div>
+                    <span><a href='https://twitter.com/'><i class="fa fa-twitter"></i></a></span>
+                    <span><a href='https://www.instagram.com/'><i class="fa fa-instagram"></i></a></span>
             </div>
             <div className="footer-break"></div>
             <div className="footer-legal-links">
+                <div className="footer-copywrite">FireStarter, © 2023</div>
+                {/* <span>Link</span>
                 <span>Link</span>
-                <span>Link</span>
-                <span>Link</span>
+                <span>Link</span> */}
             </div>
         </div>
         </div>
