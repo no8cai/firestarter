@@ -45,8 +45,8 @@ const ProjectManager=()=>{
                     <div className="projectlist-titletext">Category</div>
                     <div className="projectlist-titletext">Location</div>
                     <div className="projectlist-titletext">Date</div>
-                    <div className="projectlist-titletext">Funding Goal</div> 
-                    <div className="projectlist-titletext">More</div> 
+                    <div className="projectlist-titletext">Funding Goal</div>
+                    <div className="projectlist-titletext">More</div>
                 </div>
                 {userprojects.map(({ id, title,category,city,state,country,fundingGoal,startDate,endDate,imageUrl }) => (
                 <div key={id} className='managebox'>
@@ -66,7 +66,7 @@ const ProjectManager=()=>{
                     </NavLink>
                 </div>
                 <div className="projectlist-buttonsec">
-                    
+
                     <div className="project-buttop"><div onClick={()=>editEvents(id)} className="projectlist-buttons"><i className="fa-regular fa-pen-to-square" />Edit this Project</div></div>
                     <div className="project-buttop"><div onClick={()=>rewardEvents(id)} className="projectlist-buttons"><i className="fa-solid fa-list" />Project Rewards List</div></div>
                     <div className="project-buttop"><div onClick={()=>addRewardEvents(id)} className="projectlist-buttons"><i className="fa-solid fa-circle-plus" />Add New Reward</div></div>
