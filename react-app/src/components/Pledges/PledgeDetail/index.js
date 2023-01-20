@@ -51,7 +51,6 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     // console.log('-----------', pledges.userPledges[userId])
     // console.log('------------', pledgesArr[1])
     // console.log('**********', JSON.stringify(pledges).valueOf('backerId'))
-    console.log("AAAAAAAAA", project)
     if(!rewards) return null
     // if(!rewardsArr) return null
     // if(!project) return null
@@ -64,7 +63,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
             rewardId: rewardId,
         }
             dispatch(updatePledge(payload))
-            history.push(`/profile`)
+            history.push(`/profile/pledges`)
     }
 
 
