@@ -7,10 +7,12 @@ import { useEffect, useState } from 'react'
 import { getAllPledges, getAllPledgesByProjectId, getPledgesByCurrentUser } from '../../store/pledge';
 import SearchResultPage from '../Search';
 import background from '../../../src/images/kstrtrbg.png'
+let otherSrc = 'https://ksr-ugc.imgix.net/assets/039/670/652/dc65feab31e919618d8c1041e23226ec_original.tiff?ixlib=rb-4.0.2&crop=faces&w=1024&h=576&fit=crop&v=1673737380&auto=format&frame=1&q=92&s=b22f9e32f0f2a6c2058ef5f07b35221d'
 
 
 function Landing() {
     const dispatch = useDispatch()
+    const [newSrc, setNewSrc] = useState('')
 
     const projectsObj = useSelector(state => state.projects)
     const projects = Object.values(projectsObj)
@@ -117,7 +119,19 @@ function Landing() {
             <div className="feature-project-holder">
                 <span className="home-section-title">FEATURE PROJECT</span>
                 <Link className="feature-link" to={`/projects/${randProject.id}`}>
-                    <div className="feature-image"><img className='img' src={randProject.imageUrl}></img></div>
+                    <div className="feature-image">
+                        <img
+                        className='img'
+                        src={randProject.imageUrl}
+                        alt={randProject.title}
+                        onError={(e)=>{
+                                if(e.target.src !== otherSrc) {
+                                setNewSrc(otherSrc)
+                                e.target.src = otherSrc
+                                }
+                            }}
+                            />
+                            </div>
                     <div className="sp-add-border sp-bar-back" role='progressbar'>
                     <div className='sp-green-bar' style={{width: `${currentProgress}%`}}></div>
                     </div>
@@ -142,7 +156,18 @@ function Landing() {
                 <div key={project.id} className="rec-projects">
                     <Link to={`/projects/${project.id}`}>
 
-                    <div className="rec-project-thumbnail"><img className='img' src={project.imageUrl}></img></div>
+                    <div className="rec-project-thumbnail">
+                        <img
+                        className='img'
+                        src={project.imageUrl}
+                        onError={(e)=>{
+                            if(e.target.src !== otherSrc) {
+                            setNewSrc(otherSrc)
+                            e.target.src = otherSrc
+                            }
+                        }}
+                            />
+                            </div>
                     <div className="rec-project-details">
                         <span className="rec-project-title">{project.title}</span>
                         <span className="rec-project-funded">{counter !== 0 ? Math.ceil(((pledgeTotal)/project.fundingGoal)*100) : 0}% funded</span>
