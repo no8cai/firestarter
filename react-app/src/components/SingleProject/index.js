@@ -9,7 +9,7 @@ import { getAllPledgesByProjectId} from '../../store/pledge'
 import { getAllPledges } from '../../store/pledge';
 import {fetchDeleteReward} from '../../store/reward'
 import { fetchAllProjects } from '../../store/project';
-import { getPledgesByCurrentUser } from '../../store/pledge'
+import { getPledgesByCurrentUser,  } from '../../store/pledge'
 let otherSrc = 'https://ksr-ugc.imgix.net/assets/039/670/652/dc65feab31e919618d8c1041e23226ec_original.tiff?ixlib=rb-4.0.2&crop=faces&w=1024&h=576&fit=crop&v=1673737380&auto=format&frame=1&q=92&s=b22f9e32f0f2a6c2058ef5f07b35221d'
 
 
@@ -26,7 +26,9 @@ const SingleProject = () => {
     const allPledgeByProject = await dispatch(getAllPledgesByProjectId(id))
     const allProjects = await dispatch(fetchAllProjects())
     const allPledgesByCreatorOfProject = await dispatch(getPledgesByCurrentUser(oneProject.creatorId))
+    const allPledgesReturn = await dispatch(getAllPledges())
   }
+  let newThing = ''
 
   useEffect(() => {
     findProjectTest()
@@ -40,8 +42,10 @@ const SingleProject = () => {
    let totalProjectsOfThisProjectsCreator = 0
    const allProjects = useSelector(state => {return state.projects})
    const allCreatorsPledges = useSelector(state => { return state.pledges.userPledges})
+   const allPledges = useSelector(state => state.pledges)
 
-   if(allProjects && oneProject && allCreatorsPledges) {
+
+   if(allProjects && oneProject && allCreatorsPledges ) {
    // console.log('what is all creator pledges length', Object.values(allCreatorsPledges).length)
 
     let arrayOfProjects = Object.values(allProjects)
@@ -51,8 +55,31 @@ const SingleProject = () => {
         if (arrayOfProjects[i].creatorId ==  oneProject.creatorId) {
             totalProjectsOfThisProjectsCreator += 1
         }
-
     }
+
+    if(sessionUser && allPledges.allPledges) {
+        // console.log('well what is it' , allPledges.allPledges)
+        //allPledges.allPledges[1].projectId == id
+        //Object.values(allPledges)
+        let arrayOfAll = Object.values(allPledges.allPledges)
+        // console.log('dont we have the id', id)
+        newThing = arrayOfAll.find(pledge => {
+            if ((pledge.projectId == id) && (pledge.backerId == sessionUser.id)) {
+                return pledge
+            }
+        })
+        console.log('new thing', newThing)
+        //if you backed this project
+        //that probably is in the oneProject
+        //console.log('what is in oneProject', allCreatorsPledges)
+        //find in all creators pledges if this project id matches anywhere
+
+        //the point:
+        //look through all pledges for this 1) current user and see if they have this 2) project id
+        //if so, newThing will be that pledge
+        //if no it will be undefined
+    }
+
    }
 
 
@@ -66,7 +93,7 @@ const SingleProject = () => {
     var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
    }
 
-    const allPledges = useSelector(state => state.pledges)
+
     let allPledgesArray = []
     let totalPledges = 0
     if(allPledges.pledgesById) {
@@ -121,8 +148,12 @@ const SingleProject = () => {
                 <p>backers </p>
                 <h2>{diffDays} </h2>
                 <p>days to go</p>
+                {sessionUser && newThing &&
+                    <div>Thank you for your pledge towards the reward of "{newThing.Reward.title}"". You can update your pledge here:</div>
+                }
             </div>
             <div className="sp-add-border sp-right-side-buttons">
+
 
                     {sessionUser? <button onClick={()=>addPledgesEvents(id)} className='sp-green-button'>Back this project</button>
                     : <div className='sp-log-in-to-back'>
@@ -189,7 +220,9 @@ const SingleProject = () => {
             <div>{oneProject.creator.username} is a frequent contributor Fire Starter and has lead a variety of successful projects.</div>
             </div>
             <div className='sp-support-button'>Support</div>
-            <button onClick={()=>addPledgesEvents(id)} className='sp-green-button'>Back this project</button>
+            {sessionUser&& <button onClick={()=>addPledgesEvents(id)} className='sp-green-button'>Back this project</button>}
+
+
         </div>
     </div>
 
