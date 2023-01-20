@@ -11,11 +11,13 @@ import { getAllPledges, getPledgesByCurrentUser } from "../../store/pledge";
 import { fetchAllProjects } from "../../store/project";
 import LogoutButton from "../auth/LogoutButton";
 
+
 function UserDataModal({user}) {
     const history = useHistory()
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
+
 
     useEffect(() => {
         dispatch(getPledgesByCurrentUser())
@@ -47,18 +49,18 @@ function UserDataModal({user}) {
   
     const closeMenu = () => setShowMenu(false);
 
-    const onLogout = async (e) => {
-      closeMenu()
-    await dispatch(logout());
-    history.push('/')
-  };
+  //   const onLogout = async (e) => {
+  //     closeMenu()
+  //   await dispatch(logout());
+  //   history.push('/')
+  // };
 
-  const logoutButton = async (e) => {
-      e.preventDefault();
-      await dispatch(logout());
-      closeMenu();
-      history.push('/')
-    };
+  // const logoutButton = async (e) => {
+  //     e.preventDefault();
+  //     await dispatch(logout());
+  //     closeMenu();
+  //     history.push('/')
+  //   };
   
     console.log(userProjects.length)
     if (!userPledges || !user || !allProjects) return null
