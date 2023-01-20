@@ -35,8 +35,8 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
 
     // let userId = 10
 
-    // let pledges = useSelector(state => {return state.pledges})
-    // let pledgesArr = Object.values(pledges)
+    let pledges = useSelector(state => {return state.pledges})
+    let pledgesArr = Object.values(pledges)
     // console.log('-----------', pledges.userPledges[userId])
     // console.log('------------', pledgesArr[1])
     // console.log('**********', JSON.stringify(pledges).valueOf('backerId'))

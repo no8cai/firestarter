@@ -128,7 +128,8 @@ const ProjectForm=({project,formType})=>{
         <div className="projectform-titlesec">
         {/* <div className='projectform-title1'>{formType}</div> */}
         <div className='projectform-title2'>Start with the basics</div>
-        <div className="projectform-title3">Make it esay for people to learn about your project</div>
+        <div className="projectform-title3">Make it easy for people to learn about your project</div>
+        <div className='reward-form-title'><h2>{formType}</h2></div>
         </div>
         <form className='projectform-form' onSubmit={handleSubmit}>
 
@@ -167,14 +168,14 @@ const ProjectForm=({project,formType})=>{
               onChange={(e) => setCategory(e.target.value)}
               value={category}/></div>
               </div>
-             
+
              <div className="projectform-listitem">
               <div className="context">
                 <div className="projectform-subtitle">Project location</div>
                 <div className="projectform-subtext">Enter the location that best describes where your project is based.</div>
               </div>
             <div>
-            
+
              <div className='projectform-locationlist'>
              <label>
              City
@@ -285,7 +286,7 @@ const ProjectForm=({project,formType})=>{
               onChange={(e) => setDescription(e.target.value)}
               value={description}/></div>
               </div>
-             
+
              <div className='projectform-listitem'>
               <div className="context">
                 <div className="projectform-subtitle">Risks and challenges</div>
@@ -326,7 +327,9 @@ const ProjectForm=({project,formType})=>{
              </div>
             </form>
             {formType==="Edit Project" &&(
+              <div className="projectform-button">
               <button onClick={()=>deleteEvents(project.id)} className="projectform-delebutton">Delete project</button>
+              </div>
                 )}
             <div className='projectform-errorsec'>
             <div className='error-title'>

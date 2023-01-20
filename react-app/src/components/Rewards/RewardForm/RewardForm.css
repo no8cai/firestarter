@@ -1,11 +1,122 @@
+
 .reward-form-container{
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 .reward-form-form{
     display: flex;
     flex-direction: column;
     gap:10px;
+}
+
+
+.reward-form-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'LATO', 'Lucida Sans Regular', sans-serif;
+    padding-top: 10px;
+    padding-bottom: 40px;
+}
+
+.reward-form-form{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    width: 100vw;
+    margin-top: 30px;
+}
+
+.reward-form-list-item{
+    display: flex;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-top: 1px solid rgb(0, 0, 0,20%);
+    /* max-width: 500px; */
+
+}
+
+.reward-form-title-sec{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:15px
+}
+
+.context{
+    padding-left: 5vw;
+    width: 40vw;
+    padding-right: 40px;
+}
+input{
+    width: 50vw;
+    border: 1px solid rgb(0, 0, 0,10%);
+    border-radius: 2px;
+    height: 40px;
+
+}
+.reward-form-textarea{
+    width: 50vw;
+    height: 200px;
+    border: 1px solid rgb(0, 0, 0,10%);
+}
+
+.reward-form-location{
+    display: flex
+}
+
+.reward-form-subtitle{
+    font-size: 18px;
+}
+
+.reward-form-subtext{
+    font-size: 14px;
+    padding-top: 10px;
+    color:#656969;
+}
+label{
+    font-size: 14px;
+}
+
+.reward-form-title1{
+    font-size: 22px;
+}
+
+.reward-form-title2{
+    font-size: 22px;
+}
+
+.reward-form-title3{
+    font-size: 17px;
+    color: #656969;
+}
+
+.reward-button{
+    align-items: center;
+    background-color: #028858;
+    color:white;
+    cursor: pointer;
+    border:#028858 solid 1px;
+}
+.reward-button:hover{
+    background-color:#015738;
+}
+.reward-form-button{
+    display: flex;
+    justify-content: center;
+
+}
+.reward-form-delete-button{
+    align-items: center;
+    background-color: red;
+    color:white;
+    cursor: pointer;
+    border: red solid 1px;
+    width: 50vw;
+    margin-top: 1em;
+    height: 3vh;
+
 }
