@@ -27,15 +27,24 @@ const ProjectForm=({project,formType})=>{
         initTitle='';
         initCategory='';
         initCity='';
-        initState='';
-        initCountry='';
-        initImageUrl='';
+        initState='Alabama';
+        initCountry='USA';
+        initImageUrl='https://ksr-ugc.imgix.net/assets/039/647/599/0331687a4cdf38e80c7633da37cc46ad_original.jpeg?ixlib=rb-4.0.2&w=680&fit=max&v=1673485366&gif-q=50&q=92&s=f27813d42923efb7020ec3be1b74e327';
         initFundingGoal=0;
         initStartDate='';
         initEndDate='';
         initDescription='';
         initRisks='';
     }
+    const allStates =
+    ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware",
+    "D. C.","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky",
+    "Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri",
+    "Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota",
+    ,"Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina",
+    "South Dakota","Tennessee","Texas", "U.S. Territories","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming", "International"]
+
+    const allCategories = [ 'Art', 'Comics & Illustration',  'Design & Tech',  'Film',  'Food & Craft',  'Games']
 
 
     const [title, setTitle] = useState(initTitle);
@@ -51,6 +60,7 @@ const ProjectForm=({project,formType})=>{
     const [risks, setRisks] = useState(initRisks);
 
     const [validationErrors, setValidationErrors] = useState([]);
+    const todayDate = new Date()
 
 
     useEffect(() => {
@@ -76,10 +86,11 @@ const ProjectForm=({project,formType})=>{
         else if(fundingGoal<=0){errors.push("Project's funding goal must be greater than 0");}
         else if(!(/^\d+(\.\d{1,2})?$/.test(fundingGoal))){errors.push("Project's funding goal must be within 2 decimal places");}
         if(startDate.length<=0){errors.push("Project's start date field is required");}
+        if(todayDate - (new Date(startDate)) > 0) {errors.push(`The start date of your project needs to be after today's date`)}
         else if(endDate.length<=0){errors.push("Project's end date field is required");}
         else if(endDate<=startDate){errors.push("Project's end date field need to be after start date");}
         if(description.length<=0){errors.push("Project's description field is required");}
-        else if(description.length>=4000){errors.push("Project's descritption must be less than 4000 characters")}
+        else if(description.length>=4000){errors.push("Project's description must be less than 4000 characters")}
         if(risks.length<=0){errors.push("Project's risk field is required");}
         else if(risks.length>=4000){errors.push("Project's risk must be less than 4000 characters")}
 
@@ -95,7 +106,7 @@ const ProjectForm=({project,formType})=>{
         const errors=[]
 
         if(formType==="Create Project"){
-               dispatch(fetchCreateProject(tempProject))       
+               dispatch(fetchCreateProject(tempProject))
                .then(()=>{history.push(`/profile`)})
                .catch(async (err)=>{
                 const errobj=await err.json();
@@ -131,7 +142,8 @@ const ProjectForm=({project,formType})=>{
         <div className="projectfrom-container">
         <div className="projectform-titlesec">
         <div className='projectform-title2'>Start with the basics</div>
-        <div className="projectform-title3">Make it esay for people to learn about your project</div>
+        <div className="projectform-title3">Make it easy for people to learn about your project</div>
+        <div className='reward-form-title'><h2>{formType}</h2></div>
         </div>
         <form className='projectform-form' onSubmit={handleSubmit}>
 
@@ -162,22 +174,25 @@ const ProjectForm=({project,formType})=>{
             <label>
              Category
              </label>
-             <input
-              className='input'
-              placeholder='Art Comics&illustration Design&Tech Film Food&Craft Games'
-              type="text"
-              name="category"
-              onChange={(e) => setCategory(e.target.value)}
-              value={category}/></div>
+                        <select
+                        placeholder='Category'
+                        onChange={(e) => setCategory(e.target.value)}
+                        value={category}
+                        >
+                            {allCategories.map(category => (
+                                <option key={category} value={category}> {category}</option>
+                            ))}
+                        </select>
               </div>
-             
+              </div>
+
              <div className="projectform-listitem">
               <div className="context">
                 <div className="projectform-subtitle">Project location</div>
                 <div className="projectform-subtext">Enter the location that best describes where your project is based.</div>
               </div>
             <div>
-            
+
              <div className='projectform-locationlist'>
              <label>
              City
@@ -194,15 +209,18 @@ const ProjectForm=({project,formType})=>{
              <label>
              State
              </label>
-             <input
-              className='input'
-              placeholder='Start typing your state'
-              type="text"
-              name="state"
-              onChange={(e) => setState(e.target.value)}
-              value={state}/></div>
+             <select
+                        placeholder='State'
+                        onChange={(e) => setState(e.target.value)}
+                        value={state}
+                        >
+                            {allStates.map(state => (
+                                <option key={state} value={state}> {state}</option>
+                            ))}
+                        </select>
+              </div>
 
-             <div className='projectform-locationlist'>
+             {/* <div className='projectform-locationlist'>
              <label>
              Country
              </label>
@@ -212,13 +230,15 @@ const ProjectForm=({project,formType})=>{
               type="text"
               name="country"
               onChange={(e) => setCountry(e.target.value)}
-              value={country}/></div></div>
+              value={country}/></div>
+               */}
+              </div>
              </div>
 
              <div className='projectform-listitem' >
               <div className="context">
                 <div className="projectform-subtitle">Project image</div>
-                <div className="projectform-subtext">Add an image that clearly represents your project. Choose one that looks good at different sizes—it’ll appear on your project page, across the Kickstarter website and mobile apps, and (when shared) on social channels.</div>
+                <div className="projectform-subtext">Add an image that clearly represents your project. Choose one that looks good at different sizes—it'll appear on your project page, across the Fire Starter website and mobile apps, and (when shared) on social channels. A suggested image url is included for you, but you can add any image url you chose.</div>
               </div>
              <div >
              <label>
@@ -236,7 +256,7 @@ const ProjectForm=({project,formType})=>{
              <div className='projectform-listitem'>
              <div className="context">
               <div className="projectform-subtitle">Target launch date</div>
-              <div className="projectform-subtext">We’ll provide you with recommendations on when to complete steps that may take a few days to process. You can edit this date up until the moment you launch your project, which must always be done manually.</div>
+              <div className="projectform-subtext">We'll provide you with recommendations on when to complete steps that may take a few days to process. You can edit this date up until the moment you launch your project, which must always be done manually.</div>
              </div>
              <div>
              <label>
@@ -247,7 +267,7 @@ const ProjectForm=({project,formType})=>{
               placeholder='type your startDate'
               type="date"
               name="startDate"
-              min="2023-02-01"
+              min="2023-01-01"
               onChange={(e) => setStartDate(e.target.value)}
               value={startDate}/></div>
               </div>
@@ -288,7 +308,7 @@ const ProjectForm=({project,formType})=>{
               onChange={(e) => setDescription(e.target.value)}
               value={description}/></div>
               </div>
-             
+
              <div className='projectform-listitem'>
               <div className="context">
                 <div className="projectform-subtitle">Risks and challenges</div>
@@ -329,8 +349,8 @@ const ProjectForm=({project,formType})=>{
              </div>
             </form>
             {formType==="Edit Project" &&(
-              <div className="projectform-deletesec">
-              <button onClick={()=>deleteEvents(project.id)} className="projectform-delebutton" disabled={!!validationErrors.length}>Delete project</button>
+              <div className="projectform-button">
+              <button onClick={()=>deleteEvents(project.id)} className="projectform-delebutton">Delete project</button>
               </div>
                 )}
             <div className='projectform-errorsec'>

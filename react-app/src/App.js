@@ -17,6 +17,7 @@ import Testing from './components/Testing';
 import SearchResultPage from './components/Search';
 import ManageCenter from './components/Profile';
 import ProjectEntry from './components/Projects';
+import RewardEntry from './components/Rewards'
 import CreateReward from './components/Rewards/CreateReward';
 import EditReward from './components/Rewards/EditReward';
 import SearchBar from './components/Search/SearchBar';
@@ -49,11 +50,16 @@ function App() {
         <Route path='/' exact={true}>
           <Landing />
         </Route>
-        <ProtectedRoute path={['/profile','/createReward/:projectId','/editReward/:rewardId','/projects/:projectId/editpledge/:pledgeId']} >
+
+        <ProtectedRoute path={['/profile','/projects/:projectId/editpledge/:pledgeId']} >
           <ManageCenter />
         </ProtectedRoute>
           <ProtectedRoute path={['/createproject','/editproject/:projectId']} >
           <ProjectEntry />
+
+        </ProtectedRoute>
+          <ProtectedRoute path={['/createReward/:projectId','/editReward/:rewardId']} >
+          <RewardEntry />
         </ProtectedRoute>
 
         {/* <Route path='/login' exact={true}>

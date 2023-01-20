@@ -48,10 +48,11 @@ const allProjects = useSelector(state => {return state.projects})
 
         let booleanProjects = allProjectsArray.find(project => project.id == projectId)
         if (!booleanProjects) {
-            return (<div>This project doesn't exist. Would you like to create a project?
-                <Link className="create-project-link" to={`/createproject`}>
-                  <div>Create Project</div>
-                  </Link>
+            return (<div>This project doesn't exist.
+                {/* Would you like to create a project? */}
+                {/* <Link className="create-project-link" to={`/createproject`}> */}
+                  {/* <div>Create Project</div> */}
+                  {/* </Link> */}
             </div>)
         }
         console.log('does this work', booleanProjects.creatorId, userId)
@@ -59,17 +60,19 @@ const allProjects = useSelector(state => {return state.projects})
 
         //4 reward of project exists - check length of project array
         if(!rewards.length) {
-            return (<div>This project doesn't have any rewards yet. Would you like to create a reward for your project?
-                <button onClick={()=>rewardEvents(rewards.id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Project Rewards</button>
+            return (<div>This project doesn't have any rewards yet.
+                {/* Would you like to create a reward for your project? */}
+                {/* <button onClick={()=>rewardEvents(rewards.id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Project Rewards</button> */}
             </div>)
         }
           //3 compare user id to project creator id - check owner of project
 
           if(userId != booleanProjects.creatorId) {
-            return (<div>You don't own this or you are not logged in. Would you like to create a project?
-                 <Link className="create-project-link" to={`/createproject`}>
-                  <div>Create Project</div>
-                  </Link>
+            return (<div>You don't own this or you are not logged in.
+                {/* Would you like to create a project? */}
+                 {/* <Link className="create-project-link" to={`/createproject`}> */}
+                  {/* <div>Create Project</div> */}
+                  {/* </Link> */}
 
             </div>)
         }
@@ -84,7 +87,7 @@ const allProjects = useSelector(state => {return state.projects})
 
     return(
         <h1>
-        {rewards.map(({id,title,price,description,estimatedDelivery }) => (
+        {rewards.length ? (rewards.map(({id,title,price,description,estimatedDelivery }) => (
         <div key={id} className='managebox'>
         <div className='boxitems'>
             <NavLink to={`/`} className="links">
@@ -108,7 +111,11 @@ const allProjects = useSelector(state => {return state.projects})
             <button onClick={()=>deleteEvents(id)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button>
         </div>
         </div>
-      ))}
+      ))): (<div className="reward-form-container">
+            <div>
+                This project has no rewards yet. Add a reward (Button here)
+            </div>
+      </div>)}
 </h1>
     )
 }
