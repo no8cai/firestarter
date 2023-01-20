@@ -9,8 +9,8 @@ import { fetchProjectRewards } from '../../../store/reward';
 import '../PledgePage.css'
 
 const PledgeDetails = ({type,projectId,pledgeId}) => {
-    console.log(projectId)
-    console.log(pledgeId)
+    // console.log(projectId)
+    // console.log(pledgeId)
 
     const dispatch = useDispatch()
     const id=projectId
@@ -32,7 +32,15 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
         dispatch(getAllPledgesByProjectId(id))
     }, [dispatch])
 
-    console.log()
+
+    // let userId = 10
+
+    let pledges = useSelector(state => {return state.pledges})
+    // let pledgesArr = Object.values(pledges)
+    // console.log('-----------', pledges.userPledges[userId])
+    // console.log('------------', pledgesArr[1])
+    // console.log('**********', JSON.stringify(pledges).valueOf('backerId'))
+    // console.log()
     if(!rewardsArr) return null
     if(!project) return null
     // if(!pledges) return null
