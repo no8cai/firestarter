@@ -110,7 +110,7 @@ const ProjectForm=({project,formType})=>{
                   const errobj=await err.json();
                   errors.push(errobj.message)
                   setValidationErrors(errors)
-                  
+
                 });
             }
     }
@@ -123,7 +123,7 @@ const ProjectForm=({project,formType})=>{
           const errobj=await err.json();
           errors.push(errobj.message)
           setValidationErrors(errors)
-          
+
         });
         }
 
