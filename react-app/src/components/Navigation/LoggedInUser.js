@@ -77,11 +77,12 @@ function UserDataModal({user}) {
                 <p id="useremailline">{user.email}</p>
                 </div>
                 <div className="nav-backed-container">
-                  <p>Backed Projects</p>
+                  <Link to="/profile/pledges"><p>Backed Projects</p></Link>
+                  
                   {user && (pledges.slice(0, 2).map(pledge => {
                     return (
                         <div key={pledge.id} className="nav-backed-item">
-                            <Link to={`/projects/${pledge.Project.id}`}>
+                            <Link to={`/projects/${pledge.Project.id}/editpledge/${pledge.id}`}>
 
                             <div className="nav-thumbnail">{<img className="backed-thumbnail" src={pledge.Project.imageUrl}></img>}</div>
                             <div className="nav-backed-title">{pledge.Project.title}</div>
@@ -96,7 +97,8 @@ function UserDataModal({user}) {
                   ):(null)}
                 </div>
                 <div className="nav-created-container">
-                  <p>Created Projects</p>
+                  <Link to="/profile"><p>Created Projects</p></Link>
+                  
                   {user && userProjects.length ? (userProjects.slice(0, 2).map(project => {
                     return (
                         <div key={project.id} className="nav-backed-item">
