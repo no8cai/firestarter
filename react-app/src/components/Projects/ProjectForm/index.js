@@ -105,7 +105,7 @@ const ProjectForm=({project,formType})=>{
             }
         else if(formType==="Edit Project"){
                 dispatch(fetchUpdateProject(tempProject))
-                .then(history.push('/profile'))
+                .then(()=>history.push('/profile'))
                 .catch(async (err)=>{
                   const errobj=await err.json();
                   errors.push(errobj.message)

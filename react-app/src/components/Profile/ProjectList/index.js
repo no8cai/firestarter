@@ -34,37 +34,46 @@ const ProjectManager=()=>{
     const addRewardEvents=(id)=>{
         history.push(`/createReward/${id}`)
     }
-    const deleteEvents= (id)=>{
-        dispatch(fetchDeleteProject(id))
-    }
 
     if(!userprojects) return null
 
     return(
-        <h1>
-                {userprojects.map(({ id, title,category,city,state,country,fundingGoal,starDate,endDate }) => (
+        <div>
+                <div className="projectlist-titles">
+                    <div className="projectlist-titletext">Project</div>
+                    <div className="projectlist-titletext">Title</div>
+                    <div className="projectlist-titletext">Category</div>
+                    <div className="projectlist-titletext">Location</div>
+                    <div className="projectlist-titletext">Date</div>
+                    <div className="projectlist-titletext">Funding Goal</div> 
+                    <div className="projectlist-titletext">More</div> 
+                </div>
+                {userprojects.map(({ id, title,category,city,state,country,fundingGoal,startDate,endDate,imageUrl }) => (
                 <div key={id} className='managebox'>
-                <div className='boxitems'>
-                    <NavLink to={`/projects/${id}`} className="links">
-                    <h3>{title}</h3>
-                    <div>{category}</div>
-                    <div className='manageaddress'>
-                       <div>{`${city},${state},${country}`}</div>
-                       {/* <div><i className="fas fa-star" />{avgRating}</div> */}
+                <div className='projectlist-boxitem'>
+                    <NavLink to={`/projects/${id}`} className="projectlist-links">
+                    {/* <div>{imageUrl}</div> */}
+                    <div className="projectlist-item"><img src={imageUrl} className="projectlist-image"/></div>
+                    <div className="projectlist-item">{title}</div>
+                    <div className="projectlist-item">{category}</div>
+                    <div className="projectlist-item">
+                    <div>{`${city},${state},${country}`}</div>
                     </div>
-                    <div>
-                       {`${fundingGoal}`}
+                    <div className="projectlist-item">
+                        <div>{`From ${startDate} to ${endDate}`}</div>
                     </div>
+                    <div className="projectlist-item">{`${fundingGoal}`}</div>
                     </NavLink>
                 </div>
-                <div className="button-section">
-                    <button onClick={()=>editEvents(id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Edit</button>
-                    <button onClick={()=>rewardEvents(id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Project Rewards</button>
-                    <button onClick={()=>addRewardEvents(id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Add New Reward</button>
+                <div className="projectlist-buttonsec">
+                    
+                    <div className="project-buttop"><div onClick={()=>editEvents(id)} className="projectlist-buttons"><i className="fa-regular fa-pen-to-square" />Edit this Project</div></div>
+                    <div className="project-buttop"><div onClick={()=>rewardEvents(id)} className="projectlist-buttons"><i className="fa-solid fa-list" />Project Rewards List</div></div>
+                    <div className="project-buttop"><div onClick={()=>addRewardEvents(id)} className="projectlist-buttons"><i className="fa-solid fa-circle-plus" />Add New Reward</div></div>
                 </div>
                 </div>
               ))}
-        </h1>
+        </div>
     )
 
 }
