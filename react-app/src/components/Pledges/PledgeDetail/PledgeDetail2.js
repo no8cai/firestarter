@@ -37,9 +37,9 @@ const PledgeDetails2 = ({type,projectId,pledgeId}) => {
     // console.log('rewardsArr-----', rewardsArr)
     const [ oKRewardId, setOkRewardId ] = useState(false)
     const thisProjectsPledges = useSelector(state => state.pledges.pledgesById)
-    const pPledges = Object.values(thisProjectsPledges)
+    // const pPledges = Object.values(thisProjectsPledges)
     // console.log("come ooon",pPledges)
-    const pfiltered = pPledges.filter(pledge => pledge.id === parseInt(pledgeId))
+    // const pfiltered = pPledges.filter(pledge => pledge.id === parseInt(pledgeId))
     // console.log("PPPPPPP", pfiltered)
             // this means one of the rewards is correct
             
