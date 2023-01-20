@@ -199,19 +199,23 @@
 }
 
 .dev-img-holder {
-    border: red solid 1px;
+    /* border: red solid 1px; */
     min-height: 3rem;
     width: 15rem;
-    height: 20rem;
+    height: 15rem;
 }
 
 .each-dev {
     width: 25%;
-    height: 25rem;
-    border: red solid 1px;
+    height: 18rem;
+    /* border: red solid 1px; */
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.dev-name {
+    font-weight: 550;
 }
 
 .img {
@@ -247,7 +251,7 @@
    text-overflow: ellipsis;
    display: -webkit-box;
    -webkit-line-clamp: 2; /* number of lines to show */
-           line-clamp: 2; 
+           line-clamp: 2;
    -webkit-box-orient: vertical;
 }
 
