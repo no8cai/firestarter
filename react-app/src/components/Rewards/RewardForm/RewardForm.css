@@ -1,11 +1,166 @@
+
 .reward-form-container{
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* justify-content: center; */
+
 }
 
 .reward-form-form{
     display: flex;
     flex-direction: column;
     gap:10px;
+}
+
+
+.reward-form-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'LATO', 'Lucida Sans Regular', sans-serif;
+    padding-top: 10px;
+    padding-bottom: 40px;
+}
+
+.reward-form-form{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    width: 100vw;
+    margin-top: 30px;
+}
+
+.reward-form-list-item{
+    display: flex;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-top: 1px solid rgb(0, 0, 0,20%);
+    /* max-width: 300px; */
+
+}
+
+.reward-form-title-sec{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:15px
+}
+
+/* .context{
+    padding-left: 5vw;
+    width: 40vw;
+}
+    */
+
+
+input{
+    width: 50vw;
+    border: 1px solid rgb(0, 0, 0,10%);
+    border-radius: 2px;
+    height: 40px;
+    /* margin-right: 100px; */
+
+}
+.reward-form-textarea{
+    width: 50vw;
+    height: 200px;
+    border: 1px solid rgb(0, 0, 0,10%);
+    /* margin-right: 100px; */
+}
+
+.reward-form-location{
+    display: flex
+}
+
+.reward-form-subtitle{
+    font-size: 18px;
+}
+
+.reward-form-subtext{
+    font-size: 14px;
+    padding-top: 10px;
+    color:#656969;
+}
+label{
+    font-size: 14px;
+}
+
+.reward-form-title1{
+    font-size: 22px;
+}
+
+.reward-form-title2{
+    font-size: 22px;
+}
+
+.reward-form-title3{
+    font-size: 17px;
+    color: #656969;
+}
+
+.reward-button{
+    font-family: 'LATO', 'Lucida Sans Regular', sans-serif;
+    align-items: center;
+    background-color: #028858;
+    color:white;
+    cursor: pointer;
+    border:#028858 solid 1px;
+    width: 250px;
+    height: 40px;
+    font-size: 16px;
+    transition-duration: 0.4s;
+}
+.reward-button:hover{
+    background-color:#015738;
+}
+.reward-form-button{
+    display: flex;
+    justify-content: center;
+
+}
+.reward-form-delete-button{
+    margin-top: 1em;
+    font-family: 'LATO', 'Lucida Sans Regular', sans-serif;
+    align-items: center;
+    background-color: #028858;
+    color:white;
+    cursor: pointer;
+    border:#028858 solid 1px;
+    width: 250px;
+    height: 40px;
+    font-size: 16px;
+    transition-duration: 0.4s;
+
+}
+
+
+/* .reward-main-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+    padding-left: 5%;
+    margin-right: 0px;
+    padding-bottom: 5em;
+    margin-top: 1.5rem;
+    padding: 0px;
+} */
+
+
+.reward-form-error-sec {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.reward-form-error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
