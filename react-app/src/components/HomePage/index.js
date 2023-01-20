@@ -174,19 +174,19 @@ function Landing() {
             </div>
             <div className='each-dev'>
                 <div className="dev-img-holder">
-                    <img className='img' src='https://media.licdn.com/dms/image/C5603AQFMpdB1qR9D6g/profile-displayphoto-shrink_200_200/0/1519277230393?e=1679529600&v=beta&t=q5W5OEJx_5Y3T47-a48OD2f2j_m79durB1DF6rX1Gys'></img>
+                    <img className='img' src='https://media.licdn.com/dms/image/D5603AQHSp5XSjXQ8Lw/profile-displayphoto-shrink_200_200/0/1674231537019?e=1679529600&v=beta&t=F5MVi1TB32ZgPzBy5ffdzheMvgRM6wZaikXOCfJwSRM'></img>
                 </div>
                 <div className='dev-name'>Kirin Agcaoili</div>
                 <a href='https://github.com/kagc' ><i class="fa fa-github"></i></a>
-                <a href='https://www.linkedin.com/in/annika-mcpeek/'><i class="fa fa-linkedin"></i></a>
+                <a href='https://www.linkedin.com/in/kirin-agcaoili-a84a10187/'><i class="fa fa-linkedin"></i></a>
             </div>
             <div className='each-dev'>
                 <div className="dev-img-holder">
-                <img className='img' src='https://media.licdn.com/dms/image/C5603AQFMpdB1qR9D6g/profile-displayphoto-shrink_200_200/0/1519277230393?e=1679529600&v=beta&t=q5W5OEJx_5Y3T47-a48OD2f2j_m79durB1DF6rX1Gys'></img>
+                <img className='img' src='https://avatars.githubusercontent.com/u/26307465?v=4'></img>
                 </div>
                 <div className='dev-name'>Eric Chai</div>
                 <a href='https://github.com/no8cai' ><i class="fa fa-github"></i></a>
-                <a href='https://www.linkedin.com/in/annika-mcpeek/'><i class="fa fa-linkedin"></i></a>
+                <a href='https://www.linkedin.com/in/eric-chai-b5b9b337/'><i class="fa fa-linkedin"></i></a>
             </div>
             <div className='each-dev'>
                 <div className="dev-img-holder">
