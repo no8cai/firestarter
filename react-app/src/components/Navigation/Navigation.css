@@ -302,15 +302,11 @@
     /* padding-left: 0.5rem; */
 }
 
-/* .left-nav> a > span:hover {
-    text-decoration: underline;
-    color: green;
-} */
-
-/* a:hover {
+button:hover {
     text-decoration: underline;
     color: rgb(22, 155, 89);
-} */
+    cursor: pointer;
+  }
 
 li {
     list-style-type: none;  

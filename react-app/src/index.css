@@ -46,8 +46,3 @@ button {
   font-family: 'LATO', 'Lucida Sans Regular', sans-serif;
 }
 
-button:hover {
-  text-decoration: underline;
-  color: rgb(22, 155, 89);
-  cursor: pointer;
-}
