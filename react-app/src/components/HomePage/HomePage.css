@@ -36,7 +36,7 @@
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: darkgreen;
+    background-color: #028858;
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
   }
@@ -124,7 +124,7 @@
 
 .nums-text {
     font-size: 2rem;
-    color: rgb(0, 100, 62)
+    color: #028858;
 }
 
 .subtext {

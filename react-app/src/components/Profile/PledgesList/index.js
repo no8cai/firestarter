@@ -38,7 +38,7 @@ const PledgeManager=()=>{
 
         <div key={id} className='managebox'>
         <div className='boxitems'>
-            <NavLink to={`/`} className="projectlist-links">
+            <NavLink to={`/projects/${Project.id}`} className="projectlist-links">
             <div className="projectlist-item"><img src={Project.imageUrl} className="projectlist-image"/></div>
             <div className="projectlist-item">{Project.title}</div>
             <div className="projectlist-item">{Reward.price}</div>

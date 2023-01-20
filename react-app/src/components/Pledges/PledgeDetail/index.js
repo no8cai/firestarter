@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory, useParams } from 'react-router-dom';
 
-import { createPledge, getAllPledgesByProjectId, updatePledge, getPledgesByCurrentUser } from '../../../store/pledge';
+import { createPledge, getAllPledgesByProjectId, updatePledge, getPledgesByCurrentUser, getOnePledge } from '../../../store/pledge';
 import { fetchOneProject } from '../../../store/project';
 import { fetchProjectRewards } from '../../../store/reward';
 
 
 import '../PledgePage.css'
+import PledgeDetails2 from './PledgeDetail2';
 
 const PledgeDetails = ({type,projectId,pledgeId}) => {
     // console.log(projectId)
@@ -16,12 +17,13 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     const dispatch = useDispatch()
     const id=projectId
     const history = useHistory()
-    const sessionUser = useSelector(state => state.session.user);
+    // const sessionUser = useSelector(state => state.session.user);
 
     const userPledges = useSelector(state => state.pledges.userPledges)
     // console.log(userPledges, "EEEEEEEEEEE")
     const uPledges = Object.values(userPledges)
-    const filtered = uPledges.filter(pledge => parseInt(pledge.projectId) === parseInt(projectId))
+    const filtered = uPledges.filter(pledge => parseInt(pledgeId) === parseInt(pledge.id))
+    console.log(filtered, "Length means pledgeid belongs to user")
     // const userFilter = uPledges.filter(pledge => pledgeId ===)
     // console.log("AAAAAAAAA",filtered[0].rewardId)
     // console.log(filtered)
@@ -36,11 +38,22 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     // console.log('rewards------', rewards)
     let rewardsArr = Object.values(rewards).filter((reward)=>reward.projectId===+projectId)
     // console.log('rewardsArr-----', rewardsArr)
-    const [ oKRewardId, setOkRewardId ] = useState(false)
-    const thisProjectsPledges = useSelector(state => state.pledges.pledgesById)
-    const pPledges = Object.values(thisProjectsPledges)
+    // const [ oKRewardId, setOkRewardId ] = useState(false)
+    // const thisProjectsPledges = useSelector(state => state.pledges.pledgesById)
+    // const pPledges = Object.values(thisProjectsPledges)
     // console.log("come ooon",pPledges)
-    const pfiltered = pPledges.filter(pledge => pledge.id === parseInt(pledgeId))
+    // const pfiltered = pPledges.filter(pledge => pledge.id === parseInt(pledgeId))
+
+    // light uses PLEDGE id, PULL the pledge and compare that it 1. belongs to project 2. pledge belongs to user 3. 
+    const currentPledge = useSelector(state => state.pledges.singlePledge)
+    // if(currentPledge){
+
+    //     console.log("current pledge", "backerid",currentPledge.backerId, "projectid", currentPledge.projectId, "rewardid", currentPledge.rewardId)
+    //     console.log('page projectid', id)
+
+    //     console.log("projectid matches pledgeid", id, currentPledge.projectId)
+
+    // }
     // console.log("PPPPPPP", pfiltered)
             // this means one of the rewards is correct
 
@@ -57,6 +70,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
         dispatch(fetchProjectRewards(id))
         dispatch(getAllPledgesByProjectId(id))
         dispatch(getPledgesByCurrentUser())
+        dispatch(getOnePledge(pledgeId))
     }, [dispatch])
 
 
@@ -67,8 +81,10 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     // console.log('-----------', pledges.userPledges[userId])
     // console.log('------------', pledgesArr[1])
     // console.log('**********', JSON.stringify(pledges).valueOf('backerId'))
-    if(!rewards || !thisProjectsPledges || !userPledges) return null
-    // if(!rewardsArr) return null
+
+    if(!rewards || !userPledges || !currentPledge || filtered.length === 0 ) return null
+
+    if(!rewardsArr) return null
     // if(!project) return null
     // if(!pledges) return null
 
@@ -81,8 +97,6 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
             dispatch(updatePledge(payload))
             history.push(`/profile/pledges`)
     }
-
-
 
     const createPledgeBtn = (rewardId, projectId) => {
         // if(!sessionUser) return alert('I am working')
@@ -98,13 +112,16 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
             )
     }
 
-
-
+   
+    console.log(pledgeId, currentPledge.id, filtered.length);
 
 
     return(
         <>
-        {project !== undefined && rewardsArr.length !== 0 && filtered.length !== 0 && pfiltered.length !== 0 ? (<div className='pledge-main-container'>
+        {
+        // project !== undefined && rewardsArr.length !== 0 && filtered.length !== 0 && pfiltered.length !== 0 ? 
+        project !== undefined && parseInt(projectId) === currentPledge.projectId && filtered.length ? 
+        (<div className='pledge-main-container'>
 
 <div className='pledge-project-title'>
     <Link className='project-link' key={project.title} to={`/projects/${project.id}`}>
@@ -126,9 +143,10 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
 <div className='reward-container'>
     {rewardsArr.map(reward =>{
         let chosenReward = "not-this-reward"
-        // console.log(pledgeId, reward.id, reward.title)
-        if (filtered[0].rewardId === reward.id) {
+        // console.log("the whole reward",currentPledge.rewardId)
+        if (filtered.length && filtered[0].rewardId === reward.id) {
             chosenReward = "this-reward"}
+            // console.log("current pledge reward id then reward id", currentPledge.rewardId, reward.id )
      return (
         <ul key={reward.id}>
 
