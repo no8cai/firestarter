@@ -9,6 +9,7 @@ import OpenModalButton from '../OpenModalButton';
 import './Navigation.css'
 import UserDataModal from "./LoggedInUser";
 import proficon from '../../../src/images/favicon.ico'
+import logicon from '../../../src/images/loginicon.png'
 
 function ProfileButton({ user }) {
     const history = useHistory()
@@ -53,8 +54,7 @@ function ProfileButton({ user }) {
   
     return (
       <div className='profile-button-div'>
-        <button style={{ backgroundImage: `url('${proficon}'`, backgroundSize: 'contain' }} onClick={openMenu} className={pClassName}>
-        </button>
+        <button style={{ backgroundImage: `url('${!user ? logicon : proficon}'`, backgroundSize: 'contain' }} onClick={openMenu} className={pClassName}></button>
         <div className={ulClassName} ref={ulRef}>
           {user ? (
             <div className='modal-dropdown'>

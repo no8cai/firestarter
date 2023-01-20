@@ -42,7 +42,7 @@
     padding-bottom: 5px;
     padding-right: 5px;
     padding-left: 12px;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     text-align: start;
     font-size: 2em;
     color: gray !important;
@@ -54,8 +54,13 @@
     height: 2.5rem;
     width: 2.5rem;
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
 }
+
+/* .profile-button> span {
+    font-size: 0.7rem;
+    display: flex;
+} */
 
 .profile-button-outline {
     border: solid darkgreen 2px !important; 
@@ -76,7 +81,7 @@
     height: 2.5rem;
     width: 2.5rem;
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
 }
 
 /* .profile-button:hover {
@@ -131,7 +136,7 @@
     z-index: 99;
     float: right;
     background: white;
-    right: 4rem;
+    right: 1rem;
     left: auto;
 }
 
@@ -291,3 +296,4 @@ li {
     height: 2.5rem;
     width: auto;
 }
+
