@@ -8,6 +8,8 @@ const EditProject=()=>{
     const {projectId}=useParams();
 
     const tempproject = useSelector(state=>state.projects[projectId])
+    
+    if(!tempproject) return null
 
     const project={
         id:tempproject.id,

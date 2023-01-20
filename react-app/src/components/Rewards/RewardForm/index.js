@@ -65,7 +65,7 @@ const RewardForm=({reward,formType,projectId})=>{
             dispatch(fetchCreateReward(tempReward, projectId))
             .then(()=>{history.push(`/profile`)})
             .catch(async (err)=>{
-              const errobj=await err;
+              const errobj=await err.json();
               errors.push(errobj.message)
               setValidationErrors(errors)
             });
@@ -74,7 +74,7 @@ const RewardForm=({reward,formType,projectId})=>{
                 dispatch(fetchUpdateReward(tempReward))
                 .then(history.push('/profile'))
                 .catch(async (err)=>{
-                  const errobj=await err;
+                  const errobj=await err.json();
                   errors.push(errobj.message)
                   setValidationErrors(errors)
                 });

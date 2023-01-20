@@ -49,12 +49,12 @@ function App() {
         <Route path='/' exact={true}>
           <Landing />
         </Route>
-        <Route path={['/profile','/createReward/:projectId','/editReward/:rewardId','/projects/:projectId/editpledge/:pledgeId']} >
+        <ProtectedRoute path={['/profile','/createReward/:projectId','/editReward/:rewardId','/projects/:projectId/editpledge/:pledgeId']} >
           <ManageCenter />
-        </Route>
-          <Route path={['/createproject','/editproject/:projectId']} >
+        </ProtectedRoute>
+          <ProtectedRoute path={['/createproject','/editproject/:projectId']} >
           <ProjectEntry />
-        </Route>
+        </ProtectedRoute>
 
         {/* <Route path='/login' exact={true}>
           <LoginForm />
@@ -83,9 +83,9 @@ function App() {
         <Route path='/discover' exact={true}>
           <DiscoverPage />
           </Route>
-        <Route path='/projects/:projectId/createpledges'>
+        <ProtectedRoute path='/projects/:projectId/createpledges'>
           <CreateAPledge/>
-        </Route>
+        </ProtectedRoute>
         <Route>
           <h1>404 error</h1>
         </Route>

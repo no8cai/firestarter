@@ -79,11 +79,16 @@ label{
 }
 
 .projectbutton{
+    font-family: 'LATO', 'Lucida Sans Regular', sans-serif;
     align-items: center;
     background-color: #028858;
     color:white;
     cursor: pointer;
     border:#028858 solid 1px;
+    width: 250px;
+    height: 40px;
+    font-size: 16px;
+    transition-duration: 0.4s;
 }
 .projectbutton:hover{
     background-color:#015738;
@@ -93,6 +98,46 @@ label{
     justify-content: center;
 
 }
+
+
+.projectform-errorsec{
+    padding-top: 40px;
+    font-family: 'LATO', 'Lucida Sans Regular', sans-serif;
+}
+
+.error-title{
+    text-align: center;
+}
+
+.projectform-errortext{
+    color:rgb(101, 105, 105,0.7);
+    padding-bottom: 10px;
+}
+
+.ertlbu{
+    color: #015738;
+    font-size: 25px;
+    text-shadow: #028858;
+    border:none;
+    gap:20px;
+}
+
+.error-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+}
+
+.projectform-errtitletext{
+    font-size: 30;
+    color: #028858;
+}
+
+.projectform-deletesec{
+    margin-top: 30px;
+}
+
 .projectform-delebutton{
     align-items: center;
     background-color: red;
