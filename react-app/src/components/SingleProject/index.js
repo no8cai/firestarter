@@ -2,6 +2,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
 import './SingleProject.css'
 import React, { useEffect, useState } from 'react'
+import ProfileButton from '../Navigation/ProfileButton';
 import { fetchOneProject } from '../../store/project'
 import { fetchProjectRewards } from '../../store/reward'
 import { getAllPledgesByProjectId} from '../../store/pledge'
@@ -9,6 +10,7 @@ import { getAllPledges } from '../../store/pledge';
 import {fetchDeleteReward} from '../../store/reward'
 import { fetchAllProjects } from '../../store/project';
 import { getPledgesByCurrentUser } from '../../store/pledge'
+let otherSrc = 'https://ksr-ugc.imgix.net/assets/039/670/652/dc65feab31e919618d8c1041e23226ec_original.tiff?ixlib=rb-4.0.2&crop=faces&w=1024&h=576&fit=crop&v=1673737380&auto=format&frame=1&q=92&s=b22f9e32f0f2a6c2058ef5f07b35221d'
 
 
 
@@ -16,6 +18,7 @@ const SingleProject = () => {
     const { id } = useParams();
     const dispatch = useDispatch()
     const history = useHistory()
+    const [newSrc, setNewSrc] = useState('')
     const sessionUser = useSelector(state => state.session.user);
 
   const findProjectTest = async () => {
@@ -89,7 +92,15 @@ const SingleProject = () => {
     <div className="sp-main-content add-border">
         <div className="sp-left-side-media add-border">
             <div className="sp-media-img">
-                <img src={oneProject.imageUrl} alt="Project Image"/>
+                <img src={oneProject.imageUrl}
+                alt="Project Image"
+                onError={(e)=>{
+                    if(e.target.src !== otherSrc) {
+                    setNewSrc(otherSrc)
+                    e.target.src = otherSrc
+                    }
+                }}
+                />
             </div>
             <div className='sp-location'>
             <i className ="fa-solid fa-fire"></i>&nbsp;Project We Love&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -112,7 +123,20 @@ const SingleProject = () => {
                 <p>days to go</p>
             </div>
             <div className="sp-add-border sp-right-side-buttons">
-                <button onClick={()=>addPledgesEvents(id)} className='sp-green-button'>Back this project</button>
+
+                    {sessionUser? <button onClick={()=>addPledgesEvents(id)} className='sp-green-button'>Back this project</button>
+                    : <div className='sp-log-in-to-back'>
+
+                    <p>Log in to back this project &nbsp;
+                        {/* <i className="fa-solid fa-arrow-right"></i> */}
+                        &nbsp;</p>
+                    <ProfileButton user={sessionUser} />
+                   </div>
+                    }
+
+
+
+
                 <br/>
                 <button className='sp-remind-me'><i className="fa-regular fa-bookmark"></i> Remind me</button>
                 <p>All or nothing. This project will only be funded

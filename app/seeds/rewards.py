@@ -3,7 +3,7 @@ from app.models import db, Reward, environment, SCHEMA
 
 def seed_rewards():
     #project1
-    reward1 = Reward(title="Photoboook + Thank You", price=10,
+    reward1 = Reward(title="Photobook + Thank You", price=10,
         description="One beautifully designed digital copy of the project photo book with photographs of all the pieces made for this project plus backer acknowledgement on our website", projectId=1, estimatedDelivery="2023-10-01")
     reward2 = Reward(title="Tiny pot + Photobook + Thank You", price=30, description="A miniature pot thrown on the potter's wheel and made with all the same love as a regular sized pot! shipping not included, see fulfillment.", projectId=1, estimatedDelivery="2023-11-01")
     reward3 = Reward(title="Handcrafted Mug", price=50, description="Handcrafted mug thrown on the potter's wheel, a reliable vessel for your favorite morning drink! INCLUDES: Backer Acknowledgement on Bright Raven Studio Website, Project Photobook (PDF), Handcrafted Mug", projectId=3, estimatedDelivery="2023-12-01")

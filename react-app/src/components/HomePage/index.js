@@ -7,20 +7,29 @@ import { useEffect, useState } from 'react'
 import { getAllPledges, getAllPledgesByProjectId, getPledgesByCurrentUser } from '../../store/pledge';
 import SearchResultPage from '../Search';
 import background from '../../../src/images/kstrtrbg.png'
+let otherSrc = 'https://ksr-ugc.imgix.net/assets/039/670/652/dc65feab31e919618d8c1041e23226ec_original.tiff?ixlib=rb-4.0.2&crop=faces&w=1024&h=576&fit=crop&v=1673737380&auto=format&frame=1&q=92&s=b22f9e32f0f2a6c2058ef5f07b35221d'
 
 
 function Landing() {
     const dispatch = useDispatch()
+    const [newSrc, setNewSrc] = useState('')
+
+    const projectsObj = useSelector(state => state.projects)
+    const projects = Object.values(projectsObj)
+    // const randId
+    const [ randId, setRandId ] = useState(Math.floor(Math.random() * (projects.length) + 1))
+    console.log('randId',randId)
+    const pledgesObj = useSelector(state => state.pledges.allPledges)
+        const pledges = Object.values(pledgesObj)
 
     useEffect(() => {
         dispatch(fetchAllProjects())
-        // dispatch(fetchOneProject())
+        dispatch(fetchOneProject(randId))
         dispatch(getAllPledges())
     }, [dispatch])
 
-    const pledgesObj = useSelector(state => state.pledges.allPledges)
-    const pledges = Object.values(pledgesObj)
 
+    // console.log("all pledges", pledgesObj)
 
 
     let totalPledges = 0
@@ -30,25 +39,27 @@ function Landing() {
         })
     }
 
-    const projectsObj = useSelector(state => state.projects)
-    const projects = Object.values(projectsObj)
     // console.log(projects)
-    const randId = Math.floor(Math.random() * (projects.length) + 1)
-    // console.log("MATH", randId)
     const randProject = useSelector(state => state.projects[randId])
     // console.log("AAAAAAAAA", randProject)
 
-    if (!projectsObj || !randProject || !pledgesObj || pledges.length == 0) return null
 
     let pledgeTotal = 0
-    let randPledges = pledges.filter(pledge => pledge.projectId === randId)
-    randPledges.forEach(pledge => {
-        pledgeTotal += parseFloat(pledge.Reward.price)
-    })
-    let currentProgress = ((pledgeTotal * 100)/(randProject.fundingGoal)).toFixed(2)
+    // let randPledges = pledges.filter(pledge => pledge.projectId === randId)
+    // randPledges.forEach(pledge => {
+    //     pledgeTotal += parseFloat(pledge.Reward.price)
+    // })
+    let currentProgress
+    // if (randProject !== undefined){
+    //     currentProgress = ((pledgeTotal * 100)/(randProject.fundingGoal)).toFixed(2)
+    // }
+
+
+
     // console.log(currentProgress, pledgeTotal, randProject.fundingGoal)
 
 
+    if (!projectsObj || !randProject || !pledgesObj ) return null
 
 
     return (
@@ -108,7 +119,19 @@ function Landing() {
             <div className="feature-project-holder">
                 <span className="home-section-title">FEATURE PROJECT</span>
                 <Link className="feature-link" to={`/projects/${randProject.id}`}>
-                    <div className="feature-image"><img className='img' src={randProject.imageUrl}></img></div>
+                    <div className="feature-image">
+                        <img
+                        className='img'
+                        src={randProject.imageUrl}
+                        alt={randProject.title}
+                        onError={(e)=>{
+                                if(e.target.src !== otherSrc) {
+                                setNewSrc(otherSrc)
+                                e.target.src = otherSrc
+                                }
+                            }}
+                            />
+                            </div>
                     <div className="sp-add-border sp-bar-back" role='progressbar'>
                     <div className='sp-green-bar' style={{width: `${currentProgress}%`}}></div>
                     </div>
@@ -125,7 +148,7 @@ function Landing() {
                         let counter = 0
                         pledges.forEach(pledge => {
                             if (project.id == pledge.Project.id){
-                                pledgeTotal += pledge.Reward.price
+                                pledgeTotal += parseInt(pledge.Reward.price)
                                 counter++
                             }
                         })
@@ -133,7 +156,18 @@ function Landing() {
                 <div key={project.id} className="rec-projects">
                     <Link to={`/projects/${project.id}`}>
 
-                    <div className="rec-project-thumbnail"><img className='img' src={project.imageUrl}></img></div>
+                    <div className="rec-project-thumbnail">
+                        <img
+                        className='img'
+                        src={project.imageUrl}
+                        onError={(e)=>{
+                            if(e.target.src !== otherSrc) {
+                            setNewSrc(otherSrc)
+                            e.target.src = otherSrc
+                            }
+                        }}
+                            />
+                            </div>
                     <div className="rec-project-details">
                         <span className="rec-project-title">{project.title}</span>
                         <span className="rec-project-funded">{counter !== 0 ? Math.ceil(((pledgeTotal)/project.fundingGoal)*100) : 0}% funded</span>
@@ -152,7 +186,7 @@ function Landing() {
     <div className="line-break"></div>
 
     <div className="content-container">
-        
+
     </div>
 
     <div className="line-break"></div>
@@ -165,20 +199,38 @@ function Landing() {
      </div>
         <div className="devbox">
             <div className='each-dev'>
-                    <div className="dev-img-holder"></div>
-                    <div>Dev 1</div>
+                    <div className="dev-img-holder">
+                        <img className='img' src='https://media.licdn.com/dms/image/C5603AQFMpdB1qR9D6g/profile-displayphoto-shrink_200_200/0/1519277230393?e=1679529600&v=beta&t=q5W5OEJx_5Y3T47-a48OD2f2j_m79durB1DF6rX1Gys'></img>
+                    </div>
+                    <div className='dev-name'>Annika Mcpeek</div>
+                    <a href='https://github.com/amcpeek' ><i class="fa fa-github"></i></a>
+                    <a href='https://www.linkedin.com/in/annika-mcpeek/'><i class="fa fa-linkedin"></i></a>
             </div>
             <div className='each-dev'>
-                <div className="dev-img-holder"></div>
-                <div>Dev A</div>
+                <div className="dev-img-holder">
+                    <img className='img' src='https://media.licdn.com/dms/image/D5603AQHSp5XSjXQ8Lw/profile-displayphoto-shrink_200_200/0/1674231537019?e=1679529600&v=beta&t=F5MVi1TB32ZgPzBy5ffdzheMvgRM6wZaikXOCfJwSRM'></img>
+                </div>
+                <div className='dev-name'>Kirin Agcaoili</div>
+                <a href='https://github.com/kagc' ><i class="fa fa-github"></i></a>
+                <a href='https://www.linkedin.com/in/kirin-agcaoili-a84a10187/'><i class="fa fa-linkedin"></i></a>
             </div>
             <div className='each-dev'>
-                <div className="dev-img-holder"></div>
-                <div>Dev α</div>
+                <div className="dev-img-holder">
+                <img className='img' src='https://avatars.githubusercontent.com/u/26307465?v=4'></img>
+                </div>
+                <div className='dev-name'>Eric Chai</div>
+                <a href='https://github.com/no8cai' ><i class="fa fa-github"></i></a>
+                <a href='https://www.linkedin.com/in/eric-chai-b5b9b337/'><i class="fa fa-linkedin"></i></a>
             </div>
             <div className='each-dev'>
-                <div className="dev-img-holder"></div>
-                <div>Dev 👍</div>
+                <div className="dev-img-holder">
+                    <img className='img' src='https://media.licdn.com/dms/image/D4E03AQFxAGW_cPRZwQ/profile-displayphoto-shrink_200_200/0/1674225013679?e=1679529600&v=beta&t=W5qXSonUJhsxWL3pVSm_2nDOBGiUqqpm-1umhspVvz0'></img>
+
+                </div>
+                <div className='dev-name'>Cory Bogert</div>
+                <a href='https://github.com/Cory-Bogert' ><i class="fa fa-github"></i></a>
+                <a href='https://www.linkedin.com/in/cory-bogert-754a7a230/'><i class="fa fa-linkedin"></i></a>
+
             </div>
         </div>
     </div>
