@@ -2,16 +2,37 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCreateReward, fetchUpdateReward, fetchDeleteReward } from "../../../store/reward";
+import { fetchOneProject } from "../../../store/project";
 import './RewardForm.css'
 
 ////MEEEEEEEEEEEE
 
 const RewardForm=({reward,formType,projectId})=>{
-  //import associated project
+  //import associated project by project id, which I have
+  //view the project end date
+  //check the project id date is earlier than the start date of the estimated delivery
 
     let initDescription,initEstimatedDelivery,initPrice,initTitle
     const history=useHistory()
     const dispatch = useDispatch();
+
+    const findProjectTest = async () => {
+      const returnProject = await dispatch(fetchOneProject(projectId))
+    }
+
+    useEffect(() => {
+      findProjectTest()
+   }, [dispatch])
+
+    const oneProject = useSelector(state => {return state.projects[projectId]})
+
+    if (oneProject) {
+      console.log('what is one project', oneProject.endDate)
+
+
+    }
+
+
 
     if(formType==="Edit Reward"){
         initDescription=reward.description;
@@ -51,6 +72,8 @@ const RewardForm=({reward,formType,projectId})=>{
         else if(!(/^\d+(\.\d{1,2})?$/.test(price))){errors.push("reward's price must be within 2 decimal places");}
         if(estimatedDelivery.length<=0){errors.push("reward's estimated delivery is required");}
         else if(estimatedDelivery.length>=50){errors.push("reward's estimated delivery must be less than 50 characters")}
+        if(oneProject && oneProject.endDate && oneProject.endDate > estimatedDelivery ) {errors.push(`
+        Your current estimated delivery date in this form is ${estimatedDelivery} and it needs to be updated to be after the associated project's campaign end date of ${oneProject.endDate}.`)}
 
         setValidationErrors(errors);
 
@@ -128,7 +151,8 @@ const RewardForm=({reward,formType,projectId})=>{
             <div className='reward-form-list-item'>
             <div className="title-context context">
               <div className="reward-form-subtitle">Estimated Delivery Date</div>
-              <div className="reward-form-subtext">For packages being mailed to your backers, please enter an estimated delivery date. You can update this as needed.</div>
+              <div className="reward-form-subtext">For packages being mailed to your backers, please enter an estimated delivery date. You can update this as needed.
+              This needs to be after the end date of your funding campaign. </div>
             </div>
                 <div>
                 <label>

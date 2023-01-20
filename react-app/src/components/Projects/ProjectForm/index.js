@@ -86,10 +86,7 @@ const ProjectForm=({project,formType})=>{
         else if(fundingGoal<=0){errors.push("Project's funding goal must be greater than 0");}
         else if(!(/^\d+(\.\d{1,2})?$/.test(fundingGoal))){errors.push("Project's funding goal must be within 2 decimal places");}
         if(startDate.length<=0){errors.push("Project's start date field is required");}
-
-        //start date must be after current date //todayDate - (new Date(startDate)
         if(todayDate - (new Date(startDate)) > 0) {errors.push(`The start date of your project needs to be after today's date`)}
-
         else if(endDate.length<=0){errors.push("Project's end date field is required");}
         else if(endDate<=startDate){errors.push("Project's end date field need to be after start date");}
         if(description.length<=0){errors.push("Project's description field is required");}
@@ -98,8 +95,6 @@ const ProjectForm=({project,formType})=>{
         else if(risks.length>=4000){errors.push("Project's risk must be less than 4000 characters")}
 
         setValidationErrors(errors);
-        console.log('what is the start date format', new Date(startDate))
-        console.log('how doe date.now() work', "is the date in the future, if it is then this should be negative??", todayDate- (new Date(startDate)), (new Date(startDate))-todayDate,"start date", startDate,"future", todayDate )
 
       }, [title,category,city,state,country,imageUrl,fundingGoal,startDate,endDate,description,risks]);
 

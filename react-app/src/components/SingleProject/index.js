@@ -128,7 +128,7 @@ const SingleProject = () => {
                     : <div className='sp-log-in-to-back'>
 
                     <p>Log in to back this project &nbsp;
-                        <i className="fa-solid fa-arrow-right"></i>
+                        {/* <i className="fa-solid fa-arrow-right"></i> */}
                         &nbsp;</p>
                     <ProfileButton user={sessionUser} />
                    </div>
