@@ -21,15 +21,14 @@ const RewardManager=()=>{
 const allProjects = useSelector(state => {return state.projects})
     const rewardsObj = useSelector(state => state.rewards)
     const rewards = Object.values(rewardsObj).filter(el=>el.projectId==projectId)
-    // const history=useHistory();
     const userId = useSelector(state => {return state.session.user.id})
     const history=useHistory();
+
     console.log(projectId)
 
     useEffect(() => {
         dispatch(fetchProjectRewards(projectId));
     }, [dispatch]);
-    // }, [dispatch]);
 
     const editEvents=(id)=>{
         history.push(`/editReward/${id}`)

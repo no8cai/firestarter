@@ -6,8 +6,6 @@ import { fetchProjectRewards } from '../../../store/reward';
 import RewardForm from "../RewardForm";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { useSelector } from "react-redux";
-// import React from "react"
 
 const EditReward=()=>{
 

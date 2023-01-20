@@ -31,13 +31,11 @@
 
 .profile-bu{
     color: rgb(133, 132, 132);
-    size:16px;
+    size:20px;
     border: 1 solid white;
     height: 50px;
-    
-    font-weight: bold;
+    transition-duration: 0.4s;
 }
 .profile-bu:hover{
     color: black;
-    border-bottom: 5px solid green;
 }

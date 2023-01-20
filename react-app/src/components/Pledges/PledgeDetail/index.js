@@ -11,7 +11,8 @@ import '../PledgePage.css'
 
 const PledgeDetails = ({type,projectId,pledgeId}) => {
     // console.log(projectId)
-    // console.log("is this pledge id",pledgeId)
+    // console.log(pledgeId)
+
     const dispatch = useDispatch()
     const id=projectId
     const history = useHistory()
@@ -61,7 +62,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
 
     // let userId = 10
 
-    // let pledges = useSelector(state => {return state.pledges})
+    let pledges = useSelector(state => {return state.pledges})
     // let pledgesArr = Object.values(pledges)
     // console.log('-----------', pledges.userPledges[userId])
     // console.log('------------', pledgesArr[1])

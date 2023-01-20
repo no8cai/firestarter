@@ -43,8 +43,6 @@ const PledgeManager=()=>{
             <div>{Reward.price}</div>
             <div>{Reward.title}</div>
             <div className='manageaddress'>
-               {/* <div>{`${city},${state},${country}`}</div> */}
-               {/* <div><i className="fas fa-star" />{avgRating}</div> */}
             </div>
             <div>
                {/* {`${fundingGoal}`} */}
@@ -52,8 +50,6 @@ const PledgeManager=()=>{
             </NavLink>
         </div>
         <div className="button-section">
-            {/* <button className="buttons"><i className="fa-regular fa-pen-to-square" />Edit</button> */}
-            {/* <button className='buttons'><i className="fa-solid fa-trash-can" />Delete</button> */}
             <button onClick={()=>editEvents(Project.id,id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Edit</button>
             <button onClick={()=>deleteEvents(id)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button>
         </div>
