@@ -1,0 +1,7 @@
+.rewards-nav-item{
+    color:blue
+}
+.reward-navbar{
+    display: flex;
+    gap:10px;
+}

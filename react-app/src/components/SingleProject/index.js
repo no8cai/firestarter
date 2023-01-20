@@ -2,6 +2,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
 import './SingleProject.css'
 import React, { useEffect, useState } from 'react'
+import ProfileButton from '../Navigation/ProfileButton';
 import { fetchOneProject } from '../../store/project'
 import { fetchProjectRewards } from '../../store/reward'
 import { getAllPledgesByProjectId} from '../../store/pledge'
@@ -122,7 +123,20 @@ const SingleProject = () => {
                 <p>days to go</p>
             </div>
             <div className="sp-add-border sp-right-side-buttons">
-                <button onClick={()=>addPledgesEvents(id)} className='sp-green-button'>Back this project</button>
+
+                    {sessionUser? <button onClick={()=>addPledgesEvents(id)} className='sp-green-button'>Back this project</button>
+                    : <div className='sp-log-in-to-back'>
+
+                    <p>Log in to back this project &nbsp;
+                        <i className="fa-solid fa-arrow-right"></i>
+                        &nbsp;</p>
+                    <ProfileButton user={sessionUser} />
+                   </div>
+                    }
+
+
+
+
                 <br/>
                 <button className='sp-remind-me'><i className="fa-regular fa-bookmark"></i> Remind me</button>
                 <p>All or nothing. This project will only be funded

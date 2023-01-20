@@ -139,12 +139,15 @@ label{
 }
 
 .projectform-delebutton{
+    margin-top: 1em;
+    font-family: 'LATO', 'Lucida Sans Regular', sans-serif;
     align-items: center;
-    background-color: red;
+    background-color: #028858;
     color:white;
     cursor: pointer;
-    border:red solid 1px;
-    margin-top: 1em;
-    width: 50vw;
-    height: 3vh;
+    border:#028858 solid 1px;
+    width: 250px;
+    height: 40px;
+    font-size: 16px;
+    transition-duration: 0.4s;
 }

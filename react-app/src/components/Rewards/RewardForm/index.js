@@ -7,6 +7,7 @@ import './RewardForm.css'
 ////MEEEEEEEEEEEE
 
 const RewardForm=({reward,formType,projectId})=>{
+  //import associated project
 
     let initDescription,initEstimatedDelivery,initPrice,initTitle
     const history=useHistory()
@@ -94,6 +95,7 @@ const RewardForm=({reward,formType,projectId})=>{
         }
 
     return (
+      // <div className="reward-main-container">
 
         <div className="reward-form-container">
         <div className="reward-form-title-sec">
@@ -136,7 +138,7 @@ const RewardForm=({reward,formType,projectId})=>{
                 name='Estimated Delivery'
                 type="date"
                 id="start"
-                min="2023-02-01"
+                min="2023-01-01"
                 onChange={(e) => setEstimatedDelivery(e.target.value)}
                 value={estimatedDelivery}/>
                 </div>
@@ -181,18 +183,6 @@ const RewardForm=({reward,formType,projectId})=>{
                 value={price}/>
                 </div>
             </div>
-{/* // */}
-            <div className="reward-form-button">
-             <input type="submit" value={formType} className="reward-button" disabled={!!validationErrors.length}/>
-             </div>
-            </form>
-            {formType==="Edit Reward" &&(
-                <div className="projectform-button">
-              <button onClick={()=>deleteEvents(reward.id)} className="reward-form-delete-button">Delete Reward</button>
-              </div>
-                )}
-
-
             <div className='reward-form-error-sec'>
             <div className='error-title'>
             <h4>Validation Checking List</h4>
@@ -207,8 +197,22 @@ const RewardForm=({reward,formType,projectId})=>{
             </div>
              )}
             </div>
+{/* // */}
+            <div className="reward-form-button">
+             <input type="submit" value={formType} className="reward-button" disabled={!!validationErrors.length}/>
+             </div>
+            </form>
+            {formType==="Edit Reward" &&(
+                <div className="projectform-button">
+              <button onClick={()=>deleteEvents(reward.id)} className="reward-form-delete-button">Delete Reward</button>
+              </div>
+                )}
+
+
+
 
         </div>
+        // </div>
     )
 }
 
