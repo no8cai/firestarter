@@ -10,7 +10,7 @@ function SearchResultPage() {
   const params = useParams();
   const dispatch = useDispatch();
   let { searchItem1 } = params;
-  
+
   if(searchItem1 === 'comics&illustration') searchItem1 = 'comics & illustration'
   if(searchItem1 === 'design&tech') searchItem1 = 'design & tech'
   if(searchItem1 === 'food&craft') searchItem1 = 'food & craft'
@@ -70,7 +70,7 @@ function SearchResultPage() {
           }
         }
           }
-          
+
         currentIndex++
       }
     );
@@ -117,14 +117,14 @@ function SearchResultPage() {
           </div>
           </div>
 
-        ) : 
+        ) :
         <div className="content-container-row2">
         <div className="search-headline-holder">
           <span>We can't find projects that match your search</span>
           <span>Check out a collection of popular and recommended options below</span>
-          
+
           </div>
-          
+
           </div>}
           </div>
       {/* </div> */}
@@ -183,11 +183,11 @@ function SearchResultPage() {
           // </div>
           <DiscoverPage />
           // </div>
-          
+
         )}
       </div>
       </div>
-        
+
     </div>
   );
 }

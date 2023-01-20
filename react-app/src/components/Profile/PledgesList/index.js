@@ -33,15 +33,16 @@ const PledgeManager=()=>{
         <h1>
         {
         pledges.map(({id,Project,Reward }) => {
-            
+
         return (
-            
+
         <div key={id} className='managebox'>
         <div className='boxitems'>
-            <NavLink to={`/`} className="links">
-            <h3>{Project.title}</h3>
-            <div>{Reward.price}</div>
-            <div>{Reward.title}</div>
+            <NavLink to={`/`} className="projectlist-links">
+            <div className="projectlist-item"><img src={Project.imageUrl} className="projectlist-image"/></div>
+            <div className="projectlist-item">{Project.title}</div>
+            <div className="projectlist-item">{Reward.price}</div>
+            <div className="projectlist-item">{Reward.title}</div>
             <div className='manageaddress'>
             </div>
             <div>
