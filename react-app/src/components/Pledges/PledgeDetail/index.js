@@ -82,7 +82,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     // console.log('------------', pledgesArr[1])
     // console.log('**********', JSON.stringify(pledges).valueOf('backerId'))
 
-    if(!rewards || !userPledges || !currentPledge ) return null
+    if(!rewards || !userPledges || !currentPledge || filtered.length === 0 ) return null
 
     if(!rewardsArr) return null
     // if(!project) return null
@@ -113,7 +113,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     }
 
    
-    // console.log(project, rewardsArr, filtered, pfiltered);
+    console.log(pledgeId, currentPledge.id, filtered.length);
 
 
     return(

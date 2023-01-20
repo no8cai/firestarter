@@ -82,8 +82,8 @@ function UserDataModal({user}) {
                   {user && (pledges.slice(0, 2).map(pledge => {
                     return (
                         <div key={pledge.id} className="nav-backed-item">
-                            <Link to={`/projects/${pledge.Project.id}/editpledge/${pledge.id}`}>
-
+                            {/* <Link to={`/projects/${pledge.Project.id}/editpledge/${pledge.id}`}> */}
+                            <Link to={`/profile/pledges`}>
                             <div className="nav-thumbnail">{<img className="backed-thumbnail" src={pledge.Project.imageUrl}></img>}</div>
                             <div className="nav-backed-title">{pledge.Project.title}</div>
                             </Link>
