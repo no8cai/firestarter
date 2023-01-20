@@ -61,7 +61,7 @@ function Landing() {
 
 
     return (
-        <div className="main-container" style={{ backgroundImage: `url('${background}'`, backgroundRepeat  : 'no-repeat', backgroundSize: 'fit',
+        <div className="main-container" style={{ backgroundImage: `url('${background}'`, backgroundRepeat  : 'no-repeat', backgroundSize: 'contain',
         width: '100%' }}>
     <div className="categories-bar">
         <span>
