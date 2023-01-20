@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import { fetchCreateProject,fetchUpdateProject,fetchDeleteProject } from "../../../store/project";
 import './ProjectForm.css'
+import { fetchDeleteReward } from "../../../store/reward";
+import { deletePledge } from "../../../store/pledge";
 
 const ProjectForm=({project,formType})=>{
 
@@ -117,6 +119,7 @@ const ProjectForm=({project,formType})=>{
 
     const deleteEvents= (id)=>{
         const errors=[]
+
         dispatch(fetchDeleteProject(id))
         .then(history.push('/profile'))
         .catch(async (err)=>{
