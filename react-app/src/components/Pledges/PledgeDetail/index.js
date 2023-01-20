@@ -2,34 +2,45 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory, useParams } from 'react-router-dom';
 
-import { createPledge, getAllPledgesByProjectId, updatePledge } from '../../../store/pledge';
+import { createPledge, getAllPledgesByProjectId, updatePledge, getPledgesByCurrentUser } from '../../../store/pledge';
 import { fetchOneProject } from '../../../store/project';
 import { fetchProjectRewards } from '../../../store/reward';
+
 
 import '../PledgePage.css'
 
 const PledgeDetails = ({type,projectId,pledgeId}) => {
-    console.log(projectId)
-    console.log(pledgeId)
-
+    // console.log(projectId)
+    // console.log("is this pledge id",pledgeId)
     const dispatch = useDispatch()
     const id=projectId
     const history = useHistory()
-    // const sessionUser = useSelector(state => state.session.user);
+    const sessionUser = useSelector(state => state.session.user);
 
+    const userPledges = useSelector(state => state.pledges.userPledges)
+    console.log(userPledges, "EEEEEEEEEEE")
+    const uPledges = Object.values(userPledges)
+    const filtered = uPledges.filter(pledge => parseInt(pledge.projectId) === parseInt(projectId))
+    // const userFilter = uPledges.filter(pledge => pledgeId ===)
+    console.log("AAAAAAAAA",filtered)
+    if (filtered.length === 0) console.log("no matching pledges") 
+    
     let project = useSelector(state => {return state.projects[id]})
+
     // console.log('project page', project)
 
     let rewards = useSelector(state => state.rewards)
 
     // console.log('rewards------', rewards)
     let rewardsArr = Object.values(rewards).filter((reward)=>reward.projectId===+projectId)
-    // console.log('rewardsArr-----', rewardsArr)
+    console.log('rewardsArr-----', rewardsArr)
+    // const rewardFilter = rewardsArr.filter(reward => )
 
     useEffect(() => {
         dispatch(fetchOneProject(id))
         dispatch(fetchProjectRewards(id))
         dispatch(getAllPledgesByProjectId(id))
+        dispatch(getPledgesByCurrentUser())
     }, [dispatch])
 
 
@@ -41,7 +52,8 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     // console.log('------------', pledgesArr[1])
     // console.log('**********', JSON.stringify(pledges).valueOf('backerId'))
     console.log("AAAAAAAAA", project)
-    if(!rewardsArr) return null
+    if(!rewards) return null
+    // if(!rewardsArr) return null
     // if(!project) return null
     // if(!pledges) return null
 
@@ -77,7 +89,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
 
     return(
         <>
-        {project !== undefined ? (<div className='pledge-main-container'>
+        {project !== undefined && rewardsArr.length !== 0 ? (<div className='pledge-main-container'>
 
 <div className='pledge-project-title'>
     <Link className='project-link' key={project.title} to={`/projects/${project.id}`}>
@@ -165,7 +177,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
 </div>
 </div>
 </div>
-</div>) : (<div className='pledge-main-container'> <h1>Oops, project not found!</h1><img src="https://cdn.dribbble.com/users/252114/screenshots/3840347/mong03b_still_2x.gif?compress=1&resize=400x300&vertical=top"></img></div>)}
+</div>) : (<div className='pledge-main-container'> <h1>Oops, not found!</h1><img src="https://cdn.dribbble.com/users/252114/screenshots/3840347/mong03b_still_2x.gif?compress=1&resize=400x300&vertical=top"></img></div>)}
         
         </>
         )
