@@ -37,6 +37,17 @@ a:link {
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: underline !important;
+  color: rgb(22, 155, 89);
+}
+
 button {
   font-family: 'LATO', 'Lucida Sans Regular', sans-serif;
+}
+
+button:hover {
+  text-decoration: underline;
+  color: rgb(22, 155, 89);
+  cursor: pointer;
 }
