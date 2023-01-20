@@ -21,8 +21,8 @@
     justify-content: space-between;
     /* border-top: lightgray solid 1px; */
     /* border-bottom: lightgray solid 1px; */
-    padding-top: 1.3rem;
-    padding-bottom: 1.3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     align-items: center;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -31,11 +31,13 @@
 .right-nav {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .profile-button {
-    border: solid darkgreen 2px !important; 
-    background: white !important;
+    /* border: solid darkgreen 2px !important;  */
+    /* background: white !important; */
     padding-top: 5px;
     padding-bottom: 5px;
     padding-right: 5px;
@@ -49,18 +51,40 @@
     vertical-align: middle; */
     justify-content: center;
     flex-direction: row;
-    height: 2rem;
-    width: 2rem;
+    height: 2.5rem;
+    width: 2.5rem;
     display: flex;
     flex-direction: row;
 }
 
-.profile-button:hover {
-  box-shadow: 1px 5px 5px lightgray;
+.profile-button-outline {
+    border: solid darkgreen 2px !important; 
+    /* background: white !important; */
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    padding-left: 12px;
+    border-radius: 50%;
+    text-align: start;
+    font-size: 2em;
+    color: gray !important;
+    font-stretch: 100%;
+    /* position: relative;
+    vertical-align: middle; */
+    justify-content: center;
+    flex-direction: row;
+    height: 2.5rem;
+    width: 2.5rem;
+    display: flex;
+    flex-direction: row;
 }
 
+/* .profile-button:hover {
+  box-shadow: 1px 5px 5px lightgray;
+} */
+
 .profile-button-div {
-    padding-right: 4rem;
+    padding-right: 1rem;
     position: relative;
 }
 
@@ -82,11 +106,11 @@
     position: relative;
     /* border: red 1px solid; */
     position: absolute;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     z-index: 99;
     float: right;
     background: white;
-    right: 4rem;
+    right: 1rem;
     left: auto;
 
 }
@@ -238,11 +262,32 @@
     font-size: 0.8rem;
 }
 
-.create-project-link {
+.search-button-holder {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 1rem;
+}
 
+.fa-magnifying-glass {
+    font-size: 0.8rem;
 }
 
 .logo-img {
     height: 1.5rem;
+    width: auto;
+}
+
+.left-nav> span {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+}
+
+li {
+    list-style-type: none;  
+}
+
+.profile-icon {
+    height: 2.5rem;
     width: auto;
 }

@@ -8,6 +8,7 @@ import { Link, Route, useHistory } from 'react-router-dom'
 import OpenModalButton from '../OpenModalButton';
 import './Navigation.css'
 import UserDataModal from "./LoggedInUser";
+import proficon from '../../../src/images/favicon.ico'
 
 function ProfileButton({ user }) {
     const history = useHistory()
@@ -43,14 +44,16 @@ function ProfileButton({ user }) {
       history.push('/')
     };
   
+    let pClassName = "profile-button-outline"
     let ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
-    if (!user) ulClassName = "profile-dropdown2" + (showMenu ? "" : " hidden")
+    if (!user) {
+      ulClassName = "profile-dropdown2" + (showMenu ? "" : " hidden")
+      pClassName = "profile-button" 
+    }
   
     return (
       <div className='profile-button-div'>
-        <button onClick={openMenu} className="profile-button">
-        {/* <i className="fa-solid fa-bars" />
-          <i className="fas fa-user-circle"></i> */}
+        <button style={{ backgroundImage: `url('${proficon}'`, backgroundSize: 'contain' }} onClick={openMenu} className={pClassName}>
         </button>
         <div className={ulClassName} ref={ulRef}>
           {user ? (

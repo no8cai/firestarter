@@ -10,6 +10,7 @@ import OpenSearchModal from "../Search/OpenSearchModal"
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import logo from '../../../src/images/flogo.png'
 
+
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
@@ -54,12 +55,13 @@ function Navigation({ isLoaded }) {
            </div>
    
            <div className="right-nav">
-            <div>
+            <div className="search-button-holder">
                 <OpenSearchModal
                 itemText="Search"
                 onItemClick={closeMenu}
                 modalComponent={<SearchBar />}
               />
+              <div><i className="fa-solid fa-magnifying-glass"></i></div>
             </div>
            
 
