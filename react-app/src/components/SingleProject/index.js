@@ -39,7 +39,7 @@ const SingleProject = () => {
    const allCreatorsPledges = useSelector(state => { return state.pledges.userPledges})
 
    if(allProjects && oneProject && allCreatorsPledges) {
-    console.log('what is all creator pledges length', Object.values(allCreatorsPledges).length)
+   // console.log('what is all creator pledges length', Object.values(allCreatorsPledges).length)
 
     let arrayOfProjects = Object.values(allProjects)
     //console.log('see allProjects', )

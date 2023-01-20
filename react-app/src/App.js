@@ -49,7 +49,7 @@ function App() {
         <Route path='/' exact={true}>
           <Landing />
         </Route>
-        <Route path={['/profile','/createReward','/editReward/:rewardId','/projects/:projectId/editpledge/:pledgeId']} >
+        <Route path={['/profile','/createReward/:projectId','/editReward/:rewardId','/projects/:projectId/editpledge/:pledgeId']} >
           <ManageCenter />
         </Route>
           <Route path={['/createproject','/editproject/:projectId']} >
