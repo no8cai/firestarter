@@ -9,7 +9,7 @@ import { fetchProjectRewards } from '../../../store/reward';
 
 import '../PledgePage.css'
 
-const PledgeDetails = ({type,projectId,pledgeId}) => {
+const PledgeDetails2 = ({type,projectId,pledgeId}) => {
     // console.log(projectId)
     // console.log("is this pledge id",pledgeId)
     const dispatch = useDispatch()
@@ -103,7 +103,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
 
     return(
         <>
-        {project !== undefined && rewardsArr.length !== 0 && filtered.length !== 0 && pfiltered.length !== 0 ? (<div className='pledge-main-container'>
+        {project !== undefined ? (<div className='pledge-main-container'>
 
 <div className='pledge-project-title'>
     <Link className='project-link' key={project.title} to={`/projects/${project.id}`}>
@@ -124,14 +124,11 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
 <div className='pledge-container'>
 <div className='reward-container'>
     {rewardsArr.map(reward =>{
-        let chosenReward = "not-this-reward"
-        // console.log(pledgeId, reward.id, reward.title)
-        if (filtered[0].rewardId === reward.id) {
-            chosenReward = "this-reward"}
+        
      return (
         <ul key={reward.id}>
 
-        <div id={chosenReward} className='reward-card'>
+        <div  className='reward-card'>
 
             <div className='reward-card-details'>
                 {/* <input type='radio' />Pledge $20 */}
@@ -200,4 +197,4 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
         </>
         )
     }
-    export default PledgeDetails
+    export default PledgeDetails2
