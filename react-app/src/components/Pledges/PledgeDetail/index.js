@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory, useParams } from 'react-router-dom';
 
-import { createPledge, getAllPledgesByProjectId, updatePledge, getPledgesByCurrentUser, getOnePledge } from '../../../store/pledge';
+import { createPledge, getAllPledgesByProjectId, updatePledge, getPledgesByCurrentUser, getOnePledge, getAllPledges } from '../../../store/pledge';
 import { fetchOneProject } from '../../../store/project';
 import { fetchProjectRewards } from '../../../store/reward';
 
@@ -11,41 +11,41 @@ import '../PledgePage.css'
 import PledgeDetails2 from './PledgeDetail2';
 
 const PledgeDetails = ({type,projectId,pledgeId}) => {
-    // console.log(projectId)
-    // console.log(pledgeId)
-
     const dispatch = useDispatch()
     const id=projectId
     const history = useHistory()
-    // const sessionUser = useSelector(state => state.session.user);
 
     const userPledges = useSelector(state => state.pledges.userPledges)
     // console.log(userPledges, "EEEEEEEEEEE")
     const uPledges = Object.values(userPledges)
+    const currentPledge = useSelector(state => state.pledges.singlePledge)
+    console.log("???????", currentPledge)
     const filtered = uPledges.filter(pledge => parseInt(pledgeId) === parseInt(pledge.id))
-    console.log(filtered, "Length means pledgeid belongs to user")
+    // console.log(filtered, "Length means pledgeid belongs to user")
     // const userFilter = uPledges.filter(pledge => pledgeId ===)
     // console.log("AAAAAAAAA",filtered[0].rewardId)
     // console.log(filtered)
     // if (filtered.length === 0) console.log("no matching pledges")
 
     let project = useSelector(state => {return state.projects[id]})
-
     // console.log('project page', project)
-
     let rewards = useSelector(state => state.rewards)
 
     // console.log('rewards------', rewards)
     let rewardsArr = Object.values(rewards).filter((reward)=>reward.projectId===+projectId)
     // console.log('rewardsArr-----', rewardsArr)
     // const [ oKRewardId, setOkRewardId ] = useState(false)
-    // const thisProjectsPledges = useSelector(state => state.pledges.pledgesById)
+    
     // const pPledges = Object.values(thisProjectsPledges)
     // console.log("come ooon",pPledges)
     // const pfiltered = pPledges.filter(pledge => pledge.id === parseInt(pledgeId))
 
     // light uses PLEDGE id, PULL the pledge and compare that it 1. belongs to project 2. pledge belongs to user 3. 
-    const currentPledge = useSelector(state => state.pledges.singlePledge)
+
+
+    // console.log("ccccccccccc",currentPledge)
+
+
     // if(currentPledge){
 
     //     console.log("current pledge", "backerid",currentPledge.backerId, "projectid", currentPledge.projectId, "rewardid", currentPledge.rewardId)
@@ -66,11 +66,11 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     // }
 
     useEffect(() => {
+        dispatch(getOnePledge(+pledgeId))
         dispatch(fetchOneProject(id))
         dispatch(fetchProjectRewards(id))
         dispatch(getAllPledgesByProjectId(id))
         dispatch(getPledgesByCurrentUser())
-        dispatch(getOnePledge(pledgeId))
     }, [dispatch])
 
 
@@ -81,9 +81,10 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     // console.log('-----------', pledges.userPledges[userId])
     // console.log('------------', pledgesArr[1])
     // console.log('**********', JSON.stringify(pledges).valueOf('backerId'))
-
-    if(!rewards || !userPledges || !currentPledge || filtered.length === 0 ) return null
-
+    if( !currentPledge || !rewards || !userPledges ||  filtered.length === 0 || currentPledge.id === undefined ) return null
+    
+    console.log(pledgeId, currentPledge.id, projectId, currentPledge.projectId);
+    // parseInt(projectId) === currentPledge.projectId &&
     if(!rewardsArr) return null
     // if(!project) return null
     // if(!pledges) return null
@@ -112,15 +113,13 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
             )
     }
 
-   
-    console.log(pledgeId, currentPledge.id, filtered.length);
-
 
     return(
         <>
         {
         // project !== undefined && rewardsArr.length !== 0 && filtered.length !== 0 && pfiltered.length !== 0 ? 
-        project !== undefined && parseInt(projectId) === currentPledge.projectId && filtered.length ? 
+        // project !== undefined &&  filtered.length && parseInt(projectId) === currentPledge.projectId ? 
+        project !== undefined &&  filtered.length ?
         (<div className='pledge-main-container'>
 
 <div className='pledge-project-title'>

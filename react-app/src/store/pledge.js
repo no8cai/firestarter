@@ -121,7 +121,7 @@ export const deletePledge = backerId => async dispatch => {
 }
 
 //reducer
-const initialState = { allPledges: {}, pledgesById: {}, onePledge: {}, userPledges: {}}
+const initialState = { allPledges: {}, pledgesById: {}, singlePledge: {}, userPledges: {}}
 
 const pledgesReducer = (state = initialState, action) => {
     let newState;
@@ -161,7 +161,7 @@ const pledgesReducer = (state = initialState, action) => {
 
         
         case UPDATE_PLEDGE:
-            newState = { ...state, allPledges: { ...state.allPledges}, pledgesById: { ...state.pledgesById}, userPledges: { ...state.userPledges}}
+            newState = { ...state, allPledges: { ...state.allPledges}, pledgesById: { ...state.pledgesById}, singlePledge: {...state.singlePledge }, userPledges: { ...state.userPledges}}
             newState.allPledges[action.pledge.id] = action.pledge
             newState.pledgesById[action.pledge.id] = action.pledge
             newState.userPledges[action.pledge.id] = action.pledge
