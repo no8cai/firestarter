@@ -213,14 +213,14 @@ const ProjectForm=({project,formType})=>{
              State
              </label>
              <select
-                        placeholder='State'
-                        onChange={(e) => setState(e.target.value)}
-                        value={state}
-                        >
-                            {allStates.map(state => (
+              placeholder='State'
+              onChange={(e) => setState(e.target.value)}
+              value={state}
+              >
+              {allStates.map(state => (
                                 <option key={state} value={state}> {state}</option>
                             ))}
-                        </select>
+              </select>
               </div>
 
              {/* <div className='projectform-locationlist'>
