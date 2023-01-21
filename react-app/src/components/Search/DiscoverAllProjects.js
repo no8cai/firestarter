@@ -59,50 +59,52 @@ function DiscoverPage() {
         {/* </div> */}
         <div className="all-projects">
           {projects.length ? (projects.map((project) => {
-              let pledgeTotal = 0
-              let counter = 0
-              pledges.forEach(pledge => {
-                if (project.id === pledge.Project.id){
-                  pledgeTotal += pledge.Reward.price
-                  counter++
-                }
-              })
-              let currentProgress = ((pledgeTotal * 20000)/(project.fundingGoal)*100).toFixed(2)
-              let oneDay = 24 * 60 * 60 * 1000
-              let splitStart = project.startDate.split('-')
-              let splitEnd = project.endDate.split('-')
-              let firstDate = new Date(splitStart[2], splitStart[0], splitStart[1])
-              let secondDate = new Date(splitEnd[2], splitEnd[0], splitEnd[1])
-              let diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay))
-              return (
-                <Link key={project.id} to={`/projects/${project.id}`}>
-                  <div className="projects-holder">
-                    <div className="preview-image" style={{ backgroundImage: `url('${project.imageUrl}'` }}></div>
-                    <div className="project-details">
-                      {/* <div className="project-details-top"> */}
-                      <div>{project.title}</div>
-                      <span className="descr-text">{project.description}</span>
-                      <div>by {project.creator.username}</div>
-
-                      <div className="sp-add-border sp-bar-back" role='progressbar'>
-                      <div className='sp-green-bar' style={{width: `${currentProgress}%`}}></div>
-                      </div>
-
-                      <div>${pledgeTotal} pledged</div>
-                      <div>{counter !== 0 ? parseFloat(((pledgeTotal *1000)/project.fundingGoal)*100).toFixed(2) : 0}% funded</div>
-                      <div>{diffDays} days to go</div>
-                      <div>
-                        <span>{project.category}</span>
-                        <span>
-                          {project.city}, {project.country}
-                        </span>
-                      </div>
-                      {/* </div> */}
-                    </div>
-                  </div>
-                </Link>
-              );
+            let pledgeTotal = 0
+            let counter = 0
+            pledges.forEach(pledge => {
+              if (project.id === pledge.Project.id){
+                pledgeTotal += parseFloat(pledge.Reward.price)
+                counter++
+              }
             })
+            let currentProgress = ((pledgeTotal * 100)/(project.fundingGoal)).toFixed(2)
+            console.log(currentProgress)
+            let oneDay = 24 * 60 * 60 * 1000
+            let splitStart = project.startDate.split('-')
+            let splitEnd = project.endDate.split('-')
+            let firstDate = new Date(splitStart[2], splitStart[0], splitStart[1])
+            let secondDate = new Date(splitEnd[2], splitEnd[0], splitEnd[1])
+            let diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay))
+            return (
+              <Link key={project.id} to={`/projects/${project.id}`}>
+                <div className="projects-holder">
+                  <div className="preview-image" style={{ backgroundImage: `url('${project.imageUrl}'` }}></div>
+                  <div className="project-details">
+                    {/* <div className="project-details-top"> */}
+                    <div>{project.title}</div>
+                    <span className="descr-text">{project.description}</span>
+                    <div>by {project.creator.username}</div>
+
+                    <div className="sp-add-border sp-bar-back" role='progressbar'>
+                    <div className='sp-green-bar' style={{width: `${currentProgress}%`}}></div>
+                    </div>
+
+                    <div>${pledgeTotal} pledged</div>
+                    <div>{counter !== 0 ? Math.ceil(((pledgeTotal)/project.fundingGoal)*100) : 0}% funded</div>
+                    <div>{diffDays} days to go</div>
+                    <div>
+                      <span>{project.category}</span>
+                      <span>
+                        {project.city}, {project.country}
+                        <br/>
+                      </span>
+                    </div>
+                    {/* </div> */}
+                  </div>
+                </div>
+              </Link>
+            );
+          })
           ) : (
             <div>
               <img src="https://cdn.dribbble.com/users/252114/screenshots/3840347/mong03b_still_2x.gif?compress=1&resize=400x300&vertical=top"></img>

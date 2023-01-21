@@ -9,6 +9,7 @@ import SearchBar from "../Search/SearchBar";
 import OpenSearchModal from "../Search/OpenSearchModal"
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import logo from '../../../src/images/flogo.png'
+import aaicon from '../../../src/images/aaicon.png'
 
 
 function Navigation({ isLoaded }) {
@@ -44,8 +45,11 @@ function Navigation({ isLoaded }) {
         <nav className="nav-container">
         <div className="navbar">
             <div className="left-nav">
-               <span>Discover</span>
-               <span>Start a project</span>
+                <a title="Clicking will leave Firestarter!" href="https://www.appacademy.io/">
+                    <span><img className="aa-icon" src={aaicon}></img></span>
+               <span >Check out AppAcademy!</span>
+                </a>
+               
            </div>
    
            <div className="mid-nav">

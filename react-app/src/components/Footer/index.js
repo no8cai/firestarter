@@ -26,10 +26,10 @@ function Footer() {
             </div>
             <div className="footer-social-media">
                 <div className="footer-social-media-icons">
-                    <span><a href='https://www.facebook.com/'><i class="fa fa-facebook"></i></a></span>
+                    <span><a href='https://www.facebook.com/'><i className="fa fa-facebook"></i></a></span>
                 </div>
-                    <span><a href='https://twitter.com/'><i class="fa fa-twitter"></i></a></span>
-                    <span><a href='https://www.instagram.com/'><i class="fa fa-instagram"></i></a></span>
+                    <span><a href='https://twitter.com/'><i className="fa fa-twitter"></i></a></span>
+                    <span><a href='https://www.instagram.com/'><i className="fa fa-instagram"></i></a></span>
             </div>
             <div className="footer-break"></div>
             <div className="footer-legal-links">
