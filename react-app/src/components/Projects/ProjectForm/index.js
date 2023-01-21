@@ -3,14 +3,28 @@ import { useHistory } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import { fetchCreateProject,fetchUpdateProject,fetchDeleteProject } from "../../../store/project";
 import './ProjectForm.css'
-import { fetchDeleteReward } from "../../../store/reward";
-import { deletePledge } from "../../../store/pledge";
+import { fetchProjectRewards,fetchDeleteReward } from "../../../store/reward";
+import { getAllPledgesByProjectId, deletePledge } from "../../../store/pledge";
 
-const ProjectForm=({project,formType})=>{
+
+const ProjectForm=({project,formType,rewardsObj,pledgesObj})=>{
 
     let initTitle,initCategory,initCity,initState,initCountry,initImageUrl,initFundingGoal,initStartDate,initEndDate,initDescription,initRisks
     const history=useHistory()
     const dispatch = useDispatch();
+
+    let rewards
+    let pledges
+
+    if(formType==="Edit Project"){
+    rewards = Object.values(rewardsObj).filter(el=>el.projectId==project.id)
+    pledges = Object.values(pledgesObj).filter(el=>el.projectId==project.id)
+    console.log(rewards.map(el=>el.id))
+    console.log(pledges.map(el=>el.id))
+    }
+
+  
+
 
     if(formType==="Edit Project"){
         initTitle=project.title;
@@ -27,7 +41,7 @@ const ProjectForm=({project,formType})=>{
     }
     else{
         initTitle='';
-        initCategory='';
+        initCategory='Art';
         initCity='';
         initState='Alabama';
         initCountry='USA';
@@ -130,14 +144,21 @@ const ProjectForm=({project,formType})=>{
 
     const deleteEvents= (id)=>{
         const errors=[]
-
+        if(pledges.length>0){
+        pledges.forEach(el=>{
+          dispatch(deletePledge(el.id))
+        })}
+        if (rewards.length>0){
+        rewards.forEach(el=>{
+          dispatch(fetchDeleteReward(el.id))
+        })}
+        
         dispatch(fetchDeleteProject(id))
         .then(history.push('/profile'))
         .catch(async (err)=>{
           const errobj=await err.json();
           errors.push(errobj.message)
           setValidationErrors(errors)
-
         });
         }
 

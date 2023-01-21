@@ -15,7 +15,7 @@ const PledgeManager=()=>{
     // const history=useHistory();
     const pledges = Object.values(pledgesObj).filter(el=>el.backerId==sessionUser.id);
     const history=useHistory();
-
+    console.log(pledges)
     useEffect(() => {
         dispatch(getPledgesByCurrentUser());
   }, [dispatch]);
