@@ -118,3 +118,7 @@
     font-size: 1.6rem;
     color: #028858;
 }
+
+.search-progressbar-container {
+    max-width: 100%;
+}

@@ -71,15 +71,15 @@ function UserDataModal({user}) {
                 <div className="nav-box-user-data">
 
                 <div className="nav-user-info">
-                  <p>User Info</p>
+                  <p className="nav-user-title">User Info</p>
                   <Link to={'/profile'}>
-                  <p>Profile</p>
+                  <p >Profile</p>
                   </Link>
                   <p>{user.username}</p>
                 <p id="useremailline">{user.email}</p>
                 </div>
                 <div className="nav-backed-container">
-                  <Link to="/profile/pledges"><p>Backed Projects</p></Link>
+                  <Link to="/profile/pledges"><p className="nav-user-title">Backed Projects</p></Link>
                   
                   {user && (pledges.slice(0, 2).map(pledge => {
                     return (
@@ -99,7 +99,7 @@ function UserDataModal({user}) {
                   ):(null)}
                 </div>
                 <div className="nav-created-container">
-                  <Link to="/profile"><p>Created Projects</p></Link>
+                  <Link to="/profile"><p className="nav-user-title">Created Projects</p></Link>
                   
                   {user && userProjects.length ? (userProjects.slice(0, 2).map(project => {
                     return (

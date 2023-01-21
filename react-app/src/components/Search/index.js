@@ -158,9 +158,12 @@ function SearchResultPage() {
                     <span className="descr-text">{project.description}</span>
                     <div>by {project.creator.username}</div>
 
+              <div className='search-progressbar-container'>
                     <div className="sp-add-border sp-bar-back" role='progressbar'>
                     <div className='sp-green-bar' style={{width: `${currentProgress}%`}}></div>
                     </div>
+              </div>
+
 
                     <div>${pledgeTotal} pledged</div>
                     <div>{counter !== 0 ? Math.ceil(((pledgeTotal)/project.fundingGoal)*100) : 0}% funded</div>

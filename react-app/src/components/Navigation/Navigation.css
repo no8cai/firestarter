@@ -202,6 +202,14 @@
     /* margin-bottom: 0.5rem; */
 }
 
+.to-profile {
+    font-weight: bold;
+}
+
+.nav-user-title {
+    font-weight: bold;
+}
+
 .logoutbutton:hover {
     /* background: rgb(238, 238, 238); */
 }

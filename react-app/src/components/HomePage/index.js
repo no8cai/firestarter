@@ -35,13 +35,15 @@ function Landing() {
     let totalPledges = 0
     if (pledgesObj){
         pledges.forEach(pledge => {
-            totalPledges += parseFloat(pledge.Reward.price)
+            if (randId === pledge.Project.id){
+            totalPledges += parseInt(pledge.Reward.price)
+            }
         })
     }
 
     // console.log(projects)
     const randProject = useSelector(state => state.projects[randId])
-    // console.log("AAAAAAAAA", randProject)
+    console.log("AAAAAAAAA", randProject)
 
 
     let pledgeTotal = 0
@@ -50,13 +52,13 @@ function Landing() {
     //     pledgeTotal += parseFloat(pledge.Reward.price)
     // })
     let currentProgress
-    // if (randProject !== undefined){
-    //     currentProgress = ((pledgeTotal * 100)/(randProject.fundingGoal)).toFixed(2)
-    // }
+    if (randProject !== undefined){
+        currentProgress = ((totalPledges * 100)/(randProject.fundingGoal)).toFixed(2)
+    }
 
 
 
-    // console.log(currentProgress, pledgeTotal, randProject.fundingGoal)
+    console.log(currentProgress, "current progress")
 
 
     if (!projectsObj || !randProject || !pledgesObj ) return null
@@ -132,6 +134,10 @@ function Landing() {
                             }}
                             />
                             </div>
+
+                            {/* <div className="search-progressbar-container">
+                            
+                            </div> */}
                     <div className="sp-add-border sp-bar-back" role='progressbar'>
                     <div className='sp-green-bar' style={{width: `${currentProgress}%`}}></div>
                     </div>
