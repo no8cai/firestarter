@@ -19,12 +19,7 @@ const ProjectForm=({project,formType,rewardsObj,pledgesObj})=>{
     if(formType==="Edit Project"){
     rewards = Object.values(rewardsObj).filter(el=>el.projectId==project.id)
     pledges = Object.values(pledgesObj).filter(el=>el.projectId==project.id)
-    console.log(rewards.map(el=>el.id))
-    console.log(pledges.map(el=>el.id))
     }
-
-  
-
 
     if(formType==="Edit Project"){
         initTitle=project.title;
