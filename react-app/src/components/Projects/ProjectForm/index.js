@@ -73,7 +73,6 @@ const ProjectForm=({project,formType,rewardsObj,pledgesObj})=>{
     const [validationErrors, setValidationErrors] = useState([]);
     const todayDate = new Date()
 
-
     useEffect(() => {
         if (!title&&!category&&!city&&!state&&!country&&!imageUrl&&!fundingGoal&&!startDate&&!endDate&&!description&&!risks) {
           setValidationErrors([]);
