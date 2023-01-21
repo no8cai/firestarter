@@ -128,7 +128,7 @@ const ProjectForm=({project,formType})=>{
     const deleteEvents= (id)=>{
         const errors=[]
         dispatch(fetchDeleteProject(id))
-        .then(history.push('/profile'))
+        .then(()=>history.push('/profile'))
         .catch(async (err)=>{
           const errobj=await err.json();
           errors.push(errobj.message)
