@@ -135,7 +135,7 @@ function Landing() {
                     <div className="sp-add-border sp-bar-back" role='progressbar'>
                     <div className='sp-green-bar' style={{width: `${currentProgress}%`}}></div>
                     </div>
-                <div className="feature-title">{randProject.title}</div>
+                <div id="title" className="feature-title">{randProject.title}</div>
                 <div className="feature-description"><span className="descr-text">{randProject.description}</span></div>
                 <div className="feature-creator">by {randProject.creator.username}</div>
                 </Link>
@@ -154,7 +154,7 @@ function Landing() {
                         })
                         return (
                 <div key={project.id} className="rec-projects">
-                    <Link to={`/projects/${project.id}`}>
+                    <Link className="rec-project-link" to={`/projects/${project.id}`}>
 
                     <div className="rec-project-thumbnail">
                         <img
@@ -169,7 +169,7 @@ function Landing() {
                             />
                             </div>
                     <div className="rec-project-details">
-                        <span className="rec-project-title">{project.title}</span>
+                        <span id="title" className="rec-project-title">{project.title}</span>
                         <span className="rec-project-funded">{counter !== 0 ? Math.ceil(((pledgeTotal)/project.fundingGoal)*100) : 0}% funded</span>
                         <span className="rec-project-creator">By {project.creator.username}</span>
                         <div className="rec-project-bookmark-likes">
