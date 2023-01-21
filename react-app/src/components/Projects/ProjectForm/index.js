@@ -139,14 +139,15 @@ const ProjectForm=({project,formType,rewardsObj,pledgesObj})=>{
 
     const deleteEvents= (id)=>{
         const errors=[]
-        if(pledges.length>0){
-        pledges.forEach(el=>{
-          dispatch(deletePledge(el.id))
-        })}
-        if (rewards.length>0){
-        rewards.forEach(el=>{
-          dispatch(fetchDeleteReward(el.id))
-        })}
+
+        // if(pledges.length>0){
+        // pledges.forEach(el=>{
+        //   dispatch(deletePledge(el.id))
+        // })}
+        // if (rewards.length>0){
+        // rewards.forEach(el=>{
+        //   dispatch(fetchDeleteReward(el.id))
+        // })}
         
         dispatch(fetchDeleteProject(id))
         .then(history.push('/profile'))
