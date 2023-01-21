@@ -2,16 +2,14 @@ from app.models import db, Pledge, environment, SCHEMA
 
 def seed_pledges():
 
-    rewardId = 0
     for project in range (1,19):
         for reward in range(1,4):
-            rewardId +=1
             for backer in range(1,3):
-                if reward  ==2:
+                if reward == 2:
                     backer = backer + 2
                 elif reward == 3:
                     backer = backer + 4
-                db.session.add(Pledge(rewardId=rewardId, projectId=project, backerId=backer))
+                db.session.add(Pledge(rewardId=reward, projectId=project, backerId=backer))
 
 
     db.session.commit()
