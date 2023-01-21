@@ -74,6 +74,8 @@ const RewardForm=({reward,formType,projectId})=>{
         else if(estimatedDelivery.length>=50){errors.push("reward's estimated delivery must be less than 50 characters")}
         if(oneProject && oneProject.endDate && oneProject.endDate > estimatedDelivery ) {errors.push(`
         Your current estimated delivery date in this form is ${estimatedDelivery} and it needs to be updated to be after the associated project's campaign end date of ${oneProject.endDate}.`)}
+        if(formType=="Edit Reward" && price > initPrice){errors.push(`Once a reward is active on the site,
+        the creator of the project cannot change the price of the reward to be greater than it's original price, which was ${initPrice}`)}
 
         setValidationErrors(errors);
 

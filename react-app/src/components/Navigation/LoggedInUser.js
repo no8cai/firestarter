@@ -11,11 +11,13 @@ import { getAllPledges, getPledgesByCurrentUser } from "../../store/pledge";
 import { fetchAllProjects } from "../../store/project";
 import LogoutButton from "../auth/LogoutButton";
 
+
 function UserDataModal({user}) {
     const history = useHistory()
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
+
 
     useEffect(() => {
         dispatch(getPledgesByCurrentUser())
@@ -47,18 +49,18 @@ function UserDataModal({user}) {
   
     const closeMenu = () => setShowMenu(false);
 
-    const onLogout = async (e) => {
-      closeMenu()
-    await dispatch(logout());
-    history.push('/')
-  };
+  //   const onLogout = async (e) => {
+  //     closeMenu()
+  //   await dispatch(logout());
+  //   history.push('/')
+  // };
 
-  const logoutButton = async (e) => {
-      e.preventDefault();
-      await dispatch(logout());
-      closeMenu();
-      history.push('/')
-    };
+  // const logoutButton = async (e) => {
+  //     e.preventDefault();
+  //     await dispatch(logout());
+  //     closeMenu();
+  //     history.push('/')
+  //   };
   
     console.log(userProjects.length)
     if (!userPledges || !user || !allProjects) return null
@@ -77,12 +79,13 @@ function UserDataModal({user}) {
                 <p id="useremailline">{user.email}</p>
                 </div>
                 <div className="nav-backed-container">
-                  <p>Backed Projects</p>
+                  <Link to="/profile/pledges"><p>Backed Projects</p></Link>
+                  
                   {user && (pledges.slice(0, 2).map(pledge => {
                     return (
                         <div key={pledge.id} className="nav-backed-item">
-                            <Link to={`/projects/${pledge.Project.id}`}>
-
+                            {/* <Link to={`/projects/${pledge.Project.id}/editpledge/${pledge.id}`}> */}
+                            <Link to={`/profile/pledges`}>
                             <div className="nav-thumbnail">{<img className="backed-thumbnail" src={pledge.Project.imageUrl}></img>}</div>
                             <div className="nav-backed-title">{pledge.Project.title}</div>
                             </Link>
@@ -96,7 +99,8 @@ function UserDataModal({user}) {
                   ):(null)}
                 </div>
                 <div className="nav-created-container">
-                  <p>Created Projects</p>
+                  <Link to="/profile"><p>Created Projects</p></Link>
+                  
                   {user && userProjects.length ? (userProjects.slice(0, 2).map(project => {
                     return (
                         <div key={project.id} className="nav-backed-item">

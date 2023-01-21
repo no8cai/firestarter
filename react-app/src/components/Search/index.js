@@ -113,14 +113,16 @@ function SearchResultPage() {
         {results.length ? (
           <div className="content-container-row2">
 <div className="headline-holder">
-            Explore {filteredResults.length} project{filteredResults.length > 1 ? "s" : ""}
+            <span className="search-explore-text">
+              Explore <span className="search-explore-p">{filteredResults.length} project{filteredResults.length > 1 ? "s" : ""}</span>
+              </span>
           </div>
           </div>
 
         ) :
         <div className="content-container-row2">
         <div className="search-headline-holder">
-          <span>We can't find projects that match your search</span>
+          <span className='search-none'> <i className="fa-solid fa-circle-exclamation"></i> We can't find projects that match your search</span>
           <span>Check out a collection of popular and recommended options below</span>
 
           </div>

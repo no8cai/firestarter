@@ -63,7 +63,7 @@ function Landing() {
 
 
     return (
-        <div className="main-container" style={{ backgroundImage: `url('${background}'`, backgroundRepeat  : 'no-repeat', backgroundSize: 'fit',
+        <div className="main-container" style={{ backgroundImage: `url('${background}'`, backgroundRepeat  : 'no-repeat', backgroundSize: 'contain',
         width: '100%' }}>
     <div className="categories-bar">
         <span>
@@ -173,7 +173,8 @@ function Landing() {
                         <span className="rec-project-funded">{counter !== 0 ? Math.ceil(((pledgeTotal)/project.fundingGoal)*100) : 0}% funded</span>
                         <span className="rec-project-creator">By {project.creator.username}</span>
                         <div className="rec-project-bookmark-likes">
-                        <i className="fa-regular fa-bookmark"></i> <i className="fa-regular fa-thumbs-up"></i> <i className="fa-regular fa-thumbs-down"></i></div>
+                        {/* <i className="fa-regular fa-bookmark"></i> <i className="fa-regular fa-thumbs-up"></i> <i className="fa-regular fa-thumbs-down"></i> */}
+                        </div>
                     </div>
                         </Link>
                 </div>
@@ -203,24 +204,24 @@ function Landing() {
                         <img className='img' src='https://media.licdn.com/dms/image/C5603AQFMpdB1qR9D6g/profile-displayphoto-shrink_200_200/0/1519277230393?e=1679529600&v=beta&t=q5W5OEJx_5Y3T47-a48OD2f2j_m79durB1DF6rX1Gys'></img>
                     </div>
                     <div className='dev-name'>Annika Mcpeek</div>
-                    <a href='https://github.com/amcpeek' ><i class="fa fa-github"></i></a>
-                    <a href='https://www.linkedin.com/in/annika-mcpeek/'><i class="fa fa-linkedin"></i></a>
+                    <a href='https://github.com/amcpeek' ><i className="fa fa-github"></i></a>
+                    <a href='https://www.linkedin.com/in/annika-mcpeek/'><i className="fa fa-linkedin"></i></a>
             </div>
             <div className='each-dev'>
                 <div className="dev-img-holder">
                     <img className='img' src='https://media.licdn.com/dms/image/D5603AQHSp5XSjXQ8Lw/profile-displayphoto-shrink_200_200/0/1674231537019?e=1679529600&v=beta&t=F5MVi1TB32ZgPzBy5ffdzheMvgRM6wZaikXOCfJwSRM'></img>
                 </div>
                 <div className='dev-name'>Kirin Agcaoili</div>
-                <a href='https://github.com/kagc' ><i class="fa fa-github"></i></a>
-                <a href='https://www.linkedin.com/in/kirin-agcaoili-a84a10187/'><i class="fa fa-linkedin"></i></a>
+                <a href='https://github.com/kagc' ><i className="fa fa-github"></i></a>
+                <a href='https://www.linkedin.com/in/kirin-agcaoili-a84a10187/'><i className="fa fa-linkedin"></i></a>
             </div>
             <div className='each-dev'>
                 <div className="dev-img-holder">
                 <img className='img' src='https://avatars.githubusercontent.com/u/26307465?v=4'></img>
                 </div>
                 <div className='dev-name'>Eric Chai</div>
-                <a href='https://github.com/no8cai' ><i class="fa fa-github"></i></a>
-                <a href='https://www.linkedin.com/in/eric-chai-b5b9b337/'><i class="fa fa-linkedin"></i></a>
+                <a href='https://github.com/no8cai' ><i className="fa fa-github"></i></a>
+                <a href='https://www.linkedin.com/in/eric-chai-b5b9b337/'><i className="fa fa-linkedin"></i></a>
             </div>
             <div className='each-dev'>
                 <div className="dev-img-holder">
@@ -228,8 +229,8 @@ function Landing() {
 
                 </div>
                 <div className='dev-name'>Cory Bogert</div>
-                <a href='https://github.com/Cory-Bogert' ><i class="fa fa-github"></i></a>
-                <a href='https://www.linkedin.com/in/cory-bogert-754a7a230/'><i class="fa fa-linkedin"></i></a>
+                <a href='https://github.com/Cory-Bogert' ><i className="fa fa-github"></i></a>
+                <a href='https://www.linkedin.com/in/cory-bogert-754a7a230/'><i className="fa fa-linkedin"></i></a>
 
             </div>
         </div>
