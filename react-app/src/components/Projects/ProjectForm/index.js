@@ -25,7 +25,7 @@ const ProjectForm=({project,formType})=>{
     }
     else{
         initTitle='';
-        initCategory='';
+        initCategory='Art';
         initCity='';
         initState='Alabama';
         initCountry='USA';
@@ -133,7 +133,6 @@ const ProjectForm=({project,formType})=>{
           const errobj=await err.json();
           errors.push(errobj.message)
           setValidationErrors(errors)
-
         });
         }
 
