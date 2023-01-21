@@ -25,7 +25,7 @@ const ProjectForm=({project,formType})=>{
     }
     else{
         initTitle='';
-        initCategory='';
+        initCategory='Art';
         initCity='';
         initState='Alabama';
         initCountry='USA';
@@ -61,7 +61,6 @@ const ProjectForm=({project,formType})=>{
 
     const [validationErrors, setValidationErrors] = useState([]);
     const todayDate = new Date()
-
 
     useEffect(() => {
         if (!title&&!category&&!city&&!state&&!country&&!imageUrl&&!fundingGoal&&!startDate&&!endDate&&!description&&!risks) {
@@ -131,12 +130,11 @@ const ProjectForm=({project,formType})=>{
     const deleteEvents= (id)=>{
         const errors=[]
         dispatch(fetchDeleteProject(id))
-        .then(history.push('/profile'))
+        .then(()=>history.push('/profile'))
         .catch(async (err)=>{
           const errobj=await err.json();
           errors.push(errobj.message)
           setValidationErrors(errors)
-
         });
         }
 
