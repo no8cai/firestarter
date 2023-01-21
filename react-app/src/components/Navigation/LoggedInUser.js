@@ -4,7 +4,7 @@ import { logout } from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
-import { Link, Route, useHistory } from 'react-router-dom'
+import { Link, Route, useHistory, Redirect } from 'react-router-dom'
 import OpenModalButton from '../OpenModalButton';
 import './Navigation.css'
 import { getAllPledges, getPledgesByCurrentUser } from "../../store/pledge";
@@ -120,7 +120,7 @@ function UserDataModal({user}) {
                   ):(null)}
 
                   <Link className="create-project-link" to={`/createproject`}>
-                  <div>Create Project</div>
+                  <div><i className="fa-solid fa-square-plus"></i> Create Project</div>
                   </Link>             
                 </div>
                 </div>
