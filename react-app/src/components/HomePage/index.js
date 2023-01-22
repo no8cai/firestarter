@@ -19,6 +19,11 @@ function Landing() {
     // const randId
     const [ randId, setRandId ] = useState(Math.floor(Math.random() * (projects.length) + 1))
     // console.log('randId',randId)
+    const loadPledges = useSelector(state => state.pledges)
+    // console.log(loadPledges.totalPledgeNum)
+    // const totalPledgeNum = loadPledges.totalPledgeNum
+    // const totalPledgeNum = useSelector(state => state.pledges.totalPledgeNum)
+    // console.log(totalPledgeNum)
     const pledgesObj = useSelector(state => state.pledges.allPledges)
     const pledges = Object.values(pledgesObj)
     const randProject = useSelector(state => state.projects[randId])
@@ -29,24 +34,22 @@ function Landing() {
         dispatch(getAllPledges())
     }, [dispatch])
 
+    // if (!projectsObj || !randProject || !pledgesObj || !loadPledges ) return null
+    // let allTotalPledges = 0
+    // if(pledgesObj){
+    //     pledges.forEach(pledge => {
+    //         allTotalPledges += parseInt(pledge.Reward.price)
+    //     })
+    // }
 
-    // console.log("all pledges", pledgesObj)
-    if (!projectsObj || !randProject || !pledgesObj ) return null
-    let allTotalPledges = 0
-    if(pledgesObj){
-        pledges.forEach(pledge => {
-            allTotalPledges += parseInt(pledge.Reward.price)
-        })
-    }
-
-    let totalPledges = 0
-    if (pledgesObj){
-        pledges.forEach(pledge => {
-            if (randId === pledge.Project.id){
-            totalPledges += parseInt(pledge.Reward.price)
-            }
-        })
-    }
+    // let totalPledges = 0
+    // if (pledgesObj){
+    //     pledges.forEach(pledge => {
+    //         if (randId === pledge.Project.id){
+    //         totalPledges += parseInt(pledge.Reward.price)
+    //         }
+    //     })
+    // }
 
     // console.log(projects)
     
@@ -58,12 +61,13 @@ function Landing() {
     // randPledges.forEach(pledge => {
     //     pledgeTotal += parseFloat(pledge.Reward.price)
     // })
+    if (!projectsObj || !randProject || !loadPledges || ! pledgesObj ) return null
+    
     let currentProgress
-    if (randProject !== undefined && pledgesObj){
-        currentProgress = ((totalPledges * 100)/(randProject.fundingGoal)).toFixed(2)
+    if (randProject !== undefined && loadPledges){
+        currentProgress = ((loadPledges.totalPledges * 100)/(randProject.fundingGoal)).toFixed(2)
     }
 
-    // if (!projectsObj || !randProject || !pledgesObj ) return null
 
 
     return (
@@ -108,11 +112,11 @@ function Landing() {
                 <span className="subtext">projects</span>
             </div>
             <div className="numbers-box">
-                <span className="nums-text">${allTotalPledges}</span>
+                <span className="nums-text">${loadPledges.totalPledgeNum}</span>
                 <span className="subtext">towards creative work</span>
             </div>
             <div className="numbers-box">
-                <span className="nums-text">{pledges.length}</span>
+                <span className="nums-text">{loadPledges.totalPledges}</span>
                 <span className="subtext">pledges</span>
             </div>
         </div>
