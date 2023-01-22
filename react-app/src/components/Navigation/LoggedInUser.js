@@ -29,7 +29,7 @@ function UserDataModal({user}) {
 
     const allProjects = useSelector(state => state.projects)
     const projects = Object.values(allProjects)
-    console.log('userid',user.id)
+    // console.log('userid',user.id)
     let userProjects = projects.filter(project => parseInt(project.creatorId) === parseInt(user.id))
     
   
@@ -55,14 +55,14 @@ function UserDataModal({user}) {
   //   history.push('/')
   // };
 
-  // const logoutButton = async (e) => {
-  //     e.preventDefault();
-  //     await dispatch(logout());
-  //     closeMenu();
-  //     history.push('/')
-  //   };
+  const logoutButton = async (e) => {
+    history.push('/')
+      // e.preventDefault();
+      await dispatch(logout());
+      await dispatch(closeMenu());
+    };
   
-    console.log(userProjects.length)
+    // console.log(userProjects.length)
     if (!userPledges || !user || !allProjects) return null
     // if (!userPledges || !user) return null
 
@@ -126,7 +126,7 @@ function UserDataModal({user}) {
                 </div>
                 
                 <p className="logoutbutton">
-                  {/* <button onClick={onLogout}>Logout</button> */}
+                  {/* <button onClick={logoutButton}>Logout</button> */}
                   <LogoutButton />
                   </p>
               </div>

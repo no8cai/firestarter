@@ -131,7 +131,7 @@ const pledgesReducer = (state = initialState, action) => {
             newState = { allPledges: {}, pledgesById: { ...state.pledgesById }, singlePledge: { ...state.singlePledge }, userPledges: { ...state.userPledges}, totalPledgeNum: [], totalPledges: [] }
             // newState = { ...state, allPledges: {}}
             let totalNum = 0
-            let total = 0
+            let total = 1
             action.pledges.Pledges.forEach(pledge => {
                 newState.allPledges[pledge.id] = pledge
                 newState.totalPledgeNum = totalNum += parseInt(pledge.Reward.price)

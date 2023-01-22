@@ -19,7 +19,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     // console.log(userPledges, "EEEEEEEEEEE")
     const uPledges = Object.values(userPledges)
     const currentPledge = useSelector(state => state.pledges.singlePledge)
-    console.log("???????", currentPledge)
+    // console.log("???????", currentPledge)
     const filtered = uPledges.filter(pledge => parseInt(pledgeId) === parseInt(pledge.id))
     // console.log(filtered, "Length means pledgeid belongs to user")
     // const userFilter = uPledges.filter(pledge => pledgeId ===)
@@ -83,7 +83,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     // console.log('**********', JSON.stringify(pledges).valueOf('backerId'))
     if( !currentPledge || !rewards || !userPledges ||  filtered.length === 0 || currentPledge.id === undefined ) return null
     
-    console.log(pledgeId, currentPledge.id, projectId, currentPledge.projectId);
+    // console.log(pledgeId, currentPledge.id, projectId, currentPledge.projectId);
     // parseInt(projectId) === currentPledge.projectId &&
     if(!rewardsArr) return null
     // if(!project) return null

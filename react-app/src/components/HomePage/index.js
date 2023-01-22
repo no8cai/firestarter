@@ -24,8 +24,8 @@ function Landing() {
     // const totalPledgeNum = loadPledges.totalPledgeNum
     // const totalPledgeNum = useSelector(state => state.pledges.totalPledgeNum)
     // console.log(totalPledgeNum)
-    const pledgesObj = useSelector(state => state.pledges.allPledges)
-    const pledges = Object.values(pledgesObj)
+    // const pledgesObj = useSelector(state => state.pledges.allPledges)
+    const pledges = Object.values(loadPledges.allPledges)
     const randProject = useSelector(state => state.projects[randId])
 
     useEffect(() => {
@@ -61,8 +61,9 @@ function Landing() {
     // randPledges.forEach(pledge => {
     //     pledgeTotal += parseFloat(pledge.Reward.price)
     // })
-    if (!projectsObj || !randProject || !loadPledges || ! pledgesObj ) return null
-    
+    // if (!projectsObj || !randProject || !loadPledges || ! pledgesObj ) return null
+    if (!projectsObj || !randProject || !loadPledges ) return null
+
     let currentProgress
     if (randProject !== undefined && loadPledges){
         currentProgress = ((loadPledges.totalPledges * 100)/(randProject.fundingGoal)).toFixed(2)

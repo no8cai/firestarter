@@ -140,7 +140,7 @@ function SearchResultPage() {
               }
             })
             let currentProgress = ((pledgeTotal * 100)/(project.fundingGoal)).toFixed(2)
-            console.log(currentProgress)
+            // console.log(currentProgress)
             let oneDay = 24 * 60 * 60 * 1000
             let splitStart = project.startDate.split('-')
             let splitEnd = project.endDate.split('-')
