@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
+import { Route, Switch, NavLink, useParams } from 'react-router-dom';
 import PledgeManager from './PledgesList';
 import ProjectManager from './ProjectList';
 import RewardManager from './RewardList';
@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux';
 import "./Profile.css"
 
 const ManageCenter=()=>{
-
   const sessionUser = useSelector(state => state.session.user);
 
     return(

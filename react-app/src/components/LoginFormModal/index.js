@@ -111,13 +111,13 @@ function LoginFormModal() {
           />
         </label>
         </div>
-        <button type="submit">Log In</button>
+        <button className="form-button" type="submit">Log In</button>
       </form>
 
             <div className='form-holder'>
                <form className='login-form-css' onSubmit={demoLogin}>
                 <div className='login-break'>or</div>
-      <button type="submit">Demo User Login</button>
+      <button className="form-button" type="submit">Sign in as a Demo User</button>
     </form>
             </div>
 

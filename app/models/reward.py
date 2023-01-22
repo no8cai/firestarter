@@ -15,7 +15,7 @@ class Reward(db.Model):
     estimatedDelivery = db.Column(db.String(255))
 
     project = db.relationship("Project", back_populates="rewards")
-    pledges = db.relationship("Pledge", back_populates="reward")
+    pledges = db.relationship("Pledge", back_populates="reward", cascade="all, delete")
 
 
 

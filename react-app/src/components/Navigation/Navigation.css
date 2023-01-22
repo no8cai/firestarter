@@ -165,13 +165,15 @@
 } */
 
 .login-button> li {
-    font-weight: bold;
+    /* font-weight: bold; */
     margin-top: 1em;
 }
 
 .login-button> li:hover {
     cursor: pointer;
-    background: rgb(238, 238, 238);
+    /* background: rgb(238, 238, 238); */
+    color: rgb(22, 155, 89);
+    text-decoration: underline;
 }
 
 .signup-button> li {
@@ -181,24 +183,35 @@
 
 .signup-button> li:hover {
     cursor: pointer !important;
-    background: rgb(238, 238, 238);
+    /* background: rgb(238, 238, 238); */
+    color: rgb(22, 155, 89);
+    text-decoration: underline;
 }
 
 .logoutbutton> button {
-    /* justify-content: flex-start; */
+    justify-content: flex-start;
     /* padding-left: 0px; */
     background: none;
     color: black;
-    padding: 0px;
-    width: 30%;
+    padding-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 10%;
     font-weight: normal;
     font-size: 1rem;
     height: 1rem;
     /* margin-bottom: 0.5rem; */
 }
 
+.to-profile {
+    font-weight: bold;
+}
+
+.nav-user-title {
+    font-weight: bold;
+}
+
 .logoutbutton:hover {
-    background: rgb(238, 238, 238);
+    /* background: rgb(238, 238, 238); */
 }
 
 .modal-dropdown> li {
@@ -281,6 +294,7 @@
 .logo-img {
     height: 1.5rem;
     width: auto;
+    margin-right: 5.5rem;
 }
 
 .left-nav {

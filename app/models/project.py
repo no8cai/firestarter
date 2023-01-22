@@ -24,7 +24,7 @@ class Project(db.Model):
     risks = db.Column(db.String(4000), nullable=False)
 
     user = db.relationship("User", back_populates="projects")
-    rewards = db.relationship("Reward", back_populates="project")
+    rewards = db.relationship("Reward", back_populates="project", cascade="all, delete")
     pledges = db.relationship("Pledge", back_populates="project")
 
     def to_dict(self):

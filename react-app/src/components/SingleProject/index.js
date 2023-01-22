@@ -25,66 +25,56 @@ const SingleProject = () => {
     const returnProject = await dispatch(fetchOneProject(id))
     const allPledgeByProject = await dispatch(getAllPledgesByProjectId(id))
     const allProjects = await dispatch(fetchAllProjects())
-    // const allPledgesByCreatorOfProject = await dispatch(getPledgesByCurrentUser(oneProject.creatorId))
-    // const allPledgesReturn = await dispatch(getAllPledges())
+    const allPledgesReturn = await dispatch(getAllPledges())
   }
-  let newThing = ''
 
   useEffect(() => {
     findProjectTest()
  }, [dispatch])
 
    const addPledgesEvents=(project_Id)=>{
-        //   history.push(`/projects/${project_Id}/createpledges`)
         history.push(`/projects/${project_Id}/createpledges`)
    }
+   const editPledgesEvents=(project_Id, pledge_id)=>{
+        history.push(`/projects/${project_Id}/editpledge/${pledge_id}`)
+
+   }
    let oneProject = useSelector(state => {return state.projects[id]})
-   let totalProjectsOfThisProjectsCreator = 0
    const allProjects = useSelector(state => {return state.projects})
-   const allCreatorsPledges = useSelector(state => { return state.pledges.userPledges})
-   const allPledges = useSelector(state => state.pledges)
+   const allPledges = useSelector(state => state.pledges.allPledges)
+   const allPledgesByProjectId = useSelector(state => { return state.pledges.pledgesById})
+   //console.log("allPledgesByProjectId", allPledgesByProjectId)
+
+   let usersPledge = ''
+   let allPledgesByCurrentUser = ''
+   if (allPledges && sessionUser) {
+    let newTestTing = Object.values(allPledges)
+    console.log('OBJECT VERSION', allPledges)
+    console.log('ARRAY VERSION', newTestTing)
+    //console.log('sessionUserId should be 7', sessionUser.id, 'this should be be an array of all pledges with projectids in order', Object.values(allPledges))
+    allPledgesByCurrentUser = (Object.values(allPledges)).filter(pledge => pledge.backerId === sessionUser.id)
+    //console.log('allPledgesByCurrentUser should be 1 for projectId 1', allPledgesByCurrentUser)
+    usersPledge = allPledgesByCurrentUser.find(pledge => pledge.projectId == id)
+    //console.log('usersPledge', usersPledge)
 
 
-   if(allProjects && oneProject && allCreatorsPledges ) {
-   // console.log('what is all creator pledges length', Object.values(allCreatorsPledges).length)
+   }
 
+   let allPledgesByCreator = ''
+   let totalProjectsOfThisProjectsCreator = 0
+  if (allPledges && oneProject) {
+    allPledgesByCreator = (Object.values(allPledges)).filter(pledge => pledge.backerId === oneProject.creatorId )
+  }
+
+
+   if(allProjects && oneProject && allPledges ) {
     let arrayOfProjects = Object.values(allProjects)
-    //console.log('see allProjects', )
     for (let i=0; i < arrayOfProjects.length; i+= 1 ) {
-        //console.log('what is prog',arrayOfProjects[i].creatorId, oneProject.creatorId)
         if (arrayOfProjects[i].creatorId ==  oneProject.creatorId) {
             totalProjectsOfThisProjectsCreator += 1
         }
     }
-
-    if(sessionUser && allPledges.allPledges) {
-        // console.log('well what is it' , allPledges.allPledges)
-        //allPledges.allPledges[1].projectId == id
-        //Object.values(allPledges)
-        let arrayOfAll = Object.values(allPledges.allPledges)
-        // console.log('dont we have the id', id)
-        newThing = arrayOfAll.find(pledge => {
-            if ((pledge.projectId == id) && (pledge.backerId == sessionUser.id)) {
-                return pledge
-            }
-        })
-        console.log('new thing', newThing)
-        //if you backed this project
-        //that probably is in the oneProject
-        //console.log('what is in oneProject', allCreatorsPledges)
-        //find in all creators pledges if this project id matches anywhere
-
-        //the point:
-        //look through all pledges for this 1) current user and see if they have this 2) project id
-        //if so, newThing will be that pledge
-        //if no it will be undefined
-    }
-
    }
-
-
-
-
 
    if(oneProject) {
     var date1 = new Date(oneProject.startDate);
@@ -93,21 +83,39 @@ const SingleProject = () => {
     var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
    }
 
-
-    let allPledgesArray = []
+    let allPledgesByProjectIdArray = []
     let totalPledges = 0
-    if(allPledges.pledgesById) {
-        allPledgesArray = Object.values(allPledges.pledgesById)
-        allPledgesArray.forEach(pledge => {
+    if(allPledgesByProjectId) {
+        //console.log('what is allPledgesByProjectId', allPledgesByProjectId)
+        allPledgesByProjectIdArray = Object.values(allPledgesByProjectId)
+        allPledgesByProjectIdArray.forEach(pledge => {
             totalPledges += parseFloat(pledge.Reward.price)})
     } else {
         return null
     }
 
-
-
-  if (oneProject && allPledgesArray && allProjects && allCreatorsPledges) { //
+  if (oneProject && allPledgesByProjectId && allProjects && allPledges) { //
     let currentProgress = ((totalPledges * 100)/(oneProject.fundingGoal)).toFixed(2)
+    //console.log('allPledgesByCreator',allPledgesByCreator, 'allPledges', allPledges )
+
+    const buttonsOptions3 = () => {
+        if(sessionUser && usersPledge) {
+            return (
+                <button onClick={()=>editPledgesEvents(id, usersPledge.id)} className='sp-green-button'>Edit your pledge</button>
+            )
+        } else if (sessionUser) {
+            return (
+                <button onClick={()=>addPledgesEvents(id)} className='sp-green-button'>Back this project</button>
+            )
+        } else { return (
+            <div className='sp-log-in-to-back'>
+            <p>Log in to back this project &nbsp;
+                &nbsp;</p>
+            <ProfileButton user={sessionUser} />
+           </div>
+        )
+        }
+    }
     return (
         <div className='sp-extra-outer-div'>
         <div className='sp-whole-page'>
@@ -144,32 +152,19 @@ const SingleProject = () => {
             <div className="sp-add-border sp-basic-budget">
                 <h2 className='sp-green'>${totalPledges}</h2>
                 <p>pledged of ${Math.floor(oneProject.fundingGoal)} goal</p>
-                <h2>{allPledgesArray.length} </h2>
+                <h2>{allPledgesByProjectIdArray.length} </h2>
                 <p>backers </p>
                 <h2>{diffDays} </h2>
                 <p>days to go</p>
-                {sessionUser && newThing &&
-                    <div>Thank you for your pledge towards the reward of "{newThing.Reward.title}"". You can update your pledge here:</div>
+                {sessionUser && usersPledge &&
+                    <div>Thank you for your pledge with the reward of "{usersPledge.Reward.title}".</div>
                 }
             </div>
             <div className="sp-add-border sp-right-side-buttons">
-
-
-                    {sessionUser? <button onClick={()=>addPledgesEvents(id)} className='sp-green-button'>Back this project</button>
-                    : <div className='sp-log-in-to-back'>
-
-                    <p>Log in to back this project &nbsp;
-                        {/* <i className="fa-solid fa-arrow-right"></i> */}
-                        &nbsp;</p>
-                    <ProfileButton user={sessionUser} />
-                   </div>
-                    }
-
-
-
+            {buttonsOptions3()}
 
                 <br/>
-                <button className='sp-remind-me'><i className="fa-regular fa-bookmark"></i> Remind me</button>
+                <button id="do-not-interact" title="Feature coming soon!" className='sp-remind-me'><i className="fa-regular fa-bookmark"></i> Remind me</button>
                 <p>All or nothing. This project will only be funded
                     if it reaches its goal by {date2.toDateString()}.</p>
             </div>
@@ -182,9 +177,9 @@ const SingleProject = () => {
     </div>
     <div className='sp-add-border sp-outer-bottom-bar'>
     <div className="sp-add-border sp-bottom-bar">
-        <button>Campaign</button>
-        <button>Updates</button>
-        <button>Comments</button>
+        <button >Campaign</button>
+        <button id="do-not-interact" title="Feature coming soon!">Updates</button>
+        <button id="do-not-interact" title="Feature coming soon!">Comments</button>
     </div>
     </div>
     <div className="sp-add-border sp-bottom-section">
@@ -215,13 +210,10 @@ const SingleProject = () => {
             <br/>
             <br/>
             <div>{oneProject.creator.username}</div>
-            <div>{totalProjectsOfThisProjectsCreator} created · {Object.values(allCreatorsPledges).length} backed </div>
+            <div>{totalProjectsOfThisProjectsCreator} created · {Object.values(allPledgesByCreator).length} backed </div>
             <br/>
             <div>{oneProject.creator.username} is a frequent contributor Fire Starter and has lead a variety of successful projects.</div>
             </div>
-            <div className='sp-support-button'>Support</div>
-            {sessionUser&& <button onClick={()=>addPledgesEvents(id)} className='sp-green-button'>Back this project</button>}
-
 
         </div>
     </div>

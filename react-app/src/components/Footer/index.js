@@ -13,15 +13,15 @@ function Footer() {
             <div className="footer-links">
                 <div className="footer-link-section">
                     <span className="footer-links-labels">ABOUT</span>
-                    <p><a href='https://github.com/no8cai/firestarter/blob/main/README.md' >Link</a></p>
+                    <p><a href='https://github.com/no8cai/firestarter/blob/main/README.md' >Github README</a></p>
                 </div>
                 <div className="footer-link-section">
                     <span className="footer-links-labels">SUPPORT</span>
-                    <p><a href='https://github.com/no8cai/firestarter/blob/main/README.md' >Link</a></p>
+                    <p><a href='https://github.com/no8cai/firestarter/blob/main/README.md' >Github README</a></p>
                 </div>
                 <div className="footer-link-section">
                     <span className="footer-links-labels">MORE FROM CLONESTARTER</span>
-                    <p><a href='https://github.com/no8cai/firestarter/blob/main/README.md' >Link</a></p>
+                    <p><a href='https://github.com/no8cai/firestarter/blob/main/README.md' >Github README</a></p>
                 </div>
             </div>
             <div className="footer-social-media">
