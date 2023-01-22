@@ -13,7 +13,7 @@ const PledgeManager=()=>{
     const pledges = Object.values(pledgesObj);
     // const history=useHistory();
     // const pledges = Object.values(pledgesObj).filter(el=>el.backerId === sessionUser.id);
-    console.log("WHAT IS THISS", pledges)
+    // console.log("WHAT IS THISS", pledges)
     const history=useHistory();
 
     useEffect(() => {
@@ -32,9 +32,10 @@ const PledgeManager=()=>{
 
     return(
         <h1>
-        {
-        pledges.map((pledge) => {
-            console.log("REWARD???", pledge.Reward)
+            <div className="your-pledges">Your pledges</div>
+        {pledges.length !== 0 ?
+        (pledges.map((pledge) => {
+            // console.log("REWARD???", pledge.Reward)
         return (
 
         <div key={pledge.id} className='managebox'>
@@ -56,8 +57,8 @@ const PledgeManager=()=>{
             <button onClick={()=>deleteEvents(pledge.id)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button>
         </div>
         </div>
-      )}
-      )}
+      )})
+      ):(<div className='managebox'><div className="empty-notif"><span>You are not currently backing any projects.</span></div></div>)}
 </h1>
     )
 
