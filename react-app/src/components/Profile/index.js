@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import "./Profile.css"
 
 const ManageCenter=()=>{
-
+  
   const sessionUser = useSelector(state => state.session.user);
 
     return(
