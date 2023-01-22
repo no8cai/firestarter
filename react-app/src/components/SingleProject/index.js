@@ -164,7 +164,7 @@ const SingleProject = () => {
             {buttonsOptions3()}
 
                 <br/>
-                <button className='sp-remind-me'><i className="fa-regular fa-bookmark"></i> Remind me</button>
+                <button id="do-not-interact" title="Feature coming soon!" className='sp-remind-me'><i className="fa-regular fa-bookmark"></i> Remind me</button>
                 <p>All or nothing. This project will only be funded
                     if it reaches its goal by {date2.toDateString()}.</p>
             </div>
@@ -177,9 +177,9 @@ const SingleProject = () => {
     </div>
     <div className='sp-add-border sp-outer-bottom-bar'>
     <div className="sp-add-border sp-bottom-bar">
-        <button>Campaign</button>
-        <button>Updates</button>
-        <button>Comments</button>
+        <button >Campaign</button>
+        <button id="do-not-interact" title="Feature coming soon!">Updates</button>
+        <button id="do-not-interact" title="Feature coming soon!">Comments</button>
     </div>
     </div>
     <div className="sp-add-border sp-bottom-section">

@@ -131,7 +131,7 @@ function SignupFormModal() {
 
         </div>
        
-        <button type="submit">Sign Up</button>
+        <button className="form-button" id="override-hover" type="submit">Create account</button>
       </form>
 
     </div>

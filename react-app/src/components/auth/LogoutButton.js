@@ -34,9 +34,9 @@ const LogoutButton = () => {
     const closeMenu = () => setShowMenu(false);
 
   const onLogout = async (e) => {
-    closeMenu()
     history.push('/')
     await dispatch(logout());
+    await dispatch(closeMenu())
   };
 
   return <button onClick={onLogout}>Logout</button>;

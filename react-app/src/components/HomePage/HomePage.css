@@ -69,7 +69,7 @@
     align-items: center;
     margin-left: auto;
     margin-right: auto;
-    min-width: 77rem;
+    min-width: 80rem;
     padding-left: 1rem;
     padding-right: 1rem;
     margin-top: 1rem;
@@ -138,14 +138,14 @@
 
 .feature-project-holder {
     width: 55%;
-    padding-right: 4rem;
+    padding-right: 3rem;
     display: flex;
     flex-direction: column;
 }
 
 .rec-holder {
     width: 45%;
-    padding-left: 4rem;
+    padding-left: 3rem;
     border-left: 1px lightgray solid;
 }
 
@@ -160,6 +160,34 @@
     /* display: flex;
     flex-wrap: wrap;
     justify-content: flex-start; */
+}
+
+.img {
+    object-fit: cover;
+    /* object-fit: fill; */
+    width: 100%;
+    max-height: 20rem;
+    /* border-radius: 20px; */
+    /* object-fit: cover; */
+}
+
+.feature-title {
+    font-size: 1.8rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.feature-description {
+    margin-bottom: 1rem;
+}
+
+/* .feature-description:hover {
+    text-decoration: none;
+    color: black;
+} */
+
+.feature-creator {
+    font-size: 0.8rem;
 }
 
 .rec-projects {
@@ -184,6 +212,32 @@
 .rec-project-details {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+}
+
+.rec-project-link:hover {
+    text-decoration: none !important;
+    color: black;
+}
+
+.rec-project-link:hover #title {
+    text-decoration: underline !important;
+    color: #028858;
+}
+
+.rec-project-title {
+    margin-bottom: 0.5rem;
+}
+
+.rec-project-funded {
+    margin-bottom: 0.5rem;
+    color: #028858;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.rec-project-creator {
+    font-size: 0.8rem;
 }
 
 .devbox {
@@ -191,6 +245,7 @@
     flex-direction: row;
     justify-content: space-between;
     min-width: 100%;
+    margin-top: 1rem;
 }
 
 .devbox1 {
@@ -239,6 +294,16 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+}
+
+.feature-link:hover {
+    text-decoration: none !important;
+    color: black;
+}
+
+.feature-link:hover #title {
+    text-decoration: underline !important;
+    color: #028858;
 }
 
 .descr-text {

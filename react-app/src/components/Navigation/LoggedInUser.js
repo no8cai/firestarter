@@ -4,7 +4,7 @@ import { logout } from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
-import { Link, Route, useHistory } from 'react-router-dom'
+import { Link, Route, useHistory, Redirect } from 'react-router-dom'
 import OpenModalButton from '../OpenModalButton';
 import './Navigation.css'
 import { getAllPledges, getPledgesByCurrentUser } from "../../store/pledge";
@@ -29,7 +29,7 @@ function UserDataModal({user}) {
 
     const allProjects = useSelector(state => state.projects)
     const projects = Object.values(allProjects)
-    console.log('userid',user.id)
+    // console.log('userid',user.id)
     let userProjects = projects.filter(project => parseInt(project.creatorId) === parseInt(user.id))
     
   
@@ -55,14 +55,14 @@ function UserDataModal({user}) {
   //   history.push('/')
   // };
 
-  // const logoutButton = async (e) => {
-  //     e.preventDefault();
-  //     await dispatch(logout());
-  //     closeMenu();
-  //     history.push('/')
-  //   };
+  const logoutButton = async (e) => {
+    history.push('/')
+      // e.preventDefault();
+      await dispatch(logout());
+      await dispatch(closeMenu());
+    };
   
-    console.log(userProjects.length)
+    // console.log(userProjects.length)
     if (!userPledges || !user || !allProjects) return null
     // if (!userPledges || !user) return null
 
@@ -71,15 +71,15 @@ function UserDataModal({user}) {
                 <div className="nav-box-user-data">
 
                 <div className="nav-user-info">
-                  <p>User Info</p>
+                  <p className="nav-user-title">User Info</p>
                   <Link to={'/profile'}>
-                  <p>Profile</p>
+                  <p >Profile</p>
                   </Link>
                   <p>{user.username}</p>
                 <p id="useremailline">{user.email}</p>
                 </div>
                 <div className="nav-backed-container">
-                  <Link to="/profile/pledges"><p>Backed Projects</p></Link>
+                  <Link to="/profile/pledges"><p className="nav-user-title">Backed Projects</p></Link>
                   
                   {user && (pledges.slice(0, 2).map(pledge => {
                     return (
@@ -99,7 +99,7 @@ function UserDataModal({user}) {
                   ):(null)}
                 </div>
                 <div className="nav-created-container">
-                  <Link to="/profile"><p>Created Projects</p></Link>
+                  <Link to="/profile"><p className="nav-user-title">Created Projects</p></Link>
                   
                   {user && userProjects.length ? (userProjects.slice(0, 2).map(project => {
                     return (
@@ -120,13 +120,13 @@ function UserDataModal({user}) {
                   ):(null)}
 
                   <Link className="create-project-link" to={`/createproject`}>
-                  <div>Create Project</div>
+                  <div><i className="fa-solid fa-square-plus"></i> Create Project</div>
                   </Link>             
                 </div>
                 </div>
                 
                 <p className="logoutbutton">
-                  {/* <button onClick={onLogout}>Logout</button> */}
+                  {/* <button onClick={logoutButton}>Logout</button> */}
                   <LogoutButton />
                   </p>
               </div>
