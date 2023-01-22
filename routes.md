@@ -46,7 +46,7 @@ Returns the information about the current user that is logged in.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: /api/session
+  * URL: /api/auth/
   * Body: none
 
 * Successful Response
@@ -71,7 +71,7 @@ information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * URL: /api/session
+  * URL: /api/session NEW /api/auth/login
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -135,7 +135,7 @@ user's information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * URL: /api/users
+  * URL: /api/users NEW /api/auth/signup
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -198,9 +198,17 @@ user's information.
 
 ### U6: Log out
 
-
 Logs out a current user with valid credentials and returns the current user's
 information.
+
+* Require Authentication: true
+* Request
+  * Method: GET
+  * URL: /api/session NEW /api/auth/logout
+  * Body: none
+
+* Successful Response
+  * None
 
 
 ## PROJECTS
@@ -224,36 +232,37 @@ Returns all the projects.
     ```json
     {
       "Projects": [
-        {
-          "id": 1,
-          "creatorId": 1,
-          "category": "Art",
-          "city": "San Francisco",
-          "state": "California",
-          "country": "United States of America",
-          "title": "App Academy",
-          "imageUrl": "image.url",
-          "videoUrl": "video.url",
-          "fundingGoal": 30000,
-          "startDate": "2022-01-10",
-          "endDate": "2022-07-10",
-          "description": "This sourcebook is designed for all Nightfell fans and newcomers.",
-          "risks": "People may not like arts",
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "Rewards": {
-           "id": 1,
-           "projectId": 1,
-           "title": "The super cool project",
-           "price": 100,
-           "description": "The most fun thing ever"
-           },
-           "Creator": {
-            "id":1,
-            "name": "Kirin"
-           }
-
-        }
+       {
+            "category": "Arts",
+            "city": "New Haven",
+            "country": "USA",
+            "creator": {
+                "email": "kirin@aa.io",
+                "id": 1,
+                "username": "Kirin"
+            },
+            "creatorId": 1,
+            "description": "A Make 100 Project by GEMS.",
+            "endDate": "2024-01-01",
+            "fundingGoal": "5000.00",
+            "id": 1,
+            "imageUrl": "https://link.img",
+            "rewards": [
+                {
+                    "description": "One beautifully designed digital copy of the project photo book.",
+                    "estimatedDelivery": "2023-10-01",
+                    "id": 1,
+                    "price": "10.00",
+                    "projectId": 1,
+                    "title": "Photobook + Thank You"
+                }
+            ],
+            "risks": "Both Ericka & Gabriela have run Kickstarter campaigns in the past and have learned of potential pitfalls.",
+            "startDate": "2023-01-01",
+            "state": "Connecticut",
+            "title": "Make 100 Bowls, Ceramic Mugs, and Pottery Vases",
+            "videoUrl": null
+        },
       ]
     }
     ```
@@ -277,36 +286,37 @@ Returns all the Projects owned (created) by the current user.
     ```json
      {
       "Projects": [
-        {
-          "id": 1,
-          "creatorId": 1,
-          "category": "Art",
-          "city": "San Francisco",
-          "state": "California",
-          "country": "United States of America",
-          "title": "App Academy",
-          "imageUrl": "image.url",
-          "videoUrl": "video.url",
-          "fundingGoal": 30000,
-          "startDate": "2022-01-10",
-          "endDate": "2022-07-10",
-          "description": "This sourcebook is designed for all Nightfell fans and newcomers.",
-          "risks": "People may not like arts",
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "Rewards": {
-           "id": 1,
-           "projectId": 1,
-           "title": "The super cool project",
-           "price": 100,
-           "description": "The most fun thing ever"
-           },
-           "Creator": {
-            "id":1,
-            "name": "Kirin"
-           }
-
-        }
+           {
+            "category": "Arts",
+            "city": "New Haven",
+            "country": "USA",
+            "creator": {
+                "email": "kirin@aa.io",
+                "id": 1,
+                "username": "Kirin"
+            },
+            "creatorId": 1,
+            "description": "A Make 100 Project by GEMS.",
+            "endDate": "2024-01-01",
+            "fundingGoal": "5000.00",
+            "id": 1,
+            "imageUrl": "https://link.img",
+            "rewards": [
+                {
+                    "description": "One beautifully designed digital copy of the project photo book.",
+                    "estimatedDelivery": "2023-10-01",
+                    "id": 1,
+                    "price": "10.00",
+                    "projectId": 1,
+                    "title": "Photobook + Thank You"
+                }
+            ],
+            "risks": "Both Ericka & Gabriela have run Kickstarter campaigns in the past and have learned of potential pitfalls.",
+            "startDate": "2023-01-01",
+            "state": "Connecticut",
+            "title": "Make 100 Bowls, Ceramic Mugs, and Pottery Vases",
+            "videoUrl": null
+        },
       ]
     }
     ```
@@ -328,28 +338,37 @@ Returns the details of a project specified by its id.
   * Body:
 
     ```json
-    {
-        "id": 1,
-        "creatorId": 1,
-        "category": "Art",
-        "city": "San Francisco",
-        "state": "California",
-        "country": "United States of America",
-        "title": "App Academy",
-        "imageUrl": "image.url",
-        "videoUrl": "video.url",
-        "fundingGoal": 30000,
-        "startDate": "2022-01-10",
-        "endDate": "2022-05-04",
-        "description": "This sourcebook is designed for all Nightfell fans and all newcomer",
-        "risks": "People may not like arts",
-        "createdAt": "2021-11-19 20:39:36",
-        "updatedAt": "2021-11-19 20:39:36",
-        "creator": {
-          "id": 1,
-          "name": "John"
+        {
+            "category": "Arts",
+            "city": "New Haven",
+            "country": "USA",
+            "creator": {
+                "email": "kirin@aa.io",
+                "id": 1,
+                "username": "Kirin"
+            },
+            "creatorId": 1,
+            "description": "A Make 100 Project by GEMS.",
+            "endDate": "2024-01-01",
+            "fundingGoal": "5000.00",
+            "id": 1,
+            "imageUrl": "https://link.img",
+            "rewards": [
+                {
+                    "description": "One beautifully designed digital copy of the project photo book.",
+                    "estimatedDelivery": "2023-10-01",
+                    "id": 1,
+                    "price": "10.00",
+                    "projectId": 1,
+                    "title": "Photobook + Thank You"
+                }
+            ],
+            "risks": "Both Ericka & Gabriela have run Kickstarter campaigns in the past and have learned of potential pitfalls.",
+            "startDate": "2023-01-01",
+            "state": "Connecticut",
+            "title": "Make 100 Bowls, Ceramic Mugs, and Pottery Vases",
+            "videoUrl": null
         }
-    }
     ```
 
 * Error response: Couldn't find a project with the specified id
@@ -379,19 +398,19 @@ Creates and returns a new project.
 
     ```json
     {
-          "category": "Art",
-          "city": "San Francisco",
-          "state": "California",
-          "country": "United States of America",
-          "title": "App Academy",
-          "imageUrl": "image.url",
-          "videoUrl": "video.url",
-          "fundingGoal": 30000,
-          "startDate": "2022-01-10",
-          "endDate": "2022-05-04",
-          "description": "This sourcebook is designed for all Nightfell fans and all newcomer",
-          "risk": "People may not like arts"
-    }
+    "title":"newProject04",
+    "category":"production",
+    "city":"Los Angeles",
+    "state":"California",
+    "country":"USA",
+    "imageUrl":"http://image.com/image04",
+    "fundingGoal":"30000000.3234",
+    "startDate":"2023-04-05",
+    "endDate":"2023-05-05",
+    "description":"we found a new way to eat",
+    "risks":"people don't like eating"
+   }
+
     ```
 
 * Successful Response
@@ -402,35 +421,28 @@ Creates and returns a new project.
 
     ```json
 
-        {
-          "id": 1,
-          "creatorId": 1,
-          "category": "Art",
-          "city": "San Francisco",
-          "state": "California",
-          "country": "United States of America",
-          "title": "App Academy",
-          "imageUrl": "image.url",
-          "videoUrl": "video.url",
-          "fundingGoal": 30000,
-          "startDate": "2022-01-10",
-          "endDate": "2022-07-10",
-          "description": "This sourcebook is designed for all Nightfell fans and newcomers.",
-          "risks": "People may not like arts",
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "Rewards": {
-           "id": 1,
-           "projectId": 1,
-           "title": "The super cool project",
-           "price": 100,
-           "description": "The most fun thing ever"
-           },
-           "Creator": {
-            "id":1,
-            "name": "Kirin"
-           }
-        }
+      {
+    "category": "production",
+    "city": "Los Angeles",
+    "country": "USA",
+    "creator": {
+        "email": "david@aa.io",
+        "id": 5,
+        "username": "David"
+    },
+    "creatorId": 5,
+    "description": "we found a new way to eat",
+    "endDate": "2023-05-05",
+    "fundingGoal": "30000000.32",
+    "id": 20,
+    "imageUrl": "http://image.com/image04",
+    "rewards": [],
+    "risks": "people don't like eating",
+    "startDate": "2023-04-05",
+    "state": "California",
+    "title": "newProject04",
+    "videoUrl": null
+     }
 
     ```
 
@@ -442,20 +454,21 @@ Creates and returns a new project.
 
     ```json
     {
-      "message": "Validation Error",
-      "statusCode": 400,
-      "errors": {
-          "category": "category is required",
-          "city": "city is required",
-          "state": "state is required",
-          "country": "country is required",
-          "title": "title is required",
-          "fundingGoal": "fundingGoal is required",
-          "startDate": "startDate is required",
-          "endDate": "endDate is required",
-          "description": "description is required",
-          "risks": "risk is required"
-      }
+    "errors": [
+        "title : This field is required.",
+        "category : This field is required.",
+        "city : This field is required.",
+        "state : This field is required.",
+        "country : This field is required.",
+        "imageUrl : This field is required.",
+        "fundingGoal : This field is required.",
+        "startDate : This field is required.",
+        "endDate : This field is required.",
+        "description : This field is required.",
+        "risks : This field is required."
+    ],
+    "message": "Validation Error",
+    "statusCode": 400
     }
     ```
 
@@ -474,7 +487,7 @@ Updates and returns an existing project.
   * Body:
 
     ```json
-    {
+       {
           "category": "Art",
           "city": "San Francisco",
           "state": "California",
@@ -483,11 +496,11 @@ Updates and returns an existing project.
           "imageUrl": "image.url",
           "videoUrl": "video.url",
           "fundingGoal": 30000,
-          "startDate": "2022-01-10",
-          "endDate": "2022-05-04",
+          "startDate": "2023-01-24",
+          "endDate": "2024-05-04",
           "description": "This sourcebook is designed for all Nightfell fans and all newcomer",
           "risks": "People may not like arts"
-    }
+       }
     ```
 
 * Successful Response
@@ -497,35 +510,38 @@ Updates and returns an existing project.
   * Body:
 
     ```json
-      {
-          "id": 1,
-          "creatorId": 1,
-          "category": "Art",
-          "city": "San Francisco",
-          "state": "California",
-          "country": "United States of America",
-          "title": "App Academy",
-          "imageUrl": "image.url",
-          "videoUrl": "video.url",
-          "fundingGoal": 30000,
-          "startDate": "2022-01-10",
-          "endDate": "2022-07-10",
-          "description": "This sourcebook is designed for all Nightfell fans and newcomers.",
-          "risks": "People may not like arts",
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "Rewards": {
-           "id": 1,
-           "projectId": 1,
-           "title": "The super cool project",
-           "price": 100,
-           "description": "The most fun thing ever"
-           },
-           "Creator": {
-            "id":1,
-            "name": "Kirin"
-           }
-        }
+    {
+    "category": "Art",
+    "city": "San Francisco",
+    "country": "United States of America",
+    "creator": {
+        "email": "david@aa.io",
+        "id": 5,
+        "username": "David"
+    },
+    "creatorId": 5,
+    "description": "This sourcebook is designed for all Nightfell fans and all newcomer",
+    "endDate": "2024-05-04",
+    "fundingGoal": "30000.00",
+    "id": 5,
+    "imageUrl": "image.url",
+    "rewards": [
+        {
+            "description": "Shipping will be calculated during the post-campaign survey process. Estimated shipping costs are available on campaign page. ",
+            "estimatedDelivery": "2023-10-01",
+            "id": 13,
+            "price": "30.00",
+            "projectId": 5,
+            "title": "1x Lifted Lumbar - Early Bird"
+        },
+    ],
+    "risks": "People may not like arts",
+    "startDate": "2023-01-24",
+    "state": "California",
+    "title": "App Academy",
+    "videoUrl": "video.url"
+    }
+
     ```
 
 * Error Response: Body validation error
@@ -536,20 +552,21 @@ Updates and returns an existing project.
 
     ```json
     {
-      "message": "Validation Error",
-      "statusCode": 400,
-      "errors": {
-          "category": "category is required",
-          "city": "city is required",
-          "state": "state is required",
-          "country": "country is required",
-          "title": "title is required",
-          "fundingGoal": "fundingGoal is required",
-          "startDate": "startDate is required",
-          "endDate": "endDate is required",
-          "description": "description is required",
-          "risks": "risk is required"
-      }
+        "errors": [
+            "title : This field is required.",
+            "category : This field is required.",
+            "city : This field is required.",
+            "state : This field is required.",
+            "country : This field is required.",
+            "imageUrl : This field is required.",
+            "fundingGoal : This field is required.",
+            "startDate : This field is required.",
+            "endDate : This field is required.",
+            "description : This field is required.",
+            "risks : This field is required."
+        ],
+        "message": "Validation Error",
+        "statusCode": 400
     }
     ```
 
@@ -561,7 +578,10 @@ Updates and returns an existing project.
 
     ```json
     {
-      "message": "Project couldn't be found",
+      "errors": [
+          "Project couldn't be found"
+      ],
+      "message": "HTTP Error",
       "statusCode": 404
     }
     ```
@@ -620,10 +640,10 @@ Create and return a new reward for a project specified by ID.
 
   ```json
   {
-    "title": "Reward of paper back book",
-    "price": 1.0,
-    "description": "A virtual high five!",
-    "estimatedDelivery": "2050-11-19"
+      "title": "a title",
+      "price": 10,
+      "description": "a reward",
+      "estimatedDelivery": "2024-01-05"
   }
   ```
 
@@ -636,14 +656,12 @@ Create and return a new reward for a project specified by ID.
 
   ```json
   {
-    "id": 1,
-    "projectId": 1,
-    "title": "Reward of paper back book",
-    "price": 1.0,
-    "description": "A virtual high five!",
-    "estimatedDelivery": "2050-11-19",
-    "createdAt": "2021-11-19 20:39:36",
-    "updatedAt": "2021-11-19 20:39:36"
+      "description": "a reward",
+      "estimatedDelivery": "2024-01-05",
+      "id": 55,
+      "price": "10.00",
+      "projectId": 5,
+      "title": "a title"
   }
   ```
 
@@ -654,14 +672,14 @@ Create and return a new reward for a project specified by ID.
   - Body
   ```json
   {
-    "message": "Validation error",
-    "statusCode": 400,
-    "errors": {
-      "title": "Title text is required.",
-      "price": "Must set a price for this reward.",
-      "description": "Reward description text is required.",
-      "estimatedDelivery": "Reward delivery date must be set some time in the future."
-    }
+    "errors": [
+        "title : Reward title cannot be blank.",
+        "price : Price for this reward must be set.",
+        "description : Reward description cannot be blank.",
+        "estimatedDelivery : Delivery estimation can not be in the past."
+    ],
+    "message": "Validation Error",
+    "statusCode": 400
   }
   ```
 
@@ -684,32 +702,21 @@ Returns all of the rewards that belong to a project specified by ID.
   - Body:
 
   ```json
-  "Rewards": [
-      {
-          "id": 1,
-          "projectId": 1,
-          "title": "A book as a reward",
-          "price": 1.00,
-          "description": "A virtual high five!",
-          "estimatedDelivery": "2050-11-19",
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36" ,
-      }
-  ]
-
-  ```
-
-- Error response: Couldn't find a project with the specified ID
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-  ```json
   {
-    "message": "Project couldn't be found",
-    "statusCode": 404
+      "Rewards": [
+          {
+              "description": "One beautifully designed digital copy of the project photo book",
+              "estimatedDelivery": "2023-10-01",
+              "id": 1,
+              "price": "10.00",
+              "projectId": 1,
+              "title": "Photobook + Thank You"
+          }
+      ]
   }
+
   ```
+
 
 ### R3 - Get reward details based on reward ID - DONE
 
@@ -730,18 +737,14 @@ Returns reward details based on reward ID.
   - Body:
 
   ```json
-  "Rewards": [
-      {
-          "id": 1,
-          "projectId": 1,
-          "title": "A Project",
-          "price": 1.00,
-          "description": "A virtual high five!",
-          "estimatedDelivery": "2050-11-19",
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36" ,
-      }
-  ]
+  {
+      "description": "One beautifully designed digital copy of the project photo book.",
+      "estimatedDelivery": "2023-10-01",
+      "id": 1,
+      "price": "10.00",
+      "projectId": 1,
+      "title": "Photobook + Thank You"
+  }
 
   ```
 
@@ -752,7 +755,10 @@ Returns reward details based on reward ID.
   - Body:
   ```json
   {
-    "message": "Reward couldn't be found",
+    "errors": [
+        "Reward couldn't be found"
+    ],
+    "message": "HTTP Error",
     "statusCode": 404
   }
   ```
@@ -773,10 +779,10 @@ Updates and returns an existing reward.
 
     ```json
     {
-      "title": "A Project",
-      "price": 1.0,
-      "description": "A virtual high five!",
-      "estimatedDelivery": "2050-11-19"
+    "title": "a title",
+    "price": 500,
+    "description": "a reward",
+    "estimatedDelivery": "2050-01-01"
     }
     ```
 
@@ -789,14 +795,12 @@ Updates and returns an existing reward.
 
     ```json
     {
-      "id": 1,
-      "projectId": 1,
-      "title": "A Project",
-      "price": 1.0,
-      "description": "A virtual high five!",
-      "estimatedDelivery": "2050-11-19",
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36"
+        "description": "a reward",
+        "estimatedDelivery": "2050-01-01",
+        "id": 13,
+        "price": "500.00",
+        "projectId": 5,
+        "title": "a title"
     }
     ```
 
@@ -809,15 +813,15 @@ Updates and returns an existing reward.
 
     ```json
     {
-      "message": "Validation Error",
-      "statusCode": 400,
-      "errors": {
-        "title": "Title text is required.",
-        "price": "Must set a price for this reward.",
-        "description": "Reward description text is required.",
-        "estimatedDelivery": "Reward delivery date must be set."
+      "errors": [
+          "title : Reward title cannot be blank.",
+          "price : Price for this reward must be set.",
+          "description : Reward description cannot be blank.",
+          "estimatedDelivery : Reward estimated delivery cannot be blank."
+      ],
+      "message": "Validation error",
+      "statusCode": 400
       }
-    }
     ```
 
 - Error response: Couldn't find a reward with the specified id
@@ -828,10 +832,13 @@ Updates and returns an existing reward.
   - Body:
 
     ```json
-    {
-      "message": "Reward couldn't be found",
+      {
+      "errors": [
+          "Reward couldn't be found"
+      ],
+      "message": "HTTP Error",
       "statusCode": 404
-    }
+      }
     ```
 
 ### R5- Delete a reward - DONE
@@ -883,8 +890,11 @@ Deleted an existing reward
 
     ```json
     {
-      "message": "Cannot delete rewards if campaign has reached end date",
-      "statusCode": 403
+    "errors": [
+        "Reward couldn't be found"
+    ],
+    "message": "HTTP Error",
+    "statusCode": 404
     }
     ```
 ## Pledges
@@ -906,145 +916,195 @@ Returns all the pledges.
   * Body:
 
     ```json
-       {
-      "pledges": [
-        {
-           "id": 1,
-           "backerId": 1,
-           "projectId": 1,
-           "rewardId":1,
-           "Reward":  {
-           "id": 1,
-           "price": 20,
-           "title": "Book for kids"
-           },
-           "Project": {
-           "id": 1,
-           "creatorId": 1,
-           "title": "Books about female leaders"
-           }
-        }
-      ]
-    }
+    {
+        "Pledges": [
+            {
+                  "Project": {
+                      "category": "Arts",
+                      "city": "New Haven",
+                      "country": "USA",
+                      "creatorId": 1,
+                      "description": "A Make 100 Project by GEMS. ",
+                      "endDate": "2024-01-01",
+                      "fundingGoal": "5000.00",
+                      "id": 1,
+                      "imageUrl": "https://ksr-ugc.imgix.img",
+                      "risks": "Both Ericka & Gabriela have run Kickstarter campaigns in the past.",
+                      "startDate": "2023-01-01",
+                      "state": "Connecticut",
+                      "title": "Make 100 Bowls, Ceramic Mugs, and Pottery Vases",
+                      "videoUrl": null
+                  },
+                  "Reward": {
+                      "description": "One beautifully designed digital copy of the project photo book.",
+                      "estimatedDelivery": "2023-10-01",
+                      "id": 1,
+                      "price": "10.00",
+                      "projectId": 1,
+                      "title": "Photobook + Thank You"
+                  },
+                  "backerId": 1,
+                  "id": 1,
+                  "projectId": 1,
+                  "rewardId": 1
+              }
+          ]
+      }
     ```
-
 ### PL2: Get all pledges owned by the Current User for all their projects (low priority)
 #will want associated reward title, project title, reward price, status of project, boolean for receiving the gift for the full project page which is lower priority
 #for just the modal, we only need the name of the associated project
-
 Returns all the pledges owned (created) by the current user.
-
 * Require Authentication: true
 * Request
   * Method: GET
   * URL: /api/pledges/current
   * Body: none
-
 * Successful Response
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
   * Body:
-
     ```json
-    {
-      "pledges": [
+    "Pledges": [
         {
-           "id": 1,
-           "creatorId": 1,
-           "backerId": 1,
-           "pledgeId": 1,
-           "Reward":  {
-           "id": 1,
-           "price": 20,
-           "title": "Book for kids",
-           },
-           "Project": {
-           "id": 1
-           }
+            "Project": {
+                "category": "Arts",
+                "city": "New Haven",
+                "country": "USA",
+                "creatorId": 1,
+                "description": "A Make 100 Project by GEMS. \n We are Gabriela and Ericka, two self-taught artists c ",
+                "endDate": "2024-01-01",
+                "fundingGoal": "5000.00",
+                "id": 1,
+                "imageUrl": "https://ksr-ugc.imgix.net/assets/039/651/363/1a9",
+                "risks": "Both Ericka & Gabriela have run Kickstarter campaigns in the past and h.",
+                "startDate": "2023-01-01",
+                "state": "Connecticut",
+                "title": "Make 100 Bowls, Ceramic Mugs, and Pottery Vases",
+                "videoUrl": null
+            },
+            "Reward": {
+                "description": "One beautifully designed digital copy of the project photo or this project plus backer acknowledgement on our website",
+                "estimatedDelivery": "2023-10-01",
+                "id": 1,
+                "price": "10.00",
+                "projectId": 1,
+                "title": "Photoboook + Thank You"
+            },
+            "backerId": 7,
+            "id": 109,
+            "projectId": 1,
+            "rewardId": 1
         }
-      ]
-    }
+    ]
     ```
-
 ### PL3: Get all pledges associated with a Project (lower priority)
 #will want associated reward title, project title, reward price, status of project, boolean for receiving the gift for the full project page which is lower priority
 #for just the modal, we only need the name of the associated project
-
 Returns all the pledges owned (created) by the current user.
-
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: /api/pledges/project/:projectId
+  * URL: /api/projects/:projectId/pledges
   * Body: none
-
 * Successful Response
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
   * Body:
-
     ```json
     {
-      "pledges": [
+      "Pledges": [
         {
-           "id": 1,
-           "creatorId": 1,
-           "backerId":1,
-           "pledgeId":1,
-           "Reward": {
-              "id": 1,
-              "price": 20,
-              "title": "Book for kids"
-         },
+            "Project": {
+                "category": "Arts",
+                "city": "New Haven",
+                "country": "USA",
+                "creatorId": 1,
+                "description": "A Make 100 Project by GEMS. \n We are Gabriela and Ericka, two self-taught artists collaborating this year to create  handcrafwo artists passionate about their craft.",
+                "endDate": "2024-01-01",
+                "fundingGoal": "5000.00",
+                "id": 1,
+                "imageUrl": "https://ksr-ugc.imgix.net/assets/03",
+                "risks": "Both Ericka & Gabriela have run Kickstarter .",
+                "startDate": "2023-01-01",
+                "state": "Connecticut",
+                "title": "Make 100 Bowls, Ceramic Mugs, and Pottery Vases",
+                "videoUrl": null
+            },
+            "Reward": {
+                "description": "One beautifully designed digital copy of the ",
+                "estimatedDelivery": "2023-10-01",
+                "id": 1,
+                "price": "10.00",
+                "projectId": 1,
+                "title": "Photoboook + Thank You"
+            },
+            "backerId": 1,
+            "id": 1,
+            "projectId": 1,
+            "rewardId": 1
         }
       ]
     }
 ### PL4: Get details of a pledge from an id (will need for edit page)
-
 Returns the details of a Pledge specified by its id.
-
 * Require Authentication: false
 * Request
   * Method: GET
   * URL: /api/pledges/:pledgeId
   * Body: none
-
 * Successful Response
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
   * Body:
-
     ```json
-        {
-            "id": 1,
+    {
+        "Project": {
+            "category": "Arts",
+            "city": "New Haven",
+            "country": "USA",
             "creatorId": 1,
-            "backerId":1,
-            "pledgeId":1
-        }
+            "description": "A Make 100 Project by GEMS. \n We are Gabriela and Ericka.",
+            "endDate": "2024-01-01",
+            "fundingGoal": "5000.00",
+            "id": 1,
+            "imageUrl": "https://ksr-ugc.imgix.net/assets/039/651/363/1a9218465",
+            "risks": "Both Ericka & Gabriela have run Kickstarter .",
+            "startDate": "2023-01-01",
+            "state": "Connecticut",
+            "title": "Make 100 Bowls, Ceramic Mugs, and Pottery Vases",
+            "videoUrl": null
+        },
+        "Reward": {
+            "description": "One beautifully designed digital copy of the ",
+            "estimatedDelivery": "2023-10-01",
+            "id": 1,
+            "price": "10.00",
+            "projectId": 1,
+            "title": "Photoboook + Thank You"
+        },
+        "backerId": 1,
+        "id": 1,
+        "projectId": 1,
+        "rewardId": 1
+    }
     ```
-
 * Error response: Couldn't find a Pledge with the specified id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
   * Body:
-
  ```json
-
       {
       "message": "Pledge couldn't be found",
       "statusCode": 404
       }
-
   ```
-
 ### PL5: Create a pledge for a Reward based on the Reward’s Id (required)
-
 Creates and returns a new Pledge for a reward based on the specified Id..
-
 * Require Authentication: true
 * Request
   * Method: POST
@@ -1052,20 +1112,17 @@ Creates and returns a new Pledge for a reward based on the specified Id..
   * Headers:
     * Content-Type: application/json
   * Body:
-
     ```json
           {
             "rewardId": 1,
             "backerId":1
            }
     ```
-
 * Successful Response
   * Status Code: 201
   * Headers:
     * Content-Type: application/json
   * Body:
-
     ```json
     {
            "id": 1,
@@ -1081,22 +1138,30 @@ Creates and returns a new Pledge for a reward based on the specified Id..
                }
     }
     ```
-Error response: Couldn't find a Reward with the specified id
-Status Code: 404
-Headers:
-Content-Type: application/json
-Body:
-{
-  "message": "Reward couldn't be found",
-  "statusCode": 404
-}
-
-
-
+*Error response: Couldn't find a Reward with the specified id
+  *Status Code: 404
+  *Headers:
+    *Content-Type: application/json
+  *Body:
+  ```json
+        {
+        "message": "Reward couldn't be found",
+        "statusCode": 404
+      }
+  ```
+*Error response: Only one user can back one project
+  *Status Code: 404
+  *Headers:
+    *Content-Type: application/json
+  *Body:
+  ```json
+  {
+   "message": "Validation Error",
+   "statusCode": 400
+  }
+  ```
 ### PL6: Edit a pledge (required)
-
 Updates and returns an existing Pledge.
-
 * Require Authentication: true
 * Require proper authorization: Pledge must belong to the current user
 * The only part that changes is the reward Id
@@ -1106,7 +1171,6 @@ Updates and returns an existing Pledge.
   * Headers:
     * Content-Type: application/json
   * Body:
-
     ```json
          {
           "id": 1,
@@ -1118,13 +1182,11 @@ Updates and returns an existing Pledge.
             }
         }
     ```
-
 * Successful Response
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
   * Body:
-
     ```json
       {
           "id": 1,
@@ -1140,135 +1202,69 @@ Updates and returns an existing Pledge.
              }
       }
     ```
-
 * Error Response: Reward Id did not exist
   * Status Code: 400
   * Headers:
     * Content-Type: application/json
   * Body:
-
     ```json
     {
       "message": "Reward couldn't be found ",
       "statusCode": 404
     }
     ```
-
+* Error response: Pledge does not belong to current user
+  * Status Code: 403
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+      ```json
+      {
+      "errors": [
+        "The pledge is not belongs to the current user"
+       ],
+      "message": "Forbidden Error",
+      "statusCode": 403
+      }
+    ```
 * Error response: Couldn't find a Pledge with the specified id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
   * Body:
-
     ```json
     {
       "message": "Pledge couldn't be found",
       "statusCode": 404
     }
     ```
-
 ### PL7: Delete a pledge (required)
-
 Deletes an existing Pledge.
-
 * Require Authentication: true
 * Require proper authorization: Pledge must belong to the current user
 * Request
   * Method: DELETE
   * URL: /api/pledges/:pledgeId
   * Body: none
-
 * Successful Response
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
   * Body:
-
     ```json
     {
       "message": "Successfully deleted",
       "statusCode": 200
     }
     ```
-
 * Error response: Couldn't find a Pledge with the specified id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
   * Body:
-
     ```json
     {
       "message": "Pledge couldn't be found",
-      "statusCode": 404
-    }
-    ```
-
-## Search
-
-###  S1: Get all search results for any user
-
-Returns all the projects matching search parameters
-
-* Require Authentication: false
-* Request
-  * Method: GET
-  * URL: `https://www.kickstarter.com/discover/advanced?term=Cory&staff_picks=1&goal=2&sort=magic&seed=2789404&page=1`
-  * Later add how to search and filter correctly
-  * Body: none
-
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "Projects": [
-        {
-          "id": 1,
-          "creatorId": 1,
-          "category": "Art",
-          "city": "San Francisco",
-          "state": "California",
-          "country": "United States of America",
-          "title": "App Academy",
-          "imageUrl": "image.url",
-          "videoUrl": "video.url",
-          "fundingGoal": 30000,
-          "startDate": "2022-01-10",
-          "endDate": "2022-07-10",
-          "description": "This sourcebook is designed for all Nightfell fans and newcomers.",
-          "risks": "People may not like arts",
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "Rewards": {
-           "id": 1,
-           "projectId": 1,
-           "title": "The super cool project",
-           "price": 100,
-           "description": "The most fun thing ever"
-           },
-           "Creator": {
-            "id":1,
-            "name": "Kirin"
-           }
-
-        }
-      ]
-    }
-    ```
-
-* Error response: Couldn't find a Project with the specified parameters
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "No Projects could be found",
       "statusCode": 404
     }
     ```
