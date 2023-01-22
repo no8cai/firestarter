@@ -44,7 +44,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
     // console.log("come ooon",pPledges)
     // const pfiltered = pPledges.filter(pledge => pledge.id === parseInt(pledgeId))
 
-    // light uses PLEDGE id, PULL the pledge and compare that it 1. belongs to project 2. pledge belongs to user 3. 
+    // light uses PLEDGE id, PULL the pledge and compare that it 1. belongs to project 2. pledge belongs to user 3.
     const currentPledge = useSelector(state => state.pledges.singlePledge)
     // if(currentPledge){
 
@@ -112,15 +112,15 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
             )
     }
 
-   
+
     console.log(pledgeId, currentPledge.id, filtered.length);
 
 
     return(
         <>
         {
-        // project !== undefined && rewardsArr.length !== 0 && filtered.length !== 0 && pfiltered.length !== 0 ? 
-        project !== undefined && parseInt(projectId) === currentPledge.projectId && filtered.length ? 
+        // project !== undefined && rewardsArr.length !== 0 && filtered.length !== 0 && pfiltered.length !== 0 ?
+        project !== undefined && parseInt(projectId) === currentPledge.projectId && filtered.length ?
         (<div className='pledge-main-container'>
 
 <div className='pledge-project-title'>
@@ -165,10 +165,10 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
                 <h5 className='reward-estimated'>Anywhere in the world</h5>
             </div>
             {type==="Create Pledge" &&(
-                <button className='pledge-button' onClick={() => createPledgeBtn(reward.id, reward.projectId)}>Pledge {reward.price}</button>
+                <button className='pledge-button' onClick={() => createPledgeBtn(reward.id, reward.projectId)}>Pledge</button>
                 )}
             {type==="Edit Pledge" &&(
-                <button className='pledge-button' onClick={() => editPledgeBtn(reward.id, reward.projectId, pledgeId)}>Pledge {reward.price}</button>
+                <button className='pledge-button' onClick={() => editPledgeBtn(reward.id, reward.projectId, pledgeId)}>Pledge</button>
                 )}
         </div>
  </ul>

@@ -25,8 +25,8 @@ const SingleProject = () => {
     const returnProject = await dispatch(fetchOneProject(id))
     const allPledgeByProject = await dispatch(getAllPledgesByProjectId(id))
     const allProjects = await dispatch(fetchAllProjects())
-    const allPledgesByCreatorOfProject = await dispatch(getPledgesByCurrentUser(oneProject.creatorId))
-    const allPledgesReturn = await dispatch(getAllPledges())
+    // const allPledgesByCreatorOfProject = await dispatch(getPledgesByCurrentUser(oneProject.creatorId))
+    // const allPledgesReturn = await dispatch(getAllPledges())
   }
   let newThing = ''
 

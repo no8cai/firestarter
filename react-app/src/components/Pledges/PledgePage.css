@@ -46,10 +46,12 @@ a:link { text-decoration: none;}
 .reward-card-details {
     margin-left: 2rem;
     margin-right: 4rem;
+    width: 50%;
 }
 
 .reward-card-shipping {
-    margin-right: 20rem
+    margin-right: 10rem;
+    margin-left: 5rem;
 }
 
 
@@ -76,14 +78,18 @@ a:link { text-decoration: none;}
 
 .reward-card {
     display: flex;
-    flex-direction: row;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    /* flex-direction: row;
     flex-wrap: wrap;
     align-content: normal;
     justify-content: normal;
     align-items: normal;
-    border: .1rem solid #d3d3d3;
     column-gap: 5rem;
-    margin-top: 1rem;
+    margin-top: 1rem; */
+    border: .1rem solid #d3d3d3;
 }
 
 .reward-card:hover{
@@ -103,7 +109,8 @@ a:link { text-decoration: none;}
 
 summary {
     font-weight: bold;
-    padding: 0.5em
+    padding: 0.5em;
+    cursor: pointer;
 }
 
 details[open] {
@@ -114,10 +121,10 @@ details[open] {
     background-color: #028858;
     color: white;
     border: none;
-    margin: 5px;
+    margin: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 6rem;
     height: 1.5rem;
-    margin-left: 5rem;
+    /* margin-left: 5rem; */
 
 }
