@@ -133,21 +133,28 @@ const PledgeDetails2 = ({type,projectId,pledgeId}) => {
             <div className='reward-card-details'>
                 {/* <input type='radio' />Pledge $20 */}
                 <h4 className='reward-price'>${reward.price}</h4>
-                <h4 className='reward-title'>{reward.title}</h4>
-                <p className='reward-description'>{reward.description}</p>
-            </div>
-            <div className='reward-card-shipping'>
+                <div className="reward-card-mid">
+                    <div className="reward-card-mid-1"><h4 className='reward-title'>{reward.title}</h4>
+                <p className='reward-description'>{reward.description}</p></div>
+                    {/* <div className="reward-card-mid-2"></div> */}
+                    <div className='reward-card-shipping'>
                 <h6 className='reward-estimated'>ESTIMATED DELIVERY</h6>
                 <h5 className='reward-estimated'>{reward.estimatedDelivery}</h5>
                 <h6 className='reward-estimated'>SHIPS TO</h6>
                 <h5 className='reward-estimated'>Anywhere in the world</h5>
             </div>
+                </div>
+                
+            </div>
+            
+            <div className="pledge-button-holder">
             {type==="Create Pledge" &&(
-                <button className='pledge-button' onClick={() => createPledgeBtn(reward.id, reward.projectId)}>Pledge</button>
+                <button className='pledge-button' onClick={() => createPledgeBtn(reward.id, reward.projectId)}>Pledge {reward.price}</button>
                 )}
             {type==="Edit Pledge" &&(
-                <button className='pledge-button' onClick={() => editPledgeBtn(reward.id, reward.projectId, pledgeId)}>Pledge</button>
+                <button className='pledge-button' onClick={() => editPledgeBtn(reward.id, reward.projectId, pledgeId)}>Pledge {reward.price}</button>
                 )}
+            </div>
         </div>
  </ul>
   )})}
@@ -155,7 +162,7 @@ const PledgeDetails2 = ({type,projectId,pledgeId}) => {
 </div>
 <div className='guaranteed-container'>
 <div className='guaranteed-description'>
-    <h3>Reward aren't guaranteed</h3>
+    <h3><i class="fa-regular fa-calendar-xmark"></i> Reward aren't guaranteed</h3>
     <p>Your pledge will support an ambitious creative project that has yet to be developed. There’s a risk that, despite a creator’s best efforts, your reward will not be fulfilled, and we urge you to consider this risk prior to pledging. Kickstarter is not responsible for project claims or reward fulfillment.</p>
 </div>
 

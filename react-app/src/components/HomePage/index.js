@@ -18,7 +18,7 @@ function Landing() {
     const projects = Object.values(projectsObj)
     // const randId
     const [ randId, setRandId ] = useState(Math.floor(Math.random() * (projects.length) + 1))
-    console.log('randId',randId)
+    // console.log('randId',randId)
     const pledgesObj = useSelector(state => state.pledges.allPledges)
     const pledges = Object.values(pledgesObj)
     const randProject = useSelector(state => state.projects[randId])
