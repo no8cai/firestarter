@@ -59,6 +59,7 @@ a:link { text-decoration: none;}
     width: 25rem;
     max-width: 25rem;
     margin-right: 5rem;
+    overflow: hidden;
 }
 
 .reward-card-shipping {
@@ -157,10 +158,11 @@ details[open] {
 
 .reward-description {
     margin: 0;
-    max-height:10rem;
-    max-width: 28rem;
-    overflow-wrap: break-word;
+    /* max-height:10rem; */
+    max-width: 25rem;
     text-overflow: ellipsis;
+    overflow-wrap: break-word;
+    /* overflow: hidden; */
 }
 
 .pledge-button-holder {
@@ -170,7 +172,7 @@ details[open] {
 }
 
 .reward-title {
-    max-width: 28rem;
+    max-width: 25rem;
     overflow-wrap: break-word;
     text-overflow: ellipsis;
 }
