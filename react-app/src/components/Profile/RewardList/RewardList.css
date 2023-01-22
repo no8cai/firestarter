@@ -9,4 +9,8 @@
 .rewardlist-content{
     width:17vw;
     text-align: center;
+    /* overflow: hidden;
+    white-space: nowrap; */
+    text-overflow: ellipsis;
+    overflow-wrap: break-word;
 }
