@@ -50,3 +50,7 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+.footer-icon i{
+    color: grey;
+}
