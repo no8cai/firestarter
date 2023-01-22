@@ -123,6 +123,8 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
         (<div className='pledge-main-container'>
 
 <div className='pledge-project-title'>
+
+
     <Link className='project-link' key={project.title} to={`/projects/${project.id}`}>
     <h1>{project.title}</h1>
     </Link>
@@ -134,7 +136,10 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
 </div>
 
 <div className='reward-selection-text'>
-    <h2>Select your reward </h2>
+{type==="Edit Pledge"? (
+    <h3>Edit your pledge by selecting a different reward </h3>
+):<h2>Select your reward </h2> }
+
     <p>Select an option below</p>
 </div>
 

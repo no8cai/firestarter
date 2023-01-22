@@ -85,7 +85,9 @@ const ProjectForm=({project,formType})=>{
         else if(fundingGoal<=0){errors.push("Project's funding goal must be greater than 0");}
         else if(!(/^\d+(\.\d{1,2})?$/.test(fundingGoal))){errors.push("Project's funding goal must be within 2 decimal places");}
         if(startDate.length<=0){errors.push("Project's start date field is required");}
-        if(todayDate - (new Date(startDate)) > 0) {errors.push(`The start date of your project needs to be after today's date`)}
+        if(todayDate - (new Date(startDate)) > 0) {errors.push(`The start date of your project needs to be after tomorrow's date. If you are editing a project you will need to update the start date`)}
+        //can't do the validation below because there is also validation on the backend for start date can't be before current date
+      //  if(formType=="Edit Project" && startDate !== initStartDate && todayDate - (new Date(startDate)) > 0) {errors.push(`The start date of your project needs to be after tomorrow's date. If you are editing a project and your start date was in the past that can stay the same`)}
         else if(endDate.length<=0){errors.push("Project's end date field is required");}
         else if(endDate<=startDate){errors.push("Project's end date field need to be after start date");}
         if(description.length<=0){errors.push("Project's description field is required");}
