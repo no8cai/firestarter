@@ -25,6 +25,14 @@ function LoginFormModal() {
       }
     };
 
+    const updateEmail = (e) => {
+      setEmail(e.target.value);
+    };
+  
+    const updatePassword = (e) => {
+      setPassword(e.target.value);
+    };  
+
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   const data = await dispatch(login(email, password)).then(closeModal).then(history.push('/'));
@@ -36,13 +44,17 @@ function LoginFormModal() {
   const demoLogin = async (e) => {
     e.preventDefault();
 
-    const demoEmail = 'brad@aa.io'
-    const demoPassword = 'passwordBrad'
+    setEmail('brad@aa.io')
+    setPassword('passwordBrad')
 
-    const data = await dispatch(login(demoEmail, demoPassword));
+    // const demoEmail = 'brad@aa.io'
+    // const demoPassword = 'passwordBrad'
+
+    const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
     }
+
     // e.preventDefault();
     // const demoEmail = 'brad@aa.io'
     // const demoPassword = 'passwordBrad'
@@ -51,14 +63,6 @@ function LoginFormModal() {
     //     setErrors(data)
     // }
   }
-
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
 
   if (user) {
     closeModal()
