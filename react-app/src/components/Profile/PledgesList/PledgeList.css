@@ -48,6 +48,8 @@
     width: 14vw;
     text-align: center;
     align-items: flex-start;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
 }
 
 .managebox{

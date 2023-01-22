@@ -175,6 +175,12 @@
     font-size: 1.8rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    max-width: 41rem;
+    max-height: 4rem;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    /* white-space: nowrap; */
+    text-overflow: ellipsis;
 }
 
 .feature-description {
@@ -326,6 +332,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    overflow-wrap: break-word;
 }
 
 .dev-name{

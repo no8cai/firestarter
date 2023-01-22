@@ -126,7 +126,7 @@ const PledgeDetails = ({type,projectId,pledgeId}) => {
 
 
     <Link className='project-link' key={project.title} to={`/projects/${project.id}`}>
-    <h1>{project.title}</h1>
+    <h1 className="oneProject-title">{project.title}</h1>
     </Link>
     <h5>{project.creator.username}</h5>
 </div>

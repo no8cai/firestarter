@@ -56,10 +56,11 @@ function UserDataModal({user}) {
   // };
 
   const logoutButton = async (e) => {
-    history.push('/')
+      history.push('/')
+      closeMenu()
       // e.preventDefault();
       await dispatch(logout());
-      await dispatch(closeMenu());
+      // await dispatch(closeMenu());
     };
   
     // console.log(userProjects.length)
@@ -126,8 +127,8 @@ function UserDataModal({user}) {
                 </div>
                 
                 <p className="logoutbutton">
-                  {/* <button onClick={logoutButton}>Logout</button> */}
-                  <LogoutButton />
+                  <button onClick={logoutButton}>Logout</button>
+                  {/* <LogoutButton /> */}
                   </p>
               </div>
     )
