@@ -327,3 +327,23 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+.dev-name{
+    color: grey;
+}
+
+.each-dev i{
+    color: grey;
+    /* font-size: 20px; */
+}
+
+.dev-img-holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dev-img-holder img{
+    object-fit: cover;
+    height: 200px;
+    width: 170px;
+}

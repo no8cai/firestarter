@@ -66,7 +66,7 @@ const RewardForm=({reward,formType,projectId})=>{
         if(title.length<=0){errors.push("reward's title field is required");}
         else if(title.length>=50){errors.push("reward's title must be less than 50 characters")}
         if(description.length<=0){errors.push("reward's description field is required");}
-        else if(description.length>=200){errors.push("reward's title must be less than 200 characters")}
+        else if(description.length>=200){errors.push("reward's description must be less than 200 characters")}
         if(isNaN(price)){errors.push("reward's price must be a number");}
         else if(price<=0){errors.push("reward's price must be greater than 0");}
         else if(!(/^\d+(\.\d{1,2})?$/.test(price))){errors.push("reward's price must be within 2 decimal places");}
