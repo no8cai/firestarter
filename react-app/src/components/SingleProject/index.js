@@ -120,7 +120,7 @@ const SingleProject = () => {
         <div className='sp-extra-outer-div'>
         <div className='sp-whole-page'>
     <div className="sp-title sp-add-border">
-        <h1>{oneProject.title}</h1>
+        <h1 className="oneProject-title">{oneProject.title}</h1>
         <h4>By {oneProject.creator.username}</h4>
 
     </div>
