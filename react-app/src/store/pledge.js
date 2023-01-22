@@ -127,7 +127,8 @@ const pledgesReducer = (state = initialState, action) => {
     let newState;
     switch(action.type){
         case READ_PLEDGES:
-            newState = { allPledges: {}, pledgesById: {}, singlePledge: {}, userPledges: { ...state.userPledges}}
+            newState = { allPledges: {}, pledgesById: { ...state.pledgesById }, singlePledge: { ...state.singlePledge }, userPledges: { ...state.userPledges}}
+            // newState = { ...state, allPledges: {}}
             action.pledges.Pledges.forEach(pledge => {
                 newState.allPledges[pledge.id] = pledge
             }

@@ -20,7 +20,8 @@ function Landing() {
     const [ randId, setRandId ] = useState(Math.floor(Math.random() * (projects.length) + 1))
     console.log('randId',randId)
     const pledgesObj = useSelector(state => state.pledges.allPledges)
-        const pledges = Object.values(pledgesObj)
+    const pledges = Object.values(pledgesObj)
+    const randProject = useSelector(state => state.projects[randId])
 
     useEffect(() => {
         dispatch(fetchAllProjects())
@@ -30,7 +31,13 @@ function Landing() {
 
 
     // console.log("all pledges", pledgesObj)
-
+    if (!projectsObj || !randProject || !pledgesObj ) return null
+    let allTotalPledges = 0
+    if(pledgesObj){
+        pledges.forEach(pledge => {
+            allTotalPledges += parseInt(pledge.Reward.price)
+        })
+    }
 
     let totalPledges = 0
     if (pledgesObj){
@@ -42,26 +49,21 @@ function Landing() {
     }
 
     // console.log(projects)
-    const randProject = useSelector(state => state.projects[randId])
-    console.log("AAAAAAAAA", randProject)
+    
+    // console.log("AAAAAAAAA", randProject)
 
 
-    let pledgeTotal = 0
+    
     // let randPledges = pledges.filter(pledge => pledge.projectId === randId)
     // randPledges.forEach(pledge => {
     //     pledgeTotal += parseFloat(pledge.Reward.price)
     // })
     let currentProgress
-    if (randProject !== undefined){
+    if (randProject !== undefined && pledgesObj){
         currentProgress = ((totalPledges * 100)/(randProject.fundingGoal)).toFixed(2)
     }
 
-
-
-    console.log(currentProgress, "current progress")
-
-
-    if (!projectsObj || !randProject || !pledgesObj ) return null
+    // if (!projectsObj || !randProject || !pledgesObj ) return null
 
 
     return (
@@ -106,7 +108,7 @@ function Landing() {
                 <span className="subtext">projects</span>
             </div>
             <div className="numbers-box">
-                <span className="nums-text">${totalPledges}</span>
+                <span className="nums-text">${allTotalPledges}</span>
                 <span className="subtext">towards creative work</span>
             </div>
             <div className="numbers-box">
