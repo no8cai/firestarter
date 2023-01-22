@@ -127,7 +127,15 @@
     font-size: 1.2rem;
     padding-bottom: 1rem;
     min-height: 3rem;
+    max-width: 20rem;
+    max-height: 3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
+/* .search-project-title> span {
+    width: 100%
+} */
 
 .search-descr-text {
     /* display: block;

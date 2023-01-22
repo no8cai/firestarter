@@ -141,19 +141,24 @@ function SearchResultPage() {
             })
             let currentProgress = ((pledgeTotal * 100)/(project.fundingGoal)).toFixed(2)
             // console.log(currentProgress)
-            let oneDay = 24 * 60 * 60 * 1000
-            let splitStart = project.startDate.split('-')
-            let splitEnd = project.endDate.split('-')
-            let firstDate = new Date(splitStart[2], splitStart[0], splitStart[1])
-            let secondDate = new Date(splitEnd[2], splitEnd[0], splitEnd[1])
-            let diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay))
+            // let oneDay = 24 * 60 * 60 * 1000
+            // let splitStart = project.startDate.split('-')
+            // let splitEnd = project.endDate.split('-')
+            // let firstDate = new Date(splitStart[2], splitStart[0], splitStart[1])
+            // let secondDate = new Date(splitEnd[2], splitEnd[0], splitEnd[1])
+            // let diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay))
+            var date1 = new Date(project.startDate);
+            var date2 = new Date(project.endDate);
+            var diffTime = Math.abs(date2 - date1);
+            var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
             return (
               <Link className="feature-link" key={project.id} to={`/projects/${project.id}`}>
                 <div className="projects-holder">
                   <div className="preview-image" style={{ backgroundImage: `url('${project.imageUrl}'` }}></div>
                   <div className="project-details">
                     {/* <div className="project-details-top"> */}
-                    <div id="title" className="search-project-title">{project.title}</div>
+                    <div id="title" className="search-project-title">{project.title}
+                      </div>
                     <span className="search-descr-text">{project.description}</span>
                     <div className="search-by-text">by {project.creator.username}</div>
 
