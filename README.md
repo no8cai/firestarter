@@ -1,3 +1,97 @@
+# `Firestarter, a Kickstarter Clone, by Annika McPeek, Cory Bogert, Eric Chai, and Kirin Agcaoili`
+
+## Link to live site:
+https://firestarter.onrender.com/
+## Description:
+Our clone of the Kickstarter site has create, read, update, and delete features for projects (store) rewards (inventory) and pledges (purchases). Users can search and filter for projects. There is also a profile feature for users to see and interact with their projects they created and rewards they pledged towards. Users can log in to access all these features. In the wiki is the API documentation of the backend routes that we created.
+## Technologies used:
+The backend uses SqlAlchemy and Flask in Python. The frontend uses React and Redux in Javascript. The live site is on Render and uses PostgreSQl and locally the database is SQLite.
+## Usage description of features.
+## Home Page:
+Here a user can see one random projects extensive details, the latest 3 projects details, stats about the full site, and information about the creators of the site.
+![AllHomes]
+
+[AllHomes]:
+./HomePage.png
+
+## Single Project page:
+This page shows information on a single project and shows different details based on what the user is authorized to see or do.
+![SingleHome]
+
+[SingleHome]:
+./SingleHomePage.png
+
+##Search Feature Page
+
+##Pledge Page
+
+##Create Project Page
+
+##Profile Page
+
+##Profile Modal
+
+
+## Add a home page:
+This page is available to all logged in users.
+![CreateHome]
+
+[CreateHome]:
+./CreateHomePage.png
+
+## Road Map
+We included in our database schema the next features we want to take on: likes, comments, and updates. 
+
+## Get started using my repo locally
+Once downloading the repo in the backend folder run:
+npm install
+npx dotenv sequelize db:migrate
+npx dotenv sequelize db:seed:all
+npm start
+In the frontend folder run:
+npm install
+npm start
+
+
+## Contact Us:
+Annika McPeek
+ammcpeek@gmail.com
+linkedin.com/in/annika-mcpeek/
+
+Cory Bogert
+https://www.linkedin.com/in/cory-bogert-754a7a230/
+https://github.com/Cory-Bogert
+
+Eric Chai
+https://www.linkedin.com/in/eric-chai-b5b9b337/
+https://github.com/no8cai
+
+Kirin Agcaoili
+https://www.linkedin.com/in/kirin-agcaoili-a84a10187/
+https://github.com/kagc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###############
+
 # Flask React Project
 
 This is the starter for the Flask React project.
