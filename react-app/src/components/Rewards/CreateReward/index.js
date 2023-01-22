@@ -11,8 +11,8 @@ const CreateReward=()=>{
     const dispatch = useDispatch()
     const user = useSelector(state => {return state.session.user})
     const allProjects = useSelector(state => {return state.projects})
-    console.log(user)
-    console.log(allProjects)
+    // console.log(user)
+    // console.log(allProjects)
 
     const findProjectTest = async () => {
         const allProjects = await dispatch(fetchAllProjects())
