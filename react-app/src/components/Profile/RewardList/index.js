@@ -7,6 +7,7 @@ import { fetchProjectRewards } from "../../../store/reward";
 import { useParams } from "react-router-dom";
 import { fetchDeleteReward } from "../../../store/reward";
 import { fetchAllProjects } from '../../../store/project';
+import './RewardList.css'
 
 const RewardManager=()=>{
 
@@ -24,7 +25,7 @@ const allProjects = useSelector(state => {return state.projects})
     const userId = useSelector(state => {return state.session.user.id})
     const history=useHistory();
 
-    console.log(projectId)
+    // console.log(projectId)
 
     useEffect(() => {
         dispatch(fetchProjectRewards(projectId));
@@ -86,27 +87,19 @@ const allProjects = useSelector(state => {return state.projects})
 
 
     return(
-        <h1>
-        {rewards.length ? (rewards.map(({id,title,price,description,estimatedDelivery }) => (
+        <div>
+        {rewards.length ? (rewards.map(({id,title,price,description,estimatedDelivery,projectId}) => (
         <div key={id} className='managebox'>
-        <div className='boxitems'>
-            <NavLink to={`/`} className="links">
-            <h3>{title}</h3>
-            <div>{price}</div>
-            <div>{description}</div>
-            <div>{estimatedDelivery}</div>
-            <div className='manageaddress'>
-               {/* <div>{`${city},${state},${country}`}</div> */}
-               {/* <div><i className="fas fa-star" />{avgRating}</div> */}
-            </div>
-            <div>
-               {/* {`${fundingGoal}`} */}
-            </div>
+        <div className='rewardlist-boxitems'>
+            <NavLink to={`/projects/${projectId}`} className="rewardlist-links">
+            <h3 className="rewardlist-content">{title}</h3>
+            <div className="rewardlist-content">{price}</div>
+            <div className="rewardlist-content">{description}</div>
+            <div className="rewardlist-content">{estimatedDelivery}</div>
             </NavLink>
         </div>
         <div className="button-section">
-            {/* <button className="buttons"><i className="fa-regular fa-pen-to-square" />Edit</button>
-            <button className='buttons'><i className="fa-solid fa-trash-can" />Delete</button> */}
+
             <button onClick={()=>editEvents(id)} className="buttons"><i className="fa-regular fa-pen-to-square" />Edit</button>
             <button onClick={()=>deleteEvents(id)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button>
         </div>
@@ -116,7 +109,7 @@ const allProjects = useSelector(state => {return state.projects})
                 This project has no rewards yet. Add a reward (Button here)
             </div>
       </div>)}
-</h1>
+</div>
     )
 }
 
