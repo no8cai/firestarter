@@ -32,6 +32,7 @@
     max-width: 70rem;
     inline-size: 70rem;
     overflow-wrap: break-word;
+    text-overflow: ellipsis;
 }
 
 
