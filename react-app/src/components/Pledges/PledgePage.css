@@ -157,10 +157,20 @@ details[open] {
 
 .reward-description {
     margin: 0;
+    max-height:10rem;
+    max-width: 28rem;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
 }
 
 .pledge-button-holder {
     width: 100%;
     display: flex;
     justify-content: flex-end;
+}
+
+.reward-title {
+    max-width: 28rem;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
 }
