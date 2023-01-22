@@ -42,15 +42,20 @@ const SingleProject = () => {
    let oneProject = useSelector(state => {return state.projects[id]})
    const allProjects = useSelector(state => {return state.projects})
    const allPledges = useSelector(state => state.pledges.allPledges)
+   const allPledgesByProjectId = useSelector(state => { return state.pledges.pledgesById})
+   //console.log("allPledgesByProjectId", allPledgesByProjectId)
 
    let usersPledge = ''
    let allPledgesByCurrentUser = ''
    if (allPledges && sessionUser) {
-    console.log('sessionUserId should be 7', sessionUser.id, 'this should be be an array of all pledges with projectids in order', Object.values(allPledges))
+    let newTestTing = Object.values(allPledges)
+    console.log('OBJECT VERSION', allPledges)
+    console.log('ARRAY VERSION', newTestTing)
+    //console.log('sessionUserId should be 7', sessionUser.id, 'this should be be an array of all pledges with projectids in order', Object.values(allPledges))
     allPledgesByCurrentUser = (Object.values(allPledges)).filter(pledge => pledge.backerId === sessionUser.id)
-    console.log('allPledgesByCurrentUser should be 1 for projectId 1', allPledgesByCurrentUser)
+    //console.log('allPledgesByCurrentUser should be 1 for projectId 1', allPledgesByCurrentUser)
     usersPledge = allPledgesByCurrentUser.find(pledge => pledge.projectId == id)
-    console.log('usersPledge', usersPledge)
+    //console.log('usersPledge', usersPledge)
 
 
    }
@@ -64,7 +69,6 @@ const SingleProject = () => {
 
    if(allProjects && oneProject && allPledges ) {
     let arrayOfProjects = Object.values(allProjects)
-
     for (let i=0; i < arrayOfProjects.length; i+= 1 ) {
         if (arrayOfProjects[i].creatorId ==  oneProject.creatorId) {
             totalProjectsOfThisProjectsCreator += 1
@@ -79,18 +83,21 @@ const SingleProject = () => {
     var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
    }
 
-    let allPledgesArray = []
+    let allPledgesByProjectIdArray = []
     let totalPledges = 0
-    if(allPledges) {
-        allPledgesArray = Object.values(allPledges)
-        allPledgesArray.forEach(pledge => {
+    if(allPledgesByProjectId) {
+        //console.log('what is allPledgesByProjectId', allPledgesByProjectId)
+        allPledgesByProjectIdArray = Object.values(allPledgesByProjectId)
+        allPledgesByProjectIdArray.forEach(pledge => {
             totalPledges += parseFloat(pledge.Reward.price)})
     } else {
         return null
     }
 
-  if (oneProject && allPledgesArray && allProjects && allPledges) { //
+  if (oneProject && allPledgesByProjectId && allProjects && allPledges) { //
     let currentProgress = ((totalPledges * 100)/(oneProject.fundingGoal)).toFixed(2)
+    //console.log('allPledgesByCreator',allPledgesByCreator, 'allPledges', allPledges )
+
     const buttonsOptions3 = () => {
         if(sessionUser && usersPledge) {
             return (
@@ -145,7 +152,7 @@ const SingleProject = () => {
             <div className="sp-add-border sp-basic-budget">
                 <h2 className='sp-green'>${totalPledges}</h2>
                 <p>pledged of ${Math.floor(oneProject.fundingGoal)} goal</p>
-                <h2>{allPledgesArray.length} </h2>
+                <h2>{allPledgesByProjectIdArray.length} </h2>
                 <p>backers </p>
                 <h2>{diffDays} </h2>
                 <p>days to go</p>

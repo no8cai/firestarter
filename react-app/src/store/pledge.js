@@ -127,7 +127,8 @@ const pledgesReducer = (state = initialState, action) => {
     let newState;
     switch(action.type){
         case READ_PLEDGES:
-            newState = { allPledges: {}, pledgesById: {}, singlePledge: {}, userPledges: { ...state.userPledges}}
+            newState = { allPledges: {...state}, ...state } //allPledges: {}, pledgesById: {}, singlePledge: {}, userPledges: { ...state.userPledges}
+
             action.pledges.Pledges.forEach(pledge => {
                 newState.allPledges[pledge.id] = pledge
             }
@@ -159,7 +160,7 @@ const pledgesReducer = (state = initialState, action) => {
             newState.userPledges[action.pledge.id] = action.pledge
             return newState
 
-        
+
         case UPDATE_PLEDGE:
             newState = { ...state, allPledges: { ...state.allPledges}, pledgesById: { ...state.pledgesById}, userPledges: { ...state.userPledges}}
             newState.allPledges[action.pledge.id] = action.pledge
@@ -173,7 +174,7 @@ const pledgesReducer = (state = initialState, action) => {
             delete newState.pledgesById[action.backerId]
             delete newState.userPledges[action.backerId]
             return newState
-   
+
         default:
             return state
 
