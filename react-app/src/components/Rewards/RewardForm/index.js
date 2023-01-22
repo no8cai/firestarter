@@ -27,7 +27,7 @@ const RewardForm=({reward,formType,projectId})=>{
     const oneProject = useSelector(state => {return state.projects[projectId]})
 
     if (oneProject) {
-      console.log('what is one project', oneProject.endDate)
+      // console.log('what is one project', oneProject.endDate)
 
 
     }
@@ -87,7 +87,7 @@ const RewardForm=({reward,formType,projectId})=>{
         const errors=[]
 
         if(formType==="Create Reward"){
-            console.log('fetch, project', tempReward, projectId)
+            // console.log('fetch, project', tempReward, projectId)
             dispatch(fetchCreateReward(tempReward, projectId))
             .then(()=>{history.push(`/profile`)})
             .catch(async (err)=>{

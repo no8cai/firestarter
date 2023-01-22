@@ -49,8 +49,8 @@ const SingleProject = () => {
    let allPledgesByCurrentUser = ''
    if (allPledges && sessionUser) {
     let newTestTing = Object.values(allPledges)
-    console.log('OBJECT VERSION', allPledges)
-    console.log('ARRAY VERSION', newTestTing)
+    // console.log('OBJECT VERSION', allPledges)
+    // console.log('ARRAY VERSION', newTestTing)
     //console.log('sessionUserId should be 7', sessionUser.id, 'this should be be an array of all pledges with projectids in order', Object.values(allPledges))
     allPledgesByCurrentUser = (Object.values(allPledges)).filter(pledge => pledge.backerId === sessionUser.id)
     //console.log('allPledgesByCurrentUser should be 1 for projectId 1', allPledgesByCurrentUser)
