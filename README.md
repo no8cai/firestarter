@@ -1,4 +1,6 @@
-# `Firestarter, a Kickstarter Clone, by Annika McPeek, Cory Bogert, Eric Chai, and Kirin Agcaoili`
+# Firestarter
+## a Kickstarter Clone
+## by Annika McPeek, Cory Bogert, Eric Chai, and Kirin Agcaoili
 
 ## Link to live site:
 https://firestarter.onrender.com/
@@ -12,24 +14,32 @@ The backend uses SqlAlchemy and Flask in Python. The frontend uses React and Red
 
 ## Home Page:
 Here a user can see one random projects extensive details, the latest 3 projects details, stats about the full site, and information about the creators of the site.
+![](https://github.com/no8cai/firestarter/blob/main/images/FireStarterHomePage.png)
+
 
 ## Single Project page:
 This page shows information on a single project and shows different details based on what the user is authorized to see or do.
+![](https://github.com/no8cai/firestarter/blob/main/images/FireStarterSingleProjectPage.png)
 
-## Search Feature Page
+## Search Feature Page:
 After searching or filtering results, a user can see all projects that meet their criteria.
+![](https://github.com/no8cai/firestarter/blob/main/images/FireStarterSearchPage.png)
 
-## Pledge Page
+## Pledge Page:
 Here a user can "purchase" a reward, or chose to edit their pledge, and chose a different reward.
+![](https://github.com/no8cai/firestarter/blob/main/images/FireStarterPledgePage.png)
 
-## Create Project Page
+## Create Project Page:
 This form is where a user can create a project or edit their project. Users can create and edit rewards for their projects on a similar form.
+![](https://github.com/no8cai/firestarter/blob/main/images/FireStarterCreateProjectPage.png)
 
-## Profile Page
+## Profile Page:
 This is where a user can see all the projects they created, or click to see all the projects they have backed my pledging to those projects rewards.
+![](https://github.com/no8cai/firestarter/blob/main/images/FireStarterProfilePage.png)
 
-## Profile Modal
+## Profile Modal:
 This modal is available in the top right corner for users to navigate the site.
+![](https://github.com/no8cai/firestarter/blob/main/images/FireStarterProfileModal.png)
 
 
 ## Road Map
