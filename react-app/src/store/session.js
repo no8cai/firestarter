@@ -66,6 +66,7 @@ export const logout = () => async (dispatch) => {
 
   if (response.ok) {
     dispatch(removeUser());
+    return "Successfully logged out"
   }
 };
 
