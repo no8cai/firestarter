@@ -56,11 +56,10 @@ function UserDataModal({user}) {
   // };
 
   const logoutButton = async (e) => {
-      history.push('/')
-      closeMenu()
-      // e.preventDefault();
-      await dispatch(logout());
-      // await dispatch(closeMenu());
+      const loggedOut = await dispatch(logout());
+      if (loggedOut) {
+        closeMenu()
+        return history.push('/')}
     };
   
     // console.log(userProjects.length)

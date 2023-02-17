@@ -256,3 +256,19 @@
     padding-left: 10px;
 
 }
+
+.sp-dropdown {
+    border: gray 1px solid;
+    /* justify-content: left; */
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 5rem;
+    position: relative;
+    position: absolute;
+    margin-top: 0.5rem;
+    z-index: 99;
+    background: white;
+    right: 29rem;
+
+}

@@ -1,17 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
-import OpenModalMenuItem from './OpenModalMenuItem';
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { Link, Route, useHistory } from 'react-router-dom'
 import OpenModalButton from '../OpenModalButton';
-import './Navigation.css'
-import UserDataModal from "./LoggedInUser";
 import proficon from '../../../src/images/favicon.ico'
 import logicon from '../../../src/images/loginicon.png'
 
-function ProfileButton({ user }) {
+function LoginDropdown({ user }) {
     const history = useHistory()
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
@@ -45,23 +43,24 @@ function ProfileButton({ user }) {
     //   history.push('/')
     // };
   
-    let pClassName = "profile-button-outline"
-    let ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
-    if (!user) {
-      ulClassName = "profile-dropdown2" + (showMenu ? "" : " hidden")
-      pClassName = "profile-button" 
-    }
+    // let pClassName = "profile-button-outline"
+    let ulClassName = "sp-dropdown" + (showMenu ? "" : " hidden");
+    // if (!user) {
+    //  let ulClassName = "profile-dropdown2" + (showMenu ? "" : " hidden")
+    //   pClassName = "profile-button" 
+    // }
   
     return (
-      <div className='profile-button-div'>
-        <button style={{ backgroundImage: `url('${!user ? logicon : proficon}'`, backgroundSize: 'contain' }} onClick={openMenu} className={pClassName}></button>
+      <div 
+      // className='profile-button-div'
+      >
+        <button 
+        // style={{ backgroundImage: `url('${proficon}'`, backgroundSize: 'contain' }} 
+        onClick={openMenu} 
+        className="sp-green-button"
+        >Log in or sign up to back this project!</button>
         <div className={ulClassName} ref={ulRef}>
-          {user ? (
-            <div className='modal-dropdown'>
-              <UserDataModal user={user}/>
-              {/* <p className="logoutbutton"><button onClick={logout}>Logout</button></p> */}
-            </div>
-          ) : (
+          
               <div className='signup-button'>
             <div className='login-button'>
               <OpenModalMenuItem
@@ -79,11 +78,9 @@ function ProfileButton({ user }) {
                 modalComponent={<SignupFormModal />}
               />
             </div>
-            
-          )}
         </div>
       </div>
     );
   }
   
-  export default ProfileButton;
+  export default LoginDropdown;

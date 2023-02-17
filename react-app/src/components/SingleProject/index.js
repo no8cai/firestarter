@@ -2,7 +2,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
 import './SingleProject.css'
 import React, { useEffect, useState } from 'react'
-import ProfileButton from '../Navigation/ProfileButton';
+import LoginDropdown from './LoginDropdown';
 import { fetchOneProject } from '../../store/project'
 import { fetchProjectRewards } from '../../store/reward'
 import { getAllPledgesByProjectId} from '../../store/pledge'
@@ -108,11 +108,10 @@ const SingleProject = () => {
                 <button onClick={()=>addPledgesEvents(id)} className='sp-green-button'>Back this project</button>
             )
         } else { return (
-            <div className='sp-log-in-to-back'>
-            <p>Log in to back this project &nbsp;
-                &nbsp;</p>
-            <ProfileButton user={sessionUser} />
-           </div>
+            // <div className='sp-log-in-to-back'>
+            <LoginDropdown />
+            // <p></p>
+        //    </div>
         )
         }
     }

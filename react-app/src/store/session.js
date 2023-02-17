@@ -65,7 +65,9 @@ export const logout = () => async (dispatch) => {
   });
 
   if (response.ok) {
+    const loggedOut = await response.json()
     dispatch(removeUser());
+    return loggedOut
   }
 };
 
