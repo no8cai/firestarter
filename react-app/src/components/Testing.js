@@ -1,5 +1,5 @@
 import { useDispatch, useSelector} from 'react-redux';
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getAllPledges, getOnePledge, getAllPledgesByProjectId, getPledgesByCurrentUser,  createPledge, updatePledge, deletePledge } from '../store/pledge';
 
 const Testing = () => {
@@ -8,7 +8,7 @@ const Testing = () => {
     //PL1 - DONE
     const return1 = await dispatch(getAllPledges())
     //PL2 - current user -
-    const return2 = await dispatch(getPledgesByCurrentUser())
+    // const return2 = await dispatch(getPledgesByCurrentUser())
     // //PL3 - project id - done
     // const return3 = await dispatch(getAllPledgesByProjectId(1))
     //PL4 - DONE

@@ -1,0 +1,41 @@
+.profile-userinfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    background-color: rgba(223, 220, 220, 0.5);
+    border:1px solid white;
+    height: 300px;
+}
+
+.profile-icon01{
+    width: 150px;
+    border-radius: 100px;
+    
+}
+
+.profile-barlist{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    gap:30px;
+    border-bottom: 1px solid rgb(0, 0, 0,10%);
+}
+
+.profile-links{
+    border:none;
+
+}
+
+.profile-bu{
+    color: rgb(133, 132, 132);
+    size:20px;
+    border: 1 solid white;
+    height: 50px;
+    transition-duration: 0.4s;
+}
+.profile-bu:hover{
+    color: black;
+}

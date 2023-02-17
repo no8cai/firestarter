@@ -1,0 +1,94 @@
+.links{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* border: 1px solid rgb(0, 0, 0,20%); */
+}
+
+.button-section{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.projectlist-titles{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.projectlist-titletext{
+    font-family: 'Lucida Sans Regular', sans-serif;
+    font-size: 15px;
+    color: rgb(0, 0, 0,0.7);
+    width: 14vw;
+    text-align: center;
+}
+
+.managebox{
+    display: flex;
+}
+.projectlist-buttonsec{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap:20px;
+    
+
+}
+.projectlist-buttons{
+    width: 200px;
+    /* background-color: #028858;
+    color: white;
+    height: 30px; */
+   
+}
+
+
+.projectlist-buttons{
+    width: 14vw;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: white;
+    height: 25px;
+}
+
+
+.projectlist-item{
+    width: 14vw;
+    text-align: center;
+}
+
+.projectlist-boxitem{
+    height: 100px;
+}
+
+.managebox{
+    padding-top: 20px;
+    border-top:1px rgb(0, 0, 0,0.2) solid;
+    transition-duration: 0.4s;
+}
+
+.managebox:hover{
+    background-color: rgb(237, 233, 233, 0.5);
+}
+
+.projectlist-image{
+    height: 80px;
+    width: 150px;
+    object-fit: cover;
+}
+
+.projectlist-buttons i{
+    color: #028858;
+    font-size: 20px;
+
+}
+.project-buttop{
+    border-top: #028858;
+}

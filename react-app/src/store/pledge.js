@@ -102,7 +102,7 @@ export const updatePledge = (payload) => async dispatch => {
     })
     if(response.ok){
         const pledge = await response.json()
-        dispatch(getOne(pledge))
+        dispatch(edit(pledge))
         return pledge
     }
 }
@@ -121,19 +121,25 @@ export const deletePledge = backerId => async dispatch => {
 }
 
 //reducer
-const initialState = { allPledges: {}, pledgesById: {}, onePledge: {}, userPledges: {}}
+// const initialState = { allPledges: {}, pledgesById: {}, singlePledge: {}, userPledges: {} }
+const initialState = { allPledges: {}, pledgesById: {}, singlePledge: {}, userPledges: {}, totalPledgeNum: [], totalPledges: [] }
 
 const pledgesReducer = (state = initialState, action) => {
     let newState;
     switch(action.type){
         case READ_PLEDGES:
-            newState = { allPledges: {}, pledgesById: {}, singlePledge: {}, userPledges: { ...state.userPledges}}
+            newState = { allPledges: {}, pledgesById: { ...state.pledgesById }, singlePledge: { ...state.singlePledge }, userPledges: { ...state.userPledges}, totalPledgeNum: [], totalPledges: [] }
+            // newState = { ...state, allPledges: {}}
+            let totalNum = 0
+            let total = 1
             action.pledges.Pledges.forEach(pledge => {
                 newState.allPledges[pledge.id] = pledge
+                newState.totalPledgeNum = totalNum += parseInt(pledge.Reward.price)
+                newState.totalPledges = total++
             }
-            ) 
+            )
             return newState
-        
+
         case READ_PLEDGES_BY_PROJECT_ID:
             newState = { ...state, pledgesById: {} }
             action.pledges.Pledges.forEach(pledge => {
@@ -154,75 +160,26 @@ const pledgesReducer = (state = initialState, action) => {
             return newState
 
         case CREATE_PLEDGE:
-            newState = { ...state, allPledges: { ...state.allPledges }}
+            newState = { ...state, allPledges: { ...state.allPledges}, pledgesById: { ...state.pledgesById}, userPledges: { ...state.userPledges}}
             newState.allPledges[action.pledge.id] = action.pledge
+            newState.userPledges[action.pledge.id] = action.pledge
+            return newState
+
+
+        case UPDATE_PLEDGE:
+            newState = { ...state, allPledges: { ...state.allPledges}, pledgesById: { ...state.pledgesById}, singlePledge: {...state.singlePledge }, userPledges: { ...state.userPledges}}
+            newState.allPledges[action.pledge.id] = action.pledge
+            newState.pledgesById[action.pledge.id] = action.pledge
+            newState.userPledges[action.pledge.id] = action.pledge
             return newState
 
         case DELETE_PLEDGE:
             newState = { ...state, allPledges: { ...state.allPledges}, pledgesById: { ...state.pledgesById}, userPledges: { ...state.userPledges}}
-        // case READ_PLEDGES:
-        //     action.pledges.Pledges.forEach(pledge => {
-        //         allPledges[pledge.id] = pledge
-        //     })
-        //     return {
-        //         ...allPledges
-        //     }
-        // // case READ_PLEDGES_BY_PROJECT_ID: //just copied read pledges, need to fix
-        // //     //this is not right
-        // //     action.pledges.Pledges.forEach(pledge => {
-        // //         allPledges[pledge.id] = pledge
-        // //     })
-        // //     return {
-        // //         ...allPledges
-        // //     }
-        //  // case READ_PLEDGES_CURRENT_USER: //just copied read pledges, need to fix
-        // //     action.pledges.Pledges.forEach(pledge => {
-        // //         allPledges[pledge.id] = pledge
-        // //         return {
-        // //             ...allPledges
-        // //         }
-        // //     })
-        // case READ_PLEDGES_BY_PROJECT_ID:
-        //     const nextLevel1 = {}
-        // action.pledges.Pledges.forEach(pledge => {
-        //     nextLevel1[pledge.id] = pledge
-        // })
-        // return {
-        //     ...state,
-        //     ['PledgesByProjectId']: nextLevel1
-        // }
-        // case READ_PLEDGES_CURRENT_USER:
-        // const nextLevel2 = {}
-        // action.pledges.Pledges.forEach(pledge => {
-        //     nextLevel2[pledge.id] = pledge
-        // })
-        // return {
-        //     ...state,
-        //     ['currentOwnersPledges']: nextLevel2
-        // }
+            delete newState.allPledges[action.backerId]
+            delete newState.pledgesById[action.backerId]
+            delete newState.userPledges[action.backerId]
+            return newState
 
-        // case READ_SINGLE_PLEDGE:
-        //     const oneState = {...state}
-        //     oneState[action.pledge.id] = action.pledge
-        //     return oneState
-
-        // case CREATE_PLEDGE:
-        //     if(!state[action.pledge.id]){
-        //         return {
-        //             ...state,
-        //             [action.pledge.id]: action.pledge
-        //         }
-        //     }
-
-        // case UPDATE_PLEDGE:
-        //     let editedPledge = {...state}
-        //     editedPledge[action.pledge.id] = action.pledge
-        //     return editedPledge
-
-        // case DELETE_PLEDGE:
-        //     const deleteState = {...state}
-        //     delete deleteState[action.backerId]
-        //     return deleteState
         default:
             return state
 

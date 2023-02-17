@@ -17,17 +17,48 @@ function SignupFormModal() {
   const history = useHistory()
   const { closeModal } = useModal();
 
-  const handleSubmit = async (e) => {
-
+  const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password)).then(closeModal).then(history.push('/'));
+      const data = await dispatch(signUp(username, email, password));
       if (data) {
         setErrors(data)
       }
-    }
-    return setErrors(['Confirm Password field must be the same as the Password field']);
+    } else setErrors(["The password entries do not match."])
   };
+
+  const updateUsername = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const updateEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const updatePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const updateRepeatPassword = (e) => {
+    setRepeatPassword(e.target.value);
+  };
+
+  if (user) {
+    closeModal()
+    return <Redirect to='/' />;
+  }
+
+  // const handleSubmit = async (e) => {
+
+  //   e.preventDefault();
+  //   if (password === repeatPassword) {
+  //     const data = await dispatch(signUp(username, email, password)).then(closeModal).then(history.push('/'));
+  //     if (data) {
+  //       setErrors(data)
+  //     }
+  //   }
+  //   return setErrors(['Confirm Password field must be the same as the Password field']);
+  // };
 
   return (
     <div className='signup-holder'>
@@ -40,25 +71,16 @@ function SignupFormModal() {
 
     <div className='form-holder'>
 
-<form className='signup-form-css' onSubmit={handleSubmit}>
+<form className='signup-form-css' onSubmit={onSignUp}>
         <ul className='errorlist'>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+          {errors.map((error, idx) => (
+          <div key={idx}>{error}</div>
+          ))}
         </ul>
 
         <div className='input-holder'>
 
  <label>
-          
-          <input
-          className='input-line'
-          placeholder='Email'
-            type="text"
-            value={email}
-            title='Email Address'
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
         <label>
          
           <input
@@ -67,7 +89,18 @@ function SignupFormModal() {
             className='input-line'
             value={username}
             title='Name'
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={updateUsername}
+            required
+          />
+        </label>
+          
+          <input
+          className='input-line'
+          placeholder='Email'
+            type="text"
+            value={email}
+            title='Email Address'
+            onChange={updateEmail}
             required
           />
         </label>
@@ -79,7 +112,7 @@ function SignupFormModal() {
             placeholder='Password'
             value={password}
             title='Password'
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={updatePassword}
             required
           />
         </label>
@@ -91,14 +124,14 @@ function SignupFormModal() {
             placeholder='Confirm Password'
             value={repeatPassword}
             title='Confirm Password'
-            onChange={(e) => setRepeatPassword(e.target.value)}
+            onChange={updateRepeatPassword}
             required
           />
         </label>
 
         </div>
        
-        <button type="submit">Sign Up</button>
+        <button className="form-button" id="override-hover" type="submit">Create account</button>
       </form>
 
     </div>

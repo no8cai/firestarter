@@ -1,6 +1,6 @@
 /* TODO Add site wide styles */
 html, input, textarea, select, a {
-  font-family: 'helvetica';
+  font-family: 'Lucida Sans Regular', sans-serif;
   font-size: 16px;
   display: flex;
   justify-content: center;
@@ -32,3 +32,25 @@ body {
   justify-content: center;
   align-items: center;
 } */
+
+a:link {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline !important;
+  color: rgb(22, 155, 89);
+}
+
+button {
+  font-family: 'Lucida Sans Regular', sans-serif;
+}
+
+#do-not-interact {
+  color: gray;
+}
+
+#do-not-interact:hover {
+  cursor: not-allowed;
+  text-decoration: none;
+}

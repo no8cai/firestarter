@@ -1,0 +1,84 @@
+#this-reward {
+    border: solid white 5px;
+    /* box-shadow: 0 0 30px 5px rgb(20, 199, 88); */
+    box-shadow: 0 0 30px 5px gray;
+
+}
+
+.buttons {
+    border-top: #028858;
+    width: 14vw;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.buttons i{
+    color: #028858;
+    font-size: 20px;
+}
+
+.managebox {
+    display: flex;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.boxitems {
+    height: 100px;
+
+}
+
+.button-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap:20px;
+}
+
+.projectlist-image{
+    height: 80px;
+    width: 150px;
+    object-fit: cover;
+}
+
+.projectlist-item{
+    width: 14vw;
+    text-align: center;
+    align-items: flex-start;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+}
+
+.managebox{
+    padding-top: 20px;
+    border-top:1px rgb(0, 0, 0,0.2) solid;
+    transition-duration: 0.4s;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+/* .managebox:hover{
+    background-color: rgb(237, 233, 233, 0.5);
+} */
+
+.empty-notif {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%
+}
+
+.your-pledges {
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 1rem;
+}

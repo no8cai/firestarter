@@ -5,6 +5,12 @@ import './Navigation.css'
 import LogoutButton from "../auth/LogoutButton";
 import OpenModalButton from '../OpenModalButton';
 import ProfileButton from './ProfileButton';
+import SearchBar from "../Search/SearchBar";
+import OpenSearchModal from "../Search/OpenSearchModal"
+import OpenModalMenuItem from "./OpenModalMenuItem";
+import logo from '../../../src/images/flogo.png'
+import aaicon from '../../../src/images/aaicon.png'
+
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
@@ -39,18 +45,29 @@ function Navigation({ isLoaded }) {
         <nav className="nav-container">
         <div className="navbar">
             <div className="left-nav">
-               <span>Discover</span>
-               <span>Start a project</span>
+                <a title="Clicking will leave Firestarter!" href="https://www.appacademy.io/">
+                    <span><img className="aa-icon" src={aaicon}></img></span>
+               <span >Check out AppAcademy!</span>
+                </a>
+               
            </div>
    
            <div className="mid-nav">
            <NavLink to='/' exact={true} activeClassName='active'>
-            FIRESTARTER
+            <img className='logo-img' src={logo}></img>
           </NavLink>
            </div>
    
            <div className="right-nav">
-               <span>Search</span>
+            <div className="search-button-holder">
+                <OpenSearchModal
+                itemText={"Search"}
+                onItemClick={closeMenu}
+                modalComponent={<SearchBar />}
+              />
+              <div><i className="fa-solid fa-magnifying-glass"></i></div>
+            </div>
+           
 
 
                 <span>

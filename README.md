@@ -1,148 +1,76 @@
-# Flask React Project
+# Firestarter
+## a Kickstarter Clone
+## by Annika McPeek, Cory Bogert, Eric Chai, and Kirin Agcaoili
 
-This is the starter for the Flask React project.
+## Link to live site:
+https://firestarter.onrender.com/
 
-## Getting started
-1. Clone this repository (only this branch)
+## Description:
+Our clone of the Kickstarter site has create, read, update, and delete features for projects (store) rewards (inventory) and pledges (purchases). Users can search and filter for projects. There is also a profile feature for users to see and interact with their projects they created and rewards they pledged towards. Users can log in to access all these features. In the wiki is the API documentation of the backend routes that we created.
 
-2. Install dependencies
+## Technologies used:
+The backend uses SqlAlchemy and Flask in Python. The frontend uses React and Redux in Javascript. The live site is on Render and uses PostgreSQl and locally the database is SQLite.
+## Usage description of features.
 
-      ```bash
-      pipenv install -r requirements.txt
-      ```
-
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
-
-4. Make sure the SQLite3 database connection URL is in the **.env** file
-
-5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable.  Replace the value for
-   `SCHEMA` with a unique name, **making sure you use the snake_case
-   convention**.
-
-6. Get into your pipenv, migrate your database, seed your database, and run your Flask app
-
-   ```bash
-   pipenv shell
-   ```
-
-   ```bash
-   flask db upgrade
-   ```
-
-   ```bash
-   flask seed all
-   ```
-
-   ```bash
-   flask run
-   ```
-
-7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+## Home Page:
+Here a user can see one random projects extensive details, the latest 3 projects details, stats about the full site, and information about the creators of the site.
+![](https://github.com/no8cai/firestarter/blob/main/images/FireStarterHomePage.png)
 
 
-## Deployment through Render.com
+## Single Project page:
+This page shows information on a single project and shows different details based on what the user is authorized to see or do.
+![](https://github.com/no8cai/firestarter/blob/main/images/FireStarterSingleProjectPage.png)
 
-First, refer to your Render.com deployment articles for more detailed
-instructions about getting started with [Render.com], creating a production
-database, and deployment debugging tips.
+## Search Feature Page:
+After searching or filtering results, a user can see all projects that meet their criteria.
+![](https://github.com/no8cai/firestarter/blob/main/images/FireStarterSearchPage.png)
 
-From the [Dashboard], click on the "New +" button in the navigation bar, and
-click on "Web Service" to create the application that will be deployed.
+## Pledge Page:
+Here a user can "purchase" a reward, or chose to edit their pledge, and chose a different reward.
+![](https://github.com/no8cai/firestarter/blob/main/images/FireStarterPledgePage.png)
 
-Look for the name of the application you want to deploy, and click the "Connect"
-button to the right of the name.
+## Create Project Page:
+This form is where a user can create a project or edit their project. Users can create and edit rewards for their projects on a similar form.
+![](https://github.com/no8cai/firestarter/blob/main/images/FireStarterCreateProjectPage.png)
 
-Now, fill out the form to configure the build and start commands, as well as add
-the environment variables to properly deploy the application.
+## Profile Page:
+This is where a user can see all the projects they created, or click to see all the projects they have backed my pledging to those projects rewards.
+![](https://github.com/no8cai/firestarter/blob/main/images/FireStarterProfilePage.png)
 
-### Part A: Configure the Start and Build Commands
+## Profile Modal:
+This modal is available in the top right corner for users to navigate the site.
+![](https://github.com/no8cai/firestarter/blob/main/images/FireStarterProfileModal.png)
 
-Start by giving your application a name.
 
-Leave the root directory field blank. By default, Render will run commands from
-the root directory.
+## Road Map
+We included in our database schema the next features we want to take on: likes, comments, and updates.
 
-Make sure the Environment field is set set to "Python 3", the Region is set to
-the location closest to you, and the Branch is set to "main".
-
-Next, add your Build command. This is a script that should include everything
-that needs to happen _before_ starting the server.
-
-For your Flask project, enter the following command into the Build field, all in
-one line:
-
-```shell
-# build command - enter all in one line
-npm install --prefix react-app &&
-npm run build --prefix react-app &&
-pip install -r requirements.txt &&
-pip install psycopg2 &&
-flask db upgrade &&
+## Get started using my repo locally
+Once downloading the repo in the top level run:
+pipenv install
+pipenv shell
+flask db upgrade
 flask seed all
-```
+flask run
 
-This script will install dependencies for the frontend, and run the build
-command in the __package.json__ file for the frontend, which builds the React
-application. Then, it will install the dependencies needed for the Python
-backend, and run the migration and seed files.
+In the frontend folder run:
+npm install
+npm start
 
-Now, add your start command in the Start field:
 
-```shell
-# start script
-gunicorn app:app
-```
+## Contact Us:
+Annika McPeek
+ammcpeek@gmail.com
+linkedin.com/in/annika-mcpeek/
 
-_If you are using websockets, use the following start command instead for increased performance:_
+Cory Bogert
+https://www.linkedin.com/in/cory-bogert-754a7a230/
+https://github.com/Cory-Bogert
 
-`gunicorn --worker-class eventlet -w 1 app:app`
+Eric Chai
+https://www.linkedin.com/in/eric-chai-b5b9b337/
+https://github.com/no8cai
 
-### Part B: Add the Environment Variables
-
-Click on the "Advanced" button at the bottom of the form to configure the
-environment variables your application needs to access to run properly. In the
-development environment, you have been securing these variables in the __.env__
-file, which has been removed from source control. In this step, you will need to
-input the keys and values for the environment variables you need for production
-into the Render GUI.
-
-Click on "Add Environment Variable" to start adding all of the variables you
-need for the production environment.
-
-Add the following keys and values in the Render GUI form:
-
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-- REACT_APP_BASE_URL (use render.com url, located at top of page, similar to
-  https://this-application-name.onrender.com)
-
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
-
-Add the following keys and values:
-
-- DATABASE_URL (copy value from Internal Database URL field)
-
-_Note: Add any other keys and values that may be present in your local __.env__
-file. As you work to further develop your project, you may need to add more
-environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment._
-
-Next, choose "Yes" for the Auto-Deploy field. This will re-deploy your
-application every time you push to main.
-
-Now, you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your build and
-start commands being executed, and see any errors in the build process.
-
-When deployment is complete, open your deployed site and check to see if you
-successfully deployed your Flask application to Render! You can find the URL for
-your site just below the name of the Web Service at the top of the page.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+Kirin Agcaoili
+https://www.linkedin.com/in/kirin-agcaoili-a84a10187/
+https://github.com/kagc

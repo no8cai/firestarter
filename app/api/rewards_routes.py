@@ -128,7 +128,7 @@ def delete_reward(id):
 
     project = Project.query.get(reward.projectId)
 
-    if authenticate()['id'] == project.id:
+    if int(authenticate()['id']) == int(project.creatorId):
         db.session.delete(reward)
         db.session.commit()
         return {

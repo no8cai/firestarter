@@ -1,0 +1,16 @@
+.rewardlist-links{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 68vw;
+    height: 100px;
+}
+
+.rewardlist-content{
+    width:17vw;
+    text-align: center;
+    /* overflow: hidden;
+    white-space: nowrap; */
+    text-overflow: ellipsis;
+    overflow-wrap: break-word;
+}
