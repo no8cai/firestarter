@@ -111,12 +111,13 @@
 .sp-bottom-section {
     display: flex;
     width: 100%;
+    justify-content: space-between;
 }
 
 .sp-bottom-center {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 70%;
     margin-left: 3em;
     margin-right: 3em;
 

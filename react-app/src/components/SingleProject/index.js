@@ -200,7 +200,7 @@ const SingleProject = () => {
         <div>
 
         </div>
-        <div className="sp-add-border sp-bottom-right">
+        <div className="sp-add-border sp-bottom-right ">
             <div className='sp-outer-profile-photo'>
             <img className='sp-profile-photo' src={'https://ksr-ugc.imgix.net/assets/039/344/204/8bee49558eb7cf83017f35b941be7143_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1669689332&auto=format&frame=1&q=92&s=d237fbbd7f761943309c1523d40c0527'} alt="Profile Image"/>
             </div>
