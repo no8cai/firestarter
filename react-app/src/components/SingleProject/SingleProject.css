@@ -20,7 +20,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
 
 }
 
@@ -263,12 +263,12 @@
     padding-bottom: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    width: 5rem;
-    position: relative;
+    width: 19.8rem;
+    /* position: relative; */
     position: absolute;
     margin-top: 0.5rem;
     z-index: 99;
     background: white;
-    right: 29rem;
+    /* right: 29rem; */
 
 }
