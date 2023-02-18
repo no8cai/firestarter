@@ -12,10 +12,10 @@ import { fetchAllProjects } from "../../store/project";
 import LogoutButton from "../auth/LogoutButton";
 
 
-function UserDataModal({user}) {
+function UserDataModal({user, showMenu, setShowMenu}) {
     const history = useHistory()
     const dispatch = useDispatch();
-    const [showMenu, setShowMenu] = useState(false);
+    // const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
 
 
@@ -31,22 +31,22 @@ function UserDataModal({user}) {
     const projects = Object.values(allProjects)
     // console.log('userid',user.id)
     let userProjects = projects.filter(project => parseInt(project.creatorId) === parseInt(user.id))
-    
-  
+
+
     useEffect(() => {
       if (!showMenu) return;
-  
+
       const closeMenu = (e) => {
         if (!ulRef.current.contains(e.target)) {
           setShowMenu(false);
         }
       };
-  
+
       document.addEventListener('click', closeMenu);
-  
+
       return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
-  
+
     const closeMenu = () => setShowMenu(false);
 
   //   const onLogout = async (e) => {
@@ -61,7 +61,7 @@ function UserDataModal({user}) {
         closeMenu()
         return history.push('/')}
     };
-  
+
     // console.log(userProjects.length)
     if (!userPledges || !user || !allProjects) return null
     // if (!userPledges || !user) return null
@@ -80,7 +80,7 @@ function UserDataModal({user}) {
                 </div>
                 <div className="nav-backed-container">
                   <Link to="/profile/pledges"><p className="nav-user-title">Backed Projects</p></Link>
-                  
+
                   {user && (pledges.slice(0, 2).map(pledge => {
                     return (
                         <div key={pledge.id} className="nav-backed-item">
@@ -100,7 +100,7 @@ function UserDataModal({user}) {
                 </div>
                 <div className="nav-created-container">
                   <Link to="/profile"><p className="nav-user-title">Created Projects</p></Link>
-                  
+
                   {user && userProjects.length ? (userProjects.slice(0, 2).map(project => {
                     return (
                         <div key={project.id} className="nav-backed-item">
@@ -121,10 +121,10 @@ function UserDataModal({user}) {
 
                   <Link className="create-project-link" to={`/createproject`}>
                   <div><i className="fa-solid fa-square-plus"></i> Create Project</div>
-                  </Link>             
+                  </Link>
                 </div>
                 </div>
-                
+
                 <p className="logoutbutton">
                   <button onClick={logoutButton}>Logout</button>
                   {/* <LogoutButton /> */}
