@@ -131,26 +131,6 @@ const RewardForm=({reward,formType,projectId})=>{
         <div className='reward-form-title'><h2>{formType}</h2></div>
         <form className='reward-form-form' onSubmit={handleSubmit}>
 
-{/* // */}
-<div className='projectform-listitem'>
-        <div className=' context'>
-            <div className='error-title'>
-            <i className="fa-solid fa-circle-exclamation ertlbu" />
-            <h4 className="projectform-errtitletext">Validation Checking List</h4>
-            </div>
-            {!!validationErrors.length && (
-            <div className='projectform-errortable'>
-            <div className='projectform-error'>
-             {validationErrors.map((error) => (
-            <div key={error} className="projectform-errortext">{error}</div>
-                       ))}
-            </div>
-            </div>
-             )}
-            </div>
-
-        </div>
-
 
 {/* // */}
             <div className='reward-form-list-item'>
@@ -231,20 +211,28 @@ const RewardForm=({reward,formType,projectId})=>{
                 value={price}/>
                 </div>
             </div>
-            {/* <div className='reward-form-error-sec'>
-            <div className='error-title'>
-            <h4>Validation Checking List</h4>
-            </div>
-            {!!validationErrors.length && (
-            <div className='reward-form-error-table'>
-            <div className='reward-form-error'>
-             {validationErrors.map((error) => (
-            <div key={error} className="reward-form-error-text">{error}</div>
-                       ))}
-            </div>
-            </div>
-             )}
-            </div> */}
+
+<div className='outer-green-box'>
+
+<div className='green-box'>
+<div className='error-title'>
+<i className="fa-solid fa-circle-exclamation ertlbu" />
+<h4 className="projectform-errtitletext">Validation Checking List</h4>
+</div>
+{!!validationErrors.length && (
+<div className='projectform-errortable'>
+<div className='projectform-error'>
+{validationErrors.map((error) => (
+<div key={error} className="projectform-errortext">{error}</div>
+         ))}
+</div>
+</div>
+)}
+</div>
+</div>
+
+
+
 {/* // */}
             <div className="reward-form-button">
              <input type="submit" value={formType} className="reward-button" disabled={!!validationErrors.length}/>
