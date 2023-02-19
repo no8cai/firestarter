@@ -105,9 +105,6 @@ label{
     font-family: 'Lucida Sans Regular', sans-serif;
 }
 
-.error-title{
-    text-align: center;
-}
 
 .projectform-errortext{
     color:rgb(101, 105, 105,0.7);
@@ -124,9 +121,10 @@ label{
 
 .error-title{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap:10px;
+    text-align: center;
 }
 
 .projectform-errtitletext{
@@ -150,4 +148,10 @@ label{
     height: 40px;
     font-size: 16px;
     transition-duration: 0.4s;
+}
+
+
+.col {
+    display: flex;
+    flex-direction: column;
 }
