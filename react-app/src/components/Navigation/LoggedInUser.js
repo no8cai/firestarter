@@ -10,6 +10,8 @@ import './Navigation.css'
 import { getAllPledges, getPledgesByCurrentUser } from "../../store/pledge";
 import { fetchAllProjects } from "../../store/project";
 import LogoutButton from "../auth/LogoutButton";
+let otherSrc = 'https://ksr-ugc.imgix.net/assets/039/670/652/dc65feab31e919618d8c1041e23226ec_original.tiff?ixlib=rb-4.0.2&crop=faces&w=1024&h=576&fit=crop&v=1673737380&auto=format&frame=1&q=92&s=b22f9e32f0f2a6c2058ef5f07b35221d'
+
 
 
 function UserDataModal({user, showMenu, setShowMenu}) {
@@ -17,6 +19,7 @@ function UserDataModal({user, showMenu, setShowMenu}) {
     const dispatch = useDispatch();
     // const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
+    const [newSrc, setNewSrc] = useState('')
 
 
     useEffect(() => {
@@ -86,7 +89,13 @@ function UserDataModal({user, showMenu, setShowMenu}) {
                         <div key={pledge.id} className="nav-backed-item">
                             {/* <Link to={`/projects/${pledge.Project.id}/editpledge/${pledge.id}`}> */}
                             <Link to={`/profile/pledges`}>
-                            <div className="nav-thumbnail">{<img className="backed-thumbnail" src={pledge.Project.imageUrl}></img>}</div>
+                            <div className="nav-thumbnail">{<img className="backed-thumbnail" src={pledge.Project.imageUrl}
+                            onError={(e)=>{
+                              if(e.target.src !== otherSrc) {
+                              setNewSrc(otherSrc)
+                              e.target.src = otherSrc
+                              }
+                              }}></img>}</div>
                             <div className="nav-backed-title">{pledge.Project.title}</div>
                             </Link>
                         </div>
@@ -106,7 +115,13 @@ function UserDataModal({user, showMenu, setShowMenu}) {
                         <div key={project.id} className="nav-backed-item">
                             <Link to={`/projects/${project.id}`}>
 
-                            <div className="nav-thumbnail">{<img className="backed-thumbnail" src={project.imageUrl}></img>}</div>
+                            <div className="nav-thumbnail">{<img className="backed-thumbnail" src={project.imageUrl}
+                            onError={(e)=>{
+                              if(e.target.src !== otherSrc) {
+                              setNewSrc(otherSrc)
+                              e.target.src = otherSrc
+                              }
+                              }}></img>}</div>
                             <div className="nav-backed-title">{project.title}</div>
                             </Link>
                         </div>

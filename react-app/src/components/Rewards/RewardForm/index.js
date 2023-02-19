@@ -73,7 +73,7 @@ const RewardForm=({reward,formType,projectId})=>{
         if(estimatedDelivery.length<=0){errors.push("reward's estimated delivery is required");}
         else if(estimatedDelivery.length>=50){errors.push("reward's estimated delivery must be less than 50 characters")}
         if(oneProject && oneProject.endDate && oneProject.endDate > estimatedDelivery ) {errors.push(`
-        Your current estimated delivery date in this form is ${estimatedDelivery} and it needs to be updated to be after the associated project's campaign end date of ${oneProject.endDate}.`)}
+        Your current estimated delivery date in this form is ${estimatedDelivery}. It needs to be updated to be after the associated project's campaign end date of ${oneProject.endDate}.`)}
         if(formType=="Edit Reward" && price > initPrice){errors.push(`Once a reward is active on the site,
         the creator of the project cannot change the price of the reward to be greater than it's original price, which was ${initPrice}`)}
 
@@ -130,6 +130,28 @@ const RewardForm=({reward,formType,projectId})=>{
         </div>
         <div className='reward-form-title'><h2>{formType}</h2></div>
         <form className='reward-form-form' onSubmit={handleSubmit}>
+
+{/* // */}
+<div className='projectform-listitem'>
+        <div className=' context'>
+            <div className='error-title'>
+            <i className="fa-solid fa-circle-exclamation ertlbu" />
+            <h4 className="projectform-errtitletext">Validation Checking List</h4>
+            </div>
+            {!!validationErrors.length && (
+            <div className='projectform-errortable'>
+            <div className='projectform-error'>
+             {validationErrors.map((error) => (
+            <div key={error} className="projectform-errortext">{error}</div>
+                       ))}
+            </div>
+            </div>
+             )}
+            </div>
+
+        </div>
+
+
 {/* // */}
             <div className='reward-form-list-item'>
                 <div className="title-context context">
@@ -209,7 +231,7 @@ const RewardForm=({reward,formType,projectId})=>{
                 value={price}/>
                 </div>
             </div>
-            <div className='reward-form-error-sec'>
+            {/* <div className='reward-form-error-sec'>
             <div className='error-title'>
             <h4>Validation Checking List</h4>
             </div>
@@ -222,7 +244,7 @@ const RewardForm=({reward,formType,projectId})=>{
             </div>
             </div>
              )}
-            </div>
+            </div> */}
 {/* // */}
             <div className="reward-form-button">
              <input type="submit" value={formType} className="reward-button" disabled={!!validationErrors.length}/>
