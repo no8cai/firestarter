@@ -41,7 +41,7 @@ const ProjectManager=()=>{
 
     return(
         <div>
-            <h1><div className="your-pledges">Your Projects: Projects you created</div></h1>
+            <h1><div className="your-pledges sp-green">Your Projects: Projects you created</div></h1>
                 <div className="projectlist-titles">
                     <div className="projectlist-titletext">Project</div>
                     <div className="projectlist-titletext">Title</div>
