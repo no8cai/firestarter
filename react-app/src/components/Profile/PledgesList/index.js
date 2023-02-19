@@ -1,10 +1,12 @@
 import { useDispatch,useSelector } from "react-redux";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { getPledgesByCurrentUser } from "../../../store/pledge";
 import { deletePledge } from "../../../store/pledge";
 import './PledgeList.css'
+let otherSrc = 'https://ksr-ugc.imgix.net/assets/039/670/652/dc65feab31e919618d8c1041e23226ec_original.tiff?ixlib=rb-4.0.2&crop=faces&w=1024&h=576&fit=crop&v=1673737380&auto=format&frame=1&q=92&s=b22f9e32f0f2a6c2058ef5f07b35221d'
+
 
 const PledgeManager=()=>{
     const dispatch = useDispatch();
@@ -15,6 +17,7 @@ const PledgeManager=()=>{
     // const pledges = Object.values(pledgesObj).filter(el=>el.backerId === sessionUser.id);
     // console.log("WHAT IS THISS", pledges)
     const history=useHistory();
+    const [newSrc, setNewSrc] = useState('')
 
     useEffect(() => {
         dispatch(getPledgesByCurrentUser());
@@ -32,7 +35,7 @@ const PledgeManager=()=>{
 
     return(
         <h1>
-            <div className="your-pledges">Your pledges</div>
+            <div className="your-pledges sp-green">Your Pledges: Projects backed by you</div>
         {pledges.length !== 0 ?
         (pledges.map((pledge) => {
             // console.log("REWARD???", pledge.Reward)
@@ -41,7 +44,16 @@ const PledgeManager=()=>{
         <div key={pledge.id} className='managebox'>
         <div className='boxitems'>
             <NavLink to={`/projects/${pledge.projectId}`} className="projectlist-links">
-            <div className="projectlist-item"><img src={pledge.Project.imageUrl} className="projectlist-image"/></div>
+            <div className="projectlist-item">
+                <img src={pledge.Project.imageUrl} className="projectlist-image"
+                    onError={(e)=>{
+                    if(e.target.src !== otherSrc) {
+                    setNewSrc(otherSrc)
+                    e.target.src = otherSrc
+                    }
+                    }}
+                />
+                </div>
             <div className="projectlist-item">{pledge.Project.title}</div>
             <div className="projectlist-item">{pledge.Reward.price}</div>
             <div className="projectlist-item">{pledge.Reward.title}</div>

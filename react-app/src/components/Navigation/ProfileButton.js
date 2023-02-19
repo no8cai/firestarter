@@ -16,49 +16,55 @@ function ProfileButton({ user }) {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
-  
+
     const openMenu = () => {
       if (showMenu) return;
       setShowMenu(true);
     };
-  
+
     useEffect(() => {
       if (!showMenu) return;
-  
+
       const closeMenu = (e) => {
         if (!ulRef.current.contains(e.target)) {
           setShowMenu(false);
         }
       };
-  
+
       document.addEventListener('click', closeMenu);
-  
+
       return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
-  
+
     const closeMenu = () => setShowMenu(false);
-  
+
     // const logout = (e) => {
     //   e.preventDefault();
     //   dispatch(sessionActions.logout());
     //   closeMenu();
     //   history.push('/')
     // };
-  
+
     let pClassName = "profile-button-outline"
     let ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
     if (!user) {
       ulClassName = "profile-dropdown2" + (showMenu ? "" : " hidden")
-      pClassName = "profile-button" 
+      pClassName = "profile-button"
     }
-  
+
     return (
       <div className='profile-button-div'>
-        <button style={{ backgroundImage: `url('${!user ? logicon : proficon}'`, backgroundSize: 'contain' }} onClick={openMenu} className={pClassName}></button>
+        {/* <button style={{ backgroundImage: `url('${!user ? logicon : proficon}'`, backgroundSize: 'contain' }} onClick={openMenu} className={pClassName}></button> */}
+        {!user? <button onClick={openMenu} className={pClassName} id='add-profile-button'>Log In</button>:
+         <button style={{ backgroundImage: `url('${proficon}'`, backgroundSize: 'contain' }} onClick={openMenu} className={pClassName}></button>
+        }
+
+
+
         <div className={ulClassName} ref={ulRef}>
           {user ? (
             <div className='modal-dropdown'>
-              <UserDataModal user={user}/>
+              <UserDataModal user={user} showMenu={showMenu} setShowMenu={setShowMenu}/>
               {/* <p className="logoutbutton"><button onClick={logout}>Logout</button></p> */}
             </div>
           ) : (
@@ -67,11 +73,11 @@ function ProfileButton({ user }) {
               <OpenModalMenuItem
                 itemText="Log In"
                 onItemClick={closeMenu}
-                modalComponent={<LoginFormModal 
+                modalComponent={<LoginFormModal
                 />}
               />
             </div>
-              
+
               <div ></div>
               <OpenModalMenuItem
                 itemText="Sign Up"
@@ -79,11 +85,11 @@ function ProfileButton({ user }) {
                 modalComponent={<SignupFormModal />}
               />
             </div>
-            
+
           )}
         </div>
       </div>
     );
   }
-  
+
   export default ProfileButton;
