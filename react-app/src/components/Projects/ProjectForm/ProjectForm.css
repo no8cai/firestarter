@@ -111,13 +111,14 @@ label{
     font-family: 'Lucida Sans Regular', sans-serif;
 }
 
-.error-title{
-    text-align: center;
-}
 
 .projectform-errortext{
     color:rgb(101, 105, 105,0.7);
     padding-bottom: 10px;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 
 .ertlbu{
@@ -130,14 +131,16 @@ label{
 
 .error-title{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap:10px;
+    text-align: center;
 }
 
 .projectform-errtitletext{
     font-size: 30;
     color: #028858;
+
 }
 
 .projectform-deletesec{
@@ -156,4 +159,26 @@ label{
     height: 40px;
     font-size: 16px;
     transition-duration: 0.4s;
+}
+
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.green-box {
+    border: solid green 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+}
+
+
+.outer-green-box {
+    display: flex;
+    justify-content: center;
 }

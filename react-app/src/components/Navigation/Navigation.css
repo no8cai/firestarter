@@ -45,7 +45,8 @@
     /* border-radius: 50%; */
     text-align: start;
     font-size: 2em;
-    color: gray !important;
+    /* color: gray !important; */
+
     font-stretch: 100%;
     /* position: relative;
     vertical-align: middle; */
@@ -63,7 +64,7 @@
 } */
 
 .profile-button-outline {
-    border: solid rgb(22, 155, 89) 2px !important; 
+    border: solid rgb(22, 155, 89) 2px !important;
     /* background: white !important; */
     padding-top: 5px;
     padding-bottom: 5px;
@@ -217,7 +218,7 @@
 .modal-dropdown> li {
     margin-top: 1rem;
 }
- 
+
 #toplink {
     margin-top: 1rem;
 }
@@ -323,7 +324,7 @@ button:hover {
   }
 
 li {
-    list-style-type: none;  
+    list-style-type: none;
 }
 
 .profile-icon {
@@ -334,4 +335,13 @@ li {
 .aa-icon {
     height: 2.5rem;
     width: auto;
+}
+
+
+#add-profile-button {
+    font-size: small;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
