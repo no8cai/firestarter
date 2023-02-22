@@ -25,7 +25,7 @@ def seed_pledges():
 
 def undo_pledges():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.pledges RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM pledges")
 

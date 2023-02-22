@@ -17,10 +17,7 @@ ReactDOM.render(
       <BrowserRouter>
       <SearchModalProvider>
       <Provider store={store}>
-
         <App />
-        
-        {/* <ProjectForm/> */}
         <Modal />
         <SearchModal />
       </Provider>

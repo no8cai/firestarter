@@ -61,7 +61,9 @@
 
 .projectlist-item{
     width: 14vw;
+    height: 100px;
     text-align: center;
+    overflow: auto;
 }
 
 .projectlist-boxitem{

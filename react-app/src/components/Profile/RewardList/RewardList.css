@@ -11,6 +11,8 @@
     text-align: center;
     /* overflow: hidden;
     white-space: nowrap; */
-    text-overflow: ellipsis;
-    overflow-wrap: break-word;
+    /* text-overflow: ellipsis;
+    overflow-wrap: break-word; */
+    height: 100px;
+    overflow: auto;
 }
