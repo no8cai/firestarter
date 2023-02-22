@@ -48,6 +48,8 @@
     width: 14vw;
     text-align: center;
     align-items: flex-start;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
 }
 
 .managebox{
@@ -63,3 +65,20 @@
 /* .managebox:hover{
     background-color: rgb(237, 233, 233, 0.5);
 } */
+
+.empty-notif {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%
+}
+
+.your-pledges {
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 1rem;
+}

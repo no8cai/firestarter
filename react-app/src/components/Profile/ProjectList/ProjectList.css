@@ -35,6 +35,7 @@
     flex-direction: column;
     justify-content: flex-start;
     gap:20px;
+    
 
 }
 .projectlist-buttons{
@@ -42,6 +43,7 @@
     /* background-color: #028858;
     color: white;
     height: 30px; */
+   
 }
 
 
@@ -52,10 +54,16 @@
     border: none;
     outline: none;
     cursor: pointer;
+    background-color: white;
+    height: 25px;
 }
+
+
 .projectlist-item{
     width: 14vw;
+    height: 100px;
     text-align: center;
+    overflow: auto;
 }
 
 .projectlist-boxitem{

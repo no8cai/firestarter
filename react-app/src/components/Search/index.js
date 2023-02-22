@@ -22,7 +22,6 @@ function SearchResultPage() {
 
   const allPledges = useSelector((state) => state.pledges.allPledges)
   const pledges = Object.values(allPledges)
-
   const allProjects = useSelector((state) => state.projects);
   // const allProjectsAgain = useSelector((state) => state.projects);
   const projects = Object.values(allProjects);
@@ -141,34 +140,42 @@ function SearchResultPage() {
               }
             })
             let currentProgress = ((pledgeTotal * 100)/(project.fundingGoal)).toFixed(2)
-            console.log(currentProgress)
-            let oneDay = 24 * 60 * 60 * 1000
-            let splitStart = project.startDate.split('-')
-            let splitEnd = project.endDate.split('-')
-            let firstDate = new Date(splitStart[2], splitStart[0], splitStart[1])
-            let secondDate = new Date(splitEnd[2], splitEnd[0], splitEnd[1])
-            let diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay))
+            // console.log(currentProgress)
+            // let oneDay = 24 * 60 * 60 * 1000
+            // let splitStart = project.startDate.split('-')
+            // let splitEnd = project.endDate.split('-')
+            // let firstDate = new Date(splitStart[2], splitStart[0], splitStart[1])
+            // let secondDate = new Date(splitEnd[2], splitEnd[0], splitEnd[1])
+            // let diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay))
+            var date1 = new Date(project.startDate);
+            var date2 = new Date(project.endDate);
+            var diffTime = Math.abs(date2 - date1);
+            var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
             return (
-              <Link key={project.id} to={`/projects/${project.id}`}>
+              <Link className="feature-link" key={project.id} to={`/projects/${project.id}`}>
                 <div className="projects-holder">
                   <div className="preview-image" style={{ backgroundImage: `url('${project.imageUrl}'` }}></div>
                   <div className="project-details">
                     {/* <div className="project-details-top"> */}
-                    <div>{project.title}</div>
-                    <span className="descr-text">{project.description}</span>
-                    <div>by {project.creator.username}</div>
+                    <div id="title" className="search-project-title">{project.title}
+                      </div>
+                    <span className="search-descr-text">{project.description}</span>
+                    <div className="search-by-text">by {project.creator.username}</div>
 
+              <div className='search-progressbar-container'>
                     <div className="sp-add-border sp-bar-back" role='progressbar'>
                     <div className='sp-green-bar' style={{width: `${currentProgress}%`}}></div>
                     </div>
+              </div>
 
-                    <div>${pledgeTotal} pledged</div>
-                    <div>{counter !== 0 ? Math.ceil(((pledgeTotal)/project.fundingGoal)*100) : 0}% funded</div>
-                    <div>{diffDays} days to go</div>
-                    <div>
-                      <span>{project.category}</span>
+
+                    <div className="search-pledged">${pledgeTotal} pledged</div>
+                    <div className="search-counter">{counter !== 0 ? Math.ceil(((pledgeTotal)/project.fundingGoal)*100) : 0}% funded</div>
+                    <div className="search-days">{diffDays} days to go</div>
+                    <div className="search-last-line">
+                      <span className="search-cat">{project.category}</span>
                       <span>
-                        {project.city}, {project.country}
+                        <i className="fa-solid fa-location-dot"></i>{project.city}, {project.country}
                         <br/>
                       </span>
                     </div>

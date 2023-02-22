@@ -20,6 +20,8 @@ const ProjectForm=({project,formType,rewardsObj,pledgesObj})=>{
     rewards = Object.values(rewardsObj).filter(el=>el.projectId==project.id)
     pledges = Object.values(pledgesObj).filter(el=>el.projectId==project.id)
     }
+    const todayDate = new Date()
+    const todayDateStr = todayDate.toJSON().slice(0,10)
 
     if(formType==="Edit Project"){
         initTitle=project.title;
@@ -37,13 +39,14 @@ const ProjectForm=({project,formType,rewardsObj,pledgesObj})=>{
     else{
         initTitle='';
         initCategory='Art';
+        initCategory='Art';
         initCity='';
         initState='Alabama';
         initCountry='USA';
-        initImageUrl='https://ksr-ugc.imgix.net/assets/039/647/599/0331687a4cdf38e80c7633da37cc46ad_original.jpeg?ixlib=rb-4.0.2&w=680&fit=max&v=1673485366&gif-q=50&q=92&s=f27813d42923efb7020ec3be1b74e327';
+        initImageUrl='https://zacjohnson.com/wp-content/uploads/2020/03/2020-03-30_15-46-11-768x363.png';
         initFundingGoal=0;
-        initStartDate='';
-        initEndDate='';
+        initStartDate=todayDateStr;
+        initEndDate=todayDateStr;
         initDescription='';
         initRisks='';
     }
@@ -71,7 +74,7 @@ const ProjectForm=({project,formType,rewardsObj,pledgesObj})=>{
     const [risks, setRisks] = useState(initRisks);
 
     const [validationErrors, setValidationErrors] = useState([]);
-    const todayDate = new Date()
+    
 
     useEffect(() => {
         if (!title&&!category&&!city&&!state&&!country&&!imageUrl&&!fundingGoal&&!startDate&&!endDate&&!description&&!risks) {
@@ -96,8 +99,7 @@ const ProjectForm=({project,formType,rewardsObj,pledgesObj})=>{
         else if(fundingGoal<=0){errors.push("Project's funding goal must be greater than 0");}
         else if(!(/^\d+(\.\d{1,2})?$/.test(fundingGoal))){errors.push("Project's funding goal must be within 2 decimal places");}
         if(startDate.length<=0){errors.push("Project's start date field is required");}
-        else if(todayDate - (new Date(startDate)) > 0) {errors.push(`The start date of your project needs to be after today's date`)}
-        else if(endDate.length<=0){errors.push("Project's end date field is required");}
+        else if(todayDate - (new Date(startDate)) > 0) {errors.push(`The start date of your project needs to be after tomorrow's date. If you are editing a project you will need to update the start date and end date`)}
         else if(endDate<=startDate){errors.push("Project's end date field need to be after start date");}
         if(description.length<=0){errors.push("Project's description field is required");}
         else if(description.length>=4000){errors.push("Project's description must be less than 4000 characters")}
@@ -149,7 +151,7 @@ const ProjectForm=({project,formType,rewardsObj,pledgesObj})=>{
         // })}
         
         dispatch(fetchDeleteProject(id))
-        .then(history.push('/profile'))
+        .then(()=>history.push('/profile'))
         .catch(async (err)=>{
           const errobj=await err.json();
           errors.push(errobj.message)
@@ -275,7 +277,7 @@ const ProjectForm=({project,formType,rewardsObj,pledgesObj})=>{
              <div className='projectform-listitem'>
              <div className="context">
               <div className="projectform-subtitle">Target launch date</div>
-              <div className="projectform-subtext">We'll provide you with recommendations on when to complete steps that may take a few days to process. You can edit this date up until the moment you launch your project, which must always be done manually.</div>
+              <div className="projectform-subtext">We'll provide you with recommendations on when to complete steps that may take a few days to process. You can edit this date later but has to change the start date if the start date is in the past, which must always be done manually.</div>
              </div>
              <div>
              <label>
@@ -286,7 +288,7 @@ const ProjectForm=({project,formType,rewardsObj,pledgesObj})=>{
               placeholder='type your startDate'
               type="date"
               name="startDate"
-              min="2023-01-01"
+              min={todayDateStr}
               onChange={(e) => setStartDate(e.target.value)}
               value={startDate}/></div>
               </div>
@@ -305,7 +307,7 @@ const ProjectForm=({project,formType,rewardsObj,pledgesObj})=>{
               placeholder='type your end date'
               type="date"
               name="endDate"
-              min="2023-02-01"
+              min={todayDateStr}
               onChange={(e) => setEndDate(e.target.value)}
               value={endDate}/></div>
               </div>

@@ -121,15 +121,21 @@ export const deletePledge = backerId => async dispatch => {
 }
 
 //reducer
-const initialState = { allPledges: {}, pledgesById: {}, onePledge: {}, userPledges: {}}
+// const initialState = { allPledges: {}, pledgesById: {}, singlePledge: {}, userPledges: {} }
+const initialState = { allPledges: {}, pledgesById: {}, singlePledge: {}, userPledges: {}, totalPledgeNum: [], totalPledges: [] }
 
 const pledgesReducer = (state = initialState, action) => {
     let newState;
     switch(action.type){
         case READ_PLEDGES:
-            newState = { allPledges: {}, pledgesById: {}, singlePledge: {}, userPledges: { ...state.userPledges}}
+            newState = { allPledges: {}, pledgesById: { ...state.pledgesById }, singlePledge: { ...state.singlePledge }, userPledges: { ...state.userPledges}, totalPledgeNum: [], totalPledges: [] }
+            // newState = { ...state, allPledges: {}}
+            let totalNum = 0
+            let total = 1
             action.pledges.Pledges.forEach(pledge => {
                 newState.allPledges[pledge.id] = pledge
+                newState.totalPledgeNum = totalNum += parseInt(pledge.Reward.price)
+                newState.totalPledges = total++
             }
             )
             return newState
@@ -159,9 +165,9 @@ const pledgesReducer = (state = initialState, action) => {
             newState.userPledges[action.pledge.id] = action.pledge
             return newState
 
-        
+
         case UPDATE_PLEDGE:
-            newState = { ...state, allPledges: { ...state.allPledges}, pledgesById: { ...state.pledgesById}, userPledges: { ...state.userPledges}}
+            newState = { ...state, allPledges: { ...state.allPledges}, pledgesById: { ...state.pledgesById}, singlePledge: {...state.singlePledge }, userPledges: { ...state.userPledges}}
             newState.allPledges[action.pledge.id] = action.pledge
             newState.pledgesById[action.pledge.id] = action.pledge
             newState.userPledges[action.pledge.id] = action.pledge
@@ -173,7 +179,7 @@ const pledgesReducer = (state = initialState, action) => {
             delete newState.pledgesById[action.backerId]
             delete newState.userPledges[action.backerId]
             return newState
-   
+
         default:
             return state
 
