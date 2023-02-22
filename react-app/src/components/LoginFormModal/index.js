@@ -44,13 +44,13 @@ function LoginFormModal() {
   const demoLogin = async (e) => {
     e.preventDefault();
 
-    setEmail('brad@aa.io')
-    setPassword('passwordBrad')
+    // setEmail('brad@aa.io')
+    // setPassword('passwordBrad')
 
-    // const demoEmail = 'brad@aa.io'
-    // const demoPassword = 'passwordBrad'
+    const demoEmail = 'brad@aa.io'
+    const demoPassword = 'passwordBrad'
 
-    const data = await dispatch(login(email, password));
+    const data = await dispatch(login(demoEmail, demoPassword));
     if (data) {
       setErrors(data);
     }

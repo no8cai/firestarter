@@ -2,7 +2,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
 import './SingleProject.css'
 import React, { useEffect, useState } from 'react'
-import ProfileButton from '../Navigation/ProfileButton';
+import LoginDropdown from './LoginDropdown';
 import { fetchOneProject } from '../../store/project'
 import { fetchProjectRewards } from '../../store/reward'
 import { getAllPledgesByProjectId} from '../../store/pledge'
@@ -108,11 +108,10 @@ const SingleProject = () => {
                 <button onClick={()=>addPledgesEvents(id)} className='sp-green-button'>Back this project</button>
             )
         } else { return (
-            <div className='sp-log-in-to-back'>
-            <p>Log in to back this project &nbsp;
-                &nbsp;</p>
-            <ProfileButton user={sessionUser} />
-           </div>
+            // <div className='sp-log-in-to-back'>
+            <LoginDropdown />
+            // <p></p>
+        //    </div>
         )
         }
     }
@@ -201,7 +200,7 @@ const SingleProject = () => {
         <div>
 
         </div>
-        <div className="sp-add-border sp-bottom-right">
+        <div className="sp-add-border sp-bottom-right ">
             <div className='sp-outer-profile-photo'>
             <img className='sp-profile-photo' src={'https://ksr-ugc.imgix.net/assets/039/344/204/8bee49558eb7cf83017f35b941be7143_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1669689332&auto=format&frame=1&q=92&s=d237fbbd7f761943309c1523d40c0527'} alt="Profile Image"/>
             </div>

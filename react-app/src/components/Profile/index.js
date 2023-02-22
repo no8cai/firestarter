@@ -7,10 +7,17 @@ import CreateReward from '../Rewards/CreateReward';
 import EditReward from '../Rewards/EditReward';
 import EditPledge from '../Pledges/EditPledges';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 import "./Profile.css"
 
 const ManageCenter=()=>{
   const sessionUser = useSelector(state => state.session.user);
+  const [selectPage, setSelectPage] = useState('')
+
+
+
+
+
 
     return(
         <div className='profile-manage'>
@@ -21,10 +28,10 @@ const ManageCenter=()=>{
 
         <div className='profile-barlist'>
         <NavLink to={`/profile`} className="profile-links">
-        <div className='profile-bu'>Projects</div>
+        <div className='profile-bu'>Your Projects</div>
         </NavLink>
         <NavLink to={`/profile/pledges`} className="profile-links">
-        <div className='profile-bu'>Backed</div>
+        <div className='profile-bu'>Your Pledges</div>
         </NavLink>
 
         </div>
