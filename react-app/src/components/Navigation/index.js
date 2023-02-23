@@ -45,9 +45,9 @@ function Navigation({ isLoaded }) {
         <nav className="nav-container">
         <div className="navbar">
             <div className="left-nav">
-                <a title="Clicking will leave Firestarter!" href="https://www.appacademy.io/">
+                <a target="_blank"  title="AppAcademy" href="https://www.appacademy.io/">
                     <span><img className="aa-icon" src={aaicon}></img></span>
-               <span >Check out AppAcademy!</span>
+               <span >Learn about our bootcamp!</span>
                 </a>
                
            </div>

@@ -45,7 +45,7 @@ function SignupFormModal() {
 
   if (user) {
     closeModal()
-    return <Redirect to='/' />;
+    return <Redirect to='/profile' />;
   }
 
   // const handleSubmit = async (e) => {

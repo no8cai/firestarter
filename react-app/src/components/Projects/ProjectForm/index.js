@@ -62,7 +62,7 @@ const ProjectForm=({project,formType})=>{
     const [risks, setRisks] = useState(initRisks);
 
     const [validationErrors, setValidationErrors] = useState([]);
-    
+
 
     useEffect(() => {
         if (!title&&!category&&!city&&!state&&!country&&!imageUrl&&!fundingGoal&&!startDate&&!endDate&&!description&&!risks) {
@@ -87,7 +87,7 @@ const ProjectForm=({project,formType})=>{
         else if(fundingGoal<=0){errors.push("Project's funding goal must be greater than 0");}
         else if(!(/^\d+(\.\d{1,2})?$/.test(fundingGoal))){errors.push("Project's funding goal must be within 2 decimal places");}
         if(startDate.length<=0){errors.push("Project's start date field is required");}
-        if(todayDate - (new Date(startDate)) > 0) {errors.push(`The start date of your project needs to be after tomorrow's date. If you are editing a project you will need to update the start date and end date`)}
+        if(todayDate - (new Date(startDate)) > 0) {errors.push(`The start date needs to be after tomorrow. If you are editing a project you may need to update the start date and end date.`)}
         //can't do the validation below because there is also validation on the backend for start date can't be before current date
       //  if(formType=="Edit Project" && startDate !== initStartDate && todayDate - (new Date(startDate)) > 0) {errors.push(`The start date of your project needs to be after tomorrow's date. If you are editing a project and your start date was in the past that can stay the same`)}
         else if(endDate.length<=0){errors.push("Project's end date field is required");}
@@ -148,6 +148,8 @@ const ProjectForm=({project,formType})=>{
         <div className='reward-form-title'><h2>{formType}</h2></div>
         </div>
         <form className='projectform-form' onSubmit={handleSubmit}>
+
+
 
             <div className='projectform-listitem'>
             <div className="title-context context">
@@ -346,16 +348,9 @@ const ProjectForm=({project,formType})=>{
               onChange={(e) => setFundingGoal(e.target.value)}
               value={fundingGoal}/></div>
              </div>
-             <div className="projectform-button">
-             <input type="submit" value={formType} className="projectbutton" disabled={!!validationErrors.length}/>
-             </div>
-            </form>
-            {formType==="Edit Project" &&(
-              <div className="projectform-button">
-              <button onClick={()=>deleteEvents(project.id)} className="projectform-delebutton">Delete project</button>
-              </div>
-                )}
-            <div className='projectform-errorsec'>
+             <div className='outer-green-box'>
+
+              <div className='green-box'>
             <div className='error-title'>
             <i className="fa-solid fa-circle-exclamation ertlbu" />
             <h4 className="projectform-errtitletext">Validation Checking List</h4>
@@ -369,7 +364,18 @@ const ProjectForm=({project,formType})=>{
             </div>
             </div>
              )}
-            </div>
+              </div>
+        </div>
+             <div className="projectform-button">
+             <input type="submit" value={formType} className="projectbutton" disabled={!!validationErrors.length}/>
+             </div>
+            </form>
+            {formType==="Edit Project" &&(
+              <div className="projectform-button">
+              <button onClick={()=>deleteEvents(project.id)} className="projectform-delebutton">Delete project</button>
+              </div>
+                )}
+
 
         </div>
     )
