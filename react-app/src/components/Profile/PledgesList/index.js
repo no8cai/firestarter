@@ -35,7 +35,7 @@ const PledgeManager=()=>{
 
     return(
         <h1>
-            <div className="your-pledges sp-green">Your Pledges: Projects backed by you</div>
+            <div className="pl-description">This section contains projects backed by you</div>
         {pledges.length !== 0 ?
         (pledges.map((pledge) => {
             // console.log("REWARD???", pledge.Reward)

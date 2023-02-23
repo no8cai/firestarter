@@ -68,7 +68,17 @@ function Landing() {
     if (randProject !== undefined && loadPledges){
         currentProgress = ((loadPledges.totalPledges * 100)/(randProject.fundingGoal)).toFixed(2)
     }
-
+    function numbertrate(num){
+        let numstr=num.toString().split("").reverse()
+        let newstr=[]
+        for(let i=0;i<numstr.length;i++){
+           newstr.push(numstr[i])
+           if((i+1)%3==0&&i!==numstr.length-1){
+             newstr.push(",")
+           }
+        }
+        return newstr.reverse().join("")
+     }
 
 
     return (
@@ -109,15 +119,15 @@ function Landing() {
 
         <div className="numbers-holder">
             <div className="numbers-box">
-                <span className="nums-text">{projects.length}</span>
+                <span className="nums-text">{numbertrate(projects.length)}</span>
                 <span className="subtext">projects</span>
             </div>
             <div className="numbers-box">
-                <span className="nums-text">${loadPledges.totalPledgeNum}</span>
+                <span className="nums-text">${numbertrate(loadPledges.totalPledgeNum)}</span>
                 <span className="subtext">towards creative work</span>
             </div>
             <div className="numbers-box">
-                <span className="nums-text">{loadPledges.totalPledges}</span>
+                <span className="nums-text">{numbertrate(loadPledges.totalPledges)}</span>
                 <span className="subtext">pledges</span>
             </div>
         </div>
@@ -205,36 +215,46 @@ function Landing() {
 
     <div className="line-break"></div>
 
-    <div className='content-container'>
+    <div className='content-container hp-devsec'>
 
     <div className="content-container-row2">
-        <div className="home-section-title">DEVS</div>
+        <div className="home-section-title">Dev Team</div>
         <div className="devbox1"></div>
      </div>
         <div className="devbox">
-            <div className='each-dev'>
+            <div className='each-dev'>             
                     <div className="dev-img-holder">
                         <img className='img' src='https://media.licdn.com/dms/image/C5603AQFMpdB1qR9D6g/profile-displayphoto-shrink_200_200/0/1519277230393?e=1679529600&v=beta&t=q5W5OEJx_5Y3T47-a48OD2f2j_m79durB1DF6rX1Gys'></img>
                     </div>
                     <div className='dev-name'>Annika Mcpeek</div>
-                    <a target="_blank"  href='https://github.com/amcpeek' ><i className="fa fa-github"></i></a>
-                    <a target="_blank"  href='https://www.linkedin.com/in/annika-mcpeek/'><i className="fa fa-linkedin"></i></a>
+                    <div className='hp-devcontact'>
+                    <a target="_blank"  href='https://github.com/amcpeek' className='dev-alink'><i className="fa fa-github"></i></a>
+                    <a target="_blank"  href='https://www.linkedin.com/in/annika-mcpeek/' className='dev-alink'><i className="fa fa-linkedin"></i></a>
+                    </div>
+                    <div className='hp-devdownbar'></div>
             </div>
             <div className='each-dev'>
                 <div className="dev-img-holder">
                     <img className='img' src='https://media.licdn.com/dms/image/D5603AQHSp5XSjXQ8Lw/profile-displayphoto-shrink_200_200/0/1674231537019?e=1679529600&v=beta&t=F5MVi1TB32ZgPzBy5ffdzheMvgRM6wZaikXOCfJwSRM'></img>
                 </div>
                 <div className='dev-name'>Kirin Agcaoili</div>
-                <a target="_blank"  href='https://github.com/kagc' ><i className="fa fa-github"></i></a>
-                <a target="_blank"  href='https://www.linkedin.com/in/kirin-agcaoili-a84a10187/'><i className="fa fa-linkedin"></i></a>
+                <div className='hp-devcontact'>
+                <a target="_blank"  href='https://github.com/kagc' className='dev-alink'><i className="fa fa-github"></i></a>
+                <a target="_blank"  href='https://www.linkedin.com/in/kirin-agcaoili-a84a10187/' className='dev-alink'><i className="fa fa-linkedin"></i></a>
+                </div>
+                <div className='hp-devdownbar'></div>
             </div>
             <div className='each-dev'>
                 <div className="dev-img-holder">
                 <img className='img' src='https://avatars.githubusercontent.com/u/26307465?v=4'></img>
                 </div>
                 <div className='dev-name'>Eric Chai</div>
-                <a target="_blank"  href='https://github.com/no8cai' ><i className="fa fa-github"></i></a>
-                <a target="_blank"  href='https://www.linkedin.com/in/eric-chai-b5b9b337/'><i className="fa fa-linkedin"></i></a>
+                <div className='hp-devcontact'>
+                <a target="_blank"  href='https://github.com/no8cai' className='dev-alink'><i className="fa fa-github"></i></a>
+                <a target="_blank"  href='https://www.linkedin.com/in/eric-chai-b5b9b337/' className='dev-alink'><i className="fa fa-linkedin"></i></a>
+                </div>
+                <div className='hp-devdownbar'></div>
+
             </div>
             <div className='each-dev'>
                 <div className="dev-img-holder">
@@ -242,9 +262,11 @@ function Landing() {
 
                 </div>
                 <div className='dev-name'>Cory Bogert</div>
-                <a target="_blank"  href='https://github.com/Cory-Bogert' ><i className="fa fa-github"></i></a>
-                <a target="_blank"  href='https://www.linkedin.com/in/cory-bogert-754a7a230/'><i className="fa fa-linkedin"></i></a>
-
+                <div className='hp-devcontact'>
+                <a target="_blank"  href='https://github.com/Cory-Bogert' className='dev-alink'><i className="fa fa-github"></i></a>
+                <a target="_blank"  href='https://www.linkedin.com/in/cory-bogert-754a7a230/'className='dev-alink'><i className="fa fa-linkedin"></i></a>
+                </div>
+                <div className='hp-devdownbar'></div>
             </div>
         </div>
     </div>

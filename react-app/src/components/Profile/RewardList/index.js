@@ -56,7 +56,7 @@ const allProjects = useSelector(state => {return state.projects})
                   {/* </Link> */}
             </div>)
         }
-        console.log('does this work', booleanProjects.creatorId, userId)
+        // console.log('does this work', booleanProjects.creatorId, userId)
 
 
         //4 reward of project exists - check length of project array
@@ -88,6 +88,7 @@ const allProjects = useSelector(state => {return state.projects})
 
     return(
         <div>
+        <div className="pf-description">This section contains rewards for selected porject</div>
         {rewards.length ? (rewards.map(({id,title,price,description,estimatedDelivery,projectId}) => (
         <div key={id} className='managebox'>
         <div className='rewardlist-boxitems'>

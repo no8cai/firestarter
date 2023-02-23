@@ -94,3 +94,10 @@
 .project-buttop{
     border-top: #028858;
 }
+.pf-description{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-weight: bold;
+    color: rgb(0, 0, 0,0.7);
+    padding-left: 4vw;
+}

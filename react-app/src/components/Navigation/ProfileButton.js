@@ -64,7 +64,8 @@ function ProfileButton({ user }) {
         <div className={ulClassName} ref={ulRef}>
           {user ? (
             <div className='modal-dropdown'>
-              <UserDataModal user={user} showMenu={showMenu} setShowMenu={setShowMenu}/>
+              <UserDataModal user={user}/>
+              {/* <UserDataModal user={user} showMenu={showMenu} setShowMenu={setShowMenu}/> */}
               {/* <p className="logoutbutton"><button onClick={logout}>Logout</button></p> */}
             </div>
           ) : (

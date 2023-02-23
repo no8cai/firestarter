@@ -13,13 +13,13 @@ const ProjectForm=({project,formType,rewardsObj,pledgesObj})=>{
     const history=useHistory()
     const dispatch = useDispatch();
 
-    let rewards
-    let pledges
+    // let rewards
+    // let pledges
 
-    if(formType==="Edit Project"){
-    rewards = Object.values(rewardsObj).filter(el=>el.projectId==project.id)
-    pledges = Object.values(pledgesObj).filter(el=>el.projectId==project.id)
-    }
+    // if(formType==="Edit Project"){
+    // rewards = Object.values(rewardsObj).filter(el=>el.projectId==project.id)
+    // pledges = Object.values(pledgesObj).filter(el=>el.projectId==project.id)
+    // }
     const todayDate = new Date()
     const todayDateStr = todayDate.toJSON().slice(0,10)
 

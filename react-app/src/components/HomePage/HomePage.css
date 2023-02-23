@@ -56,7 +56,7 @@
 }
 
 .home-section-title {
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: bold;
     color: gray;
     display: flex;
@@ -252,6 +252,7 @@
     justify-content: space-between;
     min-width: 100%;
     margin-top: 1rem;
+    gap:4vw;
 }
 
 .devbox1 {
@@ -267,16 +268,20 @@
 }
 
 .each-dev {
-    width: 25%;
-    height: 18rem;
+    width: 240px;
+    /* height: 18rem; */
     /* border: red solid 1px; */
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
 .dev-name {
-    font-weight: 550;
+    margin-top: 10px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
 }
 
 .img {
@@ -341,6 +346,7 @@
 
 .each-dev i{
     color: grey;
+    
     /* font-size: 20px; */
 }
 
@@ -351,6 +357,29 @@
 }
 .dev-img-holder img{
     object-fit: cover;
-    height: 200px;
-    width: 170px;
+    height: 240px;
+    width: 100%;
+}
+
+.hp-devcontact{
+    display: flex;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    gap:20px;
+}
+
+.hp-devdownbar{
+    height: 15px;
+    width: 100%;
+    background-color: #028858;
+}
+
+.dev-alink i{
+   font-size: 18px;
+}
+
+
+.dev-alink i:hover{
+    color: #028858;
+    size: 10px;
 }
