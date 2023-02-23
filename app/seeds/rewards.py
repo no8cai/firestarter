@@ -152,7 +152,7 @@ If the first stretch goal is met ($750, the cover will have 3D Diamond printing.
 
 def undo_rewards():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.rewards RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM rewards")
 

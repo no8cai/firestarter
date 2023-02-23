@@ -31,11 +31,19 @@
 
 .profile-bu{
     color: rgb(133, 132, 132);
-    size:20px;
+    font-size: 17px;
     border: 1 solid white;
     height: 50px;
     transition-duration: 0.4s;
+    border-bottom: 5px solid transparent;
+    cursor: pointer;
 }
 .profile-bu:hover{
     color: black;
+}
+
+.pf-selected{
+    font-weight: bold;
+    color: black;
+    border-bottom: 5px solid #028858;
 }
