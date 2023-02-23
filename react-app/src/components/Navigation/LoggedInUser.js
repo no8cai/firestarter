@@ -14,10 +14,10 @@ let otherSrc = 'https://ksr-ugc.imgix.net/assets/039/670/652/dc65feab31e919618d8
 
 
 
-function UserDataModal({user, showMenu, setShowMenu}) {
+function UserDataModal({user}) {
     const history = useHistory()
     const dispatch = useDispatch();
-    // const [showMenu, setShowMenu] = useState(false);
+    const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
     const [newSrc, setNewSrc] = useState('')
 
@@ -36,19 +36,19 @@ function UserDataModal({user, showMenu, setShowMenu}) {
     let userProjects = projects.filter(project => parseInt(project.creatorId) === parseInt(user.id))
 
 
-    useEffect(() => {
-      if (!showMenu) return;
+    // useEffect(() => {
+    //   if (!showMenu) return;
 
-      const closeMenu = (e) => {
-        if (!ulRef.current.contains(e.target)) {
-          setShowMenu(false);
-        }
-      };
+    //   const closeMenu = (e) => {
+    //     if (!ulRef.current.contains(e.target)) {
+    //       setShowMenu(false);
+    //     }
+    //   };
 
-      document.addEventListener('click', closeMenu);
+    //   document.addEventListener('click', closeMenu);
 
-      return () => document.removeEventListener("click", closeMenu);
-    }, [showMenu]);
+    //   return () => document.removeEventListener("click", closeMenu);
+    // }, [showMenu]);
 
     const closeMenu = () => setShowMenu(false);
 

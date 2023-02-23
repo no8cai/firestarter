@@ -41,7 +41,7 @@ const ProjectManager=()=>{
 
     return(
         <div>
-            <h1><div className="your-pledges sp-green">Your Projects: Projects you created</div></h1>
+                <div className="pf-description">This section contains projects you created</div>
                 <div className="projectlist-titles">
                     <div className="projectlist-titletext">Project</div>
                     <div className="projectlist-titletext">Title</div>

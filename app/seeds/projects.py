@@ -220,7 +220,7 @@ In the spirit of Michael Hirst's Vikings, Jeb Stuart's Vikings: Valhalla, and Ro
 # it will reset the primary keys for you as well.
 def undo_projects():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.projects RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM projects")
 

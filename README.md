@@ -45,17 +45,64 @@ This modal is available in the top right corner for users to navigate the site.
 ## Road Map
 We included in our database schema the next features we want to take on: likes, comments, and updates.
 
-## Get started using my repo locally
-Once downloading the repo in the top level run:
-pipenv install
-pipenv shell
-flask db upgrade
-flask seed all
-flask run
 
-In the frontend folder run:
+## Getting Started
+This is an instructions on setting up the project locally. To get a local copy up and running follow these simple example steps.
+
+### Installation
+
+1. Clone the repor
+```
+git clone https://github.com/no8cai/firestarter.git
+```
+
+2. Populate the .env file based in the root directory on the example below:
+```
+SECRET_KEY=<<<Your generated key>>>
+DATABASE_URL=sqlite:///dev.db
+SCHEMA=«custom_schema_name_here»
+```
+Please make your own schema name, then make new .flaskenv
+
+```
+FLASK_APP=app
+FLASK_ENV=development
+```
+Then populate the .env in /react-app to connect frontend and backend
+
+```
+REACT_APP_BASE_URL=http://localhost:5000
+```
+
+
+3. Install Pipenv packages on /root directory and install npm packages on /react-app
+```
+#/root
+pipenv install
+```
+```
+#/react-app
 npm install
+```
+4. Migrate and Seed the data for Sqlite3
+```
+#/root
+pipenv run flask migrate
+pipenv run flask upgrade
+pipenv run flask seed all
+```
+
+5. Run the flask in root for backend and run npm for frontend server in /react-app
+
+```
+#/root
+pipenv run flask run
+```
+
+```
+#/react-app
 npm start
+```
 
 
 ## Contact Us:

@@ -154,10 +154,21 @@
 
 
 .sp-green-button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
     width: 100%;
     height: 3em;
     background-color: #028858;
     color: white;
+    font-size: 15px;
+}
+
+.sp-green-button:hover{
+    color: white;
+    text-decoration: none;
+    background-color: #013f2a;
 }
 
 .sp-remind-me {
@@ -272,4 +283,16 @@
     background: white;
     /* right: 29rem; */
 
+}
+
+.sp-basic-budget p{
+    color: rgb(0, 0, 0,0.7);
+    margin-left: 0px;
+    font-size: 13px;
+}
+
+.sp-basic-budget h2{
+    margin-top: 15px;
+    margin-bottom: 0px;
+    margin-left: 0px;
 }

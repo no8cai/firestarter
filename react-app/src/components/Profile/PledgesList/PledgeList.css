@@ -82,3 +82,11 @@
     width: 100%;
     margin-bottom: 1rem;
 }
+
+.pl-description{
+    font-size: 16px;
+    padding-bottom: 20px;
+    font-weight: bold;
+    color: rgb(0, 0, 0,0.7);
+    padding-left: 4vw;
+}

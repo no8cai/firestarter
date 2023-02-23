@@ -19,24 +19,24 @@ function Navigation({ isLoaded }) {
     const ulRef = useRef();
     const history = useHistory()
 
-    const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
-    };
+    // const openMenu = () => {
+    // if (showMenu) return;
+    // setShowMenu(true);
+    // };
 
-    useEffect(() => {
-        if (!showMenu) return;
+//     useEffect(() => {
+//         if (!showMenu) return;
 
-        const closeMenu = (e) => {
-            if (!ulRef.current.contains(e.target)) {
-                setShowMenu(false);
-        }
-    };
+//         const closeMenu = (e) => {
+//             if (!ulRef.current.contains(e.target)) {
+//                 setShowMenu(false);
+//         }
+//     };
 
-    document.addEventListener('click', closeMenu);
+//     document.addEventListener('click', closeMenu);
 
-    return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
+//     return () => document.removeEventListener("click", closeMenu);
+//   }, [showMenu]);
 
   const closeMenu = () => setShowMenu(false);
 

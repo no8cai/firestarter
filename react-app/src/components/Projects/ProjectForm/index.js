@@ -3,12 +3,23 @@ import { useHistory } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import { fetchCreateProject,fetchUpdateProject,fetchDeleteProject } from "../../../store/project";
 import './ProjectForm.css'
+import { fetchProjectRewards,fetchDeleteReward } from "../../../store/reward";
+import { getAllPledgesByProjectId, deletePledge } from "../../../store/pledge";
 
-const ProjectForm=({project,formType})=>{
+
+const ProjectForm=({project,formType,rewardsObj,pledgesObj})=>{
 
     let initTitle,initCategory,initCity,initState,initCountry,initImageUrl,initFundingGoal,initStartDate,initEndDate,initDescription,initRisks
     const history=useHistory()
     const dispatch = useDispatch();
+
+    // let rewards
+    // let pledges
+
+    // if(formType==="Edit Project"){
+    // rewards = Object.values(rewardsObj).filter(el=>el.projectId==project.id)
+    // pledges = Object.values(pledgesObj).filter(el=>el.projectId==project.id)
+    // }
     const todayDate = new Date()
     const todayDateStr = todayDate.toJSON().slice(0,10)
 
@@ -27,6 +38,7 @@ const ProjectForm=({project,formType})=>{
     }
     else{
         initTitle='';
+        initCategory='Art';
         initCategory='Art';
         initCity='';
         initState='Alabama';
@@ -87,7 +99,7 @@ const ProjectForm=({project,formType})=>{
         else if(fundingGoal<=0){errors.push("Project's funding goal must be greater than 0");}
         else if(!(/^\d+(\.\d{1,2})?$/.test(fundingGoal))){errors.push("Project's funding goal must be within 2 decimal places");}
         if(startDate.length<=0){errors.push("Project's start date field is required");}
-        if(todayDate - (new Date(startDate)) > 0) {errors.push(`The start date needs to be after tomorrow. If you are editing a project you may need to update the start date and end date.`)}
+        else if(todayDate - (new Date(startDate)) > 0) {errors.push(`The start date needs to be after tomorrow. If you are editing a project you may need to update the start date and end date.`)}
         //can't do the validation below because there is also validation on the backend for start date can't be before current date
       //  if(formType=="Edit Project" && startDate !== initStartDate && todayDate - (new Date(startDate)) > 0) {errors.push(`The start date of your project needs to be after tomorrow's date. If you are editing a project and your start date was in the past that can stay the same`)}
         else if(endDate.length<=0){errors.push("Project's end date field is required");}
@@ -131,6 +143,16 @@ const ProjectForm=({project,formType})=>{
 
     const deleteEvents= (id)=>{
         const errors=[]
+
+        // if(pledges.length>0){
+        // pledges.forEach(el=>{
+        //   dispatch(deletePledge(el.id))
+        // })}
+        // if (rewards.length>0){
+        // rewards.forEach(el=>{
+        //   dispatch(fetchDeleteReward(el.id))
+        // })}
+        
         dispatch(fetchDeleteProject(id))
         .then(()=>history.push('/profile'))
         .catch(async (err)=>{
@@ -214,14 +236,14 @@ const ProjectForm=({project,formType})=>{
              State
              </label>
              <select
-                        placeholder='State'
-                        onChange={(e) => setState(e.target.value)}
-                        value={state}
-                        >
-                            {allStates.map(state => (
+              placeholder='State'
+              onChange={(e) => setState(e.target.value)}
+              value={state}
+              >
+              {allStates.map(state => (
                                 <option key={state} value={state}> {state}</option>
                             ))}
-                        </select>
+              </select>
               </div>
 
              {/* <div className='projectform-locationlist'>

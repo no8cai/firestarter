@@ -9,15 +9,28 @@ import EditPledge from '../Pledges/EditPledges';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import "./Profile.css"
+import { useHistory } from 'react-router-dom';
 
 const ManageCenter=()=>{
   const sessionUser = useSelector(state => state.session.user);
-  const [selectPage, setSelectPage] = useState('')
+  const [selectProject, setSelectProject] = useState(true)
+  const history=useHistory()
 
+  const clickProjectEvents=()=>{
+    history.push(`/profile`)
+    setSelectProject(true)
+  }
 
+  const clickPledgeEvents=()=>{
+    history.push(`/profile/pledges`)
+    setSelectProject(false)
+  }
 
+  const pjClassName = "profile-bu" + (selectProject? " pf-selected" : "");
+  const plClassName = "profile-bu" + (selectProject? "" : " pf-selected");
 
-
+  console.log(pjClassName)
+  console.log(plClassName)
 
     return(
         <div className='profile-manage'>
@@ -27,12 +40,12 @@ const ManageCenter=()=>{
         </div>
 
         <div className='profile-barlist'>
-        <NavLink to={`/profile`} className="profile-links">
-        <div className='profile-bu'>Your Projects</div>
-        </NavLink>
-        <NavLink to={`/profile/pledges`} className="profile-links">
-        <div className='profile-bu'>Your Pledges</div>
-        </NavLink>
+        {/* <NavLink to={`/profile`} className="profile-links"> */}
+        <div className={pjClassName} onClick={()=>{clickProjectEvents()}}>Your Projects</div>
+        {/* </NavLink> */}
+        {/* <NavLink to={`/profile/pledges`} className="profile-links"> */}
+        <div className={plClassName} onClick={()=>{clickPledgeEvents()}}>Your Pledges</div>
+        {/* </NavLink> */}
 
         </div>
 
