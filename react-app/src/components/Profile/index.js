@@ -29,8 +29,8 @@ const ManageCenter=()=>{
   const pjClassName = "profile-bu" + (selectProject? " pf-selected" : "");
   const plClassName = "profile-bu" + (selectProject? "" : " pf-selected");
 
-  console.log(pjClassName)
-  console.log(plClassName)
+  // console.log(pjClassName)
+  // console.log(plClassName)
 
     return(
         <div className='profile-manage'>

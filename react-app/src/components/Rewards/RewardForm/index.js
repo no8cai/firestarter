@@ -207,6 +207,7 @@ const RewardForm=({reward,formType,projectId})=>{
                 type="number"
                 name="price"
                 min='1'
+                max='99999999'
                 onChange={(e) => setPrice(e.target.value)}
                 value={price}/>
                 </div>

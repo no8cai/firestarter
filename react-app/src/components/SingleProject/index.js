@@ -139,7 +139,7 @@ const SingleProject = () => {
             <div className='sp-location'>
             <i className ="fa-solid fa-fire"></i>&nbsp;Project We Love&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <i className="fa-regular fa-compass"></i> {oneProject.category}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <i className="fa-sharp fa-solid fa-location-dot"></i>   {oneProject.city}, {oneProject.state}, {oneProject.country}
+            <i className="fa-sharp fa-solid fa-location-dot"></i>   <div className="city-search">{oneProject.city}</div>, {oneProject.state}, {oneProject.country}
             </div>
         </div>
 
@@ -189,11 +189,11 @@ const SingleProject = () => {
         <div className="sp-add-border sp-bottom-center">
             <div className="sp-story">
                 <h4>Story</h4>
-                <p className='sp-css-fix'> {oneProject.description}</p>
+                <div className='sp-css-fix'> {oneProject.description}</div>
             </div>
             <div className="sp-risks">
                 <h4>Risks</h4>
-                <p>{oneProject.risks}</p>
+                <div className='sp-css-fix'>{oneProject.risks}</div>
             </div>
 
         </div>

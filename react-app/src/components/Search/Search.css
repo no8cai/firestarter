@@ -199,3 +199,20 @@
     text-decoration: underline !important;
     font-weight: bold;
 } */
+
+.city-search {
+    max-width: 30%;
+    height: 1.1rem;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    /* border: solid red 1px; */
+}
+
+.location {
+    max-width: 20rem;
+    display: flex;
+    flex-direction: row;
+    /* border: solid red 1px; */
+}

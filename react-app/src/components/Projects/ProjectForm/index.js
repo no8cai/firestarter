@@ -228,6 +228,7 @@ const ProjectForm=({project,formType,rewardsObj,pledgesObj})=>{
               placeholder='Start typing your city'
               type="text"
               name="city"
+              maxLength='40'
               onChange={(e) => setCity(e.target.value)}
               value={city}/></div>
 
@@ -365,8 +366,10 @@ const ProjectForm=({project,formType,rewardsObj,pledgesObj})=>{
              <input
               className='input'
               placeholder='lets calculate funding goal'
-              type="text"
+              type="number"
               name="fundingGoal"
+              max='99999999'
+              min='1'
               onChange={(e) => setFundingGoal(e.target.value)}
               value={fundingGoal}/></div>
              </div>
