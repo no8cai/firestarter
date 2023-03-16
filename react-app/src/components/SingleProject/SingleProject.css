@@ -208,6 +208,8 @@
 .sp-location {
     margin-top: 1em;
     margin-bottom: 2em;
+    display: flex;
+    flex-direction: row;
 }
 
 
@@ -218,7 +220,13 @@
 
 .sp-css-fix {
     white-space: pre-wrap; /* or pre-line */
+    
   }
+
+.sp-risks> p {
+    white-space: initial;
+    overflow-wrap: break-word;
+}
 
   .sp-profile-photo {
     height: 3em;

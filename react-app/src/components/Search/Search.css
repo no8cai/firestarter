@@ -201,12 +201,13 @@
 } */
 
 .city-search {
-    max-width: 40%;
-    height: 1rem;
+    max-width: 30%;
+    height: 1.1rem;
     overflow-wrap: break-word;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    /* border: solid red 1px; */
 }
 
 .location {

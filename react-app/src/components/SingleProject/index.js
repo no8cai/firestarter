@@ -139,7 +139,7 @@ const SingleProject = () => {
             <div className='sp-location'>
             <i className ="fa-solid fa-fire"></i>&nbsp;Project We Love&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <i className="fa-regular fa-compass"></i> {oneProject.category}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <i className="fa-sharp fa-solid fa-location-dot"></i>   {oneProject.city}, {oneProject.state}, {oneProject.country}
+            <i className="fa-sharp fa-solid fa-location-dot"></i>   <div className="city-search">{oneProject.city}</div>, {oneProject.state}, {oneProject.country}
             </div>
         </div>
 
