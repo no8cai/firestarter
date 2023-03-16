@@ -173,9 +173,10 @@ function SearchResultPage() {
                     <div className="search-counter">{counter !== 0 ? Math.ceil(((pledgeTotal)/project.fundingGoal)*100) : 0}% funded</div>
                     <div className="search-days">{diffDays} days to go</div>
                     <div className="search-last-line">
-                      <span className="search-cat">{project.category}</span>
-                      <span>
-                        <i className="fa-solid fa-location-dot"></i>{project.city}, {project.country}
+                     
+                      <span> <div className='location'><span className="search-cat">{project.category}</span><div><i className="fa-solid fa-location-dot"></i></div><div className="city-search">{project.city}</div> 
+                      <div>, {project.country}</div></div>
+                        
                         <br/>
                       </span>
                     </div>
