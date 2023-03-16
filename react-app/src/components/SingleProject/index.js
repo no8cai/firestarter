@@ -189,11 +189,11 @@ const SingleProject = () => {
         <div className="sp-add-border sp-bottom-center">
             <div className="sp-story">
                 <h4>Story</h4>
-                <p className='sp-css-fix'> {oneProject.description}</p>
+                <div className='sp-css-fix'> {oneProject.description}</div>
             </div>
             <div className="sp-risks">
                 <h4>Risks</h4>
-                <p>{oneProject.risks}</p>
+                <div className='sp-css-fix'>{oneProject.risks}</div>
             </div>
 
         </div>
